@@ -1,0 +1,202 @@
+﻿namespace File_Searcher
+{
+    partial class MainForm
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
+            this.txtBoxDirectorySearch = new System.Windows.Forms.TextBox();
+            this.btnSearchDir = new System.Windows.Forms.Button();
+            this.label1 = new System.Windows.Forms.Label();
+            this.checkBoxIncludeSubDirs = new System.Windows.Forms.CheckBox();
+            this.listBoxResults = new System.Windows.Forms.ListBox();
+            this.btnSearch = new System.Windows.Forms.Button();
+            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.comboBoxSearchDir = new System.Windows.Forms.ComboBox();
+            this.btnStopSearching = new System.Windows.Forms.Button();
+            this.listViewResults = new System.Windows.Forms.ListView();
+            this.checkBoxShowDir = new System.Windows.Forms.CheckBox();
+            this.SuspendLayout();
+            // 
+            // txtBoxDirectorySearch
+            // 
+            this.txtBoxDirectorySearch.Location = new System.Drawing.Point(13, 34);
+            this.txtBoxDirectorySearch.Name = "txtBoxDirectorySearch";
+            this.txtBoxDirectorySearch.Size = new System.Drawing.Size(534, 20);
+            this.txtBoxDirectorySearch.TabIndex = 0;
+            this.txtBoxDirectorySearch.Text = "C:\\";
+            // 
+            // btnSearchDir
+            // 
+            this.btnSearchDir.Location = new System.Drawing.Point(542, 33);
+            this.btnSearchDir.Name = "btnSearchDir";
+            this.btnSearchDir.Size = new System.Drawing.Size(24, 20);
+            this.btnSearchDir.TabIndex = 1;
+            this.btnSearchDir.Text = "...";
+            this.btnSearchDir.UseVisualStyleBackColor = true;
+            this.btnSearchDir.Click += new System.EventHandler(this.btnSearchDir_Click);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(13, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(110, 13);
+            this.label1.TabIndex = 2;
+            this.label1.Text = "Directory to search in:";
+            // 
+            // checkBoxIncludeSubDirs
+            // 
+            this.checkBoxIncludeSubDirs.AutoSize = true;
+            this.checkBoxIncludeSubDirs.Checked = true;
+            this.checkBoxIncludeSubDirs.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxIncludeSubDirs.Location = new System.Drawing.Point(16, 117);
+            this.checkBoxIncludeSubDirs.Name = "checkBoxIncludeSubDirs";
+            this.checkBoxIncludeSubDirs.Size = new System.Drawing.Size(129, 17);
+            this.checkBoxIncludeSubDirs.TabIndex = 3;
+            this.checkBoxIncludeSubDirs.Text = "Include subdirectories";
+            this.checkBoxIncludeSubDirs.UseVisualStyleBackColor = true;
+            // 
+            // listBoxResults
+            // 
+            this.listBoxResults.Enabled = false;
+            this.listBoxResults.FormattingEnabled = true;
+            this.listBoxResults.Location = new System.Drawing.Point(13, 291);
+            this.listBoxResults.Name = "listBoxResults";
+            this.listBoxResults.Size = new System.Drawing.Size(553, 43);
+            this.listBoxResults.TabIndex = 4;
+            // 
+            // btnSearch
+            // 
+            this.btnSearch.Location = new System.Drawing.Point(491, 117);
+            this.btnSearch.Name = "btnSearch";
+            this.btnSearch.Size = new System.Drawing.Size(75, 23);
+            this.btnSearch.TabIndex = 5;
+            this.btnSearch.Text = "Search";
+            this.btnSearch.UseVisualStyleBackColor = true;
+            this.btnSearch.Click += new System.EventHandler(this.button2_Click);
+            // 
+            // textBox2
+            // 
+            this.textBox2.Location = new System.Drawing.Point(13, 85);
+            this.textBox2.Name = "textBox2";
+            this.textBox2.Size = new System.Drawing.Size(553, 20);
+            this.textBox2.TabIndex = 0;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(13, 67);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(244, 13);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Filename to search for (doesn\'t require a directory):";
+            // 
+            // comboBoxSearchDir
+            // 
+            this.comboBoxSearchDir.FormattingEnabled = true;
+            this.comboBoxSearchDir.Location = new System.Drawing.Point(550, 6);
+            this.comboBoxSearchDir.Name = "comboBoxSearchDir";
+            this.comboBoxSearchDir.Size = new System.Drawing.Size(16, 21);
+            this.comboBoxSearchDir.TabIndex = 6;
+            this.comboBoxSearchDir.Text = "C:\\";
+            this.comboBoxSearchDir.SelectedIndexChanged += new System.EventHandler(this.comboBoxSearchDir_SelectedIndexChanged);
+            // 
+            // btnStopSearching
+            // 
+            this.btnStopSearching.Enabled = false;
+            this.btnStopSearching.Location = new System.Drawing.Point(410, 117);
+            this.btnStopSearching.Name = "btnStopSearching";
+            this.btnStopSearching.Size = new System.Drawing.Size(75, 23);
+            this.btnStopSearching.TabIndex = 7;
+            this.btnStopSearching.Text = "Stop";
+            this.btnStopSearching.UseVisualStyleBackColor = true;
+            // 
+            // listViewResults
+            // 
+            this.listViewResults.Location = new System.Drawing.Point(16, 140);
+            this.listViewResults.Name = "listViewResults";
+            this.listViewResults.Size = new System.Drawing.Size(550, 178);
+            this.listViewResults.TabIndex = 8;
+            this.listViewResults.UseCompatibleStateImageBehavior = false;
+            // 
+            // checkBoxShowDir
+            // 
+            this.checkBoxShowDir.AutoSize = true;
+            this.checkBoxShowDir.Checked = true;
+            this.checkBoxShowDir.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxShowDir.Location = new System.Drawing.Point(163, 117);
+            this.checkBoxShowDir.Name = "checkBoxShowDir";
+            this.checkBoxShowDir.Size = new System.Drawing.Size(124, 17);
+            this.checkBoxShowDir.TabIndex = 9;
+            this.checkBoxShowDir.Text = "Show directory of file";
+            this.checkBoxShowDir.UseVisualStyleBackColor = true;
+            // 
+            // MainForm
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(578, 346);
+            this.Controls.Add(this.checkBoxShowDir);
+            this.Controls.Add(this.listViewResults);
+            this.Controls.Add(this.btnStopSearching);
+            this.Controls.Add(this.btnSearchDir);
+            this.Controls.Add(this.comboBoxSearchDir);
+            this.Controls.Add(this.btnSearch);
+            this.Controls.Add(this.listBoxResults);
+            this.Controls.Add(this.checkBoxIncludeSubDirs);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txtBoxDirectorySearch);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.Name = "MainForm";
+            this.Text = "File-searcher";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.ResumeLayout(false);
+            this.PerformLayout();
+
+        }
+
+        #endregion
+
+        private System.Windows.Forms.TextBox txtBoxDirectorySearch;
+        private System.Windows.Forms.Button btnSearchDir;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.CheckBox checkBoxIncludeSubDirs;
+        private System.Windows.Forms.ListBox listBoxResults;
+        private System.Windows.Forms.Button btnSearch;
+        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.ComboBox comboBoxSearchDir;
+        private System.Windows.Forms.Button btnStopSearching;
+        private System.Windows.Forms.ListView listViewResults;
+        private System.Windows.Forms.CheckBox checkBoxShowDir;
+    }
+}
+
