@@ -132,24 +132,28 @@ namespace File_Searcher
             string[] files = Directory.GetFiles(directorySearch);
 
             for (int i = 0; i < files.Length; i++)
-                if (files[i] != "")
-                    if ((File.GetAttributes(files[i]) & FileAttributes.Hidden) != FileAttributes.Hidden)
-                        allFiles += files[i] + "\n";
-
-            string[] arrayFiles = allFiles.Split('\n');
-
-            for (int i = 0; i < arrayFiles.Length; i++)
             {
-                if (Path.HasExtension(arrayFiles[i]))
+                if (files[i] != "")
                 {
-                    string fileName = arrayFiles[i];
-                    string extension = Path.GetExtension(arrayFiles[i]);
-                    string fileSize = new FileInfo(arrayFiles[i]).Length.ToString();
+                    if (txtBoxFilenameSearch.Text == "" || (txtBoxFilenameSearch.Text != "" && files[i].Contains(txtBoxFilenameSearch.Text)))
+                    {
+                        if ((File.GetAttributes(files[i]) & FileAttributes.Hidden) != FileAttributes.Hidden)
+                        {
+                            allFiles += files[i] + "\n"; //! Need to fill up the reference...
 
-                    if (!checkBoxShowDir.Checked)
-                        fileName = Path.GetFileName(fileName);
+                            if (Path.HasExtension(files[i]))
+                            {
+                                string fileName = files[i];
+                                string extension = Path.GetExtension(files[i]);
+                                string fileSize = new FileInfo(files[i]).Length.ToString();
 
-                    AddItemToListView(listViewResults, new ListViewItem(new[] { extension, fileName, fileSize, new FileInfo(arrayFiles[i]).LastWriteTime.ToString() }));
+                                if (!checkBoxShowDir.Checked)
+                                    fileName = Path.GetFileName(fileName);
+
+                                AddItemToListView(listViewResults, new ListViewItem(new[] { extension, fileName, fileSize, new FileInfo(files[i]).LastWriteTime.ToString() }));
+                            }
+                        }
+                    }
                 }
             }
 
