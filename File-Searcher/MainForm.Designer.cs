@@ -34,8 +34,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.checkBoxIncludeSubDirs = new System.Windows.Forms.CheckBox();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.txtBoxFilenameSearch = new System.Windows.Forms.TextBox();
+            this.labelSearchFilename = new System.Windows.Forms.Label();
             this.comboBoxSearchDir = new System.Windows.Forms.ComboBox();
             this.btnStopSearching = new System.Windows.Forms.Button();
             this.listViewResults = new System.Windows.Forms.ListView();
@@ -91,21 +91,21 @@
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.button2_Click);
             // 
-            // textBox2
+            // txtBoxFilenameSearch
             // 
-            this.textBox2.Location = new System.Drawing.Point(13, 85);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(553, 20);
-            this.textBox2.TabIndex = 0;
+            this.txtBoxFilenameSearch.Location = new System.Drawing.Point(13, 85);
+            this.txtBoxFilenameSearch.Name = "txtBoxFilenameSearch";
+            this.txtBoxFilenameSearch.Size = new System.Drawing.Size(553, 20);
+            this.txtBoxFilenameSearch.TabIndex = 0;
             // 
-            // label2
+            // labelSearchFilename
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(13, 67);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(244, 13);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Filename to search for (doesn\'t require a directory):";
+            this.labelSearchFilename.AutoSize = true;
+            this.labelSearchFilename.Location = new System.Drawing.Point(13, 67);
+            this.labelSearchFilename.Name = "labelSearchFilename";
+            this.labelSearchFilename.Size = new System.Drawing.Size(250, 13);
+            this.labelSearchFilename.TabIndex = 2;
+            this.labelSearchFilename.Text = "Filename to search for (may not contain a directory):";
             // 
             // comboBoxSearchDir
             // 
@@ -160,9 +160,9 @@
             this.Controls.Add(this.comboBoxSearchDir);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.checkBoxIncludeSubDirs);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.labelSearchFilename);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txtBoxFilenameSearch);
             this.Controls.Add(this.txtBoxDirectorySearch);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
@@ -180,8 +180,8 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox checkBoxIncludeSubDirs;
         private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.TextBox txtBoxFilenameSearch;
+        private System.Windows.Forms.Label labelSearchFilename;
         private System.Windows.Forms.ComboBox comboBoxSearchDir;
         private System.Windows.Forms.Button btnStopSearching;
         private System.Windows.Forms.ListView listViewResults;

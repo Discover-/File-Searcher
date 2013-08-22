@@ -53,6 +53,7 @@ namespace File_Searcher
         private void StartSearching()
         {
             string searchDirectory = txtBoxDirectorySearch.Text;
+            string searchFilename = txtBoxFilenameSearch.Text;
 
             if (searchDirectory == "" || searchDirectory == String.Empty)
             {
@@ -76,31 +77,16 @@ namespace File_Searcher
             SetEnabledOfControl(btnStopSearching, true);
 
             string allFiles = "";
-            GetAllFilesFromDirectory(searchDirectory, checkBoxIncludeSubDirs.Checked, ref allFiles);
+
+            ClearListViewResultsCrossThread(listViewResults);
+
+            //! Function also fills up the listbox on the fly
+            GetAllFilesFromDirectoryAndFillResults(searchDirectory, checkBoxIncludeSubDirs.Checked, ref allFiles);
 
             if (allFiles == string.Empty)
             {
                 MessageBox.Show("The searched directory contains no files at all.", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
-            }
-
-            string[] arrayFiles = allFiles.Split('\n');
-
-            listViewResults.Items.Clear();
-
-            for (int i = 0; i < arrayFiles.Length; i++)
-            {
-                if (Path.HasExtension(arrayFiles[i]))
-                {
-                    string fileName = arrayFiles[i];
-                    string extension = Path.GetExtension(arrayFiles[i]);
-                    string fileSize = new FileInfo(arrayFiles[i]).Length.ToString();
-
-                    if (!checkBoxShowDir.Checked)
-                        fileName = Path.GetFileName(fileName);
-
-                    AddItemToListView(listViewResults, new ListViewItem(new[] { extension, fileName, fileSize, new FileInfo(arrayFiles[i]).LastWriteTime.ToString() }));
-                }
             }
 
             SetEnabledOfControl(btnSearch, true);
@@ -134,7 +120,7 @@ namespace File_Searcher
             }
         }
 
-        private void GetAllFilesFromDirectory(string directorySearch, bool includingSubDirs, ref string allFiles)
+        private void GetAllFilesFromDirectoryAndFillResults(string directorySearch, bool includingSubDirs, ref string allFiles)
         {
             string[] directories = Directory.GetDirectories(directorySearch);
             string[] files = Directory.GetFiles(directorySearch);
@@ -144,10 +130,27 @@ namespace File_Searcher
                     if ((File.GetAttributes(files[i]) & FileAttributes.Hidden) != FileAttributes.Hidden)
                         allFiles += files[i] + "\n";
 
+            string[] arrayFiles = allFiles.Split('\n');
+
+            for (int i = 0; i < arrayFiles.Length; i++)
+            {
+                if (Path.HasExtension(arrayFiles[i]))
+                {
+                    string fileName = arrayFiles[i];
+                    string extension = Path.GetExtension(arrayFiles[i]);
+                    string fileSize = new FileInfo(arrayFiles[i]).Length.ToString();
+
+                    if (!checkBoxShowDir.Checked)
+                        fileName = Path.GetFileName(fileName);
+
+                    AddItemToListView(listViewResults, new ListViewItem(new[] { extension, fileName, fileSize, new FileInfo(arrayFiles[i]).LastWriteTime.ToString() }));
+                }
+            }
+
             //! If we include sub directories, recursive call this function up to every single directory.
             if (includingSubDirs)
                 for (int i = 0; i < directories.Length; i++)
-                    GetAllFilesFromDirectory(directories[i], true, ref allFiles);
+                    GetAllFilesFromDirectoryAndFillResults(directories[i], true, ref allFiles);
         }
 
         private void GetAllSubDirectoriesFromDirectory(string directorySearch, ref string allDirectories)
@@ -206,6 +209,19 @@ namespace File_Searcher
             }
 
             listView.Items.Add(item);
+        }
+
+        private delegate void ClearListViewResultsCrossThreadDelegate(ListView listView);
+
+        private void ClearListViewResultsCrossThread(ListView listView)
+        {
+            if (listView.InvokeRequired)
+            {
+                Invoke(new ClearListViewResultsCrossThreadDelegate(ClearListViewResultsCrossThread), new object[] { listView });
+                return;
+            }
+
+            listView.Items.Clear();
         }
     }
 }
