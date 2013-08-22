@@ -15,6 +15,7 @@ namespace File_Searcher
     public partial class MainForm : Form
     {
         private Thread searchThread = null;
+        private int oldWidth;
 
         public MainForm()
         {
@@ -23,13 +24,10 @@ namespace File_Searcher
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            MaximizeBox = false; //! This looks ugly when pressed with a hardcoded max size
+            MaximizeBox = false; //! This looks ugly if set to true when button is pressed while we have a hardcoded max size
             MinimizeBox = true;
             MinimumSize = new Size(Width, Height);
             MaximumSize = new Size(1300, Height);
-
-            //btnSearch.BackgroundImage = Image.FromFile("C:\\Users\\Jasper\\Downloads\\document_search.ico");
-            //btnSearch.BackgroundImageLayout = ImageLayout.Center;
 
             listViewResults.View = View.Details;
             ColumnHeader headerExt = listViewResults.Columns.Add("Extension", 1, HorizontalAlignment.Right);
@@ -47,6 +45,21 @@ namespace File_Searcher
             btnSearch.Anchor = AnchorStyles.Right;
             btnStopSearching.Anchor = AnchorStyles.Right;
             listViewResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
+
+            oldWidth = Width;
+        }
+
+        protected override void OnResize(EventArgs e)
+        {
+            base.OnResize(e);
+
+            //! We need a try-catch block because this is also called when the app is created (and listViewResults' columns are not yet initialized).
+            try
+            {
+                listViewResults.Columns[1].Width -= oldWidth - Width;
+                oldWidth = Width;
+            }
+            catch (Exception) { };
         }
 
         private void button2_Click(object sender, EventArgs e)
