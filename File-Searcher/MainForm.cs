@@ -32,12 +32,14 @@ namespace File_Searcher
             listViewResults.View = View.Details;
             ColumnHeader headerExt = listViewResults.Columns.Add("Extension", 1, HorizontalAlignment.Right);
             ColumnHeader headerName = listViewResults.Columns.Add("Name", 1, HorizontalAlignment.Left);
-            ColumnHeader headerSize = listViewResults.Columns.Add("Size (KB)", 1, HorizontalAlignment.Right);
+            ColumnHeader headerSize = listViewResults.Columns.Add("Size", 1, HorizontalAlignment.Right);
+            ColumnHeader headerSizeType = listViewResults.Columns.Add("Sizetype", 1, HorizontalAlignment.Right);
             ColumnHeader headerLastModified = listViewResults.Columns.Add("Last Modified", 1, HorizontalAlignment.Right);
             headerExt.Width = 60;
             headerName.Width = 430;
-            headerSize.Width = 85;
-            headerLastModified.Width = 161; //! -4 becuase else we get a scrollbar
+            headerSize.Width = 35;
+            headerSizeType.Width = 55;
+            headerLastModified.Width = 156; //! -4 becuase else we get a scrollbar
 
             txtBoxDirectorySearch.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
             btnSearchDir.Anchor = AnchorStyles.Right;
@@ -47,7 +49,6 @@ namespace File_Searcher
             listViewResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
 
             oldWidth = Width;
-
             listViewResults.FullRowSelect = true;
         }
 
@@ -140,12 +141,15 @@ namespace File_Searcher
                                 {
                                     string fileName = files[i];
                                     string extension = Path.GetExtension(files[i]);
-                                    string fileSize = new FileInfo(files[i]).Length.ToString();
+                                    //string fileSize = (new FileInfo(files[i]).Length / 1024).ToString();
+                                    string fileSizeType = "";
+                                    string fileSize = bytesToMegaByte((int)new FileInfo(files[i]).Length, ref fileSizeType);
 
                                     if (!checkBoxShowDir.Checked)
                                         fileName = Path.GetFileName(fileName);
 
-                                    AddItemToListView(listViewResults, new ListViewItem(new[] { extension, fileName, fileSize, new FileInfo(files[i]).LastWriteTime.ToString() }));
+                                    ListViewItem listViewItem = new ListViewItem(new[] { extension, fileName, fileSize, fileSizeType, new FileInfo(files[i]).LastWriteTime.ToString() });
+                                    AddItemToListView(listViewResults, listViewItem);
                                 }
                             }
                         }
@@ -189,6 +193,20 @@ namespace File_Searcher
             //! Update current results with path
             foreach (ListViewItem item in listViewResults.Items)
                 item.SubItems[1].Text = checkBoxShowDir.Checked ? Path.GetFullPath(item.SubItems[1].Text) : Path.GetFileName(item.SubItems[1].Text);
+        }
+
+        private string bytesToMegaByte(int bytes, ref string fileType)
+        {
+            string[] sizes = { "B", "KB", "MB", "GB" };
+            int order = 0;
+            while (bytes >= 1024 && order + 1 < sizes.Length)
+            {
+                order++;
+                bytes = bytes / 1024;
+            }
+
+            fileType = sizes[order];
+            return String.Format("{0:0.##}", bytes);
         }
 
         //! Cross-thread functions:
