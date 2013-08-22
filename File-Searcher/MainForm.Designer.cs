@@ -147,6 +147,7 @@
             this.checkBoxShowDir.TabIndex = 9;
             this.checkBoxShowDir.Text = "Show directory of file";
             this.checkBoxShowDir.UseVisualStyleBackColor = true;
+            this.checkBoxShowDir.CheckedChanged += new System.EventHandler(this.checkBoxShowDir_CheckedChanged);
             // 
             // MainForm
             // 

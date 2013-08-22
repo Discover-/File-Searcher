@@ -143,7 +143,7 @@ namespace File_Searcher
 
                             if (Path.HasExtension(files[i]))
                             {
-                                string fileName = files[i];
+                                string fileName = Path.GetFullPath(Path.GetFileName(files[i]));
                                 string extension = Path.GetExtension(files[i]);
                                 string fileSize = new FileInfo(files[i]).Length.ToString();
 
@@ -232,6 +232,12 @@ namespace File_Searcher
             }
 
             listView.Items.Clear();
+        }
+
+        private void checkBoxShowDir_CheckedChanged(object sender, EventArgs e)
+        {
+            foreach (ListViewItem item in listViewResults.Items)
+                item.SubItems[1].Text = checkBoxShowDir.Checked ? Path.GetFullPath(item.SubItems[1].Text) : Path.GetFileName(item.SubItems[1].Text);
         }
     }
 }
