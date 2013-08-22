@@ -33,7 +33,6 @@
             this.btnSearchDir = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.checkBoxIncludeSubDirs = new System.Windows.Forms.CheckBox();
-            this.listBoxResults = new System.Windows.Forms.ListBox();
             this.btnSearch = new System.Windows.Forms.Button();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -82,15 +81,6 @@
             this.checkBoxIncludeSubDirs.Text = "Include subdirectories";
             this.checkBoxIncludeSubDirs.UseVisualStyleBackColor = true;
             // 
-            // listBoxResults
-            // 
-            this.listBoxResults.Enabled = false;
-            this.listBoxResults.FormattingEnabled = true;
-            this.listBoxResults.Location = new System.Drawing.Point(13, 291);
-            this.listBoxResults.Name = "listBoxResults";
-            this.listBoxResults.Size = new System.Drawing.Size(553, 43);
-            this.listBoxResults.TabIndex = 4;
-            // 
             // btnSearch
             // 
             this.btnSearch.Location = new System.Drawing.Point(491, 117);
@@ -136,12 +126,13 @@
             this.btnStopSearching.TabIndex = 7;
             this.btnStopSearching.Text = "Stop";
             this.btnStopSearching.UseVisualStyleBackColor = true;
+            this.btnStopSearching.Click += new System.EventHandler(this.btnStopSearching_Click);
             // 
             // listViewResults
             // 
-            this.listViewResults.Location = new System.Drawing.Point(16, 140);
+            this.listViewResults.Location = new System.Drawing.Point(16, 146);
             this.listViewResults.Name = "listViewResults";
-            this.listViewResults.Size = new System.Drawing.Size(550, 178);
+            this.listViewResults.Size = new System.Drawing.Size(550, 188);
             this.listViewResults.TabIndex = 8;
             this.listViewResults.UseCompatibleStateImageBehavior = false;
             // 
@@ -168,7 +159,6 @@
             this.Controls.Add(this.btnSearchDir);
             this.Controls.Add(this.comboBoxSearchDir);
             this.Controls.Add(this.btnSearch);
-            this.Controls.Add(this.listBoxResults);
             this.Controls.Add(this.checkBoxIncludeSubDirs);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -189,7 +179,6 @@
         private System.Windows.Forms.Button btnSearchDir;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.CheckBox checkBoxIncludeSubDirs;
-        private System.Windows.Forms.ListBox listBoxResults;
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.Label label2;

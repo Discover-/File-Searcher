@@ -8,11 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
+using System.Threading;
 
 namespace File_Searcher
 {
     public partial class MainForm : Form
     {
+        private Thread searchThread = null;
+
         public MainForm()
         {
             InitializeComponent();
@@ -27,6 +30,9 @@ namespace File_Searcher
             this.comboBoxSearchDir.TextChanged += new System.EventHandler(this.comboBoxSearchDir_TextChanged);
             comboBoxSearchDir_TextChanged(sender, e);
 
+            //btnSearch.BackgroundImage = Image.FromFile("C:\\Users\\Jasper\\Downloads\\document_search.ico");
+            //btnSearch.BackgroundImageLayout = ImageLayout.Center;
+
             listViewResults.View = View.Details;
             ColumnHeader headerExt = listViewResults.Columns.Add("Extension", 1, HorizontalAlignment.Right);
             ColumnHeader headerName = listViewResults.Columns.Add("Name", 1, HorizontalAlignment.Left);
@@ -39,6 +45,12 @@ namespace File_Searcher
         }
 
         private void button2_Click(object sender, EventArgs e)
+        {
+            searchThread = new Thread(new ThreadStart(StartSearching));
+            searchThread.Start();
+        }
+
+        private void StartSearching()
         {
             string searchDirectory = txtBoxDirectorySearch.Text;
 
@@ -59,6 +71,9 @@ namespace File_Searcher
                 MessageBox.Show("The search directory field contains an extension!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
+
+            SetEnabledOfControl(btnSearch, false);
+            SetEnabledOfControl(btnStopSearching, true);
 
             string allFiles = "";
             GetAllFilesFromDirectory(searchDirectory, checkBoxIncludeSubDirs.Checked, ref allFiles);
@@ -82,9 +97,12 @@ namespace File_Searcher
                     if (!checkBoxShowDir.Checked)
                         fileName = Path.GetFileName(fileName);
 
-                    listViewResults.Items.Add(new ListViewItem(new[] { extension, fileName, fileSize, new FileInfo(arrayFiles[i]).LastWriteTime.ToString() }));
+                    AddItemToListView(listViewResults, new ListViewItem(new[] { extension, fileName, fileSize, new FileInfo(arrayFiles[i]).LastWriteTime.ToString() }));
                 }
             }
+
+            SetEnabledOfControl(btnSearch, true);
+            SetEnabledOfControl(btnStopSearching, false);
         }
 
         private void comboBoxSearchDir_SelectedIndexChanged(object sender, EventArgs e)
@@ -148,6 +166,44 @@ namespace File_Searcher
 
             if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
                 txtBoxDirectorySearch.Text = fbd.SelectedPath;
+        }
+
+        private void btnStopSearching_Click(object sender, EventArgs e)
+        {
+            if (searchThread != null && searchThread.IsAlive)
+            {
+                searchThread.Abort();
+                searchThread = null;
+
+                SetEnabledOfControl(btnSearch, true);
+                SetEnabledOfControl(btnStopSearching, false);
+            }
+        }
+
+        private delegate void SetEnabledOfControlDelegate(Control control, bool enable);
+
+        private void SetEnabledOfControl(Control control, bool enable)
+        {
+            if (control.InvokeRequired)
+            {
+                Invoke(new SetEnabledOfControlDelegate(SetEnabledOfControl), new object[] { control, enable });
+                return;
+            }
+
+            control.Enabled = enable;
+        }
+
+        private delegate void AddItemToListViewDelegate(ListView listView, ListViewItem item);
+
+        private void AddItemToListView(ListView listView, ListViewItem item)
+        {
+            if (listView.InvokeRequired)
+            {
+                Invoke(new AddItemToListViewDelegate(AddItemToListView), new object[] { listView, item });
+                return;
+            }
+
+            listView.Items.Add(item);
         }
     }
 }
