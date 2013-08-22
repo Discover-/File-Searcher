@@ -103,47 +103,43 @@ namespace File_Searcher
 
         private void GetAllFilesFromDirectoryAndFillResults(string directorySearch, bool includingSubDirs, ref string allFiles)
         {
-            string[] directories = Directory.GetDirectories(directorySearch);
-            string[] files = Directory.GetFiles(directorySearch);
-
-            for (int i = 0; i < files.Length; i++)
+            try
             {
-                if (files[i] != "")
+                string[] directories = Directory.GetDirectories(directorySearch);
+                string[] files = Directory.GetFiles(directorySearch);
+
+                for (int i = 0; i < files.Length; i++)
                 {
-                    if (txtBoxFilenameSearch.Text == "" || (txtBoxFilenameSearch.Text != "" && files[i].Contains(txtBoxFilenameSearch.Text)))
+                    if (files[i] != "")
                     {
-                        if ((File.GetAttributes(files[i]) & FileAttributes.Hidden) != FileAttributes.Hidden)
+                        if (txtBoxFilenameSearch.Text == "" || (txtBoxFilenameSearch.Text != "" && files[i].Contains(txtBoxFilenameSearch.Text)))
                         {
-                            allFiles += files[i] + "\n"; //! Need to fill up the reference...
-
-                            if (Path.HasExtension(files[i]))
+                            if ((File.GetAttributes(files[i]) & FileAttributes.Hidden) != FileAttributes.Hidden)
                             {
-                                string fileName = Path.GetFullPath(Path.GetFileName(files[i]));
-                                string extension = Path.GetExtension(files[i]);
-                                string fileSize = new FileInfo(files[i]).Length.ToString();
+                                allFiles += files[i] + "\n"; //! Need to fill up the reference...
 
-                                if (!checkBoxShowDir.Checked)
-                                    fileName = Path.GetFileName(fileName);
+                                if (Path.HasExtension(files[i]))
+                                {
+                                    string fileName = files[i];
+                                    string extension = Path.GetExtension(files[i]);
+                                    string fileSize = new FileInfo(files[i]).Length.ToString();
 
-                                AddItemToListView(listViewResults, new ListViewItem(new[] { extension, fileName, fileSize, new FileInfo(files[i]).LastWriteTime.ToString() }));
+                                    if (!checkBoxShowDir.Checked)
+                                        fileName = Path.GetFileName(fileName);
+
+                                    AddItemToListView(listViewResults, new ListViewItem(new[] { extension, fileName, fileSize, new FileInfo(files[i]).LastWriteTime.ToString() }));
+                                }
                             }
                         }
                     }
                 }
+
+                //! If we include sub directories, recursive call this function up to every single directory.
+                if (includingSubDirs)
+                    for (int i = 0; i < directories.Length; i++)
+                        GetAllFilesFromDirectoryAndFillResults(directories[i], true, ref allFiles);
             }
-
-            //! If we include sub directories, recursive call this function up to every single directory.
-            if (includingSubDirs)
-                for (int i = 0; i < directories.Length; i++)
-                    GetAllFilesFromDirectoryAndFillResults(directories[i], true, ref allFiles);
-        }
-
-        private void GetAllSubDirectoriesFromDirectory(string directorySearch, ref string allDirectories)
-        {
-            string[] directories = Directory.GetDirectories(directorySearch);
-
-            for (int i = 0; i < directories.Length; i++)
-                allDirectories += directories[i] + "\n";
+            catch (Exception) { }; //! No need to do anything with the error.
         }
 
         private void btnSearchDir_Click(object sender, EventArgs e)
@@ -170,6 +166,14 @@ namespace File_Searcher
             }
         }
 
+        private void checkBoxShowDir_CheckedChanged(object sender, EventArgs e)
+        {
+            //! Update current results with path
+            foreach (ListViewItem item in listViewResults.Items)
+                item.SubItems[1].Text = checkBoxShowDir.Checked ? Path.GetFullPath(item.SubItems[1].Text) : Path.GetFileName(item.SubItems[1].Text);
+        }
+
+        //! Cross-thread functions:
         private delegate void SetEnabledOfControlDelegate(Control control, bool enable);
 
         private void SetEnabledOfControl(Control control, bool enable)
@@ -207,12 +211,6 @@ namespace File_Searcher
             }
 
             listView.Items.Clear();
-        }
-
-        private void checkBoxShowDir_CheckedChanged(object sender, EventArgs e)
-        {
-            foreach (ListViewItem item in listViewResults.Items)
-                item.SubItems[1].Text = checkBoxShowDir.Checked ? Path.GetFullPath(item.SubItems[1].Text) : Path.GetFileName(item.SubItems[1].Text);
         }
     }
 }
