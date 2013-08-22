@@ -36,7 +36,6 @@
             this.btnSearch = new System.Windows.Forms.Button();
             this.txtBoxFilenameSearch = new System.Windows.Forms.TextBox();
             this.labelSearchFilename = new System.Windows.Forms.Label();
-            this.comboBoxSearchDir = new System.Windows.Forms.ComboBox();
             this.btnStopSearching = new System.Windows.Forms.Button();
             this.listViewResults = new System.Windows.Forms.ListView();
             this.checkBoxShowDir = new System.Windows.Forms.CheckBox();
@@ -46,13 +45,13 @@
             // 
             this.txtBoxDirectorySearch.Location = new System.Drawing.Point(13, 34);
             this.txtBoxDirectorySearch.Name = "txtBoxDirectorySearch";
-            this.txtBoxDirectorySearch.Size = new System.Drawing.Size(534, 20);
+            this.txtBoxDirectorySearch.Size = new System.Drawing.Size(717, 20);
             this.txtBoxDirectorySearch.TabIndex = 0;
             this.txtBoxDirectorySearch.Text = "C:\\";
             // 
             // btnSearchDir
             // 
-            this.btnSearchDir.Location = new System.Drawing.Point(542, 33);
+            this.btnSearchDir.Location = new System.Drawing.Point(729, 34);
             this.btnSearchDir.Name = "btnSearchDir";
             this.btnSearchDir.Size = new System.Drawing.Size(24, 20);
             this.btnSearchDir.TabIndex = 1;
@@ -83,7 +82,7 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(491, 117);
+            this.btnSearch.Location = new System.Drawing.Point(678, 117);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 5;
@@ -95,7 +94,7 @@
             // 
             this.txtBoxFilenameSearch.Location = new System.Drawing.Point(13, 85);
             this.txtBoxFilenameSearch.Name = "txtBoxFilenameSearch";
-            this.txtBoxFilenameSearch.Size = new System.Drawing.Size(553, 20);
+            this.txtBoxFilenameSearch.Size = new System.Drawing.Size(740, 20);
             this.txtBoxFilenameSearch.TabIndex = 0;
             // 
             // labelSearchFilename
@@ -107,20 +106,10 @@
             this.labelSearchFilename.TabIndex = 2;
             this.labelSearchFilename.Text = "Filename to search for (may not contain a directory):";
             // 
-            // comboBoxSearchDir
-            // 
-            this.comboBoxSearchDir.FormattingEnabled = true;
-            this.comboBoxSearchDir.Location = new System.Drawing.Point(550, 6);
-            this.comboBoxSearchDir.Name = "comboBoxSearchDir";
-            this.comboBoxSearchDir.Size = new System.Drawing.Size(16, 21);
-            this.comboBoxSearchDir.TabIndex = 6;
-            this.comboBoxSearchDir.Text = "C:\\";
-            this.comboBoxSearchDir.SelectedIndexChanged += new System.EventHandler(this.comboBoxSearchDir_SelectedIndexChanged);
-            // 
             // btnStopSearching
             // 
             this.btnStopSearching.Enabled = false;
-            this.btnStopSearching.Location = new System.Drawing.Point(410, 117);
+            this.btnStopSearching.Location = new System.Drawing.Point(597, 117);
             this.btnStopSearching.Name = "btnStopSearching";
             this.btnStopSearching.Size = new System.Drawing.Size(75, 23);
             this.btnStopSearching.TabIndex = 7;
@@ -130,9 +119,9 @@
             // 
             // listViewResults
             // 
-            this.listViewResults.Location = new System.Drawing.Point(16, 146);
+            this.listViewResults.Location = new System.Drawing.Point(13, 146);
             this.listViewResults.Name = "listViewResults";
-            this.listViewResults.Size = new System.Drawing.Size(550, 188);
+            this.listViewResults.Size = new System.Drawing.Size(740, 268);
             this.listViewResults.TabIndex = 8;
             this.listViewResults.UseCompatibleStateImageBehavior = false;
             // 
@@ -153,12 +142,11 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(578, 346);
+            this.ClientSize = new System.Drawing.Size(765, 426);
             this.Controls.Add(this.checkBoxShowDir);
             this.Controls.Add(this.listViewResults);
             this.Controls.Add(this.btnStopSearching);
             this.Controls.Add(this.btnSearchDir);
-            this.Controls.Add(this.comboBoxSearchDir);
             this.Controls.Add(this.btnSearch);
             this.Controls.Add(this.checkBoxIncludeSubDirs);
             this.Controls.Add(this.labelSearchFilename);
@@ -183,7 +171,6 @@
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtBoxFilenameSearch;
         private System.Windows.Forms.Label labelSearchFilename;
-        private System.Windows.Forms.ComboBox comboBoxSearchDir;
         private System.Windows.Forms.Button btnStopSearching;
         private System.Windows.Forms.ListView listViewResults;
         private System.Windows.Forms.CheckBox checkBoxShowDir;

@@ -27,9 +27,6 @@ namespace File_Searcher
             MaximizeBox = false;
             MinimizeBox = true;
 
-            this.comboBoxSearchDir.TextChanged += new System.EventHandler(this.comboBoxSearchDir_TextChanged);
-            comboBoxSearchDir_TextChanged(sender, e);
-
             //btnSearch.BackgroundImage = Image.FromFile("C:\\Users\\Jasper\\Downloads\\document_search.ico");
             //btnSearch.BackgroundImageLayout = ImageLayout.Center;
 
@@ -39,9 +36,9 @@ namespace File_Searcher
             ColumnHeader headerSize = listViewResults.Columns.Add("Size (KB)", 1, HorizontalAlignment.Right);
             ColumnHeader headerLastModified = listViewResults.Columns.Add("Last Modified", 1, HorizontalAlignment.Right);
             headerExt.Width = 60;
-            headerName.Width = 265;
+            headerName.Width = 430;
             headerSize.Width = 85;
-            headerLastModified.Width = 136; //! -4 becuase else we get a scrollbar
+            headerLastModified.Width = 161; //! -4 becuase else we get a scrollbar
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -102,28 +99,6 @@ namespace File_Searcher
         private void comboBoxSearchDir_SelectedIndexChanged(object sender, EventArgs e)
         {
 
-        }
-
-        private void comboBoxSearchDir_TextChanged(object sender, EventArgs e)
-        {
-            if (checkBoxIncludeSubDirs.Checked)
-            {
-                int prevSelectStart = comboBoxSearchDir.SelectionStart;
-                int prevSelectLength = comboBoxSearchDir.SelectionLength;
-
-                string allDirectories = "";
-                GetAllSubDirectoriesFromDirectory(comboBoxSearchDir.Text, ref allDirectories);
-
-                string[] arrayDirectories = allDirectories.Split('\n');
-
-                comboBoxSearchDir.Items.Clear();
-
-                for (int i = 0; i < arrayDirectories.Length; i++)
-                    if (arrayDirectories[i] != string.Empty && arrayDirectories[i] != "" && !Path.HasExtension(arrayDirectories[i]))
-                        comboBoxSearchDir.Items.Add(arrayDirectories[i]);
-
-                comboBoxSearchDir.Select(prevSelectStart, prevSelectLength);
-            }
         }
 
         private void GetAllFilesFromDirectoryAndFillResults(string directorySearch, bool includingSubDirs, ref string allFiles)
