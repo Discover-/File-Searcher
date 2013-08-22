@@ -47,6 +47,8 @@ namespace File_Searcher
             listViewResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
 
             oldWidth = Width;
+
+            listViewResults.FullRowSelect = true;
         }
 
         protected override void OnResize(EventArgs e)
