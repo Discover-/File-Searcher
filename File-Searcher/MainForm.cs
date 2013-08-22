@@ -182,10 +182,10 @@ namespace File_Searcher
             {
                 searchThread.Abort();
                 searchThread = null;
-
-                SetEnabledOfControl(btnSearch, true);
-                SetEnabledOfControl(btnStopSearching, false);
             }
+
+            SetEnabledOfControl(btnSearch, true);
+            SetEnabledOfControl(btnStopSearching, false);
         }
 
         private void checkBoxShowDir_CheckedChanged(object sender, EventArgs e)
