@@ -73,6 +73,12 @@ namespace File_Searcher
                 return;
             }
 
+            if (searchFilename != "" && searchFilename != String.Empty && Directory.Exists(searchFilename))
+            {
+                MessageBox.Show("The field for filename contains a directory!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+
             SetEnabledOfControl(btnSearch, false);
             SetEnabledOfControl(btnStopSearching, true);
 
