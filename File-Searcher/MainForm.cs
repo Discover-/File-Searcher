@@ -23,9 +23,10 @@ namespace File_Searcher
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            FormBorderStyle = FormBorderStyle.FixedDialog;
-            MaximizeBox = false;
+            MaximizeBox = false; //! This looks ugly when pressed with a hardcoded max size
             MinimizeBox = true;
+            MinimumSize = new Size(Width, Height);
+            MaximumSize = new Size(1300, Height);
 
             //btnSearch.BackgroundImage = Image.FromFile("C:\\Users\\Jasper\\Downloads\\document_search.ico");
             //btnSearch.BackgroundImageLayout = ImageLayout.Center;
@@ -39,6 +40,13 @@ namespace File_Searcher
             headerName.Width = 430;
             headerSize.Width = 85;
             headerLastModified.Width = 161; //! -4 becuase else we get a scrollbar
+
+            txtBoxDirectorySearch.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
+            btnSearchDir.Anchor = AnchorStyles.Right;
+            txtBoxFilenameSearch.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
+            btnSearch.Anchor = AnchorStyles.Right;
+            btnStopSearching.Anchor = AnchorStyles.Right;
+            listViewResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -94,11 +102,6 @@ namespace File_Searcher
 
             SetEnabledOfControl(btnSearch, true);
             SetEnabledOfControl(btnStopSearching, false);
-        }
-
-        private void comboBoxSearchDir_SelectedIndexChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void GetAllFilesFromDirectoryAndFillResults(string directorySearch, bool includingSubDirs, ref string allFiles)
