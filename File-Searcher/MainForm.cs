@@ -86,6 +86,8 @@ namespace File_Searcher
 
             string[] arrayFiles = allFiles.Split('\n');
 
+            listViewResults.Items.Clear();
+
             for (int i = 0; i < arrayFiles.Length; i++)
             {
                 if (Path.HasExtension(arrayFiles[i]))
