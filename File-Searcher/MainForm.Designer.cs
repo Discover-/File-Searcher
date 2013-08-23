@@ -102,9 +102,9 @@
             this.labelSearchFilename.AutoSize = true;
             this.labelSearchFilename.Location = new System.Drawing.Point(13, 67);
             this.labelSearchFilename.Name = "labelSearchFilename";
-            this.labelSearchFilename.Size = new System.Drawing.Size(250, 13);
+            this.labelSearchFilename.Size = new System.Drawing.Size(270, 13);
             this.labelSearchFilename.TabIndex = 2;
-            this.labelSearchFilename.Text = "Filename to search for (may not contain a directory):";
+            this.labelSearchFilename.Text = "Filename to search for (if left empty all files are returned):";
             // 
             // btnStopSearching
             // 
