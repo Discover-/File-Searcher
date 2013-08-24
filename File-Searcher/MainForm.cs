@@ -230,7 +230,7 @@ namespace File_Searcher
                     if (Path.HasExtension(files[i]))
                     {
                         string fileName = files[i];
-                        string extension = Path.GetExtension(files[i]);
+                        string extension = Path.GetExtension(files[i]).ToLower();
                         //string fileSize = (new FileInfo(files[i]).Length / 1024).ToString();
                         string fileSizeType = "";
                         string fileSize = bytesToMegaByte((int)new FileInfo(files[i]).Length, ref fileSizeType);
