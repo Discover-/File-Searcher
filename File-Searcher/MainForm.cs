@@ -135,9 +135,12 @@ namespace File_Searcher
                     if (checkBoxIgnoreRecycledFiles.Checked && files[i].Contains("Recycle"))
                         continue;
 
+                    if (checkBoxIgnoreRecycledFiles.Checked && files[i].Contains("Recycle"))
+                        continue;
+
                     if (txtBoxFilenameSearch.Text == "" || (txtBoxFilenameSearch.Text != "" && files[i].Contains(txtBoxFilenameSearch.Text)))
                     {
-                        if ((File.GetAttributes(files[i]) & FileAttributes.Hidden) != FileAttributes.Hidden)
+                        if (checkBoxShowHiddenFiles.Checked || (File.GetAttributes(files[i]) & FileAttributes.Hidden) != FileAttributes.Hidden)
                         {
                             allFiles += files[i] + "\n"; //! Need to fill up the reference...
 

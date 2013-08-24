@@ -44,6 +44,7 @@
             this.labelSearchFilename = new System.Windows.Forms.Label();
             this.lblHeaderDirectories = new System.Windows.Forms.Label();
             this.checkBoxIgnoreRecycledFiles = new System.Windows.Forms.CheckBox();
+            this.checkBoxShowHiddenFiles = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBoxFirst.SuspendLayout();
             this.SuspendLayout();
@@ -128,6 +129,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkBoxShowHiddenFiles);
             this.groupBox1.Controls.Add(this.checkBoxIgnoreRecycledFiles);
             this.groupBox1.Controls.Add(this.checkBoxShowDir);
             this.groupBox1.Controls.Add(this.labelOptions);
@@ -197,6 +199,16 @@
             this.checkBoxIgnoreRecycledFiles.Text = "Ignore recycled files";
             this.checkBoxIgnoreRecycledFiles.UseVisualStyleBackColor = true;
             // 
+            // checkBoxShowHiddenFiles
+            // 
+            this.checkBoxShowHiddenFiles.AutoSize = true;
+            this.checkBoxShowHiddenFiles.Location = new System.Drawing.Point(156, 42);
+            this.checkBoxShowHiddenFiles.Name = "checkBoxShowHiddenFiles";
+            this.checkBoxShowHiddenFiles.Size = new System.Drawing.Size(109, 17);
+            this.checkBoxShowHiddenFiles.TabIndex = 11;
+            this.checkBoxShowHiddenFiles.Text = "Show hidden files";
+            this.checkBoxShowHiddenFiles.UseVisualStyleBackColor = true;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -239,6 +251,7 @@
         private System.Windows.Forms.Label labelSearchFilename;
         private System.Windows.Forms.Label lblHeaderDirectories;
         private System.Windows.Forms.CheckBox checkBoxIgnoreRecycledFiles;
+        private System.Windows.Forms.CheckBox checkBoxShowHiddenFiles;
     }
 }
 
