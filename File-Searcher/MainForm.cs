@@ -105,7 +105,7 @@ namespace File_Searcher
 
             string allFiles = "";
 
-            ClearListViewResultsCrossThread(listViewResults);
+            ClearListViewResults(listViewResults);
 
             //! Function also fills up the listbox on the fly
             GetAllFilesFromDirectoryAndFillResults(searchDirectory, checkBoxIncludeSubDirs.Checked, ref allFiles);
@@ -129,28 +129,31 @@ namespace File_Searcher
 
                 for (int i = 0; i < files.Length; i++)
                 {
-                    if (files[i] != "")
+                    if (files[i] == "")
+                        continue;
+
+                    if (checkBoxIgnoreRecycledFiles.Checked && files[i].Contains("Recycle"))
+                        continue;
+
+                    if (txtBoxFilenameSearch.Text == "" || (txtBoxFilenameSearch.Text != "" && files[i].Contains(txtBoxFilenameSearch.Text)))
                     {
-                        if (txtBoxFilenameSearch.Text == "" || (txtBoxFilenameSearch.Text != "" && files[i].Contains(txtBoxFilenameSearch.Text)))
+                        if ((File.GetAttributes(files[i]) & FileAttributes.Hidden) != FileAttributes.Hidden)
                         {
-                            if ((File.GetAttributes(files[i]) & FileAttributes.Hidden) != FileAttributes.Hidden)
+                            allFiles += files[i] + "\n"; //! Need to fill up the reference...
+
+                            if (Path.HasExtension(files[i]))
                             {
-                                allFiles += files[i] + "\n"; //! Need to fill up the reference...
+                                string fileName = files[i];
+                                string extension = Path.GetExtension(files[i]);
+                                //string fileSize = (new FileInfo(files[i]).Length / 1024).ToString();
+                                string fileSizeType = "";
+                                string fileSize = bytesToMegaByte((int)new FileInfo(files[i]).Length, ref fileSizeType);
 
-                                if (Path.HasExtension(files[i]))
-                                {
-                                    string fileName = files[i];
-                                    string extension = Path.GetExtension(files[i]);
-                                    //string fileSize = (new FileInfo(files[i]).Length / 1024).ToString();
-                                    string fileSizeType = "";
-                                    string fileSize = bytesToMegaByte((int)new FileInfo(files[i]).Length, ref fileSizeType);
+                                if (!checkBoxShowDir.Checked)
+                                    fileName = Path.GetFileName(fileName);
 
-                                    if (!checkBoxShowDir.Checked)
-                                        fileName = Path.GetFileName(fileName);
-
-                                    ListViewItem listViewItem = new ListViewItem(new[] { extension, fileName, fileSize, fileSizeType, new FileInfo(files[i]).LastWriteTime.ToString() });
-                                    AddItemToListView(listViewResults, listViewItem);
-                                }
+                                ListViewItem listViewItem = new ListViewItem(new[] { extension, fileName, fileSize, fileSizeType, new FileInfo(files[i]).LastWriteTime.ToString() });
+                                AddItemToListView(listViewResults, listViewItem);
                             }
                         }
                     }
@@ -236,13 +239,13 @@ namespace File_Searcher
             listView.Items.Add(item);
         }
 
-        private delegate void ClearListViewResultsCrossThreadDelegate(ListView listView);
+        private delegate void ClearListViewResultsDelegate(ListView listView);
 
-        private void ClearListViewResultsCrossThread(ListView listView)
+        private void ClearListViewResults(ListView listView)
         {
             if (listView.InvokeRequired)
             {
-                Invoke(new ClearListViewResultsCrossThreadDelegate(ClearListViewResultsCrossThread), new object[] { listView });
+                Invoke(new ClearListViewResultsDelegate(ClearListViewResults), new object[] { listView });
                 return;
             }
 

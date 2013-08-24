@@ -43,6 +43,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.labelSearchFilename = new System.Windows.Forms.Label();
             this.lblHeaderDirectories = new System.Windows.Forms.Label();
+            this.checkBoxIgnoreRecycledFiles = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.groupBoxFirst.SuspendLayout();
             this.SuspendLayout();
@@ -106,7 +107,7 @@
             // 
             // listViewResults
             // 
-            this.listViewResults.Location = new System.Drawing.Point(13, 213);
+            this.listViewResults.Location = new System.Drawing.Point(14, 213);
             this.listViewResults.Name = "listViewResults";
             this.listViewResults.Size = new System.Drawing.Size(740, 232);
             this.listViewResults.TabIndex = 8;
@@ -127,6 +128,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkBoxIgnoreRecycledFiles);
             this.groupBox1.Controls.Add(this.checkBoxShowDir);
             this.groupBox1.Controls.Add(this.labelOptions);
             this.groupBox1.Controls.Add(this.checkBoxIncludeSubDirs);
@@ -172,9 +174,9 @@
             this.labelSearchFilename.AutoSize = true;
             this.labelSearchFilename.Location = new System.Drawing.Point(6, 80);
             this.labelSearchFilename.Name = "labelSearchFilename";
-            this.labelSearchFilename.Size = new System.Drawing.Size(270, 13);
+            this.labelSearchFilename.Size = new System.Drawing.Size(348, 13);
             this.labelSearchFilename.TabIndex = 2;
-            this.labelSearchFilename.Text = "Filename to search for (if left empty all files are returned):";
+            this.labelSearchFilename.Text = "Filename to search for (if left empty all files in the directory will be shown):";
             // 
             // lblHeaderDirectories
             // 
@@ -184,6 +186,16 @@
             this.lblHeaderDirectories.Size = new System.Drawing.Size(95, 13);
             this.lblHeaderDirectories.TabIndex = 3;
             this.lblHeaderDirectories.Text = "Search information";
+            // 
+            // checkBoxIgnoreRecycledFiles
+            // 
+            this.checkBoxIgnoreRecycledFiles.AutoSize = true;
+            this.checkBoxIgnoreRecycledFiles.Location = new System.Drawing.Point(156, 19);
+            this.checkBoxIgnoreRecycledFiles.Name = "checkBoxIgnoreRecycledFiles";
+            this.checkBoxIgnoreRecycledFiles.Size = new System.Drawing.Size(120, 17);
+            this.checkBoxIgnoreRecycledFiles.TabIndex = 10;
+            this.checkBoxIgnoreRecycledFiles.Text = "Ignore recycled files";
+            this.checkBoxIgnoreRecycledFiles.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -226,6 +238,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label labelSearchFilename;
         private System.Windows.Forms.Label lblHeaderDirectories;
+        private System.Windows.Forms.CheckBox checkBoxIgnoreRecycledFiles;
     }
 }
 
