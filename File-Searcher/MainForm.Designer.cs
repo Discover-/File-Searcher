@@ -33,7 +33,7 @@
             this.labelOptions = new System.Windows.Forms.Label();
             this.checkBoxIncludeSubDirs = new System.Windows.Forms.CheckBox();
             this.btnSearch = new System.Windows.Forms.Button();
-            this.txtBoxFilenameSearch = new System.Windows.Forms.TextBox();
+            this.txtBoxFileSearch = new System.Windows.Forms.TextBox();
             this.btnStopSearching = new System.Windows.Forms.Button();
             this.listViewResults = new System.Windows.Forms.ListView();
             this.checkBoxShowDir = new System.Windows.Forms.CheckBox();
@@ -41,13 +41,14 @@
             this.groupBoxSearchInfo = new System.Windows.Forms.GroupBox();
             this.btnSearchDir = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
-            this.labelSearchFilename = new System.Windows.Forms.Label();
+            this.lblSearchFile = new System.Windows.Forms.Label();
             this.lblHeaderDirectories = new System.Windows.Forms.Label();
             this.checkBoxIgnoreRecycledFiles = new System.Windows.Forms.CheckBox();
             this.checkBoxShowHiddenFiles = new System.Windows.Forms.CheckBox();
             this.textBoxExtensions = new System.Windows.Forms.TextBox();
             this.lblIgnoreExtensions = new System.Windows.Forms.Label();
             this.checkBoxReverseExtensions = new System.Windows.Forms.CheckBox();
+            this.checkBoxSearchForFileContent = new System.Windows.Forms.CheckBox();
             this.groupBoxOptions.SuspendLayout();
             this.groupBoxSearchInfo.SuspendLayout();
             this.SuspendLayout();
@@ -91,12 +92,12 @@
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.button2_Click);
             // 
-            // txtBoxFilenameSearch
+            // txtBoxFileSearch
             // 
-            this.txtBoxFilenameSearch.Location = new System.Drawing.Point(5, 100);
-            this.txtBoxFilenameSearch.Name = "txtBoxFilenameSearch";
-            this.txtBoxFilenameSearch.Size = new System.Drawing.Size(355, 20);
-            this.txtBoxFilenameSearch.TabIndex = 0;
+            this.txtBoxFileSearch.Location = new System.Drawing.Point(5, 100);
+            this.txtBoxFileSearch.Name = "txtBoxFileSearch";
+            this.txtBoxFileSearch.Size = new System.Drawing.Size(355, 20);
+            this.txtBoxFileSearch.TabIndex = 0;
             // 
             // btnStopSearching
             // 
@@ -132,6 +133,7 @@
             // 
             // groupBoxOptions
             // 
+            this.groupBoxOptions.Controls.Add(this.checkBoxSearchForFileContent);
             this.groupBoxOptions.Controls.Add(this.checkBoxReverseExtensions);
             this.groupBoxOptions.Controls.Add(this.checkBoxShowHiddenFiles);
             this.groupBoxOptions.Controls.Add(this.checkBoxIgnoreRecycledFiles);
@@ -150,9 +152,9 @@
             this.groupBoxSearchInfo.Controls.Add(this.textBoxExtensions);
             this.groupBoxSearchInfo.Controls.Add(this.lblHeaderDirectories);
             this.groupBoxSearchInfo.Controls.Add(this.btnSearchDir);
-            this.groupBoxSearchInfo.Controls.Add(this.txtBoxFilenameSearch);
+            this.groupBoxSearchInfo.Controls.Add(this.txtBoxFileSearch);
             this.groupBoxSearchInfo.Controls.Add(this.label2);
-            this.groupBoxSearchInfo.Controls.Add(this.labelSearchFilename);
+            this.groupBoxSearchInfo.Controls.Add(this.lblSearchFile);
             this.groupBoxSearchInfo.Location = new System.Drawing.Point(14, 7);
             this.groupBoxSearchInfo.Name = "groupBoxSearchInfo";
             this.groupBoxSearchInfo.Size = new System.Drawing.Size(740, 128);
@@ -178,14 +180,14 @@
             this.label2.TabIndex = 2;
             this.label2.Text = "Directory to search in:";
             // 
-            // labelSearchFilename
+            // lblSearchFile
             // 
-            this.labelSearchFilename.AutoSize = true;
-            this.labelSearchFilename.Location = new System.Drawing.Point(6, 80);
-            this.labelSearchFilename.Name = "labelSearchFilename";
-            this.labelSearchFilename.Size = new System.Drawing.Size(348, 13);
-            this.labelSearchFilename.TabIndex = 2;
-            this.labelSearchFilename.Text = "Filename to search for (if left empty all files in the directory will be shown):";
+            this.lblSearchFile.AutoSize = true;
+            this.lblSearchFile.Location = new System.Drawing.Point(6, 80);
+            this.lblSearchFile.Name = "lblSearchFile";
+            this.lblSearchFile.Size = new System.Drawing.Size(348, 13);
+            this.lblSearchFile.TabIndex = 2;
+            this.lblSearchFile.Text = "Filename to search for (if left empty all files in the directory will be shown):";
             // 
             // lblHeaderDirectories
             // 
@@ -243,6 +245,17 @@
             this.checkBoxReverseExtensions.UseVisualStyleBackColor = true;
             this.checkBoxReverseExtensions.CheckedChanged += new System.EventHandler(this.checkBoxReverseExtensions_CheckedChanged);
             // 
+            // checkBoxSearchForFileContent
+            // 
+            this.checkBoxSearchForFileContent.AutoSize = true;
+            this.checkBoxSearchForFileContent.Location = new System.Drawing.Point(311, 42);
+            this.checkBoxSearchForFileContent.Name = "checkBoxSearchForFileContent";
+            this.checkBoxSearchForFileContent.Size = new System.Drawing.Size(167, 17);
+            this.checkBoxSearchForFileContent.TabIndex = 13;
+            this.checkBoxSearchForFileContent.Text = "Search for file content instead";
+            this.checkBoxSearchForFileContent.UseVisualStyleBackColor = true;
+            this.checkBoxSearchForFileContent.CheckedChanged += new System.EventHandler(this.checkBoxSearchForFileContent_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -273,7 +286,7 @@
         private System.Windows.Forms.Label labelOptions;
         private System.Windows.Forms.CheckBox checkBoxIncludeSubDirs;
         private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.TextBox txtBoxFilenameSearch;
+        private System.Windows.Forms.TextBox txtBoxFileSearch;
         private System.Windows.Forms.Button btnStopSearching;
         private System.Windows.Forms.ListView listViewResults;
         private System.Windows.Forms.CheckBox checkBoxShowDir;
@@ -281,13 +294,14 @@
         private System.Windows.Forms.GroupBox groupBoxSearchInfo;
         private System.Windows.Forms.Button btnSearchDir;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.Label labelSearchFilename;
+        private System.Windows.Forms.Label lblSearchFile;
         private System.Windows.Forms.Label lblHeaderDirectories;
         private System.Windows.Forms.CheckBox checkBoxIgnoreRecycledFiles;
         private System.Windows.Forms.CheckBox checkBoxShowHiddenFiles;
         private System.Windows.Forms.Label lblIgnoreExtensions;
         private System.Windows.Forms.TextBox textBoxExtensions;
         private System.Windows.Forms.CheckBox checkBoxReverseExtensions;
+        private System.Windows.Forms.CheckBox checkBoxSearchForFileContent;
     }
 }
 

@@ -43,7 +43,7 @@ namespace File_Searcher
 
             txtBoxDirectorySearch.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
             btnSearchDir.Anchor = AnchorStyles.Right;
-            txtBoxFilenameSearch.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
+            txtBoxFileSearch.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
             btnSearch.Anchor = AnchorStyles.Right;
             btnStopSearching.Anchor = AnchorStyles.Right;
             listViewResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
@@ -76,7 +76,7 @@ namespace File_Searcher
         private void StartSearching()
         {
             string searchDirectory = txtBoxDirectorySearch.Text;
-            string searchFilename = txtBoxFilenameSearch.Text;
+            string searchFileText = txtBoxFileSearch.Text;
 
             if (searchDirectory == "" || searchDirectory == String.Empty)
             {
@@ -96,7 +96,7 @@ namespace File_Searcher
                 return;
             }
 
-            if (searchFilename != "" && searchFilename != String.Empty && Directory.Exists(searchFilename))
+            if (searchFileText != "" && searchFileText != String.Empty && Directory.Exists(searchFileText))
             {
                 MessageBox.Show("The field for filename contains a directory!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -144,6 +144,8 @@ namespace File_Searcher
 
                         for (int x = 0; x < extensionsToIgnore.Length; x++)
                         {
+                            //! Just writing it all out instead of using better-looking if-checks so nobody gets
+                            //! confused trying to understand this code.
                             if (checkBoxReverseExtensions.Checked)
                             {
                                 if (Path.GetExtension(files[i]) != extensionsToIgnore[x])
@@ -166,27 +168,35 @@ namespace File_Searcher
                             continue;
                     }
 
-                    if (txtBoxFilenameSearch.Text == "" || (txtBoxFilenameSearch.Text != "" && files[i].Contains(txtBoxFilenameSearch.Text)))
+                    if (!checkBoxShowHiddenFiles.Checked && (File.GetAttributes(files[i]) & FileAttributes.Hidden) == FileAttributes.Hidden)
+                        continue;
+
+                    if (txtBoxFileSearch.Text != "")
                     {
-                        if (checkBoxShowHiddenFiles.Checked || (File.GetAttributes(files[i]) & FileAttributes.Hidden) != FileAttributes.Hidden)
+                        if (checkBoxSearchForFileContent.Checked)
                         {
-                            allFiles += files[i] + "\n"; //! Need to fill up the reference...
-
-                            if (Path.HasExtension(files[i]))
-                            {
-                                string fileName = files[i];
-                                string extension = Path.GetExtension(files[i]);
-                                //string fileSize = (new FileInfo(files[i]).Length / 1024).ToString();
-                                string fileSizeType = "";
-                                string fileSize = bytesToMegaByte((int)new FileInfo(files[i]).Length, ref fileSizeType);
-
-                                if (!checkBoxShowDir.Checked)
-                                    fileName = Path.GetFileName(fileName);
-
-                                ListViewItem listViewItem = new ListViewItem(new[] { extension, fileName, fileSize, fileSizeType, new FileInfo(files[i]).LastWriteTime.ToString() });
-                                AddItemToListView(listViewResults, listViewItem);
-                            }
+                            if (!File.ReadAllText(files[i]).Contains(txtBoxFileSearch.Text))
+                                continue;
                         }
+                        else if (!files[i].Contains(txtBoxFileSearch.Text))
+                            continue;
+                    }
+
+                    allFiles += files[i] + "\n"; //! Need to fill up the reference...
+
+                    if (Path.HasExtension(files[i]))
+                    {
+                        string fileName = files[i];
+                        string extension = Path.GetExtension(files[i]);
+                        //string fileSize = (new FileInfo(files[i]).Length / 1024).ToString();
+                        string fileSizeType = "";
+                        string fileSize = bytesToMegaByte((int)new FileInfo(files[i]).Length, ref fileSizeType);
+
+                        if (!checkBoxShowDir.Checked)
+                            fileName = Path.GetFileName(fileName);
+
+                        ListViewItem listViewItem = new ListViewItem(new[] { extension, fileName, fileSize, fileSizeType, new FileInfo(files[i]).LastWriteTime.ToString() });
+                        AddItemToListView(listViewResults, listViewItem);
                     }
                 }
 
@@ -289,6 +299,14 @@ namespace File_Searcher
                 lblIgnoreExtensions.Text = "Extensions to show (split by semicolon):";
             else
                 lblIgnoreExtensions.Text = "Extensions to ignore (split by semicolon):";
+        }
+
+        private void checkBoxSearchForFileContent_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxSearchForFileContent.Checked)
+                lblSearchFile.Text = "File content to search for (if left empty all files in the directory will be shown):";
+            else
+                lblSearchFile.Text = "Filename to search for (if left empty all files in the directory will be shown):";
         }
     }
 }
