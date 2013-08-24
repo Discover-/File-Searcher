@@ -47,6 +47,8 @@ namespace File_Searcher
             btnSearch.Anchor = AnchorStyles.Right;
             btnStopSearching.Anchor = AnchorStyles.Right;
             listViewResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
+            groupBoxSearchInfo.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
+            groupBoxOptions.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
 
             oldWidth = Width;
             listViewResults.FullRowSelect = true;
