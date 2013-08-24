@@ -184,6 +184,8 @@
             // checkBoxIgnoreRecycledFiles
             // 
             this.checkBoxIgnoreRecycledFiles.AutoSize = true;
+            this.checkBoxIgnoreRecycledFiles.Checked = true;
+            this.checkBoxIgnoreRecycledFiles.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxIgnoreRecycledFiles.Location = new System.Drawing.Point(163, 19);
             this.checkBoxIgnoreRecycledFiles.Name = "checkBoxIgnoreRecycledFiles";
             this.checkBoxIgnoreRecycledFiles.Size = new System.Drawing.Size(120, 17);
