@@ -17,6 +17,7 @@ namespace File_Searcher
     {
         private Thread searchThread = null;
         private int oldWidth;
+        private ListViewColumnSorter lvwColumnSorter;
 
         public MainForm()
         {
@@ -62,6 +63,10 @@ namespace File_Searcher
             progressBar.Value = 0;
 
             listViewResults.DoubleClick += listViewResults_DoubleClick;
+
+            lvwColumnSorter = new ListViewColumnSorter();
+            listViewResults.ListViewItemSorter = lvwColumnSorter;
+            listViewResults.ColumnClick += new ColumnClickEventHandler(listViewResults_ColumnClick);
         }
 
         protected override void OnResize(EventArgs e)
@@ -409,7 +414,30 @@ namespace File_Searcher
                     }
                 }
             }
+        }
 
+        private void listViewResults_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            ListView myListView = (ListView)sender;
+
+            // Determine if clicked column is already the column that is being sorted.
+            if (e.Column == lvwColumnSorter.SortColumn)
+            {
+                // Reverse the current sort direction for this column.
+                if (lvwColumnSorter.Order == SortOrder.Ascending)
+                    lvwColumnSorter.Order = SortOrder.Descending;
+                else
+                    lvwColumnSorter.Order = SortOrder.Ascending;
+            }
+            else
+            {
+                // Set the column number that is to be sorted; default to ascending.
+                lvwColumnSorter.SortColumn = e.Column;
+                lvwColumnSorter.Order = SortOrder.Ascending;
+            }
+
+            // Perform the sort with these new sort options.
+            myListView.Sort();
         }
     }
 }
