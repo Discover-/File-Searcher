@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
+using System.Diagnostics;
 
 namespace File_Searcher
 {
@@ -57,6 +58,8 @@ namespace File_Searcher
             progressBar.Minimum = 0;
             progressBar.Maximum = 100;
             progressBar.Value = 0;
+
+            listViewResults.DoubleClick += listViewResults_DoubleClick;
         }
 
         protected override void OnResize(EventArgs e)
@@ -385,6 +388,25 @@ namespace File_Searcher
             }
 
             progressBar.Value = value;
+        }
+
+        private void listViewResults_DoubleClick(object sender, EventArgs e)
+        {
+            if (listViewResults.SelectedItems.Count == 1)
+            {
+                string selectedItemName = listViewResults.SelectedItems[0].SubItems[1].Text;
+
+                if (selectedItemName != "" && selectedItemName != String.Empty)
+                {
+                    if (MessageBox.Show("Are you sure you want to open this file?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        Process process = new Process();
+                        process.StartInfo = new ProcessStartInfo(selectedItemName);
+                        process.Start();
+                    }
+                }
+            }
+
         }
     }
 }
