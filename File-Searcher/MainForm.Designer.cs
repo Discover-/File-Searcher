@@ -45,6 +45,8 @@
             this.lblHeaderDirectories = new System.Windows.Forms.Label();
             this.checkBoxIgnoreRecycledFiles = new System.Windows.Forms.CheckBox();
             this.checkBoxShowHiddenFiles = new System.Windows.Forms.CheckBox();
+            this.textBoxExtensions = new System.Windows.Forms.TextBox();
+            this.lblIgnoreExtensions = new System.Windows.Forms.Label();
             this.groupBoxOptions.SuspendLayout();
             this.groupBoxSearchInfo.SuspendLayout();
             this.SuspendLayout();
@@ -90,9 +92,9 @@
             // 
             // txtBoxFilenameSearch
             // 
-            this.txtBoxFilenameSearch.Location = new System.Drawing.Point(19, 107);
+            this.txtBoxFilenameSearch.Location = new System.Drawing.Point(5, 100);
             this.txtBoxFilenameSearch.Name = "txtBoxFilenameSearch";
-            this.txtBoxFilenameSearch.Size = new System.Drawing.Size(728, 20);
+            this.txtBoxFilenameSearch.Size = new System.Drawing.Size(355, 20);
             this.txtBoxFilenameSearch.TabIndex = 0;
             // 
             // btnStopSearching
@@ -110,7 +112,7 @@
             // 
             this.listViewResults.Location = new System.Drawing.Point(14, 213);
             this.listViewResults.Name = "listViewResults";
-            this.listViewResults.Size = new System.Drawing.Size(740, 232);
+            this.listViewResults.Size = new System.Drawing.Size(739, 232);
             this.listViewResults.TabIndex = 8;
             this.listViewResults.UseCompatibleStateImageBehavior = false;
             // 
@@ -142,8 +144,11 @@
             // 
             // groupBoxSearchInfo
             // 
+            this.groupBoxSearchInfo.Controls.Add(this.lblIgnoreExtensions);
+            this.groupBoxSearchInfo.Controls.Add(this.textBoxExtensions);
             this.groupBoxSearchInfo.Controls.Add(this.lblHeaderDirectories);
             this.groupBoxSearchInfo.Controls.Add(this.btnSearchDir);
+            this.groupBoxSearchInfo.Controls.Add(this.txtBoxFilenameSearch);
             this.groupBoxSearchInfo.Controls.Add(this.label2);
             this.groupBoxSearchInfo.Controls.Add(this.labelSearchFilename);
             this.groupBoxSearchInfo.Location = new System.Drawing.Point(14, 7);
@@ -192,7 +197,7 @@
             // checkBoxIgnoreRecycledFiles
             // 
             this.checkBoxIgnoreRecycledFiles.AutoSize = true;
-            this.checkBoxIgnoreRecycledFiles.Location = new System.Drawing.Point(156, 19);
+            this.checkBoxIgnoreRecycledFiles.Location = new System.Drawing.Point(163, 19);
             this.checkBoxIgnoreRecycledFiles.Name = "checkBoxIgnoreRecycledFiles";
             this.checkBoxIgnoreRecycledFiles.Size = new System.Drawing.Size(120, 17);
             this.checkBoxIgnoreRecycledFiles.TabIndex = 10;
@@ -202,12 +207,28 @@
             // checkBoxShowHiddenFiles
             // 
             this.checkBoxShowHiddenFiles.AutoSize = true;
-            this.checkBoxShowHiddenFiles.Location = new System.Drawing.Point(156, 42);
+            this.checkBoxShowHiddenFiles.Location = new System.Drawing.Point(163, 42);
             this.checkBoxShowHiddenFiles.Name = "checkBoxShowHiddenFiles";
             this.checkBoxShowHiddenFiles.Size = new System.Drawing.Size(109, 17);
             this.checkBoxShowHiddenFiles.TabIndex = 11;
             this.checkBoxShowHiddenFiles.Text = "Show hidden files";
             this.checkBoxShowHiddenFiles.UseVisualStyleBackColor = true;
+            // 
+            // textBoxExtensions
+            // 
+            this.textBoxExtensions.Location = new System.Drawing.Point(378, 100);
+            this.textBoxExtensions.Name = "textBoxExtensions";
+            this.textBoxExtensions.Size = new System.Drawing.Size(355, 20);
+            this.textBoxExtensions.TabIndex = 4;
+            // 
+            // lblIgnoreExtensions
+            // 
+            this.lblIgnoreExtensions.AutoSize = true;
+            this.lblIgnoreExtensions.Location = new System.Drawing.Point(378, 80);
+            this.lblIgnoreExtensions.Name = "lblIgnoreExtensions";
+            this.lblIgnoreExtensions.Size = new System.Drawing.Size(196, 13);
+            this.lblIgnoreExtensions.TabIndex = 5;
+            this.lblIgnoreExtensions.Text = "Extensions to ignore (split by semicolon):";
             // 
             // MainForm
             // 
@@ -217,7 +238,6 @@
             this.Controls.Add(this.listViewResults);
             this.Controls.Add(this.btnStopSearching);
             this.Controls.Add(this.btnSearch);
-            this.Controls.Add(this.txtBoxFilenameSearch);
             this.Controls.Add(this.txtBoxDirectorySearch);
             this.Controls.Add(this.groupBoxSearchInfo);
             this.Controls.Add(this.groupBoxOptions);
@@ -252,6 +272,8 @@
         private System.Windows.Forms.Label lblHeaderDirectories;
         private System.Windows.Forms.CheckBox checkBoxIgnoreRecycledFiles;
         private System.Windows.Forms.CheckBox checkBoxShowHiddenFiles;
+        private System.Windows.Forms.Label lblIgnoreExtensions;
+        private System.Windows.Forms.TextBox textBoxExtensions;
     }
 }
 

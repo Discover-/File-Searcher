@@ -137,8 +137,23 @@ namespace File_Searcher
                     if (checkBoxIgnoreRecycledFiles.Checked && files[i].Contains("Recycle"))
                         continue;
 
-                    if (checkBoxIgnoreRecycledFiles.Checked && files[i].Contains("Recycle"))
-                        continue;
+                    if (textBoxExtensions.Text != string.Empty && Path.HasExtension(textBoxExtensions.Text))
+                    {
+                        string[] extensionsToIgnore = textBoxExtensions.Text.Split(';');
+                        bool _foundBadExtension = false;
+
+                        for (int x = 0; x < extensionsToIgnore.Length; x++)
+                        {
+                            if (Path.GetExtension(files[i]) == extensionsToIgnore[x])
+                            {
+                                _foundBadExtension = true;
+                                break;
+                            }
+                        }
+
+                        if (_foundBadExtension)
+                            break;
+                    }
 
                     if (txtBoxFilenameSearch.Text == "" || (txtBoxFilenameSearch.Text != "" && files[i].Contains(txtBoxFilenameSearch.Text)))
                     {
