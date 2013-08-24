@@ -38,17 +38,19 @@
             this.listViewResults = new System.Windows.Forms.ListView();
             this.checkBoxShowDir = new System.Windows.Forms.CheckBox();
             this.groupBoxOptions = new System.Windows.Forms.GroupBox();
+            this.checkBoxSearchForFileContent = new System.Windows.Forms.CheckBox();
+            this.checkBoxReverseExtensions = new System.Windows.Forms.CheckBox();
+            this.checkBoxShowHiddenFiles = new System.Windows.Forms.CheckBox();
+            this.checkBoxIgnoreRecycledFiles = new System.Windows.Forms.CheckBox();
             this.groupBoxSearchInfo = new System.Windows.Forms.GroupBox();
+            this.lblIgnoreExtensions = new System.Windows.Forms.Label();
+            this.textBoxExtensions = new System.Windows.Forms.TextBox();
+            this.lblHeaderDirectories = new System.Windows.Forms.Label();
             this.btnSearchDir = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.lblSearchFile = new System.Windows.Forms.Label();
-            this.lblHeaderDirectories = new System.Windows.Forms.Label();
-            this.checkBoxIgnoreRecycledFiles = new System.Windows.Forms.CheckBox();
-            this.checkBoxShowHiddenFiles = new System.Windows.Forms.CheckBox();
-            this.textBoxExtensions = new System.Windows.Forms.TextBox();
-            this.lblIgnoreExtensions = new System.Windows.Forms.Label();
-            this.checkBoxReverseExtensions = new System.Windows.Forms.CheckBox();
-            this.checkBoxSearchForFileContent = new System.Windows.Forms.CheckBox();
+            this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.checkBoxUseProgressBar = new System.Windows.Forms.CheckBox();
             this.groupBoxOptions.SuspendLayout();
             this.groupBoxSearchInfo.SuspendLayout();
             this.SuspendLayout();
@@ -133,6 +135,7 @@
             // 
             // groupBoxOptions
             // 
+            this.groupBoxOptions.Controls.Add(this.checkBoxUseProgressBar);
             this.groupBoxOptions.Controls.Add(this.checkBoxSearchForFileContent);
             this.groupBoxOptions.Controls.Add(this.checkBoxReverseExtensions);
             this.groupBoxOptions.Controls.Add(this.checkBoxShowHiddenFiles);
@@ -145,6 +148,48 @@
             this.groupBoxOptions.Size = new System.Drawing.Size(659, 66);
             this.groupBoxOptions.TabIndex = 10;
             this.groupBoxOptions.TabStop = false;
+            // 
+            // checkBoxSearchForFileContent
+            // 
+            this.checkBoxSearchForFileContent.AutoSize = true;
+            this.checkBoxSearchForFileContent.Location = new System.Drawing.Point(311, 42);
+            this.checkBoxSearchForFileContent.Name = "checkBoxSearchForFileContent";
+            this.checkBoxSearchForFileContent.Size = new System.Drawing.Size(167, 17);
+            this.checkBoxSearchForFileContent.TabIndex = 13;
+            this.checkBoxSearchForFileContent.Text = "Search for file content instead";
+            this.checkBoxSearchForFileContent.UseVisualStyleBackColor = true;
+            this.checkBoxSearchForFileContent.CheckedChanged += new System.EventHandler(this.checkBoxSearchForFileContent_CheckedChanged);
+            // 
+            // checkBoxReverseExtensions
+            // 
+            this.checkBoxReverseExtensions.AutoSize = true;
+            this.checkBoxReverseExtensions.Location = new System.Drawing.Point(311, 19);
+            this.checkBoxReverseExtensions.Name = "checkBoxReverseExtensions";
+            this.checkBoxReverseExtensions.Size = new System.Drawing.Size(136, 17);
+            this.checkBoxReverseExtensions.TabIndex = 12;
+            this.checkBoxReverseExtensions.Text = "Reverse extension field";
+            this.checkBoxReverseExtensions.UseVisualStyleBackColor = true;
+            this.checkBoxReverseExtensions.CheckedChanged += new System.EventHandler(this.checkBoxReverseExtensions_CheckedChanged);
+            // 
+            // checkBoxShowHiddenFiles
+            // 
+            this.checkBoxShowHiddenFiles.AutoSize = true;
+            this.checkBoxShowHiddenFiles.Location = new System.Drawing.Point(163, 42);
+            this.checkBoxShowHiddenFiles.Name = "checkBoxShowHiddenFiles";
+            this.checkBoxShowHiddenFiles.Size = new System.Drawing.Size(109, 17);
+            this.checkBoxShowHiddenFiles.TabIndex = 11;
+            this.checkBoxShowHiddenFiles.Text = "Show hidden files";
+            this.checkBoxShowHiddenFiles.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxIgnoreRecycledFiles
+            // 
+            this.checkBoxIgnoreRecycledFiles.AutoSize = true;
+            this.checkBoxIgnoreRecycledFiles.Location = new System.Drawing.Point(163, 19);
+            this.checkBoxIgnoreRecycledFiles.Name = "checkBoxIgnoreRecycledFiles";
+            this.checkBoxIgnoreRecycledFiles.Size = new System.Drawing.Size(120, 17);
+            this.checkBoxIgnoreRecycledFiles.TabIndex = 10;
+            this.checkBoxIgnoreRecycledFiles.Text = "Ignore recycled files";
+            this.checkBoxIgnoreRecycledFiles.UseVisualStyleBackColor = true;
             // 
             // groupBoxSearchInfo
             // 
@@ -160,6 +205,31 @@
             this.groupBoxSearchInfo.Size = new System.Drawing.Size(740, 128);
             this.groupBoxSearchInfo.TabIndex = 10;
             this.groupBoxSearchInfo.TabStop = false;
+            // 
+            // lblIgnoreExtensions
+            // 
+            this.lblIgnoreExtensions.AutoSize = true;
+            this.lblIgnoreExtensions.Location = new System.Drawing.Point(378, 80);
+            this.lblIgnoreExtensions.Name = "lblIgnoreExtensions";
+            this.lblIgnoreExtensions.Size = new System.Drawing.Size(196, 13);
+            this.lblIgnoreExtensions.TabIndex = 5;
+            this.lblIgnoreExtensions.Text = "Extensions to ignore (split by semicolon):";
+            // 
+            // textBoxExtensions
+            // 
+            this.textBoxExtensions.Location = new System.Drawing.Point(378, 100);
+            this.textBoxExtensions.Name = "textBoxExtensions";
+            this.textBoxExtensions.Size = new System.Drawing.Size(355, 20);
+            this.textBoxExtensions.TabIndex = 4;
+            // 
+            // lblHeaderDirectories
+            // 
+            this.lblHeaderDirectories.AutoSize = true;
+            this.lblHeaderDirectories.Location = new System.Drawing.Point(6, 0);
+            this.lblHeaderDirectories.Name = "lblHeaderDirectories";
+            this.lblHeaderDirectories.Size = new System.Drawing.Size(95, 13);
+            this.lblHeaderDirectories.TabIndex = 3;
+            this.lblHeaderDirectories.Text = "Search information";
             // 
             // btnSearchDir
             // 
@@ -189,78 +259,31 @@
             this.lblSearchFile.TabIndex = 2;
             this.lblSearchFile.Text = "Filename to search for (if left empty all files in the directory will be shown):";
             // 
-            // lblHeaderDirectories
+            // progressBar
             // 
-            this.lblHeaderDirectories.AutoSize = true;
-            this.lblHeaderDirectories.Location = new System.Drawing.Point(6, 0);
-            this.lblHeaderDirectories.Name = "lblHeaderDirectories";
-            this.lblHeaderDirectories.Size = new System.Drawing.Size(95, 13);
-            this.lblHeaderDirectories.TabIndex = 3;
-            this.lblHeaderDirectories.Text = "Search information";
+            this.progressBar.Location = new System.Drawing.Point(13, 454);
+            this.progressBar.Name = "progressBar";
+            this.progressBar.Size = new System.Drawing.Size(740, 23);
+            this.progressBar.TabIndex = 11;
             // 
-            // checkBoxIgnoreRecycledFiles
+            // checkBoxUseProgressBar
             // 
-            this.checkBoxIgnoreRecycledFiles.AutoSize = true;
-            this.checkBoxIgnoreRecycledFiles.Location = new System.Drawing.Point(163, 19);
-            this.checkBoxIgnoreRecycledFiles.Name = "checkBoxIgnoreRecycledFiles";
-            this.checkBoxIgnoreRecycledFiles.Size = new System.Drawing.Size(120, 17);
-            this.checkBoxIgnoreRecycledFiles.TabIndex = 10;
-            this.checkBoxIgnoreRecycledFiles.Text = "Ignore recycled files";
-            this.checkBoxIgnoreRecycledFiles.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxShowHiddenFiles
-            // 
-            this.checkBoxShowHiddenFiles.AutoSize = true;
-            this.checkBoxShowHiddenFiles.Location = new System.Drawing.Point(163, 42);
-            this.checkBoxShowHiddenFiles.Name = "checkBoxShowHiddenFiles";
-            this.checkBoxShowHiddenFiles.Size = new System.Drawing.Size(109, 17);
-            this.checkBoxShowHiddenFiles.TabIndex = 11;
-            this.checkBoxShowHiddenFiles.Text = "Show hidden files";
-            this.checkBoxShowHiddenFiles.UseVisualStyleBackColor = true;
-            // 
-            // textBoxExtensions
-            // 
-            this.textBoxExtensions.Location = new System.Drawing.Point(378, 100);
-            this.textBoxExtensions.Name = "textBoxExtensions";
-            this.textBoxExtensions.Size = new System.Drawing.Size(355, 20);
-            this.textBoxExtensions.TabIndex = 4;
-            // 
-            // lblIgnoreExtensions
-            // 
-            this.lblIgnoreExtensions.AutoSize = true;
-            this.lblIgnoreExtensions.Location = new System.Drawing.Point(378, 80);
-            this.lblIgnoreExtensions.Name = "lblIgnoreExtensions";
-            this.lblIgnoreExtensions.Size = new System.Drawing.Size(196, 13);
-            this.lblIgnoreExtensions.TabIndex = 5;
-            this.lblIgnoreExtensions.Text = "Extensions to ignore (split by semicolon):";
-            // 
-            // checkBoxReverseExtensions
-            // 
-            this.checkBoxReverseExtensions.AutoSize = true;
-            this.checkBoxReverseExtensions.Location = new System.Drawing.Point(311, 19);
-            this.checkBoxReverseExtensions.Name = "checkBoxReverseExtensions";
-            this.checkBoxReverseExtensions.Size = new System.Drawing.Size(136, 17);
-            this.checkBoxReverseExtensions.TabIndex = 12;
-            this.checkBoxReverseExtensions.Text = "Reverse extension field";
-            this.checkBoxReverseExtensions.UseVisualStyleBackColor = true;
-            this.checkBoxReverseExtensions.CheckedChanged += new System.EventHandler(this.checkBoxReverseExtensions_CheckedChanged);
-            // 
-            // checkBoxSearchForFileContent
-            // 
-            this.checkBoxSearchForFileContent.AutoSize = true;
-            this.checkBoxSearchForFileContent.Location = new System.Drawing.Point(311, 42);
-            this.checkBoxSearchForFileContent.Name = "checkBoxSearchForFileContent";
-            this.checkBoxSearchForFileContent.Size = new System.Drawing.Size(167, 17);
-            this.checkBoxSearchForFileContent.TabIndex = 13;
-            this.checkBoxSearchForFileContent.Text = "Search for file content instead";
-            this.checkBoxSearchForFileContent.UseVisualStyleBackColor = true;
-            this.checkBoxSearchForFileContent.CheckedChanged += new System.EventHandler(this.checkBoxSearchForFileContent_CheckedChanged);
+            this.checkBoxUseProgressBar.AutoSize = true;
+            this.checkBoxUseProgressBar.Checked = true;
+            this.checkBoxUseProgressBar.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxUseProgressBar.Location = new System.Drawing.Point(492, 19);
+            this.checkBoxUseProgressBar.Name = "checkBoxUseProgressBar";
+            this.checkBoxUseProgressBar.Size = new System.Drawing.Size(106, 17);
+            this.checkBoxUseProgressBar.TabIndex = 14;
+            this.checkBoxUseProgressBar.Text = "Use progress bar";
+            this.checkBoxUseProgressBar.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(765, 457);
+            this.ClientSize = new System.Drawing.Size(765, 484);
+            this.Controls.Add(this.progressBar);
             this.Controls.Add(this.listViewResults);
             this.Controls.Add(this.btnStopSearching);
             this.Controls.Add(this.btnSearch);
@@ -302,6 +325,8 @@
         private System.Windows.Forms.TextBox textBoxExtensions;
         private System.Windows.Forms.CheckBox checkBoxReverseExtensions;
         private System.Windows.Forms.CheckBox checkBoxSearchForFileContent;
+        private System.Windows.Forms.ProgressBar progressBar;
+        private System.Windows.Forms.CheckBox checkBoxUseProgressBar;
     }
 }
 

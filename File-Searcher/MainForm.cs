@@ -49,9 +49,14 @@ namespace File_Searcher
             listViewResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
             groupBoxSearchInfo.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
             groupBoxOptions.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
+            progressBar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
 
             oldWidth = Width;
             listViewResults.FullRowSelect = true;
+
+            progressBar.Minimum = 0;
+            progressBar.Maximum = 100;
+            progressBar.Value = 0;
         }
 
         protected override void OnResize(EventArgs e)
@@ -105,9 +110,19 @@ namespace File_Searcher
             SetEnabledOfControl(btnSearch, false);
             SetEnabledOfControl(btnStopSearching, true);
 
+            SetProgressBarMaxValue(progressBar, 100);
+            SetProgressBarValue(progressBar, 0);
+
             string allFiles = "";
 
             ClearListViewResults(listViewResults);
+
+            if (checkBoxUseProgressBar.Checked)
+            {
+                int directoryCountTotal = 0;
+                GetDirectoryCount(searchDirectory, ref directoryCountTotal);
+                SetProgressBarMaxValue(progressBar, directoryCountTotal);
+            }
 
             //! Function also fills up the listbox on the fly
             GetAllFilesFromDirectoryAndFillResults(searchDirectory, checkBoxIncludeSubDirs.Checked, ref allFiles);
@@ -120,6 +135,22 @@ namespace File_Searcher
 
             SetEnabledOfControl(btnSearch, true);
             SetEnabledOfControl(btnStopSearching, false);
+
+            SetProgressBarMaxValue(progressBar, 100);
+            SetProgressBarValue(progressBar, 0);
+        }
+
+        private void GetDirectoryCount(string searchDirectory, ref int directoryCountTotal)
+        {
+            try
+            {
+                string[] directories = Directory.GetDirectories(searchDirectory);
+                directoryCountTotal += directories.Count();
+
+                for (int i = 0; i < directories.Length; i++)
+                    GetDirectoryCount(directories[i], ref directoryCountTotal);
+            }
+            catch (Exception) { };
         }
 
         private void GetAllFilesFromDirectoryAndFillResults(string directorySearch, bool includingSubDirs, ref string allFiles)
@@ -128,6 +159,9 @@ namespace File_Searcher
             {
                 string[] directories = Directory.GetDirectories(directorySearch);
                 string[] files = Directory.GetFiles(directorySearch);
+
+                if (checkBoxUseProgressBar.Checked)
+                    SetProgressBarValue(progressBar, progressBar.Value + 1);
 
                 for (int i = 0; i < files.Length; i++)
                 {
@@ -230,6 +264,9 @@ namespace File_Searcher
 
             SetEnabledOfControl(btnSearch, true);
             SetEnabledOfControl(btnStopSearching, false);
+
+            SetProgressBarMaxValue(progressBar, 100);
+            SetProgressBarValue(progressBar, 0);
         }
 
         private void checkBoxShowDir_CheckedChanged(object sender, EventArgs e)
@@ -307,6 +344,38 @@ namespace File_Searcher
                 lblSearchFile.Text = "File content to search for (if left empty all files in the directory will be shown):";
             else
                 lblSearchFile.Text = "Filename to search for (if left empty all files in the directory will be shown):";
+        }
+
+        private delegate void SetProgressBarMaxValueDelegate(ProgressBar progressBar, int value);
+
+        private void SetProgressBarMaxValue(ProgressBar progressBar, int value)
+        {
+            if (progressBar.InvokeRequired)
+            {
+                Invoke(new SetProgressBarMaxValueDelegate(SetProgressBarMaxValue), new object[] { progressBar, value });
+                return;
+            }
+
+            progressBar.Maximum = value;
+        }
+
+        private delegate void SetProgressBarValueDelegate(ProgressBar progressBar, int value);
+
+        private void SetProgressBarValue(ProgressBar progressBar, int value)
+        {
+            if (progressBar.InvokeRequired)
+            {
+                Invoke(new SetProgressBarValueDelegate(SetProgressBarValue), new object[] { progressBar, value });
+                return;
+            }
+
+            if (progressBar.Value >= progressBar.Maximum)
+            {
+                progressBar.Value = progressBar.Maximum;
+                return;
+            }
+
+            progressBar.Value = value;
         }
     }
 }
