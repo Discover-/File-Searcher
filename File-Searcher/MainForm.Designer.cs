@@ -269,8 +269,6 @@
             // checkBoxUseProgressBar
             // 
             this.checkBoxUseProgressBar.AutoSize = true;
-            this.checkBoxUseProgressBar.Checked = true;
-            this.checkBoxUseProgressBar.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxUseProgressBar.Location = new System.Drawing.Point(492, 19);
             this.checkBoxUseProgressBar.Name = "checkBoxUseProgressBar";
             this.checkBoxUseProgressBar.Size = new System.Drawing.Size(106, 17);
