@@ -104,7 +104,7 @@
             // btnStopSearching
             // 
             this.btnStopSearching.Enabled = false;
-            this.btnStopSearching.Location = new System.Drawing.Point(678, 183);
+            this.btnStopSearching.Location = new System.Drawing.Point(678, 190);
             this.btnStopSearching.Name = "btnStopSearching";
             this.btnStopSearching.Size = new System.Drawing.Size(75, 23);
             this.btnStopSearching.TabIndex = 7;
@@ -114,9 +114,9 @@
             // 
             // listViewResults
             // 
-            this.listViewResults.Location = new System.Drawing.Point(14, 213);
+            this.listViewResults.Location = new System.Drawing.Point(14, 220);
             this.listViewResults.Name = "listViewResults";
-            this.listViewResults.Size = new System.Drawing.Size(739, 232);
+            this.listViewResults.Size = new System.Drawing.Size(739, 225);
             this.listViewResults.TabIndex = 8;
             this.listViewResults.UseCompatibleStateImageBehavior = false;
             // 
@@ -125,7 +125,7 @@
             this.checkBoxShowDir.AutoSize = true;
             this.checkBoxShowDir.Checked = true;
             this.checkBoxShowDir.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxShowDir.Location = new System.Drawing.Point(9, 42);
+            this.checkBoxShowDir.Location = new System.Drawing.Point(9, 46);
             this.checkBoxShowDir.Name = "checkBoxShowDir";
             this.checkBoxShowDir.Size = new System.Drawing.Size(124, 17);
             this.checkBoxShowDir.TabIndex = 9;
@@ -145,14 +145,14 @@
             this.groupBoxOptions.Controls.Add(this.checkBoxIncludeSubDirs);
             this.groupBoxOptions.Location = new System.Drawing.Point(13, 141);
             this.groupBoxOptions.Name = "groupBoxOptions";
-            this.groupBoxOptions.Size = new System.Drawing.Size(659, 66);
+            this.groupBoxOptions.Size = new System.Drawing.Size(659, 73);
             this.groupBoxOptions.TabIndex = 10;
             this.groupBoxOptions.TabStop = false;
             // 
             // checkBoxSearchForFileContent
             // 
             this.checkBoxSearchForFileContent.AutoSize = true;
-            this.checkBoxSearchForFileContent.Location = new System.Drawing.Point(311, 42);
+            this.checkBoxSearchForFileContent.Location = new System.Drawing.Point(311, 46);
             this.checkBoxSearchForFileContent.Name = "checkBoxSearchForFileContent";
             this.checkBoxSearchForFileContent.Size = new System.Drawing.Size(167, 17);
             this.checkBoxSearchForFileContent.TabIndex = 13;
@@ -174,7 +174,7 @@
             // checkBoxShowHiddenFiles
             // 
             this.checkBoxShowHiddenFiles.AutoSize = true;
-            this.checkBoxShowHiddenFiles.Location = new System.Drawing.Point(163, 42);
+            this.checkBoxShowHiddenFiles.Location = new System.Drawing.Point(163, 46);
             this.checkBoxShowHiddenFiles.Name = "checkBoxShowHiddenFiles";
             this.checkBoxShowHiddenFiles.Size = new System.Drawing.Size(109, 17);
             this.checkBoxShowHiddenFiles.TabIndex = 11;
