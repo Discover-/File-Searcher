@@ -140,19 +140,30 @@ namespace File_Searcher
                     if (textBoxExtensions.Text != string.Empty && Path.HasExtension(textBoxExtensions.Text))
                     {
                         string[] extensionsToIgnore = textBoxExtensions.Text.Split(';');
-                        bool _foundBadExtension = false;
+                        bool _break = false, _continue = false;
 
                         for (int x = 0; x < extensionsToIgnore.Length; x++)
                         {
-                            if (Path.GetExtension(files[i]) == extensionsToIgnore[x])
+                            if (checkBoxReverseExtensions.Checked)
                             {
-                                _foundBadExtension = true;
+                                if (Path.GetExtension(files[i]) != extensionsToIgnore[x])
+                                {
+                                    _continue = true;
+                                    break;
+                                }
+                            }
+                            else if (Path.GetExtension(files[i]) == extensionsToIgnore[x])
+                            {
+                                _break = true;
                                 break;
                             }
                         }
 
-                        if (_foundBadExtension)
+                        if (_break)
                             break;
+
+                        if (_continue)
+                            continue;
                     }
 
                     if (txtBoxFilenameSearch.Text == "" || (txtBoxFilenameSearch.Text != "" && files[i].Contains(txtBoxFilenameSearch.Text)))
@@ -270,6 +281,14 @@ namespace File_Searcher
             }
 
             listView.Items.Clear();
+        }
+
+        private void checkBoxReverseExtensions_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxReverseExtensions.Checked)
+                lblIgnoreExtensions.Text = "Extensions to show (split by semicolon):";
+            else
+                lblIgnoreExtensions.Text = "Extensions to ignore (split by semicolon):";
         }
     }
 }

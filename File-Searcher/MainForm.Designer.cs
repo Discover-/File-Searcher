@@ -47,6 +47,7 @@
             this.checkBoxShowHiddenFiles = new System.Windows.Forms.CheckBox();
             this.textBoxExtensions = new System.Windows.Forms.TextBox();
             this.lblIgnoreExtensions = new System.Windows.Forms.Label();
+            this.checkBoxReverseExtensions = new System.Windows.Forms.CheckBox();
             this.groupBoxOptions.SuspendLayout();
             this.groupBoxSearchInfo.SuspendLayout();
             this.SuspendLayout();
@@ -131,6 +132,7 @@
             // 
             // groupBoxOptions
             // 
+            this.groupBoxOptions.Controls.Add(this.checkBoxReverseExtensions);
             this.groupBoxOptions.Controls.Add(this.checkBoxShowHiddenFiles);
             this.groupBoxOptions.Controls.Add(this.checkBoxIgnoreRecycledFiles);
             this.groupBoxOptions.Controls.Add(this.checkBoxShowDir);
@@ -230,6 +232,17 @@
             this.lblIgnoreExtensions.TabIndex = 5;
             this.lblIgnoreExtensions.Text = "Extensions to ignore (split by semicolon):";
             // 
+            // checkBoxReverseExtensions
+            // 
+            this.checkBoxReverseExtensions.AutoSize = true;
+            this.checkBoxReverseExtensions.Location = new System.Drawing.Point(311, 19);
+            this.checkBoxReverseExtensions.Name = "checkBoxReverseExtensions";
+            this.checkBoxReverseExtensions.Size = new System.Drawing.Size(136, 17);
+            this.checkBoxReverseExtensions.TabIndex = 12;
+            this.checkBoxReverseExtensions.Text = "Reverse extension field";
+            this.checkBoxReverseExtensions.UseVisualStyleBackColor = true;
+            this.checkBoxReverseExtensions.CheckedChanged += new System.EventHandler(this.checkBoxReverseExtensions_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -274,6 +287,7 @@
         private System.Windows.Forms.CheckBox checkBoxShowHiddenFiles;
         private System.Windows.Forms.Label lblIgnoreExtensions;
         private System.Windows.Forms.TextBox textBoxExtensions;
+        private System.Windows.Forms.CheckBox checkBoxReverseExtensions;
     }
 }
 
