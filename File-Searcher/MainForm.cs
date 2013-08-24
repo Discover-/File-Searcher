@@ -130,6 +130,12 @@ namespace File_Searcher
             if (allFiles == string.Empty)
             {
                 MessageBox.Show("The searched directory contains no files at all.", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+
+                SetEnabledOfControl(btnSearch, true);
+                SetEnabledOfControl(btnStopSearching, false);
+
+                SetProgressBarMaxValue(progressBar, 100);
+                SetProgressBarValue(progressBar, 0);
                 return;
             }
 
