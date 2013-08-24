@@ -18,6 +18,7 @@ namespace File_Searcher
         private Thread searchThread = null;
         private int oldWidth;
         private ListViewColumnSorter lvwColumnSorter;
+        private List<ListViewItem> listViewResultsContainer = null;
 
         public MainForm()
         {
@@ -67,6 +68,8 @@ namespace File_Searcher
             lvwColumnSorter = new ListViewColumnSorter();
             listViewResults.ListViewItemSorter = lvwColumnSorter;
             listViewResults.ColumnClick += new ColumnClickEventHandler(listViewResults_ColumnClick);
+
+            listViewResultsContainer = new List<ListViewItem>();
         }
 
         protected override void OnResize(EventArgs e)
@@ -84,6 +87,7 @@ namespace File_Searcher
 
         private void button2_Click(object sender, EventArgs e)
         {
+            listViewResultsContainer.Clear();
             searchThread = new Thread(new ThreadStart(StartSearching));
             searchThread.Start();
         }
@@ -136,6 +140,10 @@ namespace File_Searcher
 
             //! Function also fills up the listbox on the fly
             GetAllFilesFromDirectoryAndFillResults(searchDirectory, checkBoxIncludeSubDirs.Checked, ref allFiles);
+
+            if (listViewResultsContainer != null && checkBoxShowAllResultsAtOnce.Checked && listViewResultsContainer.Count() > 0)
+                foreach (ListViewItem item in listViewResultsContainer)
+                    AddItemToListView(listViewResults, item);
 
             if (allFiles == string.Empty)
             {
@@ -249,7 +257,11 @@ namespace File_Searcher
                             fileName = Path.GetFileName(fileName);
 
                         ListViewItem listViewItem = new ListViewItem(new[] { extension, fileName, fileSize, fileSizeType, new FileInfo(files[i]).LastWriteTime.ToString(), fileName });
-                        AddItemToListView(listViewResults, listViewItem);
+
+                        if (checkBoxShowAllResultsAtOnce.Checked)
+                            listViewResultsContainer.Add(listViewItem);
+                        else
+                            AddItemToListView(listViewResults, listViewItem);
                     }
                 }
 
@@ -286,6 +298,14 @@ namespace File_Searcher
 
             SetProgressBarMaxValue(progressBar, 100);
             SetProgressBarValue(progressBar, 0);
+
+            if (listViewResultsContainer != null && checkBoxShowAllResultsAtOnce.Checked && listViewResultsContainer.Count() > 0)
+            {
+                foreach (ListViewItem item in listViewResultsContainer)
+                    AddItemToListView(listViewResults, item);
+
+                listViewResultsContainer.Clear();
+            }
         }
 
         private void checkBoxShowDir_CheckedChanged(object sender, EventArgs e)
