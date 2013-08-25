@@ -95,7 +95,8 @@ namespace File_Searcher
             }
             catch (Exception exception)
             {
-                exceptionStringStore.Add(exception.ToString());
+                if (checkBoxShowExceptions.Checked)
+                    exceptionStringStore.Add(exception.ToString());
             }
         }
 
@@ -227,7 +228,8 @@ namespace File_Searcher
             }
             catch (Exception exception)
             {
-                exceptionStringStore.Add(exception.ToString());
+                if (checkBoxShowExceptions.Checked)
+                    exceptionStringStore.Add(exception.ToString());
             }
         }
 
@@ -325,7 +327,8 @@ namespace File_Searcher
             }
             catch (Exception exception)
             {
-                exceptionStringStore.Add(exception.ToString());
+                if (checkBoxShowExceptions.Checked)
+                    exceptionStringStore.Add(exception.ToString());
             }
         }
 
