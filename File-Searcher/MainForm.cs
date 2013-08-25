@@ -27,6 +27,11 @@ namespace File_Searcher
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            Microsoft.Win32.RegistryKey key;
+            key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("Names");
+            key.SetValue("Name", "Isabella");
+            key.Close();
+
             MaximizeBox = false; //! This looks ugly if set to true when button is pressed while we have a hardcoded max size
             MinimizeBox = true;
             MinimumSize = new Size(Width, Height);
@@ -121,6 +126,8 @@ namespace File_Searcher
                 return;
             }
 
+            UseWaitCursor = true;
+
             SetEnabledOfControl(btnSearch, false);
             SetEnabledOfControl(btnStopSearching, true);
 
@@ -157,6 +164,8 @@ namespace File_Searcher
 
                 SetProgressBarMaxValue(progressBar, 100);
                 SetProgressBarValue(progressBar, 0);
+
+                UseWaitCursor = false;
                 return;
             }
 
@@ -298,6 +307,8 @@ namespace File_Searcher
 
             SetProgressBarMaxValue(progressBar, 100);
             SetProgressBarValue(progressBar, 0);
+
+            UseWaitCursor = false;
 
             if (listViewResultsContainer != null && checkBoxShowAllResultsAtOnce.Checked && listViewResultsContainer.Count() > 0)
             {
