@@ -52,6 +52,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lblSearchFile = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.checkBoxShowExceptions = new System.Windows.Forms.CheckBox();
             this.groupBoxOptions.SuspendLayout();
             this.groupBoxSearchInfo.SuspendLayout();
             this.SuspendLayout();
@@ -105,7 +106,7 @@
             // btnStopSearching
             // 
             this.btnStopSearching.Enabled = false;
-            this.btnStopSearching.Location = new System.Drawing.Point(678, 188);
+            this.btnStopSearching.Location = new System.Drawing.Point(678, 193);
             this.btnStopSearching.Name = "btnStopSearching";
             this.btnStopSearching.Size = new System.Drawing.Size(75, 23);
             this.btnStopSearching.TabIndex = 7;
@@ -115,9 +116,9 @@
             // 
             // listViewResults
             // 
-            this.listViewResults.Location = new System.Drawing.Point(14, 220);
+            this.listViewResults.Location = new System.Drawing.Point(14, 223);
             this.listViewResults.Name = "listViewResults";
-            this.listViewResults.Size = new System.Drawing.Size(739, 225);
+            this.listViewResults.Size = new System.Drawing.Size(739, 245);
             this.listViewResults.TabIndex = 8;
             this.listViewResults.UseCompatibleStateImageBehavior = false;
             // 
@@ -126,7 +127,7 @@
             this.checkBoxShowDir.AutoSize = true;
             this.checkBoxShowDir.Checked = true;
             this.checkBoxShowDir.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxShowDir.Location = new System.Drawing.Point(9, 46);
+            this.checkBoxShowDir.Location = new System.Drawing.Point(9, 39);
             this.checkBoxShowDir.Name = "checkBoxShowDir";
             this.checkBoxShowDir.Size = new System.Drawing.Size(124, 17);
             this.checkBoxShowDir.TabIndex = 9;
@@ -136,6 +137,7 @@
             // 
             // groupBoxOptions
             // 
+            this.groupBoxOptions.Controls.Add(this.checkBoxShowExceptions);
             this.groupBoxOptions.Controls.Add(this.checkBoxShowAllResultsAtOnce);
             this.groupBoxOptions.Controls.Add(this.checkBoxUseProgressBar);
             this.groupBoxOptions.Controls.Add(this.checkBoxSearchForFileContent);
@@ -147,14 +149,14 @@
             this.groupBoxOptions.Controls.Add(this.checkBoxIncludeSubDirs);
             this.groupBoxOptions.Location = new System.Drawing.Point(13, 141);
             this.groupBoxOptions.Name = "groupBoxOptions";
-            this.groupBoxOptions.Size = new System.Drawing.Size(659, 73);
+            this.groupBoxOptions.Size = new System.Drawing.Size(659, 78);
             this.groupBoxOptions.TabIndex = 10;
             this.groupBoxOptions.TabStop = false;
             // 
             // checkBoxShowAllResultsAtOnce
             // 
             this.checkBoxShowAllResultsAtOnce.AutoSize = true;
-            this.checkBoxShowAllResultsAtOnce.Location = new System.Drawing.Point(511, 46);
+            this.checkBoxShowAllResultsAtOnce.Location = new System.Drawing.Point(511, 39);
             this.checkBoxShowAllResultsAtOnce.Name = "checkBoxShowAllResultsAtOnce";
             this.checkBoxShowAllResultsAtOnce.Size = new System.Drawing.Size(138, 17);
             this.checkBoxShowAllResultsAtOnce.TabIndex = 15;
@@ -175,7 +177,7 @@
             // checkBoxSearchForFileContent
             // 
             this.checkBoxSearchForFileContent.AutoSize = true;
-            this.checkBoxSearchForFileContent.Location = new System.Drawing.Point(316, 46);
+            this.checkBoxSearchForFileContent.Location = new System.Drawing.Point(316, 39);
             this.checkBoxSearchForFileContent.Name = "checkBoxSearchForFileContent";
             this.checkBoxSearchForFileContent.Size = new System.Drawing.Size(167, 17);
             this.checkBoxSearchForFileContent.TabIndex = 13;
@@ -197,7 +199,7 @@
             // checkBoxShowHiddenFiles
             // 
             this.checkBoxShowHiddenFiles.AutoSize = true;
-            this.checkBoxShowHiddenFiles.Location = new System.Drawing.Point(168, 46);
+            this.checkBoxShowHiddenFiles.Location = new System.Drawing.Point(168, 39);
             this.checkBoxShowHiddenFiles.Name = "checkBoxShowHiddenFiles";
             this.checkBoxShowHiddenFiles.Size = new System.Drawing.Size(109, 17);
             this.checkBoxShowHiddenFiles.TabIndex = 11;
@@ -286,16 +288,26 @@
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(13, 454);
+            this.progressBar.Location = new System.Drawing.Point(14, 474);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(740, 23);
             this.progressBar.TabIndex = 11;
+            // 
+            // checkBoxShowExceptions
+            // 
+            this.checkBoxShowExceptions.AutoSize = true;
+            this.checkBoxShowExceptions.Location = new System.Drawing.Point(9, 59);
+            this.checkBoxShowExceptions.Name = "checkBoxShowExceptions";
+            this.checkBoxShowExceptions.Size = new System.Drawing.Size(131, 17);
+            this.checkBoxShowExceptions.TabIndex = 16;
+            this.checkBoxShowExceptions.Text = "Show exception errors";
+            this.checkBoxShowExceptions.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(765, 484);
+            this.ClientSize = new System.Drawing.Size(765, 505);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.listViewResults);
             this.Controls.Add(this.btnStopSearching);
@@ -341,6 +353,7 @@
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.CheckBox checkBoxUseProgressBar;
         private System.Windows.Forms.CheckBox checkBoxShowAllResultsAtOnce;
+        private System.Windows.Forms.CheckBox checkBoxShowExceptions;
     }
 }
 

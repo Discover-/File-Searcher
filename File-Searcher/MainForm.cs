@@ -20,6 +20,7 @@ namespace File_Searcher
         private ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         private List<ListViewItem> listViewResultsContainer = new List<ListViewItem>();
         private List<Control> controlsToDisable = new List<Control>();
+        private List<string> exceptionStringStore = new List<string>();
 
         public MainForm()
         {
@@ -75,6 +76,7 @@ namespace File_Searcher
             controlsToDisable.Add(checkBoxShowDir);
             controlsToDisable.Add(checkBoxShowHiddenFiles);
             controlsToDisable.Add(checkBoxUseProgressBar);
+            controlsToDisable.Add(checkBoxShowExceptions);
             controlsToDisable.Add(txtBoxDirectorySearch);
             controlsToDisable.Add(txtBoxFileSearch);
             controlsToDisable.Add(txtBoxExtensions);
@@ -91,7 +93,10 @@ namespace File_Searcher
                 listViewResults.Columns[1].Width -= oldWidth - Width;
                 oldWidth = Width;
             }
-            catch (Exception) { };
+            catch (Exception exception)
+            {
+                exceptionStringStore.Add(exception.ToString());
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -220,7 +225,10 @@ namespace File_Searcher
                 for (int i = 0; i < directories.Length; i++)
                     GetDirectoryCount(directories[i], ref directoryCountTotal);
             }
-            catch (Exception) { };
+            catch (Exception exception)
+            {
+                exceptionStringStore.Add(exception.ToString());
+            }
         }
 
         private void GetAllFilesFromDirectoryAndFillResults(string directorySearch, bool includingSubDirs, ref string allFiles)
@@ -315,7 +323,10 @@ namespace File_Searcher
                     for (int i = 0; i < directories.Length; i++)
                         GetAllFilesFromDirectoryAndFillResults(directories[i], true, ref allFiles);
             }
-            catch (Exception) { }; //! No need to do anything with the error.
+            catch (Exception exception)
+            {
+                exceptionStringStore.Add(exception.ToString());
+            }
         }
 
         private void btnSearchDir_Click(object sender, EventArgs e)
@@ -356,6 +367,15 @@ namespace File_Searcher
 
             foreach (Control control in controlsToDisable)
                 SetEnabledOfControl(control, true);
+
+            if (checkBoxShowExceptions.Checked)
+                new Thread(StartExceptionForm).Start();
+        }
+
+        private void StartExceptionForm()
+        {
+            Application.Run(new ExceptionForm(exceptionStringStore));
+            exceptionStringStore.Clear();
         }
 
         private void checkBoxShowDir_CheckedChanged(object sender, EventArgs e)
