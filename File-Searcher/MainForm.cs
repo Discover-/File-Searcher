@@ -262,7 +262,7 @@ namespace File_Searcher
                     if (files[i] == "")
                         continue;
 
-                    if (checkBoxIgnoreRecycledFiles.Checked && files[i].Contains("Recycle"))
+                    if (checkBoxIgnoreRecycledFiles.Checked && files[i].IndexOf("recycle", StringComparison.OrdinalIgnoreCase) >= 0)
                         continue;
 
                     if (txtBoxExtensions.Text != string.Empty && Path.HasExtension(txtBoxExtensions.Text))
