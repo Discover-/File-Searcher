@@ -265,37 +265,6 @@ namespace File_Searcher
                     if (checkBoxIgnoreRecycledFiles.Checked && files[i].IndexOf("recycle", StringComparison.OrdinalIgnoreCase) >= 0)
                         continue;
 
-                    if (txtBoxExtensions.Text != string.Empty && Path.HasExtension(txtBoxExtensions.Text))
-                    {
-                        string[] extensionsToIgnore = txtBoxExtensions.Text.Split(';');
-                        bool _break = false, _continue = false;
-
-                        for (int x = 0; x < extensionsToIgnore.Length; x++)
-                        {
-                            //! Just writing it all out instead of using better-looking if-checks so nobody gets
-                            //! confused trying to understand this code.
-                            if (checkBoxReverseExtensions.Checked)
-                            {
-                                if (Path.GetExtension(files[i]) != extensionsToIgnore[x])
-                                {
-                                    _continue = true;
-                                    break;
-                                }
-                            }
-                            else if (Path.GetExtension(files[i]) == extensionsToIgnore[x])
-                            {
-                                _break = true;
-                                break;
-                            }
-                        }
-
-                        if (_break)
-                            break;
-
-                        if (_continue)
-                            continue;
-                    }
-
                     if (!checkBoxShowHiddenFiles.Checked && (File.GetAttributes(files[i]) & FileAttributes.Hidden) == FileAttributes.Hidden)
                         continue;
 
@@ -307,6 +276,39 @@ namespace File_Searcher
                                 continue;
                         }
                         else if (!files[i].Contains(txtBoxFileSearch.Text))
+                            continue;
+                    }
+
+                    if (txtBoxExtensions.Text != string.Empty && Path.HasExtension(txtBoxExtensions.Text))
+                    {
+                        string[] extensionsToIgnoreOrShow = txtBoxExtensions.Text.Split(';');
+                        bool _break = false, _continue = false;
+
+                        for (int x = 0; x < extensionsToIgnoreOrShow.Length; x++)
+                        {
+                            //! Just writing it all out instead of using better-looking if-checks so nobody gets
+                            //! confused trying to understand this code.
+                            if (checkBoxReverseExtensions.Checked) //! Extensions to show instead of ignore in the field now
+                            {
+                                if (Path.GetExtension(files[i]) != extensionsToIgnoreOrShow[x])
+                                {
+                                    _continue = true;
+                                    break;
+                                }
+                                else
+                                    break;
+                            }
+                            else if (Path.GetExtension(files[i]) == extensionsToIgnoreOrShow[x])
+                            {
+                                _break = true;
+                                break;
+                            }
+                        }
+
+                        if (_break)
+                            break;
+
+                        if (_continue)
                             continue;
                     }
 
