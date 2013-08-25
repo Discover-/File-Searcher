@@ -211,6 +211,8 @@ namespace File_Searcher
             SetProgressBarMaxValue(progressBar, 100);
             SetProgressBarValue(progressBar, 0);
 
+            UseWaitCursor = false;
+
             foreach (Control control in controlsToDisable)
                 SetEnabledOfControl(control, true);
         }
