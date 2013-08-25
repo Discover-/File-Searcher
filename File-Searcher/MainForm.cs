@@ -210,6 +210,8 @@ namespace File_Searcher
 
         private void GetDirectoryCount(string searchDirectory, ref int directoryCountTotal)
         {
+            //! We need a try-catch block because accessing files without permissions does not work for some reason
+            //! and breaks with an exception.
             try
             {
                 string[] directories = Directory.GetDirectories(searchDirectory);
@@ -223,6 +225,8 @@ namespace File_Searcher
 
         private void GetAllFilesFromDirectoryAndFillResults(string directorySearch, bool includingSubDirs, ref string allFiles)
         {
+            //! We need a try-catch block because accessing files without permissions does not work for some reason
+            //! and breaks with an exception.
             try
             {
                 string[] directories = Directory.GetDirectories(directorySearch);
@@ -418,6 +422,7 @@ namespace File_Searcher
 
         private void checkBoxReverseExtensions_CheckedChanged(object sender, EventArgs e)
         {
+            //! Using string::replace doesn't have the same effect for some reason
             if (checkBoxReverseExtensions.Checked)
                 lblIgnoreExtensions.Text = "Extensions to show (split by semicolon):";
             else
@@ -486,23 +491,18 @@ namespace File_Searcher
         {
             ListView myListView = (ListView)sender;
 
-            // Determine if clicked column is already the column that is being sorted.
-            if (e.Column == lvwColumnSorter.SortColumn)
+            //! Determine if clicked column is already the column that is being sorted
+            if (e.Column != lvwColumnSorter.SortColumn)
             {
-                // Reverse the current sort direction for this column.
-                if (lvwColumnSorter.Order == SortOrder.Ascending)
-                    lvwColumnSorter.Order = SortOrder.Descending;
-                else
-                    lvwColumnSorter.Order = SortOrder.Ascending;
-            }
-            else
-            {
-                // Set the column number that is to be sorted; default to ascending.
+                //! Set the column number that is to be sorted; default to ascending
                 lvwColumnSorter.SortColumn = e.Column;
                 lvwColumnSorter.Order = SortOrder.Ascending;
             }
+            else
+                //! Reverse the current sort direction for this column
+                lvwColumnSorter.Order = lvwColumnSorter.Order == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
 
-            // Perform the sort with these new sort options.
+            //! Perform the sort with these new sort options
             myListView.Sort();
         }
 
