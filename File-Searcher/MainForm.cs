@@ -28,15 +28,10 @@ namespace File_Searcher
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            Microsoft.Win32.RegistryKey key;
-            key = Microsoft.Win32.Registry.CurrentUser.CreateSubKey("Names");
-            key.SetValue("Name", "Isabella");
-            key.Close();
-
             MaximizeBox = false; //! This looks ugly if set to true when button is pressed while we have a hardcoded max size
             MinimizeBox = true;
             MinimumSize = new Size(Width, Height);
-            MaximumSize = new Size(1300, Height);
+            MaximumSize = new Size(1500, Height);
 
             listViewResults.View = View.Details;
             ColumnHeader headerExt = listViewResults.Columns.Add("Extension", 1, HorizontalAlignment.Right);
