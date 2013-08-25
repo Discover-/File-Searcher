@@ -34,13 +34,14 @@ namespace File_Searcher
             MaximumSize = new Size(1500, Height);
 
             listViewResults.View = View.Details;
-            ColumnHeader headerExt = listViewResults.Columns.Add("Extension", 60, HorizontalAlignment.Right);
-            ColumnHeader headerName = listViewResults.Columns.Add("Name", 430, HorizontalAlignment.Left);
-            ColumnHeader headerSize = listViewResults.Columns.Add("Size", 35, HorizontalAlignment.Right);
-            ColumnHeader headerSizeType = listViewResults.Columns.Add("Sizetype", 55, HorizontalAlignment.Right);
-            ColumnHeader headerLastModified = listViewResults.Columns.Add("Last Modified", 155, HorizontalAlignment.Right);
-            ColumnHeader headerFullFilename = listViewResults.Columns.Add("", 0, HorizontalAlignment.Right);
+            listViewResults.Columns.Add("Extension", 60, HorizontalAlignment.Right);
+            listViewResults.Columns.Add("Name", 430, HorizontalAlignment.Left);
+            listViewResults.Columns.Add("Size", 35, HorizontalAlignment.Right);
+            listViewResults.Columns.Add("Sizetype", 55, HorizontalAlignment.Right);
+            listViewResults.Columns.Add("Last Modified", 155, HorizontalAlignment.Right);
+            listViewResults.Columns.Add("", 0, HorizontalAlignment.Right);
 
+            //! Set all anchors; this makes the controls properly resize along with the form when it gets resized.
             txtBoxDirectorySearch.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
             btnSearchDir.Anchor = AnchorStyles.Right;
             btnSearch.Anchor = AnchorStyles.Right;
@@ -50,9 +51,12 @@ namespace File_Searcher
             progressBar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
             txtBoxExtensions.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
 
-            oldWidth = Width;
-            listViewResults.FullRowSelect = true;
+            oldWidth = Width; //! We store the initial width of the form so that we know how far the form was resized
+                              //! which allows us to determine how many pixels the 'Name' column need to be increased.
 
+            listViewResults.FullRowSelect = true; //! This will make clicking on a row in the results select the full row.
+
+            //! Initialize progress bar; default should be on 0%.
             progressBar.Minimum = 0;
             progressBar.Maximum = 100;
             progressBar.Value = 0;
@@ -64,6 +68,8 @@ namespace File_Searcher
             listViewResults.ColumnClick += new ColumnClickEventHandler(listViewResults_ColumnClick);
 
             listViewResultsContainer = new List<ListViewItem>();
+
+            //! Add all controls we disable once we start searching to the list controlling this
             controlsToDisable = new List<Control>();
             controlsToDisable.Add(checkBoxIgnoreRecycledFiles);
             controlsToDisable.Add(checkBoxIncludeSubDirs);
