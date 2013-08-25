@@ -186,8 +186,12 @@ namespace File_Searcher
             GetAllFilesFromDirectoryAndFillResults(searchDirectory, checkBoxIncludeSubDirs.Checked, ref allFiles);
 
             if (listViewResultsContainer != null && checkBoxShowAllResultsAtOnce.Checked && listViewResultsContainer.Count() > 0)
+            {
                 foreach (ListViewItem item in listViewResultsContainer)
                     AddItemToListView(listViewResults, item);
+
+                listViewResultsContainer.Clear();
+            }
 
             if (allFiles == string.Empty)
             {
