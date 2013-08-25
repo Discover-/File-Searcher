@@ -210,6 +210,9 @@ namespace File_Searcher
 
             SetProgressBarMaxValue(progressBar, 100);
             SetProgressBarValue(progressBar, 0);
+
+            foreach (Control control in controlsToDisable)
+                SetEnabledOfControl(control, true);
         }
 
         private void GetDirectoryCount(string searchDirectory, ref int directoryCountTotal)
