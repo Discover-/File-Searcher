@@ -281,6 +281,11 @@ namespace File_Searcher
 
                     if (txtBoxExtensions.Text != String.Empty && Path.HasExtension(txtBoxExtensions.Text))
                     {
+                        //! If we only list specific extensions (field is not left empty) and the given file has no
+                        //! extension, we can safely ignore it.
+                        if (checkBoxReverseExtensions.Checked && !Path.HasExtension(files[i]))
+                            continue;
+
                         string[] splitExtensionsField = txtBoxExtensions.Text.Split(';');
                         bool foundExtensionMatch = false;
 
