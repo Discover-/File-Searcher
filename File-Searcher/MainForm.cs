@@ -281,34 +281,24 @@ namespace File_Searcher
 
                     if (txtBoxExtensions.Text != String.Empty && Path.HasExtension(txtBoxExtensions.Text))
                     {
-                        string[] extensionsToIgnoreOrShow = txtBoxExtensions.Text.Split(';');
-                        bool _break = false, _continue = false;
+                        string[] splitExtensionsField = txtBoxExtensions.Text.Split(';');
+                        bool foundExtensionMatch = false;
 
-                        for (int x = 0; x < extensionsToIgnoreOrShow.Length; x++)
+                        for (int x = 0; x < splitExtensionsField.Length; x++)
                         {
-                            //! Just writing it all out instead of using better-looking if-checks so nobody gets
-                            //! confused trying to understand this code.
-                            if (checkBoxReverseExtensions.Checked) //! Extensions to show instead of ignore in the field now
+                            if (Path.GetExtension(files[i]) == splitExtensionsField[x])
                             {
-                                if (Path.GetExtension(files[i]) != extensionsToIgnoreOrShow[x])
-                                {
-                                    _continue = true;
-                                    break;
-                                }
-                                else
-                                    break;
-                            }
-                            else if (Path.GetExtension(files[i]) == extensionsToIgnoreOrShow[x])
-                            {
-                                _break = true;
+                                foundExtensionMatch = true;
                                 break;
                             }
                         }
 
-                        if (_break)
-                            break;
-
-                        if (_continue)
+                        if (foundExtensionMatch)
+                        {
+                            if (!checkBoxReverseExtensions.Checked) //! Extensions to show instead of ignore in the field now
+                                continue;
+                        }
+                        else if (checkBoxReverseExtensions.Checked)
                             continue;
                     }
 
