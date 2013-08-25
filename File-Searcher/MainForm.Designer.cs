@@ -38,6 +38,7 @@
             this.listViewResults = new System.Windows.Forms.ListView();
             this.checkBoxShowDir = new System.Windows.Forms.CheckBox();
             this.groupBoxOptions = new System.Windows.Forms.GroupBox();
+            this.checkBoxShowAllResultsAtOnce = new System.Windows.Forms.CheckBox();
             this.checkBoxUseProgressBar = new System.Windows.Forms.CheckBox();
             this.checkBoxSearchForFileContent = new System.Windows.Forms.CheckBox();
             this.checkBoxReverseExtensions = new System.Windows.Forms.CheckBox();
@@ -45,13 +46,12 @@
             this.checkBoxIgnoreRecycledFiles = new System.Windows.Forms.CheckBox();
             this.groupBoxSearchInfo = new System.Windows.Forms.GroupBox();
             this.lblIgnoreExtensions = new System.Windows.Forms.Label();
-            this.textBoxExtensions = new System.Windows.Forms.TextBox();
+            this.txtBoxExtensions = new System.Windows.Forms.TextBox();
             this.lblHeaderDirectories = new System.Windows.Forms.Label();
             this.btnSearchDir = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.lblSearchFile = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.checkBoxShowAllResultsAtOnce = new System.Windows.Forms.CheckBox();
             this.groupBoxOptions.SuspendLayout();
             this.groupBoxSearchInfo.SuspendLayout();
             this.SuspendLayout();
@@ -105,7 +105,7 @@
             // btnStopSearching
             // 
             this.btnStopSearching.Enabled = false;
-            this.btnStopSearching.Location = new System.Drawing.Point(678, 190);
+            this.btnStopSearching.Location = new System.Drawing.Point(678, 188);
             this.btnStopSearching.Name = "btnStopSearching";
             this.btnStopSearching.Size = new System.Drawing.Size(75, 23);
             this.btnStopSearching.TabIndex = 7;
@@ -150,6 +150,16 @@
             this.groupBoxOptions.Size = new System.Drawing.Size(659, 73);
             this.groupBoxOptions.TabIndex = 10;
             this.groupBoxOptions.TabStop = false;
+            // 
+            // checkBoxShowAllResultsAtOnce
+            // 
+            this.checkBoxShowAllResultsAtOnce.AutoSize = true;
+            this.checkBoxShowAllResultsAtOnce.Location = new System.Drawing.Point(492, 46);
+            this.checkBoxShowAllResultsAtOnce.Name = "checkBoxShowAllResultsAtOnce";
+            this.checkBoxShowAllResultsAtOnce.Size = new System.Drawing.Size(138, 17);
+            this.checkBoxShowAllResultsAtOnce.TabIndex = 15;
+            this.checkBoxShowAllResultsAtOnce.Text = "Show all results at once";
+            this.checkBoxShowAllResultsAtOnce.UseVisualStyleBackColor = true;
             // 
             // checkBoxUseProgressBar
             // 
@@ -208,7 +218,7 @@
             // groupBoxSearchInfo
             // 
             this.groupBoxSearchInfo.Controls.Add(this.lblIgnoreExtensions);
-            this.groupBoxSearchInfo.Controls.Add(this.textBoxExtensions);
+            this.groupBoxSearchInfo.Controls.Add(this.txtBoxExtensions);
             this.groupBoxSearchInfo.Controls.Add(this.lblHeaderDirectories);
             this.groupBoxSearchInfo.Controls.Add(this.btnSearchDir);
             this.groupBoxSearchInfo.Controls.Add(this.txtBoxFileSearch);
@@ -229,12 +239,12 @@
             this.lblIgnoreExtensions.TabIndex = 5;
             this.lblIgnoreExtensions.Text = "Extensions to ignore (split by semicolon):";
             // 
-            // textBoxExtensions
+            // txtBoxExtensions
             // 
-            this.textBoxExtensions.Location = new System.Drawing.Point(378, 100);
-            this.textBoxExtensions.Name = "textBoxExtensions";
-            this.textBoxExtensions.Size = new System.Drawing.Size(355, 20);
-            this.textBoxExtensions.TabIndex = 4;
+            this.txtBoxExtensions.Location = new System.Drawing.Point(378, 100);
+            this.txtBoxExtensions.Name = "txtBoxExtensions";
+            this.txtBoxExtensions.Size = new System.Drawing.Size(355, 20);
+            this.txtBoxExtensions.TabIndex = 4;
             // 
             // lblHeaderDirectories
             // 
@@ -280,16 +290,6 @@
             this.progressBar.Size = new System.Drawing.Size(740, 23);
             this.progressBar.TabIndex = 11;
             // 
-            // checkBoxShowAllResultsAtOnce
-            // 
-            this.checkBoxShowAllResultsAtOnce.AutoSize = true;
-            this.checkBoxShowAllResultsAtOnce.Location = new System.Drawing.Point(492, 46);
-            this.checkBoxShowAllResultsAtOnce.Name = "checkBoxShowAllResultsAtOnce";
-            this.checkBoxShowAllResultsAtOnce.Size = new System.Drawing.Size(138, 17);
-            this.checkBoxShowAllResultsAtOnce.TabIndex = 15;
-            this.checkBoxShowAllResultsAtOnce.Text = "Show all results at once";
-            this.checkBoxShowAllResultsAtOnce.UseVisualStyleBackColor = true;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -334,7 +334,7 @@
         private System.Windows.Forms.CheckBox checkBoxIgnoreRecycledFiles;
         private System.Windows.Forms.CheckBox checkBoxShowHiddenFiles;
         private System.Windows.Forms.Label lblIgnoreExtensions;
-        private System.Windows.Forms.TextBox textBoxExtensions;
+        private System.Windows.Forms.TextBox txtBoxExtensions;
         private System.Windows.Forms.CheckBox checkBoxReverseExtensions;
         private System.Windows.Forms.CheckBox checkBoxSearchForFileContent;
         private System.Windows.Forms.ProgressBar progressBar;

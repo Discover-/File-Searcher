@@ -19,6 +19,7 @@ namespace File_Searcher
         private int oldWidth;
         private ListViewColumnSorter lvwColumnSorter;
         private List<ListViewItem> listViewResultsContainer = null;
+        private List<Control> controlsToDisable = null;
 
         public MainForm()
         {
@@ -59,7 +60,7 @@ namespace File_Searcher
             groupBoxSearchInfo.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
             groupBoxOptions.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
             progressBar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
-            textBoxExtensions.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
+            txtBoxExtensions.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
 
             oldWidth = Width;
             listViewResults.FullRowSelect = true;
@@ -75,6 +76,19 @@ namespace File_Searcher
             listViewResults.ColumnClick += new ColumnClickEventHandler(listViewResults_ColumnClick);
 
             listViewResultsContainer = new List<ListViewItem>();
+            controlsToDisable = new List<Control>();
+            controlsToDisable.Add(checkBoxIgnoreRecycledFiles);
+            controlsToDisable.Add(checkBoxIncludeSubDirs);
+            controlsToDisable.Add(checkBoxReverseExtensions);
+            controlsToDisable.Add(checkBoxSearchForFileContent);
+            controlsToDisable.Add(checkBoxShowAllResultsAtOnce);
+            controlsToDisable.Add(checkBoxShowDir);
+            controlsToDisable.Add(checkBoxShowHiddenFiles);
+            controlsToDisable.Add(checkBoxUseProgressBar);
+            controlsToDisable.Add(txtBoxDirectorySearch);
+            controlsToDisable.Add(txtBoxFileSearch);
+            controlsToDisable.Add(txtBoxExtensions);
+            controlsToDisable.Add(btnSearchDir);
         }
 
         protected override void OnResize(EventArgs e)
@@ -101,7 +115,7 @@ namespace File_Searcher
         {
             string searchDirectory = txtBoxDirectorySearch.Text;
             string searchFileText = txtBoxFileSearch.Text;
-            string extensionField = textBoxExtensions.Text;
+            string extensionField = txtBoxExtensions.Text;
 
             if (searchDirectory == "" || searchDirectory == String.Empty)
             {
@@ -147,6 +161,9 @@ namespace File_Searcher
             SetEnabledOfControl(btnSearch, false);
             SetEnabledOfControl(btnStopSearching, true);
 
+            foreach (Control control in controlsToDisable)
+                SetEnabledOfControl(control, false);
+
             SetProgressBarMaxValue(progressBar, 100);
             SetProgressBarValue(progressBar, 0);
 
@@ -182,6 +199,10 @@ namespace File_Searcher
                 SetProgressBarValue(progressBar, 0);
 
                 UseWaitCursor = false;
+
+                foreach (Control control in controlsToDisable)
+                    SetEnabledOfControl(control, true);
+
                 return;
             }
 
@@ -223,9 +244,9 @@ namespace File_Searcher
                     if (checkBoxIgnoreRecycledFiles.Checked && files[i].Contains("Recycle"))
                         continue;
 
-                    if (textBoxExtensions.Text != string.Empty && Path.HasExtension(textBoxExtensions.Text))
+                    if (txtBoxExtensions.Text != string.Empty && Path.HasExtension(txtBoxExtensions.Text))
                     {
-                        string[] extensionsToIgnore = textBoxExtensions.Text.Split(';');
+                        string[] extensionsToIgnore = txtBoxExtensions.Text.Split(';');
                         bool _break = false, _continue = false;
 
                         for (int x = 0; x < extensionsToIgnore.Length; x++)
@@ -333,6 +354,9 @@ namespace File_Searcher
 
                 listViewResultsContainer.Clear();
             }
+
+            foreach (Control control in controlsToDisable)
+                SetEnabledOfControl(control, true);
         }
 
         private void checkBoxShowDir_CheckedChanged(object sender, EventArgs e)
