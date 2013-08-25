@@ -193,7 +193,7 @@ namespace File_Searcher
                 listViewResultsContainer.Clear();
             }
 
-            if (allFiles == string.Empty)
+            if (allFiles == String.Empty)
             {
                 if (Path.HasExtension(txtBoxFileSearch.Text) || Path.HasExtension(extensionField))
                     MessageBox.Show("The searched directory contains no files matching your criteria.", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -279,7 +279,7 @@ namespace File_Searcher
                             continue;
                     }
 
-                    if (txtBoxExtensions.Text != string.Empty && Path.HasExtension(txtBoxExtensions.Text))
+                    if (txtBoxExtensions.Text != String.Empty && Path.HasExtension(txtBoxExtensions.Text))
                     {
                         string[] extensionsToIgnoreOrShow = txtBoxExtensions.Text.Split(';');
                         bool _break = false, _continue = false;
