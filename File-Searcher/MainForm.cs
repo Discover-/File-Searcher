@@ -101,6 +101,7 @@ namespace File_Searcher
         {
             string searchDirectory = txtBoxDirectorySearch.Text;
             string searchFileText = txtBoxFileSearch.Text;
+            string extensionField = textBoxExtensions.Text;
 
             if (searchDirectory == "" || searchDirectory == String.Empty)
             {
@@ -124,6 +125,15 @@ namespace File_Searcher
             {
                 MessageBox.Show("The field for filename contains a directory!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
+            }
+
+            if (extensionField != "" && extensionField != String.Empty)
+            {
+                if (extensionField.Substring(extensionField.Length - 1) != ";")
+                {
+                    MessageBox.Show("The field for extensions must end with a semicolon!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
             }
 
             UseWaitCursor = true;
@@ -154,7 +164,7 @@ namespace File_Searcher
 
             if (allFiles == string.Empty)
             {
-                if (Path.HasExtension(txtBoxFileSearch.Text) || Path.HasExtension(textBoxExtensions.Text))
+                if (Path.HasExtension(txtBoxFileSearch.Text) || Path.HasExtension(extensionField))
                     MessageBox.Show("The searched directory contains no files matching your criteria.", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
                     MessageBox.Show("The searched directory contains no files at all.", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
