@@ -34,18 +34,12 @@ namespace File_Searcher
             MaximumSize = new Size(1500, Height);
 
             listViewResults.View = View.Details;
-            ColumnHeader headerExt = listViewResults.Columns.Add("Extension", 1, HorizontalAlignment.Right);
-            ColumnHeader headerName = listViewResults.Columns.Add("Name", 1, HorizontalAlignment.Left);
-            ColumnHeader headerSize = listViewResults.Columns.Add("Size", 1, HorizontalAlignment.Right);
-            ColumnHeader headerSizeType = listViewResults.Columns.Add("Sizetype", 1, HorizontalAlignment.Right);
-            ColumnHeader headerLastModified = listViewResults.Columns.Add("Last Modified", 1, HorizontalAlignment.Right);
-            ColumnHeader headerFullFilename = listViewResults.Columns.Add("", 1, HorizontalAlignment.Right);
-            headerExt.Width = 60;
-            headerName.Width = 430;
-            headerSize.Width = 35;
-            headerSizeType.Width = 55;
-            headerLastModified.Width = 155; //! -5 becuase else we get a scrollbar
-            headerFullFilename.Width = 0;
+            ColumnHeader headerExt = listViewResults.Columns.Add("Extension", 60, HorizontalAlignment.Right);
+            ColumnHeader headerName = listViewResults.Columns.Add("Name", 430, HorizontalAlignment.Left);
+            ColumnHeader headerSize = listViewResults.Columns.Add("Size", 35, HorizontalAlignment.Right);
+            ColumnHeader headerSizeType = listViewResults.Columns.Add("Sizetype", 55, HorizontalAlignment.Right);
+            ColumnHeader headerLastModified = listViewResults.Columns.Add("Last Modified", 155, HorizontalAlignment.Right);
+            ColumnHeader headerFullFilename = listViewResults.Columns.Add("", 0, HorizontalAlignment.Right);
 
             txtBoxDirectorySearch.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
             btnSearchDir.Anchor = AnchorStyles.Right;
