@@ -154,7 +154,7 @@
             // checkBoxShowAllResultsAtOnce
             // 
             this.checkBoxShowAllResultsAtOnce.AutoSize = true;
-            this.checkBoxShowAllResultsAtOnce.Location = new System.Drawing.Point(492, 46);
+            this.checkBoxShowAllResultsAtOnce.Location = new System.Drawing.Point(511, 46);
             this.checkBoxShowAllResultsAtOnce.Name = "checkBoxShowAllResultsAtOnce";
             this.checkBoxShowAllResultsAtOnce.Size = new System.Drawing.Size(138, 17);
             this.checkBoxShowAllResultsAtOnce.TabIndex = 15;
@@ -164,17 +164,18 @@
             // checkBoxUseProgressBar
             // 
             this.checkBoxUseProgressBar.AutoSize = true;
-            this.checkBoxUseProgressBar.Location = new System.Drawing.Point(492, 19);
+            this.checkBoxUseProgressBar.Location = new System.Drawing.Point(511, 19);
             this.checkBoxUseProgressBar.Name = "checkBoxUseProgressBar";
             this.checkBoxUseProgressBar.Size = new System.Drawing.Size(106, 17);
             this.checkBoxUseProgressBar.TabIndex = 14;
             this.checkBoxUseProgressBar.Text = "Use progress bar";
             this.checkBoxUseProgressBar.UseVisualStyleBackColor = true;
+            this.checkBoxUseProgressBar.CheckedChanged += new System.EventHandler(this.checkBoxUseProgressBar_CheckedChanged);
             // 
             // checkBoxSearchForFileContent
             // 
             this.checkBoxSearchForFileContent.AutoSize = true;
-            this.checkBoxSearchForFileContent.Location = new System.Drawing.Point(311, 46);
+            this.checkBoxSearchForFileContent.Location = new System.Drawing.Point(316, 46);
             this.checkBoxSearchForFileContent.Name = "checkBoxSearchForFileContent";
             this.checkBoxSearchForFileContent.Size = new System.Drawing.Size(167, 17);
             this.checkBoxSearchForFileContent.TabIndex = 13;
@@ -185,7 +186,7 @@
             // checkBoxReverseExtensions
             // 
             this.checkBoxReverseExtensions.AutoSize = true;
-            this.checkBoxReverseExtensions.Location = new System.Drawing.Point(311, 19);
+            this.checkBoxReverseExtensions.Location = new System.Drawing.Point(316, 19);
             this.checkBoxReverseExtensions.Name = "checkBoxReverseExtensions";
             this.checkBoxReverseExtensions.Size = new System.Drawing.Size(136, 17);
             this.checkBoxReverseExtensions.TabIndex = 12;
@@ -196,7 +197,7 @@
             // checkBoxShowHiddenFiles
             // 
             this.checkBoxShowHiddenFiles.AutoSize = true;
-            this.checkBoxShowHiddenFiles.Location = new System.Drawing.Point(163, 46);
+            this.checkBoxShowHiddenFiles.Location = new System.Drawing.Point(168, 46);
             this.checkBoxShowHiddenFiles.Name = "checkBoxShowHiddenFiles";
             this.checkBoxShowHiddenFiles.Size = new System.Drawing.Size(109, 17);
             this.checkBoxShowHiddenFiles.TabIndex = 11;
@@ -208,7 +209,7 @@
             this.checkBoxIgnoreRecycledFiles.AutoSize = true;
             this.checkBoxIgnoreRecycledFiles.Checked = true;
             this.checkBoxIgnoreRecycledFiles.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxIgnoreRecycledFiles.Location = new System.Drawing.Point(163, 19);
+            this.checkBoxIgnoreRecycledFiles.Location = new System.Drawing.Point(168, 19);
             this.checkBoxIgnoreRecycledFiles.Name = "checkBoxIgnoreRecycledFiles";
             this.checkBoxIgnoreRecycledFiles.Size = new System.Drawing.Size(120, 17);
             this.checkBoxIgnoreRecycledFiles.TabIndex = 10;

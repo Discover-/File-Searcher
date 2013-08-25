@@ -16,10 +16,10 @@ namespace File_Searcher
     public partial class MainForm : Form
     {
         private Thread searchThread = null;
-        private int oldWidth;
-        private ListViewColumnSorter lvwColumnSorter;
-        private List<ListViewItem> listViewResultsContainer = null;
-        private List<Control> controlsToDisable = null;
+        private int oldWidth = 0;
+        private ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
+        private List<ListViewItem> listViewResultsContainer = new List<ListViewItem>();
+        private List<Control> controlsToDisable = new List<Control>();
 
         public MainForm()
         {
@@ -31,7 +31,7 @@ namespace File_Searcher
             MaximizeBox = false; //! This looks ugly if set to true when button is pressed while we have a hardcoded max size
             MinimizeBox = true;
             MinimumSize = new Size(Width, Height);
-            MaximumSize = new Size(1500, Height);
+            MaximumSize = new Size(Width + 700, Height);
 
             listViewResults.View = View.Details;
             listViewResults.Columns.Add("Extension", 60, HorizontalAlignment.Right);
@@ -63,14 +63,10 @@ namespace File_Searcher
 
             listViewResults.DoubleClick += listViewResults_DoubleClick;
 
-            lvwColumnSorter = new ListViewColumnSorter();
             listViewResults.ListViewItemSorter = lvwColumnSorter;
             listViewResults.ColumnClick += new ColumnClickEventHandler(listViewResults_ColumnClick);
 
-            listViewResultsContainer = new List<ListViewItem>();
-
             //! Add all controls we disable once we start searching to the list controlling this
-            controlsToDisable = new List<Control>();
             controlsToDisable.Add(checkBoxIgnoreRecycledFiles);
             controlsToDisable.Add(checkBoxIncludeSubDirs);
             controlsToDisable.Add(checkBoxReverseExtensions);
@@ -508,6 +504,13 @@ namespace File_Searcher
 
             // Perform the sort with these new sort options.
             myListView.Sort();
+        }
+
+        private void checkBoxUseProgressBar_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxUseProgressBar.Checked)
+                if (MessageBox.Show("Are you sure you want to initialize a progress bar? The progress will take a lot longer than it would normally (if the directory we search in is big).", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                    checkBoxUseProgressBar.Checked = false;
         }
     }
 }
