@@ -129,6 +129,12 @@ namespace File_Searcher
 
             if (extensionField != "" && extensionField != String.Empty)
             {
+                if (Directory.Exists(extensionField))
+                {
+                    MessageBox.Show("The field for extensions contains a directory!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+
                 if (extensionField.Substring(extensionField.Length - 1) != ";")
                 {
                     MessageBox.Show("The field for extensions must end with a semicolon!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
