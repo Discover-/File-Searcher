@@ -125,7 +125,7 @@ namespace File_Searcher
             string searchFileText = txtBoxFileSearch.Text;
             string extensionField = txtBoxExtensions.Text;
 
-            if (searchDirectory == "" || searchDirectory == String.Empty)
+            if (searchDirectory == String.Empty)
             {
                 MessageBox.Show("The search directory field was left empty!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -143,13 +143,13 @@ namespace File_Searcher
                 return;
             }
 
-            if (searchFileText != "" && searchFileText != String.Empty && Directory.Exists(searchFileText))
+            if (searchFileText != String.Empty && Directory.Exists(searchFileText))
             {
                 MessageBox.Show("The field for filename contains a directory!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (extensionField != "" && extensionField != String.Empty)
+            if (extensionField != String.Empty)
             {
                 if (Directory.Exists(extensionField))
                 {
@@ -524,7 +524,7 @@ namespace File_Searcher
             {
                 string selectedItemName = listViewResults.SelectedItems[0].SubItems[1].Text;
 
-                if (selectedItemName != "" && selectedItemName != String.Empty)
+                if (selectedItemName != String.Empty)
                 {
                     if (MessageBox.Show("Are you sure you want to open this file?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
