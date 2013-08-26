@@ -167,7 +167,7 @@ namespace File_Searcher
 
                 for (int x = 0; x < splitExtensionsField.Length; x++)
                 {
-                    if (splitExtensionsField[x].Substring(0, 1) == ".")
+                    if (splitExtensionsField[x].Substring(0, 1) != ".")
                     {
                         MessageBox.Show("The extension '" + splitExtensionsField[x] + "' did not start with a period!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
