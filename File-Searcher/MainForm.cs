@@ -44,14 +44,14 @@ namespace File_Searcher
 
             //! Set all anchors; this makes the controls properly resize along with the form when it gets resized.
             txtBoxDirectorySearch.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
-            btnSearchDir.Anchor = AnchorStyles.Right;
-            btnSearch.Anchor = AnchorStyles.Right;
-            btnClear.Anchor = AnchorStyles.Right;
-            btnStopSearching.Anchor = AnchorStyles.Right;
             listViewResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
             groupBoxSearchInfo.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
             progressBar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
             txtBoxExtensions.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
+            btnSearchDir.Anchor = AnchorStyles.Right;
+            btnSearch.Anchor = AnchorStyles.Right;
+            btnClear.Anchor = AnchorStyles.Right;
+            btnStopSearching.Anchor = AnchorStyles.Right;
 
             oldWidth = Width; //! We store the initial width of the form so that we know how far the form was resized
             //! which allows us to determine how many pixels the 'Name' column need to be increased.
@@ -615,6 +615,16 @@ namespace File_Searcher
         {
             listViewResults.Clear();
             btnClear.Enabled = false;
+        }
+
+        private void txtBoxFileSearch_TextChanged(object sender, EventArgs e)
+        {
+            checkBoxIgnoreCaseSensitivity.Enabled = (!IsInvalidString(txtBoxFileSearch.Text) || !IsInvalidString(txtBoxExtensions.Text));
+        }
+
+        private void txtBoxExtensions_TextChanged(object sender, EventArgs e)
+        {
+            checkBoxIgnoreCaseSensitivity.Enabled = (!IsInvalidString(txtBoxFileSearch.Text) || !IsInvalidString(txtBoxExtensions.Text));
         }
     }
 }

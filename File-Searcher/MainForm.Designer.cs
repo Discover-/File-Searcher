@@ -105,6 +105,7 @@
             this.txtBoxFileSearch.Name = "txtBoxFileSearch";
             this.txtBoxFileSearch.Size = new System.Drawing.Size(355, 20);
             this.txtBoxFileSearch.TabIndex = 0;
+            this.txtBoxFileSearch.TextChanged += new System.EventHandler(this.txtBoxFileSearch_TextChanged);
             // 
             // btnStopSearching
             // 
@@ -163,6 +164,7 @@
             this.checkBoxIgnoreCaseSensitivity.AutoSize = true;
             this.checkBoxIgnoreCaseSensitivity.Checked = true;
             this.checkBoxIgnoreCaseSensitivity.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxIgnoreCaseSensitivity.Enabled = false;
             this.checkBoxIgnoreCaseSensitivity.Location = new System.Drawing.Point(329, 59);
             this.checkBoxIgnoreCaseSensitivity.Name = "checkBoxIgnoreCaseSensitivity";
             this.checkBoxIgnoreCaseSensitivity.Size = new System.Drawing.Size(130, 17);
@@ -285,6 +287,7 @@
             this.txtBoxExtensions.Name = "txtBoxExtensions";
             this.txtBoxExtensions.Size = new System.Drawing.Size(355, 20);
             this.txtBoxExtensions.TabIndex = 4;
+            this.txtBoxExtensions.TextChanged += new System.EventHandler(this.txtBoxExtensions_TextChanged);
             // 
             // lblHeaderDirectories
             // 
