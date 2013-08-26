@@ -55,6 +55,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lblSearchFile = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
+            this.btnClear = new System.Windows.Forms.Button();
             this.groupBoxOptions.SuspendLayout();
             this.groupBoxSearchInfo.SuspendLayout();
             this.SuspendLayout();
@@ -90,7 +91,7 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(678, 148);
+            this.btnSearch.Location = new System.Drawing.Point(678, 147);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 5;
@@ -108,7 +109,7 @@
             // btnStopSearching
             // 
             this.btnStopSearching.Enabled = false;
-            this.btnStopSearching.Location = new System.Drawing.Point(678, 198);
+            this.btnStopSearching.Location = new System.Drawing.Point(678, 173);
             this.btnStopSearching.Name = "btnStopSearching";
             this.btnStopSearching.Size = new System.Drawing.Size(75, 23);
             this.btnStopSearching.TabIndex = 7;
@@ -329,11 +330,23 @@
             this.progressBar.Size = new System.Drawing.Size(740, 23);
             this.progressBar.TabIndex = 11;
             // 
+            // btnClear
+            // 
+            this.btnClear.Enabled = false;
+            this.btnClear.Location = new System.Drawing.Point(678, 199);
+            this.btnClear.Name = "btnClear";
+            this.btnClear.Size = new System.Drawing.Size(75, 23);
+            this.btnClear.TabIndex = 12;
+            this.btnClear.Text = "Clear";
+            this.btnClear.UseVisualStyleBackColor = true;
+            this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(765, 505);
+            this.Controls.Add(this.btnClear);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.listViewResults);
             this.Controls.Add(this.btnStopSearching);
@@ -382,6 +395,7 @@
         private System.Windows.Forms.CheckBox checkBoxShowExceptions;
         private System.Windows.Forms.CheckBox checkBoxIgnoreFilesWithoutExtension;
         private System.Windows.Forms.CheckBox checkBoxIgnoreCaseSensitivity;
+        private System.Windows.Forms.Button btnClear;
     }
 }
 

@@ -83,6 +83,7 @@ namespace File_Searcher
             controlsToDisable.Add(txtBoxFileSearch);
             controlsToDisable.Add(txtBoxExtensions);
             controlsToDisable.Add(btnSearchDir);
+            controlsToDisable.Add(btnClear);
 
             addTooltip(checkBoxIgnoreRecycledFiles, "A lot of files found when searching through a root directory like the C disk are found in a recycle bin folder which make no sense if listed.");
             addTooltip(checkBoxReverseExtensions, "Checking this will mean the text box saying 'Extensions to ignore' will now be reversed, thus only show files containing extensions in that field");
@@ -607,6 +608,12 @@ namespace File_Searcher
             }
 
             return false;
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            listViewResults.Clear();
+            btnClear.Enabled = false;
         }
     }
 }
