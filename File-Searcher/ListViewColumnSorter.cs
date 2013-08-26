@@ -162,24 +162,30 @@ namespace File_Searcher
         {
 
         }
+
         public new int Compare(object x, object y)
         {
-            // in case x,y are strings and actually number,
-            // convert them to int and use the base.Compare for comparison
-            if ((x is System.String) && IsWholeNumber((string)x)
-               && (y is System.String) && IsWholeNumber((string)y))
+            if (x is System.String && y is System.String && (String.IsNullOrEmpty(((string)x)) || String.IsNullOrWhiteSpace(((string)x))) || (String.IsNullOrEmpty(((string)y)) || String.IsNullOrWhiteSpace(((string)y))))
+                return base.Compare(x, y);
+
+            try
             {
-                return base.Compare(System.Convert.ToInt32(x),
-                                       System.Convert.ToInt32(y));
+                // in case x,y are strings and actually number,
+                // convert them to int and use the base.Compare for comparison
+                if ((x is System.String) && IsWholeNumber((string)x) && (y is System.String) && IsWholeNumber((string)y))
+                    return base.Compare(System.Convert.ToInt32(x), System.Convert.ToInt32(y));
+                else
+                    return base.Compare(x, y);
             }
-            else
+            catch (Exception)
             {
                 return base.Compare(x, y);
-            }
+            };
         }
         private bool IsWholeNumber(string strNumber)
-        { // use a regular expression to find out if string is actually a number
-            Regex objNotWholePattern = new Regex("[^0-9]+$");
+        {
+            // use a regular expression to find out if string is actually a number
+            Regex objNotWholePattern = new Regex("^[0-9]+$");
             return !objNotWholePattern.IsMatch(strNumber);
         }
     }
