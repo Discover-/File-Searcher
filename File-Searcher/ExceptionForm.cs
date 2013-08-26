@@ -22,6 +22,8 @@ namespace File_Searcher
 
             InitializeComponent();
 
+            MinimumSize = new Size(Width, Height);
+
             totalExceptions = exceptionStringStore.Count() - 1;
             labelInfo.Text = "Exception 0 out of " + totalExceptions.ToString();
             textBoxExceptions.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
