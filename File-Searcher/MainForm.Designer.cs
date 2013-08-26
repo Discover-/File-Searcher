@@ -38,6 +38,7 @@
             this.listViewResults = new System.Windows.Forms.ListView();
             this.checkBoxShowDir = new System.Windows.Forms.CheckBox();
             this.groupBoxOptions = new System.Windows.Forms.GroupBox();
+            this.checkBoxIgnoreCaseSensitivity = new System.Windows.Forms.CheckBox();
             this.checkBoxIgnoreFilesWithoutExtension = new System.Windows.Forms.CheckBox();
             this.checkBoxShowExceptions = new System.Windows.Forms.CheckBox();
             this.checkBoxShowAllResultsAtOnce = new System.Windows.Forms.CheckBox();
@@ -54,7 +55,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lblSearchFile = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.checkBoxIgnoreCaseSensitivity = new System.Windows.Forms.CheckBox();
             this.groupBoxOptions.SuspendLayout();
             this.groupBoxSearchInfo.SuspendLayout();
             this.SuspendLayout();
@@ -108,7 +108,7 @@
             // btnStopSearching
             // 
             this.btnStopSearching.Enabled = false;
-            this.btnStopSearching.Location = new System.Drawing.Point(678, 193);
+            this.btnStopSearching.Location = new System.Drawing.Point(678, 198);
             this.btnStopSearching.Name = "btnStopSearching";
             this.btnStopSearching.Size = new System.Drawing.Size(75, 23);
             this.btnStopSearching.TabIndex = 7;
@@ -118,9 +118,9 @@
             // 
             // listViewResults
             // 
-            this.listViewResults.Location = new System.Drawing.Point(14, 223);
+            this.listViewResults.Location = new System.Drawing.Point(14, 228);
             this.listViewResults.Name = "listViewResults";
-            this.listViewResults.Size = new System.Drawing.Size(739, 245);
+            this.listViewResults.Size = new System.Drawing.Size(739, 240);
             this.listViewResults.TabIndex = 8;
             this.listViewResults.UseCompatibleStateImageBehavior = false;
             // 
@@ -153,9 +153,21 @@
             this.groupBoxOptions.Controls.Add(this.checkBoxIncludeSubDirs);
             this.groupBoxOptions.Location = new System.Drawing.Point(13, 141);
             this.groupBoxOptions.Name = "groupBoxOptions";
-            this.groupBoxOptions.Size = new System.Drawing.Size(659, 78);
+            this.groupBoxOptions.Size = new System.Drawing.Size(659, 81);
             this.groupBoxOptions.TabIndex = 10;
             this.groupBoxOptions.TabStop = false;
+            // 
+            // checkBoxIgnoreCaseSensitivity
+            // 
+            this.checkBoxIgnoreCaseSensitivity.AutoSize = true;
+            this.checkBoxIgnoreCaseSensitivity.Checked = true;
+            this.checkBoxIgnoreCaseSensitivity.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxIgnoreCaseSensitivity.Location = new System.Drawing.Point(329, 59);
+            this.checkBoxIgnoreCaseSensitivity.Name = "checkBoxIgnoreCaseSensitivity";
+            this.checkBoxIgnoreCaseSensitivity.Size = new System.Drawing.Size(130, 17);
+            this.checkBoxIgnoreCaseSensitivity.TabIndex = 18;
+            this.checkBoxIgnoreCaseSensitivity.Text = "Ignore case sensitivity";
+            this.checkBoxIgnoreCaseSensitivity.UseVisualStyleBackColor = true;
             // 
             // checkBoxIgnoreFilesWithoutExtension
             // 
@@ -312,22 +324,10 @@
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(14, 474);
+            this.progressBar.Location = new System.Drawing.Point(14, 475);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(740, 23);
             this.progressBar.TabIndex = 11;
-            // 
-            // checkBoxIgnoreCaseSensitivity
-            // 
-            this.checkBoxIgnoreCaseSensitivity.AutoSize = true;
-            this.checkBoxIgnoreCaseSensitivity.Checked = true;
-            this.checkBoxIgnoreCaseSensitivity.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxIgnoreCaseSensitivity.Location = new System.Drawing.Point(329, 59);
-            this.checkBoxIgnoreCaseSensitivity.Name = "checkBoxIgnoreCaseSensitivity";
-            this.checkBoxIgnoreCaseSensitivity.Size = new System.Drawing.Size(130, 17);
-            this.checkBoxIgnoreCaseSensitivity.TabIndex = 18;
-            this.checkBoxIgnoreCaseSensitivity.Text = "Ignore case sensitivity";
-            this.checkBoxIgnoreCaseSensitivity.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
