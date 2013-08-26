@@ -296,7 +296,7 @@ namespace File_Searcher
 
                         for (int x = 0; x < splitExtensionsField.Length; x++)
                         {
-                            if (Path.GetExtension(files[i]) == splitExtensionsField[x])
+                            if (Path.GetExtension(files[i]).ToLower() == splitExtensionsField[x].ToLower())
                             {
                                 foundExtensionMatch = true;
                                 break;
