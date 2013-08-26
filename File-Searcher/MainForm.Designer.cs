@@ -320,6 +320,8 @@
             // checkBoxIgnoreCaseSensitivity
             // 
             this.checkBoxIgnoreCaseSensitivity.AutoSize = true;
+            this.checkBoxIgnoreCaseSensitivity.Checked = true;
+            this.checkBoxIgnoreCaseSensitivity.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxIgnoreCaseSensitivity.Location = new System.Drawing.Point(329, 59);
             this.checkBoxIgnoreCaseSensitivity.Name = "checkBoxIgnoreCaseSensitivity";
             this.checkBoxIgnoreCaseSensitivity.Size = new System.Drawing.Size(130, 17);

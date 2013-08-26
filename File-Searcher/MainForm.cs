@@ -78,6 +78,7 @@ namespace File_Searcher
             controlsToDisable.Add(checkBoxUseProgressBar);
             controlsToDisable.Add(checkBoxShowExceptions);
             controlsToDisable.Add(checkBoxIgnoreFilesWithoutExtension);
+            controlsToDisable.Add(checkBoxIgnoreCaseSensitivity);
             controlsToDisable.Add(txtBoxDirectorySearch);
             controlsToDisable.Add(txtBoxFileSearch);
             controlsToDisable.Add(txtBoxExtensions);
@@ -91,6 +92,7 @@ namespace File_Searcher
             addTooltip(checkBoxShowExceptions, "This is basically meant for error-tracking. This software is written in C# which means sometimes code return errors and only developers can see them (under certain circumstances). Checking this will show the errors in a new window when the process finished.");
             addTooltip(checkBoxUseProgressBar, "This will enable the progressbar shown at the bottom of the application. The reason it's default unchecked is because it will make the process take quite a lot longer.");
             addTooltip(checkBoxIgnoreFilesWithoutExtension, "Checking this will make files without any extension be ignored (like most of the README files).");
+            addTooltip(checkBoxIgnoreCaseSensitivity, "Checking this will allow you to ignore case sensitivity in the file name/content search field.");
         }
 
         protected override void OnResize(EventArgs e)
