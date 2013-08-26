@@ -529,7 +529,7 @@ namespace File_Searcher
                 return;
             }
 
-            if (progressBar.Value >= progressBar.Maximum)
+            if (value >= progressBar.Maximum)
             {
                 progressBar.Value = progressBar.Maximum;
                 return;
