@@ -179,7 +179,7 @@ namespace File_Searcher
         }
         private bool IsWholeNumber(string strNumber)
         { // use a regular expression to find out if string is actually a number
-            Regex objNotWholePattern = new Regex("[^0-9]");
+            Regex objNotWholePattern = new Regex("[^0-9]+$");
             return !objNotWholePattern.IsMatch(strNumber);
         }
     }
