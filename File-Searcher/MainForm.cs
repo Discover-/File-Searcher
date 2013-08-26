@@ -42,9 +42,16 @@ namespace File_Searcher
             listViewResults.Columns.Add("Last Modified", 138, HorizontalAlignment.Right);
             listViewResults.Columns.Add("", 0, HorizontalAlignment.Right);
 
+            listViewResults.FullRowSelect = true; //! This will make clicking on a row in the results select the full row.
+
+            listViewResults.DoubleClick += listViewResults_DoubleClick;
+
+            listViewResults.ListViewItemSorter = lvwColumnSorter;
+            listViewResults.ColumnClick += new ColumnClickEventHandler(listViewResults_ColumnClick);
+
             //! Set all anchors; this makes the controls properly resize along with the form when it gets resized.
-            txtBoxDirectorySearch.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
             listViewResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
+            txtBoxDirectorySearch.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
             groupBoxSearchInfo.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
             progressBar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
             txtBoxExtensions.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
@@ -56,17 +63,10 @@ namespace File_Searcher
             oldWidth = Width; //! We store the initial width of the form so that we know how far the form was resized
             //! which allows us to determine how many pixels the 'Name' column need to be increased.
 
-            listViewResults.FullRowSelect = true; //! This will make clicking on a row in the results select the full row.
-
             //! Initialize progress bar; default should be on 0%.
             progressBar.Minimum = 0;
             progressBar.Maximum = 100;
             progressBar.Value = 0;
-
-            listViewResults.DoubleClick += listViewResults_DoubleClick;
-
-            listViewResults.ListViewItemSorter = lvwColumnSorter;
-            listViewResults.ColumnClick += new ColumnClickEventHandler(listViewResults_ColumnClick);
 
             //! Add all controls we disable once we start searching to the list controlling this
             controlsToDisable.Add(checkBoxIgnoreRecycledFiles);
@@ -176,7 +176,7 @@ namespace File_Searcher
 
                 for (int x = 0; x < splitExtensionsField.Length; x++)
                 {
-                    if (splitExtensionsField[x].Substring(0, 1) == ".")
+                    if (splitExtensionsField[x].Substring(0, 1) != ".")
                     {
                         MessageBox.Show("The extension '" + splitExtensionsField[x] + "' did not start with a period!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
@@ -626,6 +626,16 @@ namespace File_Searcher
         private void txtBoxExtensions_TextChanged(object sender, EventArgs e)
         {
             checkBoxIgnoreCaseSensitivity.Enabled = (!IsInvalidString(txtBoxFileSearch.Text) || !IsInvalidString(txtBoxExtensions.Text));
+        }
+
+        private void buttonOpenFilter_Click(object sender, EventArgs e)
+        {
+            new Thread(StartFilteredResultsForm).Start();
+        }
+
+        private void StartFilteredResultsForm()
+        {
+            Application.Run(new FilteredResultsForm(listViewResults));
         }
     }
 }

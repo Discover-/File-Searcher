@@ -56,6 +56,7 @@
             this.lblSearchFile = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.btnClear = new System.Windows.Forms.Button();
+            this.buttonOpenFilter = new System.Windows.Forms.Button();
             this.groupBoxOptions.SuspendLayout();
             this.groupBoxSearchInfo.SuspendLayout();
             this.SuspendLayout();
@@ -328,7 +329,7 @@
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(14, 475);
+            this.progressBar.Location = new System.Drawing.Point(14, 500);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(740, 23);
             this.progressBar.TabIndex = 11;
@@ -344,11 +345,22 @@
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
             // 
+            // buttonOpenFilter
+            // 
+            this.buttonOpenFilter.Location = new System.Drawing.Point(677, 471);
+            this.buttonOpenFilter.Name = "buttonOpenFilter";
+            this.buttonOpenFilter.Size = new System.Drawing.Size(75, 23);
+            this.buttonOpenFilter.TabIndex = 13;
+            this.buttonOpenFilter.Text = "Open filter";
+            this.buttonOpenFilter.UseVisualStyleBackColor = true;
+            this.buttonOpenFilter.Click += new System.EventHandler(this.buttonOpenFilter_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(765, 505);
+            this.ClientSize = new System.Drawing.Size(765, 536);
+            this.Controls.Add(this.buttonOpenFilter);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.progressBar);
             this.Controls.Add(this.listViewResults);
@@ -399,6 +411,7 @@
         private System.Windows.Forms.CheckBox checkBoxIgnoreFilesWithoutExtension;
         private System.Windows.Forms.CheckBox checkBoxIgnoreCaseSensitivity;
         private System.Windows.Forms.Button btnClear;
+        private System.Windows.Forms.Button buttonOpenFilter;
     }
 }
 
