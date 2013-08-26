@@ -274,11 +274,24 @@ namespace File_Searcher
                     {
                         if (checkBoxSearchForFileContent.Checked)
                         {
-                            if (!File.ReadAllText(files[i]).Contains(txtBoxFileSearch.Text))
+                            if (checkBoxIgnoreCaseSensitivity.Checked)
+                            {
+                                if (!File.ReadAllText(files[i]).ToLower().Contains(txtBoxFileSearch.Text.ToLower()))
+                                    continue;
+                            }
+                            else if (!File.ReadAllText(files[i]).Contains(txtBoxFileSearch.Text))
                                 continue;
                         }
-                        else if (!files[i].Contains(txtBoxFileSearch.Text))
-                            continue;
+                        else
+                        {
+                            if (checkBoxIgnoreCaseSensitivity.Checked)
+                            {
+                                if (!files[i].ToLower().Contains(txtBoxFileSearch.Text.ToLower()))
+                                    continue;
+                            }
+                            else if (!files[i].Contains(txtBoxFileSearch.Text))
+                                continue;
+                        }
                     }
                     
                     if (checkBoxIgnoreFilesWithoutExtension.Checked && !Path.HasExtension(txtBoxExtensions.Text))
