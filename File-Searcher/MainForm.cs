@@ -125,7 +125,7 @@ namespace File_Searcher
             string searchFileText = txtBoxFileSearch.Text;
             string extensionField = txtBoxExtensions.Text;
 
-            if (searchDirectory == String.Empty)
+            if (IsInvalidString(searchDirectory))
             {
                 MessageBox.Show("The search directory field was left empty!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -143,13 +143,13 @@ namespace File_Searcher
                 return;
             }
 
-            if (searchFileText != String.Empty && Directory.Exists(searchFileText))
+            if (!IsInvalidString(searchFileText) && Directory.Exists(searchFileText))
             {
                 MessageBox.Show("The field for filename contains a directory!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (extensionField != String.Empty)
+            if (!IsInvalidString(extensionField))
             {
                 if (Directory.Exists(extensionField))
                 {
@@ -197,7 +197,7 @@ namespace File_Searcher
                 listViewResultsContainer.Clear();
             }
 
-            if (allFiles == String.Empty)
+            if (IsInvalidString(allFiles))
             {
                 if (Path.HasExtension(txtBoxFileSearch.Text) || Path.HasExtension(extensionField))
                     MessageBox.Show("The searched directory contains no files matching your criteria.", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -299,7 +299,7 @@ namespace File_Searcher
                     if (checkBoxIgnoreFilesWithoutExtension.Checked && !Path.HasExtension(txtBoxExtensions.Text))
                         continue;
 
-                    if (txtBoxExtensions.Text != String.Empty)
+                    if (!IsInvalidString(txtBoxExtensions.Text))
                     {
                         //! If we only list specific extensions (field is not left empty) and the given file has no
                         //! extension, we can safely ignore it.
@@ -524,7 +524,7 @@ namespace File_Searcher
             {
                 string selectedItemName = listViewResults.SelectedItems[0].SubItems[1].Text;
 
-                if (selectedItemName != String.Empty)
+                if (!IsInvalidString(selectedItemName))
                 {
                     if (MessageBox.Show("Are you sure you want to open this file?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
@@ -567,6 +567,11 @@ namespace File_Searcher
             ToolTip toolTip = new ToolTip();
             toolTip.SetToolTip(control, tooltipMsg);
             toolTip.ShowAlways = true;
+        }
+
+        private bool IsInvalidString(string str)
+        {
+            return (String.IsNullOrEmpty(str) || String.IsNullOrWhiteSpace(str));
         }
     }
 }
