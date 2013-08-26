@@ -162,6 +162,17 @@ namespace File_Searcher
                     MessageBox.Show("The field for extensions may not end with a semicolon!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
+
+                string[] splitExtensionsField = txtBoxExtensions.Text.Split(';');
+
+                for (int x = 0; x < splitExtensionsField.Length; x++)
+                {
+                    if (splitExtensionsField[x].Substring(0, 1) == ".")
+                    {
+                        MessageBox.Show("The extension '" + splitExtensionsField[x] + "' did not start with a period!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return;
+                    }
+                }
             }
 
             UseWaitCursor = true;
