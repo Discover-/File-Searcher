@@ -46,6 +46,7 @@ namespace File_Searcher
             txtBoxDirectorySearch.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
             btnSearchDir.Anchor = AnchorStyles.Right;
             btnSearch.Anchor = AnchorStyles.Right;
+            btnClear.Anchor = AnchorStyles.Right;
             btnStopSearching.Anchor = AnchorStyles.Right;
             listViewResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
             groupBoxSearchInfo.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
