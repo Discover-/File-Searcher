@@ -38,6 +38,7 @@
             this.listViewResults = new System.Windows.Forms.ListView();
             this.checkBoxShowDir = new System.Windows.Forms.CheckBox();
             this.groupBoxOptions = new System.Windows.Forms.GroupBox();
+            this.checkBoxShowExceptions = new System.Windows.Forms.CheckBox();
             this.checkBoxShowAllResultsAtOnce = new System.Windows.Forms.CheckBox();
             this.checkBoxUseProgressBar = new System.Windows.Forms.CheckBox();
             this.checkBoxSearchForFileContent = new System.Windows.Forms.CheckBox();
@@ -52,7 +53,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.lblSearchFile = new System.Windows.Forms.Label();
             this.progressBar = new System.Windows.Forms.ProgressBar();
-            this.checkBoxShowExceptions = new System.Windows.Forms.CheckBox();
+            this.checkBoxIgnoreFilesWithoutExtension = new System.Windows.Forms.CheckBox();
             this.groupBoxOptions.SuspendLayout();
             this.groupBoxSearchInfo.SuspendLayout();
             this.SuspendLayout();
@@ -137,6 +138,7 @@
             // 
             // groupBoxOptions
             // 
+            this.groupBoxOptions.Controls.Add(this.checkBoxIgnoreFilesWithoutExtension);
             this.groupBoxOptions.Controls.Add(this.checkBoxShowExceptions);
             this.groupBoxOptions.Controls.Add(this.checkBoxShowAllResultsAtOnce);
             this.groupBoxOptions.Controls.Add(this.checkBoxUseProgressBar);
@@ -153,10 +155,20 @@
             this.groupBoxOptions.TabIndex = 10;
             this.groupBoxOptions.TabStop = false;
             // 
+            // checkBoxShowExceptions
+            // 
+            this.checkBoxShowExceptions.AutoSize = true;
+            this.checkBoxShowExceptions.Location = new System.Drawing.Point(9, 59);
+            this.checkBoxShowExceptions.Name = "checkBoxShowExceptions";
+            this.checkBoxShowExceptions.Size = new System.Drawing.Size(131, 17);
+            this.checkBoxShowExceptions.TabIndex = 16;
+            this.checkBoxShowExceptions.Text = "Show exception errors";
+            this.checkBoxShowExceptions.UseVisualStyleBackColor = true;
+            // 
             // checkBoxShowAllResultsAtOnce
             // 
             this.checkBoxShowAllResultsAtOnce.AutoSize = true;
-            this.checkBoxShowAllResultsAtOnce.Location = new System.Drawing.Point(511, 39);
+            this.checkBoxShowAllResultsAtOnce.Location = new System.Drawing.Point(519, 39);
             this.checkBoxShowAllResultsAtOnce.Name = "checkBoxShowAllResultsAtOnce";
             this.checkBoxShowAllResultsAtOnce.Size = new System.Drawing.Size(138, 17);
             this.checkBoxShowAllResultsAtOnce.TabIndex = 15;
@@ -166,7 +178,7 @@
             // checkBoxUseProgressBar
             // 
             this.checkBoxUseProgressBar.AutoSize = true;
-            this.checkBoxUseProgressBar.Location = new System.Drawing.Point(511, 19);
+            this.checkBoxUseProgressBar.Location = new System.Drawing.Point(519, 19);
             this.checkBoxUseProgressBar.Name = "checkBoxUseProgressBar";
             this.checkBoxUseProgressBar.Size = new System.Drawing.Size(106, 17);
             this.checkBoxUseProgressBar.TabIndex = 14;
@@ -177,7 +189,7 @@
             // checkBoxSearchForFileContent
             // 
             this.checkBoxSearchForFileContent.AutoSize = true;
-            this.checkBoxSearchForFileContent.Location = new System.Drawing.Point(316, 39);
+            this.checkBoxSearchForFileContent.Location = new System.Drawing.Point(329, 39);
             this.checkBoxSearchForFileContent.Name = "checkBoxSearchForFileContent";
             this.checkBoxSearchForFileContent.Size = new System.Drawing.Size(167, 17);
             this.checkBoxSearchForFileContent.TabIndex = 13;
@@ -188,7 +200,7 @@
             // checkBoxReverseExtensions
             // 
             this.checkBoxReverseExtensions.AutoSize = true;
-            this.checkBoxReverseExtensions.Location = new System.Drawing.Point(316, 19);
+            this.checkBoxReverseExtensions.Location = new System.Drawing.Point(329, 19);
             this.checkBoxReverseExtensions.Name = "checkBoxReverseExtensions";
             this.checkBoxReverseExtensions.Size = new System.Drawing.Size(136, 17);
             this.checkBoxReverseExtensions.TabIndex = 12;
@@ -293,15 +305,15 @@
             this.progressBar.Size = new System.Drawing.Size(740, 23);
             this.progressBar.TabIndex = 11;
             // 
-            // checkBoxShowExceptions
+            // checkBoxIgnoreFilesWithoutExtension
             // 
-            this.checkBoxShowExceptions.AutoSize = true;
-            this.checkBoxShowExceptions.Location = new System.Drawing.Point(9, 59);
-            this.checkBoxShowExceptions.Name = "checkBoxShowExceptions";
-            this.checkBoxShowExceptions.Size = new System.Drawing.Size(131, 17);
-            this.checkBoxShowExceptions.TabIndex = 16;
-            this.checkBoxShowExceptions.Text = "Show exception errors";
-            this.checkBoxShowExceptions.UseVisualStyleBackColor = true;
+            this.checkBoxIgnoreFilesWithoutExtension.AutoSize = true;
+            this.checkBoxIgnoreFilesWithoutExtension.Location = new System.Drawing.Point(168, 59);
+            this.checkBoxIgnoreFilesWithoutExtension.Name = "checkBoxIgnoreFilesWithoutExtension";
+            this.checkBoxIgnoreFilesWithoutExtension.Size = new System.Drawing.Size(162, 17);
+            this.checkBoxIgnoreFilesWithoutExtension.TabIndex = 17;
+            this.checkBoxIgnoreFilesWithoutExtension.Text = "Ignore files without extension";
+            this.checkBoxIgnoreFilesWithoutExtension.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -354,6 +366,7 @@
         private System.Windows.Forms.CheckBox checkBoxUseProgressBar;
         private System.Windows.Forms.CheckBox checkBoxShowAllResultsAtOnce;
         private System.Windows.Forms.CheckBox checkBoxShowExceptions;
+        private System.Windows.Forms.CheckBox checkBoxIgnoreFilesWithoutExtension;
     }
 }
 

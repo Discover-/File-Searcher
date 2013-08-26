@@ -77,6 +77,7 @@ namespace File_Searcher
             controlsToDisable.Add(checkBoxShowHiddenFiles);
             controlsToDisable.Add(checkBoxUseProgressBar);
             controlsToDisable.Add(checkBoxShowExceptions);
+            controlsToDisable.Add(checkBoxIgnoreFilesWithoutExtension);
             controlsToDisable.Add(txtBoxDirectorySearch);
             controlsToDisable.Add(txtBoxFileSearch);
             controlsToDisable.Add(txtBoxExtensions);
@@ -89,6 +90,7 @@ namespace File_Searcher
             addTooltip(checkBoxShowAllResultsAtOnce, "If this is checked, instead of live-updating the result box below, it will be filled all at once when the process finished.");
             addTooltip(checkBoxShowExceptions, "This is basically meant for error-tracking. This software is written in C# which means sometimes code return errors and only developers can see them (under certain circumstances). Checking this will show the errors in a new window when the process finished.");
             addTooltip(checkBoxUseProgressBar, "This will enable the progressbar shown at the bottom of the application. The reason it's default unchecked is because it will make the process take quite a lot longer.");
+            addTooltip(checkBoxIgnoreFilesWithoutExtension, "Checking this will make files without any extension be ignored (like most of the README files).");
         }
 
         protected override void OnResize(EventArgs e)
@@ -278,8 +280,11 @@ namespace File_Searcher
                         else if (!files[i].Contains(txtBoxFileSearch.Text))
                             continue;
                     }
+                    
+                    if (checkBoxIgnoreFilesWithoutExtension.Checked && !Path.HasExtension(txtBoxExtensions.Text))
+                        continue;
 
-                    if (txtBoxExtensions.Text != String.Empty && Path.HasExtension(txtBoxExtensions.Text))
+                    if (txtBoxExtensions.Text != String.Empty)
                     {
                         //! If we only list specific extensions (field is not left empty) and the given file has no
                         //! extension, we can safely ignore it.
@@ -309,24 +314,21 @@ namespace File_Searcher
 
                     allFiles += files[i] + "\n"; //! Need to fill up the reference...
 
-                    if (Path.HasExtension(files[i]))
-                    {
-                        string fileName = files[i];
-                        string extension = Path.GetExtension(files[i]).ToLower();
-                        //string fileSize = (new FileInfo(files[i]).Length / 1024).ToString();
-                        string fileSizeType = "";
-                        string fileSize = convertBytesFormat((int)new FileInfo(files[i]).Length, ref fileSizeType);
+                    string fileName = files[i];
+                    string extension = Path.GetExtension(files[i]).ToLower();
+                    //string fileSize = (new FileInfo(files[i]).Length / 1024).ToString();
+                    string fileSizeType = "";
+                    string fileSize = convertBytesFormat((int)new FileInfo(files[i]).Length, ref fileSizeType);
 
-                        if (!checkBoxShowDir.Checked)
-                            fileName = Path.GetFileName(fileName);
+                    if (!checkBoxShowDir.Checked)
+                        fileName = Path.GetFileName(fileName);
 
-                        ListViewItem listViewItem = new ListViewItem(new[] { extension, fileName, fileSize, fileSizeType, new FileInfo(files[i]).LastWriteTime.ToString(), fileName });
+                    ListViewItem listViewItem = new ListViewItem(new[] { extension, fileName, fileSize, fileSizeType, new FileInfo(files[i]).LastWriteTime.ToString(), fileName });
 
-                        if (checkBoxShowAllResultsAtOnce.Checked)
-                            listViewResultsContainer.Add(listViewItem);
-                        else
-                            AddItemToListView(listViewResults, listViewItem);
-                    }
+                    if (checkBoxShowAllResultsAtOnce.Checked)
+                        listViewResultsContainer.Add(listViewItem);
+                    else
+                        AddItemToListView(listViewResults, listViewItem);
                 }
 
                 //! If we include sub directories, recursive call this function up to every single directory.
