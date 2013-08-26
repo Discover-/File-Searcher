@@ -157,9 +157,9 @@ namespace File_Searcher
                     return;
                 }
 
-                if (extensionField.Substring(extensionField.Length - 1) != ";")
+                if (extensionField.Substring(extensionField.Length - 1) == ";")
                 {
-                    MessageBox.Show("The field for extensions must end with a semicolon!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("The field for extensions may not end with a semicolon!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
             }
