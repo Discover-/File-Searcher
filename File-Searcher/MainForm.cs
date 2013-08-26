@@ -39,7 +39,7 @@ namespace File_Searcher
             listViewResults.Columns.Add("Name", 430, HorizontalAlignment.Left);
             listViewResults.Columns.Add("Size", 35, HorizontalAlignment.Right);
             listViewResults.Columns.Add("Sizetype", 55, HorizontalAlignment.Right);
-            listViewResults.Columns.Add("Last Modified", 155, HorizontalAlignment.Right);
+            listViewResults.Columns.Add("Last Modified", 138, HorizontalAlignment.Right);
             listViewResults.Columns.Add("", 0, HorizontalAlignment.Right);
 
             //! Set all anchors; this makes the controls properly resize along with the form when it gets resized.
@@ -429,7 +429,8 @@ namespace File_Searcher
 
         private void checkBoxShowDir_CheckedChanged(object sender, EventArgs e)
         {
-            //! Update current results with path
+            //! Update current results with path. SubItems[5] returns text of a column which is not visible (Width = 0)
+            //! and which contains the full directory/path to the file.
             foreach (ListViewItem item in listViewResults.Items)
                 item.SubItems[1].Text = checkBoxShowDir.Checked ? item.SubItems[5].Text : Path.GetFileName(item.SubItems[1].Text);
         }
