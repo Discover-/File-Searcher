@@ -53,7 +53,7 @@ namespace File_Searcher
             txtBoxExtensions.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
 
             oldWidth = Width; //! We store the initial width of the form so that we know how far the form was resized
-                              //! which allows us to determine how many pixels the 'Name' column need to be increased.
+            //! which allows us to determine how many pixels the 'Name' column need to be increased.
 
             listViewResults.FullRowSelect = true; //! This will make clicking on a row in the results select the full row.
 
@@ -164,10 +164,17 @@ namespace File_Searcher
                 }
 
                 string[] splitExtensionsField = txtBoxExtensions.Text.Split(';');
+                string duplicateExtension = "";
+
+                if (ArrayHasDuplicates(splitExtensionsField, ref duplicateExtension))
+                {
+                    MessageBox.Show("The extension '" + duplicateExtension + "' was listed more than once!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
 
                 for (int x = 0; x < splitExtensionsField.Length; x++)
                 {
-                    if (splitExtensionsField[x].Substring(0, 1) != ".")
+                    if (splitExtensionsField[x].Substring(0, 1) == ".")
                     {
                         MessageBox.Show("The extension '" + splitExtensionsField[x] + "' did not start with a period!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
@@ -306,7 +313,7 @@ namespace File_Searcher
                                 continue;
                         }
                     }
-                    
+
                     if (checkBoxIgnoreFilesWithoutExtension.Checked && !Path.HasExtension(txtBoxExtensions.Text))
                         continue;
 
@@ -583,6 +590,23 @@ namespace File_Searcher
         private bool IsInvalidString(string str)
         {
             return (String.IsNullOrEmpty(str) || String.IsNullOrWhiteSpace(str));
+        }
+
+        private bool ArrayHasDuplicates(string[] arrayString, ref string duplicateString)
+        {
+            List<string> listValues = new List<string>();
+            foreach (string str in arrayString)
+            {
+                if (listValues.Contains(str))
+                {
+                    duplicateString = str;
+                    return true;
+                }
+
+                listValues.Add(str);
+            }
+
+            return false;
         }
     }
 }
