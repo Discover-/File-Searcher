@@ -316,7 +316,7 @@ namespace File_Searcher
                         }
                     }
 
-                    if (checkBoxIgnoreFilesWithoutExtension.Checked && !Path.HasExtension(txtBoxExtensions.Text))
+                    if (checkBoxIgnoreFilesWithoutExtension.Checked && !Path.HasExtension(files[i]))
                         continue;
 
                     if (!IsInvalidString(txtBoxExtensions.Text))
