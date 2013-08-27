@@ -549,9 +549,16 @@ namespace File_Searcher
                 {
                     if (MessageBox.Show("Are you sure you want to open this file?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
-                        Process process = new Process();
-                        process.StartInfo = new ProcessStartInfo(selectedItemName);
-                        process.Start();
+                        try
+                        {
+                            Process process = new Process();
+                            process.StartInfo = new ProcessStartInfo(selectedItemName);
+                            process.Start();
+                        }
+                        catch (Exception)
+                        {
+                            MessageBox.Show("The process could not be opened!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
                     }
                 }
             }
