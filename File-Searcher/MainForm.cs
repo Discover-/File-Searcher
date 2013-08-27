@@ -33,6 +33,7 @@ namespace File_Searcher
             MinimizeBox = true;
             MinimumSize = new Size(Width, Height);
             MaximumSize = new Size(Width + 700, Height);
+            KeyDown += new KeyEventHandler(Form1_KeyDown);
 
             listViewResults.View = View.Details;
             listViewResults.Columns.Add("Extension", 60, HorizontalAlignment.Right);
@@ -643,6 +644,16 @@ namespace File_Searcher
         private void StartFilteredResultsForm()
         {
             Application.Run(new FilteredResultsForm(listViewResults));
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Enter:
+                    button2_Click(sender, e); // Start searching
+                    break;
+            }
         }
     }
 }
