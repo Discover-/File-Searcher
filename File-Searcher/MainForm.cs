@@ -33,6 +33,8 @@ namespace File_Searcher
             MinimizeBox = true;
             MinimumSize = new Size(Width, Height);
             MaximumSize = new Size(Width + 700, Height);
+
+            KeyPreview = true;
             KeyDown += new KeyEventHandler(Form1_KeyDown);
 
             listViewResults.View = View.Details;
