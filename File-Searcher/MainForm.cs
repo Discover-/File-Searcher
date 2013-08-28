@@ -548,22 +548,23 @@ namespace File_Searcher
             {
                 string selectedItemName = listViewResults.SelectedItems[0].SubItems[1].Text;
 
-                if (!IsInvalidString(selectedItemName))
-                {
+                if (!IsInvalidString(listViewResults.SelectedItems[0].SubItems[1].Text))
                     if (MessageBox.Show("Are you sure you want to open this file?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    {
-                        try
-                        {
-                            Process process = new Process();
-                            process.StartInfo = new ProcessStartInfo(selectedItemName);
-                            process.Start();
-                        }
-                        catch (Exception)
-                        {
-                            MessageBox.Show("The process could not be opened!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                }
+                        StartProcess(selectedItemName);
+            }
+        }
+
+        private void StartProcess(string filename)
+        {
+            try
+            {
+                Process process = new Process();
+                process.StartInfo = new ProcessStartInfo(filename);
+                process.Start();
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("The process could not be opened!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -653,7 +654,14 @@ namespace File_Searcher
             switch (e.KeyCode)
             {
                 case Keys.Enter:
-                    button2_Click(sender, e); // Start searching
+                    if (listViewResults.SelectedItems.Count > 0)
+                    {
+                        if (MessageBox.Show(string.Format("Are you sure you want to open {0} files?", listViewResults.SelectedItems.Count), "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                            foreach (ListViewItem item in listViewResults.SelectedItems)
+                                StartProcess(item.SubItems[5].Text);
+                    }
+                    else
+                        button2_Click(sender, e); // Start searching
                     break;
                 case Keys.Escape:
                     if (MessageBox.Show("Are you sure you want to quit?.", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
