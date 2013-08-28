@@ -564,7 +564,7 @@ namespace File_Searcher
             }
             catch (Exception)
             {
-                MessageBox.Show(string.Format("The process '{0}' could not be opened!", Path.GetFileName(filename)), "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(String.Format("The process '{0}' could not be opened!", Path.GetFileName(filename)), "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
@@ -656,7 +656,7 @@ namespace File_Searcher
                 case Keys.Enter:
                     if (listViewResults.SelectedItems.Count > 0)
                     {
-                        if (MessageBox.Show(string.Format("Are you sure you want to open {0} files?", listViewResults.SelectedItems.Count), "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        if (MessageBox.Show(String.Format("Are you sure you want to open {0} files?", listViewResults.SelectedItems.Count), "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                             foreach (ListViewItem item in listViewResults.SelectedItems)
                                 StartProcess(item.SubItems[5].Text);
                     }
