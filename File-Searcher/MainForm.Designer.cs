@@ -86,7 +86,7 @@
             this.checkBoxIncludeSubDirs.Location = new System.Drawing.Point(9, 19);
             this.checkBoxIncludeSubDirs.Name = "checkBoxIncludeSubDirs";
             this.checkBoxIncludeSubDirs.Size = new System.Drawing.Size(129, 17);
-            this.checkBoxIncludeSubDirs.TabIndex = 3;
+            this.checkBoxIncludeSubDirs.TabIndex = 4;
             this.checkBoxIncludeSubDirs.Text = "Include subdirectories";
             this.checkBoxIncludeSubDirs.UseVisualStyleBackColor = true;
             // 
@@ -95,7 +95,7 @@
             this.btnSearch.Location = new System.Drawing.Point(678, 143);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
-            this.btnSearch.TabIndex = 5;
+            this.btnSearch.TabIndex = 15;
             this.btnSearch.Text = "Search";
             this.btnSearch.UseVisualStyleBackColor = true;
             this.btnSearch.Click += new System.EventHandler(this.button2_Click);
@@ -105,7 +105,7 @@
             this.txtBoxFileSearch.Location = new System.Drawing.Point(5, 93);
             this.txtBoxFileSearch.Name = "txtBoxFileSearch";
             this.txtBoxFileSearch.Size = new System.Drawing.Size(355, 20);
-            this.txtBoxFileSearch.TabIndex = 0;
+            this.txtBoxFileSearch.TabIndex = 2;
             this.txtBoxFileSearch.TextChanged += new System.EventHandler(this.txtBoxFileSearch_TextChanged);
             // 
             // btnStopSearching
@@ -114,7 +114,7 @@
             this.btnStopSearching.Location = new System.Drawing.Point(678, 169);
             this.btnStopSearching.Name = "btnStopSearching";
             this.btnStopSearching.Size = new System.Drawing.Size(75, 23);
-            this.btnStopSearching.TabIndex = 7;
+            this.btnStopSearching.TabIndex = 16;
             this.btnStopSearching.Text = "Stop";
             this.btnStopSearching.UseVisualStyleBackColor = true;
             this.btnStopSearching.Click += new System.EventHandler(this.btnStopSearching_Click);
@@ -135,7 +135,7 @@
             this.checkBoxShowDir.Location = new System.Drawing.Point(9, 39);
             this.checkBoxShowDir.Name = "checkBoxShowDir";
             this.checkBoxShowDir.Size = new System.Drawing.Size(124, 17);
-            this.checkBoxShowDir.TabIndex = 9;
+            this.checkBoxShowDir.TabIndex = 8;
             this.checkBoxShowDir.Text = "Show directory of file";
             this.checkBoxShowDir.UseVisualStyleBackColor = true;
             this.checkBoxShowDir.CheckedChanged += new System.EventHandler(this.checkBoxShowDir_CheckedChanged);
@@ -169,7 +169,7 @@
             this.checkBoxIgnoreCaseSensitivity.Location = new System.Drawing.Point(329, 59);
             this.checkBoxIgnoreCaseSensitivity.Name = "checkBoxIgnoreCaseSensitivity";
             this.checkBoxIgnoreCaseSensitivity.Size = new System.Drawing.Size(130, 17);
-            this.checkBoxIgnoreCaseSensitivity.TabIndex = 18;
+            this.checkBoxIgnoreCaseSensitivity.TabIndex = 14;
             this.checkBoxIgnoreCaseSensitivity.Text = "Ignore case sensitivity";
             this.checkBoxIgnoreCaseSensitivity.UseVisualStyleBackColor = true;
             // 
@@ -179,7 +179,7 @@
             this.checkBoxIgnoreFilesWithoutExtension.Location = new System.Drawing.Point(168, 59);
             this.checkBoxIgnoreFilesWithoutExtension.Name = "checkBoxIgnoreFilesWithoutExtension";
             this.checkBoxIgnoreFilesWithoutExtension.Size = new System.Drawing.Size(162, 17);
-            this.checkBoxIgnoreFilesWithoutExtension.TabIndex = 17;
+            this.checkBoxIgnoreFilesWithoutExtension.TabIndex = 13;
             this.checkBoxIgnoreFilesWithoutExtension.Text = "Ignore files without extension";
             this.checkBoxIgnoreFilesWithoutExtension.UseVisualStyleBackColor = true;
             // 
@@ -189,7 +189,7 @@
             this.checkBoxShowExceptions.Location = new System.Drawing.Point(9, 59);
             this.checkBoxShowExceptions.Name = "checkBoxShowExceptions";
             this.checkBoxShowExceptions.Size = new System.Drawing.Size(131, 17);
-            this.checkBoxShowExceptions.TabIndex = 16;
+            this.checkBoxShowExceptions.TabIndex = 12;
             this.checkBoxShowExceptions.Text = "Show exception errors";
             this.checkBoxShowExceptions.UseVisualStyleBackColor = true;
             // 
@@ -199,7 +199,7 @@
             this.checkBoxShowAllResultsAtOnce.Location = new System.Drawing.Point(519, 39);
             this.checkBoxShowAllResultsAtOnce.Name = "checkBoxShowAllResultsAtOnce";
             this.checkBoxShowAllResultsAtOnce.Size = new System.Drawing.Size(138, 17);
-            this.checkBoxShowAllResultsAtOnce.TabIndex = 15;
+            this.checkBoxShowAllResultsAtOnce.TabIndex = 11;
             this.checkBoxShowAllResultsAtOnce.Text = "Show all results at once";
             this.checkBoxShowAllResultsAtOnce.UseVisualStyleBackColor = true;
             // 
@@ -209,7 +209,7 @@
             this.checkBoxUseProgressBar.Location = new System.Drawing.Point(519, 19);
             this.checkBoxUseProgressBar.Name = "checkBoxUseProgressBar";
             this.checkBoxUseProgressBar.Size = new System.Drawing.Size(106, 17);
-            this.checkBoxUseProgressBar.TabIndex = 14;
+            this.checkBoxUseProgressBar.TabIndex = 7;
             this.checkBoxUseProgressBar.Text = "Use progress bar";
             this.checkBoxUseProgressBar.UseVisualStyleBackColor = true;
             this.checkBoxUseProgressBar.CheckedChanged += new System.EventHandler(this.checkBoxUseProgressBar_CheckedChanged);
@@ -220,7 +220,7 @@
             this.checkBoxSearchForFileContent.Location = new System.Drawing.Point(329, 39);
             this.checkBoxSearchForFileContent.Name = "checkBoxSearchForFileContent";
             this.checkBoxSearchForFileContent.Size = new System.Drawing.Size(167, 17);
-            this.checkBoxSearchForFileContent.TabIndex = 13;
+            this.checkBoxSearchForFileContent.TabIndex = 10;
             this.checkBoxSearchForFileContent.Text = "Search for file content instead";
             this.checkBoxSearchForFileContent.UseVisualStyleBackColor = true;
             this.checkBoxSearchForFileContent.CheckedChanged += new System.EventHandler(this.checkBoxSearchForFileContent_CheckedChanged);
@@ -231,7 +231,7 @@
             this.checkBoxReverseExtensions.Location = new System.Drawing.Point(329, 19);
             this.checkBoxReverseExtensions.Name = "checkBoxReverseExtensions";
             this.checkBoxReverseExtensions.Size = new System.Drawing.Size(136, 17);
-            this.checkBoxReverseExtensions.TabIndex = 12;
+            this.checkBoxReverseExtensions.TabIndex = 6;
             this.checkBoxReverseExtensions.Text = "Reverse extension field";
             this.checkBoxReverseExtensions.UseVisualStyleBackColor = true;
             this.checkBoxReverseExtensions.CheckedChanged += new System.EventHandler(this.checkBoxReverseExtensions_CheckedChanged);
@@ -242,7 +242,7 @@
             this.checkBoxShowHiddenFiles.Location = new System.Drawing.Point(168, 39);
             this.checkBoxShowHiddenFiles.Name = "checkBoxShowHiddenFiles";
             this.checkBoxShowHiddenFiles.Size = new System.Drawing.Size(109, 17);
-            this.checkBoxShowHiddenFiles.TabIndex = 11;
+            this.checkBoxShowHiddenFiles.TabIndex = 9;
             this.checkBoxShowHiddenFiles.Text = "Show hidden files";
             this.checkBoxShowHiddenFiles.UseVisualStyleBackColor = true;
             // 
@@ -254,7 +254,7 @@
             this.checkBoxIgnoreRecycledFiles.Location = new System.Drawing.Point(168, 19);
             this.checkBoxIgnoreRecycledFiles.Name = "checkBoxIgnoreRecycledFiles";
             this.checkBoxIgnoreRecycledFiles.Size = new System.Drawing.Size(120, 17);
-            this.checkBoxIgnoreRecycledFiles.TabIndex = 10;
+            this.checkBoxIgnoreRecycledFiles.TabIndex = 5;
             this.checkBoxIgnoreRecycledFiles.Text = "Ignore recycled files";
             this.checkBoxIgnoreRecycledFiles.UseVisualStyleBackColor = true;
             // 
@@ -287,7 +287,7 @@
             this.txtBoxExtensions.Location = new System.Drawing.Point(378, 93);
             this.txtBoxExtensions.Name = "txtBoxExtensions";
             this.txtBoxExtensions.Size = new System.Drawing.Size(355, 20);
-            this.txtBoxExtensions.TabIndex = 4;
+            this.txtBoxExtensions.TabIndex = 3;
             this.txtBoxExtensions.TextChanged += new System.EventHandler(this.txtBoxExtensions_TextChanged);
             // 
             // lblHeaderDirectories
@@ -340,7 +340,7 @@
             this.btnClear.Location = new System.Drawing.Point(678, 195);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 23);
-            this.btnClear.TabIndex = 12;
+            this.btnClear.TabIndex = 17;
             this.btnClear.Text = "Clear";
             this.btnClear.UseVisualStyleBackColor = true;
             this.btnClear.Click += new System.EventHandler(this.btnClear_Click);
@@ -350,7 +350,7 @@
             this.buttonOpenFilter.Location = new System.Drawing.Point(677, 468);
             this.buttonOpenFilter.Name = "buttonOpenFilter";
             this.buttonOpenFilter.Size = new System.Drawing.Size(75, 23);
-            this.buttonOpenFilter.TabIndex = 13;
+            this.buttonOpenFilter.TabIndex = 18;
             this.buttonOpenFilter.Text = "Open filter";
             this.buttonOpenFilter.UseVisualStyleBackColor = true;
             this.buttonOpenFilter.Click += new System.EventHandler(this.buttonOpenFilter_Click);
