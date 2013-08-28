@@ -564,7 +564,7 @@ namespace File_Searcher
             }
             catch (Exception)
             {
-                MessageBox.Show("The process could not be opened!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show(string.Format("The process '{0}' could not be opened!", Path.GetFileName(filename)), "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
 
