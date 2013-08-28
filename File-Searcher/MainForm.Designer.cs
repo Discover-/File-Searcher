@@ -63,7 +63,7 @@
             // 
             // txtBoxDirectorySearch
             // 
-            this.txtBoxDirectorySearch.Location = new System.Drawing.Point(19, 56);
+            this.txtBoxDirectorySearch.Location = new System.Drawing.Point(19, 49);
             this.txtBoxDirectorySearch.Name = "txtBoxDirectorySearch";
             this.txtBoxDirectorySearch.Size = new System.Drawing.Size(704, 20);
             this.txtBoxDirectorySearch.TabIndex = 0;
@@ -92,7 +92,7 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(678, 147);
+            this.btnSearch.Location = new System.Drawing.Point(678, 143);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 5;
@@ -102,7 +102,7 @@
             // 
             // txtBoxFileSearch
             // 
-            this.txtBoxFileSearch.Location = new System.Drawing.Point(5, 100);
+            this.txtBoxFileSearch.Location = new System.Drawing.Point(5, 93);
             this.txtBoxFileSearch.Name = "txtBoxFileSearch";
             this.txtBoxFileSearch.Size = new System.Drawing.Size(355, 20);
             this.txtBoxFileSearch.TabIndex = 0;
@@ -111,7 +111,7 @@
             // btnStopSearching
             // 
             this.btnStopSearching.Enabled = false;
-            this.btnStopSearching.Location = new System.Drawing.Point(678, 173);
+            this.btnStopSearching.Location = new System.Drawing.Point(678, 169);
             this.btnStopSearching.Name = "btnStopSearching";
             this.btnStopSearching.Size = new System.Drawing.Size(75, 23);
             this.btnStopSearching.TabIndex = 7;
@@ -121,7 +121,7 @@
             // 
             // listViewResults
             // 
-            this.listViewResults.Location = new System.Drawing.Point(14, 228);
+            this.listViewResults.Location = new System.Drawing.Point(14, 224);
             this.listViewResults.Name = "listViewResults";
             this.listViewResults.Size = new System.Drawing.Size(739, 240);
             this.listViewResults.TabIndex = 8;
@@ -154,7 +154,7 @@
             this.groupBoxOptions.Controls.Add(this.checkBoxShowDir);
             this.groupBoxOptions.Controls.Add(this.labelOptions);
             this.groupBoxOptions.Controls.Add(this.checkBoxIncludeSubDirs);
-            this.groupBoxOptions.Location = new System.Drawing.Point(13, 141);
+            this.groupBoxOptions.Location = new System.Drawing.Point(13, 137);
             this.groupBoxOptions.Name = "groupBoxOptions";
             this.groupBoxOptions.Size = new System.Drawing.Size(659, 81);
             this.groupBoxOptions.TabIndex = 10;
@@ -269,14 +269,14 @@
             this.groupBoxSearchInfo.Controls.Add(this.lblSearchFile);
             this.groupBoxSearchInfo.Location = new System.Drawing.Point(14, 7);
             this.groupBoxSearchInfo.Name = "groupBoxSearchInfo";
-            this.groupBoxSearchInfo.Size = new System.Drawing.Size(740, 128);
+            this.groupBoxSearchInfo.Size = new System.Drawing.Size(740, 118);
             this.groupBoxSearchInfo.TabIndex = 10;
             this.groupBoxSearchInfo.TabStop = false;
             // 
             // lblIgnoreExtensions
             // 
             this.lblIgnoreExtensions.AutoSize = true;
-            this.lblIgnoreExtensions.Location = new System.Drawing.Point(378, 80);
+            this.lblIgnoreExtensions.Location = new System.Drawing.Point(378, 73);
             this.lblIgnoreExtensions.Name = "lblIgnoreExtensions";
             this.lblIgnoreExtensions.Size = new System.Drawing.Size(196, 13);
             this.lblIgnoreExtensions.TabIndex = 5;
@@ -284,7 +284,7 @@
             // 
             // txtBoxExtensions
             // 
-            this.txtBoxExtensions.Location = new System.Drawing.Point(378, 100);
+            this.txtBoxExtensions.Location = new System.Drawing.Point(378, 93);
             this.txtBoxExtensions.Name = "txtBoxExtensions";
             this.txtBoxExtensions.Size = new System.Drawing.Size(355, 20);
             this.txtBoxExtensions.TabIndex = 4;
@@ -301,7 +301,7 @@
             // 
             // btnSearchDir
             // 
-            this.btnSearchDir.Location = new System.Drawing.Point(709, 49);
+            this.btnSearchDir.Location = new System.Drawing.Point(709, 42);
             this.btnSearchDir.Name = "btnSearchDir";
             this.btnSearchDir.Size = new System.Drawing.Size(24, 20);
             this.btnSearchDir.TabIndex = 1;
@@ -312,7 +312,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(6, 28);
+            this.label2.Location = new System.Drawing.Point(6, 21);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(110, 13);
             this.label2.TabIndex = 2;
@@ -321,7 +321,7 @@
             // lblSearchFile
             // 
             this.lblSearchFile.AutoSize = true;
-            this.lblSearchFile.Location = new System.Drawing.Point(6, 80);
+            this.lblSearchFile.Location = new System.Drawing.Point(6, 73);
             this.lblSearchFile.Name = "lblSearchFile";
             this.lblSearchFile.Size = new System.Drawing.Size(348, 13);
             this.lblSearchFile.TabIndex = 2;
@@ -329,7 +329,7 @@
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(14, 500);
+            this.progressBar.Location = new System.Drawing.Point(14, 495);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(740, 23);
             this.progressBar.TabIndex = 11;
@@ -337,7 +337,7 @@
             // btnClear
             // 
             this.btnClear.Enabled = false;
-            this.btnClear.Location = new System.Drawing.Point(678, 199);
+            this.btnClear.Location = new System.Drawing.Point(678, 195);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 23);
             this.btnClear.TabIndex = 12;
@@ -347,7 +347,7 @@
             // 
             // buttonOpenFilter
             // 
-            this.buttonOpenFilter.Location = new System.Drawing.Point(677, 471);
+            this.buttonOpenFilter.Location = new System.Drawing.Point(677, 468);
             this.buttonOpenFilter.Name = "buttonOpenFilter";
             this.buttonOpenFilter.Size = new System.Drawing.Size(75, 23);
             this.buttonOpenFilter.TabIndex = 13;
@@ -359,7 +359,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(765, 536);
+            this.ClientSize = new System.Drawing.Size(765, 525);
             this.Controls.Add(this.buttonOpenFilter);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.progressBar);
