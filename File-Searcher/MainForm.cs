@@ -222,6 +222,20 @@ namespace File_Searcher
 
             if (IsInvalidString(allFiles))
             {
+                string illegalCharacters = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
+
+                if (!IsInvalidString(txtBoxFileSearch.Text) && !IsInvalidString(extensionField))
+                {
+                    for (int i = 0; i < illegalCharacters.Count(); ++i)
+                    {
+                        if (txtBoxFileSearch.Text.Contains(illegalCharacters[i]))
+                        {
+                            MessageBox.Show("The searched directory contains no files matching the given criteria (most likely because you specified an illegal character in one of the criteria fields).", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                        }
+                    }
+                }
+
                 if ((((checkBoxSearchForFileContent.Checked && !IsInvalidString(txtBoxFileSearch.Text)) || Path.HasExtension(txtBoxFileSearch.Text)) || Path.HasExtension(extensionField)))
                     MessageBox.Show("The searched directory contains no files matching the given criteria.", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
