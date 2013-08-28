@@ -546,9 +546,9 @@ namespace File_Searcher
         {
             if (listViewResults.SelectedItems.Count == 1)
             {
-                string selectedItemName = listViewResults.SelectedItems[0].SubItems[1].Text;
+                string selectedItemName = listViewResults.SelectedItems[0].SubItems[5].Text;
 
-                if (!IsInvalidString(listViewResults.SelectedItems[0].SubItems[1].Text))
+                if (!IsInvalidString(listViewResults.SelectedItems[0].SubItems[5].Text))
                     if (MessageBox.Show("Are you sure you want to open this file?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         StartProcess(selectedItemName);
             }
