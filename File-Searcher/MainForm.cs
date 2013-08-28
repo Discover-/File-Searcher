@@ -664,7 +664,7 @@ namespace File_Searcher
                         button2_Click(sender, e); // Start searching
                     break;
                 case Keys.Escape:
-                    if (MessageBox.Show("Are you sure you want to quit?.", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    if (MessageBox.Show("Are you sure you want to quit?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         Close();
 
                     break;
