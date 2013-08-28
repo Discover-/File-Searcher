@@ -222,8 +222,8 @@ namespace File_Searcher
 
             if (IsInvalidString(allFiles))
             {
-                if (Path.HasExtension(txtBoxFileSearch.Text) || Path.HasExtension(extensionField))
-                    MessageBox.Show("The searched directory contains no files matching your criteria.", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if ((((checkBoxSearchForFileContent.Checked && !IsInvalidString(txtBoxFileSearch.Text)) || Path.HasExtension(txtBoxFileSearch.Text)) || Path.HasExtension(extensionField)))
+                    MessageBox.Show("The searched directory contains no files matching the given criteria.", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
                     MessageBox.Show("The searched directory contains no files at all.", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
