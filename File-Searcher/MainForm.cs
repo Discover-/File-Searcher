@@ -1,16 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
 using System.Diagnostics;
-using System.Windows.Input;
 
 namespace File_Searcher
 {
@@ -18,10 +13,10 @@ namespace File_Searcher
     {
         private Thread searchThread = null;
         private int oldWidth = 0;
-        private ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
-        private List<ListViewItem> listViewResultsContainer = new List<ListViewItem>();
-        private List<Control> controlsToDisable = new List<Control>();
-        private List<string> exceptionStringStore = new List<string>();
+        private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
+        private readonly List<ListViewItem> listViewResultsContainer = new List<ListViewItem>();
+        private readonly List<Control> controlsToDisable = new List<Control>();
+        private readonly List<string> exceptionStringStore = new List<string>();
 
         public MainForm()
         {
@@ -51,7 +46,7 @@ namespace File_Searcher
             listViewResults.DoubleClick += listViewResults_DoubleClick;
 
             listViewResults.ListViewItemSorter = lvwColumnSorter;
-            listViewResults.ColumnClick += new ColumnClickEventHandler(listViewResults_ColumnClick);
+            listViewResults.ColumnClick += listViewResults_ColumnClick;
 
             //! Set all anchors; this makes the controls properly resize along with the form when it gets resized.
             listViewResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
@@ -65,7 +60,7 @@ namespace File_Searcher
             btnStopSearching.Anchor = AnchorStyles.Right;
 
             oldWidth = Width; //! We store the initial width of the form so that we know how far the form was resized
-            //! which allows us to determine how many pixels the 'Name' column need to be increased.
+                              //! which allows us to determine how many pixels the 'Name' column need to be increased.
 
             //! Initialize progress bar; default should be on 0%.
             progressBar.Minimum = 0;
@@ -178,11 +173,11 @@ namespace File_Searcher
                     return;
                 }
 
-                for (int x = 0; x < splitExtensionsField.Length; x++)
+                foreach (string ext in splitExtensionsField)
                 {
-                    if (splitExtensionsField[x].Substring(0, 1) != ".")
+                    if (ext.Substring(0, 1) != ".")
                     {
-                        MessageBox.Show("The extension '" + splitExtensionsField[x] + "' did not start with a period!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("The extension '" + ext + "' did not start with a period!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return;
                     }
                 }
@@ -193,19 +188,19 @@ namespace File_Searcher
             SetEnabledOfControl(btnSearch, false);
             SetEnabledOfControl(btnStopSearching, true);
 
-            foreach (Control control in controlsToDisable)
+            foreach (var control in controlsToDisable)
                 SetEnabledOfControl(control, false);
 
             SetProgressBarMaxValue(progressBar, 100);
             SetProgressBarValue(progressBar, 0);
 
-            string allFiles = "";
+            var allFiles = "";
 
             ClearListViewResults(listViewResults);
 
             if (checkBoxUseProgressBar.Checked)
             {
-                int directoryCountTotal = 0;
+                var directoryCountTotal = 0;
                 GetDirectoryCount(searchDirectory, ref directoryCountTotal);
                 SetProgressBarMaxValue(progressBar, directoryCountTotal);
             }
@@ -213,9 +208,9 @@ namespace File_Searcher
             //! Function also fills up the listbox on the fly
             GetAllFilesFromDirectoryAndFillResults(searchDirectory, checkBoxIncludeSubDirs.Checked, ref allFiles);
 
-            if (listViewResultsContainer != null && checkBoxShowAllResultsAtOnce.Checked && listViewResultsContainer.Count() > 0)
+            if (listViewResultsContainer != null && checkBoxShowAllResultsAtOnce.Checked && listViewResultsContainer.Any())
             {
-                foreach (ListViewItem item in listViewResultsContainer)
+                foreach (var item in listViewResultsContainer)
                     AddItemToListView(listViewResults, item);
 
                 listViewResultsContainer.Clear();
@@ -223,17 +218,17 @@ namespace File_Searcher
 
             if (IsInvalidString(allFiles))
             {
-                string illegalCharacters = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
+                var illegalCharacters = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
 
                 if (!IsInvalidString(txtBoxFileSearch.Text) && !IsInvalidString(extensionField))
                 {
-                    for (int i = 0; i < illegalCharacters.Count(); ++i)
+                    for (var i = 0; i < illegalCharacters.Count(); ++i)
                     {
-                        if (txtBoxFileSearch.Text.Contains(illegalCharacters[i]))
-                        {
-                            MessageBox.Show("The searched directory contains no files matching the given criteria (most likely because you specified an illegal character in one of the criteria fields).", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
-                        }
+                        if (!txtBoxFileSearch.Text.Contains(illegalCharacters[i]))
+                            continue;
+
+                        MessageBox.Show("The searched directory contains no files matching the given criteria (most likely because you specified an illegal character in one of the criteria fields).", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
                     }
                 }
 
@@ -250,7 +245,7 @@ namespace File_Searcher
 
                 UseWaitCursor = false;
 
-                foreach (Control control in controlsToDisable)
+                foreach (var control in controlsToDisable)
                     SetEnabledOfControl(control, true);
 
                 return;
@@ -264,7 +259,7 @@ namespace File_Searcher
 
             UseWaitCursor = false;
 
-            foreach (Control control in controlsToDisable)
+            foreach (var control in controlsToDisable)
                 SetEnabledOfControl(control, true);
         }
 
@@ -274,11 +269,11 @@ namespace File_Searcher
             //! and breaks with an exception.
             try
             {
-                string[] directories = Directory.GetDirectories(searchDirectory);
+                var directories = Directory.GetDirectories(searchDirectory);
                 directoryCountTotal += directories.Count();
 
-                for (int i = 0; i < directories.Length; i++)
-                    GetDirectoryCount(directories[i], ref directoryCountTotal);
+                foreach (string dir in directories)
+                    GetDirectoryCount(dir, ref directoryCountTotal);
             }
             catch (Exception exception)
             {
@@ -299,15 +294,15 @@ namespace File_Searcher
                 if (checkBoxUseProgressBar.Checked)
                     SetProgressBarValue(progressBar, progressBar.Value + 1);
 
-                for (int i = 0; i < files.Length; i++)
+                foreach (string file in files)
                 {
-                    if (files[i] == "")
+                    if (file == "")
                         continue;
 
-                    if (checkBoxIgnoreRecycledFiles.Checked && files[i].IndexOf("recycle", StringComparison.OrdinalIgnoreCase) >= 0)
+                    if (checkBoxIgnoreRecycledFiles.Checked && file.IndexOf("recycle", StringComparison.OrdinalIgnoreCase) >= 0)
                         continue;
 
-                    if (!checkBoxShowHiddenFiles.Checked && (File.GetAttributes(files[i]) & FileAttributes.Hidden) == FileAttributes.Hidden)
+                    if (!checkBoxShowHiddenFiles.Checked && (File.GetAttributes(file) & FileAttributes.Hidden) == FileAttributes.Hidden)
                         continue;
 
                     if (txtBoxFileSearch.Text != "")
@@ -316,32 +311,32 @@ namespace File_Searcher
                         {
                             if (checkBoxIgnoreCaseSensitivity.Checked)
                             {
-                                if (!File.ReadAllText(files[i]).ToLower().Contains(txtBoxFileSearch.Text.ToLower()))
+                                if (!File.ReadAllText(file).ToLower().Contains(txtBoxFileSearch.Text.ToLower()))
                                     continue;
                             }
-                            else if (!File.ReadAllText(files[i]).Contains(txtBoxFileSearch.Text))
+                            else if (!File.ReadAllText(file).Contains(txtBoxFileSearch.Text))
                                 continue;
                         }
                         else
                         {
                             if (checkBoxIgnoreCaseSensitivity.Checked)
                             {
-                                if (!files[i].ToLower().Contains(txtBoxFileSearch.Text.ToLower()))
+                                if (!file.ToLower().Contains(txtBoxFileSearch.Text.ToLower()))
                                     continue;
                             }
-                            else if (!files[i].Contains(txtBoxFileSearch.Text))
+                            else if (!file.Contains(txtBoxFileSearch.Text))
                                 continue;
                         }
                     }
 
-                    if (checkBoxIgnoreFilesWithoutExtension.Checked && !Path.HasExtension(files[i]))
+                    if (checkBoxIgnoreFilesWithoutExtension.Checked && !Path.HasExtension(file))
                         continue;
 
                     if (!IsInvalidString(txtBoxExtensions.Text))
                     {
                         //! If we only list specific extensions (field is not left empty) and the given file has no
                         //! extension, we can safely ignore it.
-                        if (checkBoxReverseExtensions.Checked && !Path.HasExtension(files[i]))
+                        if (checkBoxReverseExtensions.Checked && !Path.HasExtension(file))
                             continue;
 
                         string[] splitExtensionsField = txtBoxExtensions.Text.Split(';');
@@ -349,7 +344,7 @@ namespace File_Searcher
 
                         for (int x = 0; x < splitExtensionsField.Length; x++)
                         {
-                            if (Path.GetExtension(files[i]).ToLower() == splitExtensionsField[x].ToLower())
+                            if (Path.GetExtension(file).ToLower() == splitExtensionsField[x].ToLower())
                             {
                                 foundExtensionMatch = true;
                                 break;
@@ -365,18 +360,18 @@ namespace File_Searcher
                             continue;
                     }
 
-                    allFiles += files[i] + "\n"; //! Need to fill up the reference...
+                    allFiles += file + "\n"; //! Need to fill up the reference...
 
-                    string fileName = files[i];
-                    string extension = Path.GetExtension(files[i]).ToLower();
+                    string fileName = file;
+                    string extension = Path.GetExtension(file).ToLower();
                     //string fileSize = (new FileInfo(files[i]).Length / 1024).ToString();
                     string fileSizeType = "";
-                    string fileSize = convertBytesFormat((int)new FileInfo(files[i]).Length, ref fileSizeType);
+                    string fileSize = convertBytesFormat((int)new FileInfo(file).Length, ref fileSizeType);
 
                     if (!checkBoxShowDir.Checked)
                         fileName = Path.GetFileName(fileName);
 
-                    ListViewItem listViewItem = new ListViewItem(new[] { extension, fileName, fileSize, fileSizeType, new FileInfo(files[i]).LastWriteTime.ToString(), fileName });
+                    var listViewItem = new ListViewItem(new[] { extension, fileName, fileSize, fileSizeType, new FileInfo(file).LastWriteTime.ToString(), fileName });
 
                     if (checkBoxShowAllResultsAtOnce.Checked)
                         listViewResultsContainer.Add(listViewItem);
@@ -386,8 +381,8 @@ namespace File_Searcher
 
                 //! If we include sub directories, recursive call this function up to every single directory.
                 if (includingSubDirs)
-                    for (int i = 0; i < directories.Length; i++)
-                        GetAllFilesFromDirectoryAndFillResults(directories[i], true, ref allFiles);
+                    foreach (string dir in directories)
+                        GetAllFilesFromDirectoryAndFillResults(dir, true, ref allFiles);
             }
             catch (Exception exception)
             {
@@ -398,8 +393,10 @@ namespace File_Searcher
 
         private void btnSearchDir_Click(object sender, EventArgs e)
         {
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
-            fbd.Description = "Select a directory in which you want to search for files and directories.";
+            var fbd = new FolderBrowserDialog
+            {
+                Description = "Select a directory in which you want to search for files and directories."
+            };
 
             if (txtBoxDirectorySearch.Text != "" && Directory.Exists(txtBoxDirectorySearch.Text))
                 fbd.SelectedPath = txtBoxDirectorySearch.Text;
@@ -424,15 +421,15 @@ namespace File_Searcher
 
             UseWaitCursor = false;
 
-            if (listViewResultsContainer != null && checkBoxShowAllResultsAtOnce.Checked && listViewResultsContainer.Count() > 0)
+            if (listViewResultsContainer != null && checkBoxShowAllResultsAtOnce.Checked && listViewResultsContainer.Any())
             {
-                foreach (ListViewItem item in listViewResultsContainer)
+                foreach (var item in listViewResultsContainer)
                     AddItemToListView(listViewResults, item);
 
                 listViewResultsContainer.Clear();
             }
 
-            foreach (Control control in controlsToDisable)
+            foreach (var control in controlsToDisable)
                 SetEnabledOfControl(control, true);
 
             if (checkBoxShowExceptions.Checked)
@@ -463,8 +460,11 @@ namespace File_Searcher
 
         private string convertBytesFormat(int bytes, ref string fileType)
         {
+            if (fileType == null)
+                throw new ArgumentNullException("fileType");
+
             string[] sizes = { "B", "KB", "MB", "GB" };
-            int order = 0;
+            var order = 0;
 
             while (bytes >= 1024 && order + 1 < sizes.Length)
             {
@@ -567,21 +567,21 @@ namespace File_Searcher
 
         private void listViewResults_DoubleClick(object sender, EventArgs e)
         {
-            string selectedItemName = listViewResults.SelectedItems[0].SubItems[5].Text;
+            var selectedItemName = listViewResults.SelectedItems[0].SubItems[5].Text;
             var hadShiftDown = ((Control.ModifierKeys & Keys.Shift) != 0);
 
-            if (!IsInvalidString(listViewResults.SelectedItems[0].SubItems[5].Text))
-                if (MessageBox.Show("Are you sure you want to open this file?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                    StartProcess(hadShiftDown ? Path.GetDirectoryName(selectedItemName) : selectedItemName);
+            if (IsInvalidString(listViewResults.SelectedItems[0].SubItems[5].Text))
+                return;
+
+            if (MessageBox.Show("Are you sure you want to open this file?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                StartProcess(hadShiftDown ? Path.GetDirectoryName(selectedItemName) : selectedItemName);
         }
 
         private void StartProcess(string filename)
         {
             try
             {
-                Process process = new Process();
-                process.StartInfo = new ProcessStartInfo(filename);
-                process.Start();
+                new Process { StartInfo = new ProcessStartInfo(filename) }.Start();
             }
             catch (Exception)
             {
@@ -591,7 +591,7 @@ namespace File_Searcher
 
         private void listViewResults_ColumnClick(object sender, ColumnClickEventArgs e)
         {
-            ListView myListView = (ListView)sender;
+            var myListView = (ListView)sender;
 
             //! Determine if clicked column is already the column that is being sorted
             if (e.Column != lvwColumnSorter.SortColumn)
@@ -617,7 +617,7 @@ namespace File_Searcher
 
         private void addTooltip(Control control, string tooltipMsg)
         {
-            ToolTip toolTip = new ToolTip();
+            var toolTip = new ToolTip();
             toolTip.SetToolTip(control, tooltipMsg);
             toolTip.ShowAlways = true;
         }
@@ -629,7 +629,7 @@ namespace File_Searcher
 
         private bool ArrayHasDuplicates(string[] arrayString, ref string duplicateString)
         {
-            List<string> listValues = new List<string>();
+            var listValues = new List<string>();
             foreach (string str in arrayString)
             {
                 if (listValues.Contains(str))
