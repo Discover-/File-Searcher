@@ -664,12 +664,13 @@ namespace File_Searcher
 
         private void buttonOpenFilter_Click(object sender, EventArgs e)
         {
-            new Thread(StartFilteredResultsForm).Start();
+            //new Thread(StartFilteredResultsForm).Start();
+            new FilteredResultsForm(listViewResults.Items).ShowDialog(this);
         }
 
         private void StartFilteredResultsForm()
         {
-            Application.Run(new FilteredResultsForm(listViewResults));
+            //Application.Run(new FilteredResultsForm(listViewResults));
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)

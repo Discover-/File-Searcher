@@ -28,35 +28,65 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.listViewResults = new System.Windows.Forms.ListView();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FilteredResultsForm));
+            this.listViewResultsFilter = new System.Windows.Forms.ListView();
+            this.textBoxFilter = new System.Windows.Forms.TextBox();
+            this.comboBoxFilterType = new System.Windows.Forms.ComboBox();
+            this.button1 = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
-            // listViewResults
+            // listViewResultsFilter
             // 
-            this.listViewResults.Location = new System.Drawing.Point(11, 39);
-            this.listViewResults.Name = "listViewResults";
-            this.listViewResults.Size = new System.Drawing.Size(739, 240);
-            this.listViewResults.TabIndex = 0;
-            this.listViewResults.UseCompatibleStateImageBehavior = false;
+            this.listViewResultsFilter.Location = new System.Drawing.Point(11, 39);
+            this.listViewResultsFilter.Name = "listViewResultsFilter";
+            this.listViewResultsFilter.Size = new System.Drawing.Size(739, 240);
+            this.listViewResultsFilter.TabIndex = 0;
+            this.listViewResultsFilter.UseCompatibleStateImageBehavior = false;
             // 
-            // textBox1
+            // textBoxFilter
             // 
-            this.textBox1.Location = new System.Drawing.Point(11, 13);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(739, 20);
-            this.textBox1.TabIndex = 1;
-            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            this.textBoxFilter.Location = new System.Drawing.Point(138, 13);
+            this.textBoxFilter.Name = "textBoxFilter";
+            this.textBoxFilter.Size = new System.Drawing.Size(531, 20);
+            this.textBoxFilter.TabIndex = 1;
+            // 
+            // comboBoxFilterType
+            // 
+            this.comboBoxFilterType.FormattingEnabled = true;
+            this.comboBoxFilterType.Items.AddRange(new object[] {
+            "Extension",
+            "Name",
+            "Size",
+            "Sizetype",
+            "Last modified"});
+            this.comboBoxFilterType.Location = new System.Drawing.Point(11, 12);
+            this.comboBoxFilterType.Name = "comboBoxFilterType";
+            this.comboBoxFilterType.Size = new System.Drawing.Size(121, 21);
+            this.comboBoxFilterType.TabIndex = 2;
+            this.comboBoxFilterType.Text = "Filter type";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(675, 13);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 20);
+            this.button1.TabIndex = 3;
+            this.button1.Text = "Filter";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // FilteredResultsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(762, 289);
-            this.Controls.Add(this.textBox1);
-            this.Controls.Add(this.listViewResults);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.comboBoxFilterType);
+            this.Controls.Add(this.textBoxFilter);
+            this.Controls.Add(this.listViewResultsFilter);
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FilteredResultsForm";
-            this.Text = "FilteredResultsForm";
+            this.Text = "Filtered results";
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -64,7 +94,9 @@
 
         #endregion
 
-        private System.Windows.Forms.ListView listViewResults;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.ListView listViewResultsFilter;
+        private System.Windows.Forms.TextBox textBoxFilter;
+        private System.Windows.Forms.ComboBox comboBoxFilterType;
+        private System.Windows.Forms.Button button1;
     }
 }
