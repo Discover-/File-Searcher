@@ -567,15 +567,12 @@ namespace File_Searcher
 
         private void listViewResults_DoubleClick(object sender, EventArgs e)
         {
-            if (listViewResults.SelectedItems.Count == 1)
-            {
-                string selectedItemName = listViewResults.SelectedItems[0].SubItems[5].Text;
-                var hadShiftDown = ((Control.ModifierKeys & Keys.Shift) != 0);
+            string selectedItemName = listViewResults.SelectedItems[0].SubItems[5].Text;
+            var hadShiftDown = ((Control.ModifierKeys & Keys.Shift) != 0);
 
-                if (!IsInvalidString(listViewResults.SelectedItems[0].SubItems[5].Text))
-                    if (MessageBox.Show("Are you sure you want to open this file?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                        StartProcess(hadShiftDown ? Path.GetDirectoryName(selectedItemName) : selectedItemName);
-            }
+            if (!IsInvalidString(listViewResults.SelectedItems[0].SubItems[5].Text))
+                if (MessageBox.Show("Are you sure you want to open this file?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    StartProcess(hadShiftDown ? Path.GetDirectoryName(selectedItemName) : selectedItemName);
         }
 
         private void StartProcess(string filename)
