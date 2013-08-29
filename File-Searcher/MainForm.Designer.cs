@@ -301,9 +301,9 @@
             // 
             // btnSearchDir
             // 
-            this.btnSearchDir.Location = new System.Drawing.Point(709, 42);
+            this.btnSearchDir.Location = new System.Drawing.Point(709, 41);
             this.btnSearchDir.Name = "btnSearchDir";
-            this.btnSearchDir.Size = new System.Drawing.Size(24, 20);
+            this.btnSearchDir.Size = new System.Drawing.Size(24, 22);
             this.btnSearchDir.TabIndex = 1;
             this.btnSearchDir.Text = "...";
             this.btnSearchDir.UseVisualStyleBackColor = true;
