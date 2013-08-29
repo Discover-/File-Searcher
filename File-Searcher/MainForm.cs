@@ -58,6 +58,7 @@ namespace File_Searcher
             btnSearch.Anchor = AnchorStyles.Right;
             btnClear.Anchor = AnchorStyles.Right;
             btnStopSearching.Anchor = AnchorStyles.Right;
+            btnOpenFilter.Anchor = AnchorStyles.Right;
 
             oldWidth = Width; //! We store the initial width of the form so that we know how far the form was resized
                               //! which allows us to determine how many pixels the 'Name' column need to be increased.
@@ -84,6 +85,7 @@ namespace File_Searcher
             controlsToDisable.Add(txtBoxExtensions);
             controlsToDisable.Add(btnSearchDir);
             controlsToDisable.Add(btnClear);
+            controlsToDisable.Add(btnOpenFilter);
 
             addTooltip(checkBoxIgnoreRecycledFiles, "A lot of files found when searching through a root directory like the C disk are found in a recycle bin folder which make no sense if listed.");
             addTooltip(checkBoxReverseExtensions, "Checking this will mean the text box saying 'Extensions to ignore' will now be reversed, thus only show files containing extensions in that field");
