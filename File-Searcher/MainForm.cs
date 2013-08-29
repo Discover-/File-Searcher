@@ -435,7 +435,11 @@ namespace File_Searcher
                 SetEnabledOfControl(control, true);
 
             if (checkBoxShowExceptions.Checked)
-                new Thread(StartExceptionForm).Start();
+            {
+                new ExceptionForm(exceptionStringStore).ShowDialog(this);
+                exceptionStringStore.Clear();
+                //new Thread(StartExceptionForm).Start();
+            }
         }
 
         private void StartExceptionForm()
