@@ -372,7 +372,7 @@
             this.Controls.Add(this.groupBoxOptions);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "MainForm";
-            this.Text = "File-searcher";
+            this.Text = "File Searcher";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBoxOptions.ResumeLayout(false);
             this.groupBoxOptions.PerformLayout();

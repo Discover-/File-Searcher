@@ -31,7 +31,7 @@ namespace File_Searcher
             MaximumSize = new Size(Width + 700, Height);
 
             KeyPreview = true;
-            KeyDown += new KeyEventHandler(Form1_KeyDown);
+            KeyDown += Form1_KeyDown;
 
             listViewResults.View = View.Details;
             listViewResults.Columns.Add("Extension", 60, HorizontalAlignment.Right);
@@ -69,23 +69,7 @@ namespace File_Searcher
             progressBar.Value = 0;
 
             //! Add all controls we disable once we start searching to the list controlling this
-            controlsToDisable.Add(checkBoxIgnoreRecycledFiles);
-            controlsToDisable.Add(checkBoxIncludeSubDirs);
-            controlsToDisable.Add(checkBoxReverseExtensions);
-            controlsToDisable.Add(checkBoxSearchForFileContent);
-            controlsToDisable.Add(checkBoxShowAllResultsAtOnce);
-            controlsToDisable.Add(checkBoxShowDir);
-            controlsToDisable.Add(checkBoxShowHiddenFiles);
-            controlsToDisable.Add(checkBoxUseProgressBar);
-            controlsToDisable.Add(checkBoxShowExceptions);
-            controlsToDisable.Add(checkBoxIgnoreFilesWithoutExtension);
-            controlsToDisable.Add(checkBoxIgnoreCaseSensitivity);
-            controlsToDisable.Add(txtBoxDirectorySearch);
-            controlsToDisable.Add(txtBoxFileSearch);
-            controlsToDisable.Add(txtBoxExtensions);
-            controlsToDisable.Add(btnSearchDir);
-            controlsToDisable.Add(btnClear);
-            controlsToDisable.Add(btnOpenFilter);
+            FillControlsToDisable();
 
             addTooltip(checkBoxIgnoreRecycledFiles, "A lot of files found when searching through a root directory like the C disk are found in a recycle bin folder which make no sense if listed.");
             addTooltip(checkBoxReverseExtensions, "Checking this will mean the text box saying 'Extensions to ignore' will now be reversed, thus only show files containing extensions in that field");
@@ -96,6 +80,34 @@ namespace File_Searcher
             addTooltip(checkBoxUseProgressBar, "This will enable the progressbar shown at the bottom of the application. The reason it's default unchecked is because it will make the process take quite a lot longer.");
             addTooltip(checkBoxIgnoreFilesWithoutExtension, "Checking this will make files without any extension be ignored (like most of the README files).");
             addTooltip(checkBoxIgnoreCaseSensitivity, "Checking this will allow you to ignore case sensitivity in the file name/content search field.");
+        }
+
+        private void FillControlsToDisable()
+        {
+            controlsToDisable.Clear();
+            controlsToDisable.Add(checkBoxIgnoreRecycledFiles);
+            controlsToDisable.Add(checkBoxIncludeSubDirs);
+            controlsToDisable.Add(checkBoxReverseExtensions);
+            controlsToDisable.Add(checkBoxSearchForFileContent);
+            controlsToDisable.Add(checkBoxShowAllResultsAtOnce);
+            controlsToDisable.Add(checkBoxShowDir);
+            controlsToDisable.Add(checkBoxShowHiddenFiles);
+            controlsToDisable.Add(checkBoxUseProgressBar);
+            controlsToDisable.Add(checkBoxShowExceptions);
+            controlsToDisable.Add(checkBoxIgnoreFilesWithoutExtension);
+            controlsToDisable.Add(txtBoxDirectorySearch);
+            controlsToDisable.Add(txtBoxFileSearch);
+            controlsToDisable.Add(txtBoxExtensions);
+            controlsToDisable.Add(btnSearchDir);
+
+            if (btnClear.Enabled)
+                controlsToDisable.Add(btnClear);
+
+            if (btnOpenFilter.Enabled)
+                controlsToDisable.Add(btnOpenFilter);
+
+            if (checkBoxIgnoreCaseSensitivity.Enabled)
+                controlsToDisable.Add(checkBoxIgnoreCaseSensitivity);
         }
 
         protected override void OnResize(EventArgs e)
@@ -118,7 +130,7 @@ namespace File_Searcher
         private void button2_Click(object sender, EventArgs e)
         {
             listViewResultsContainer.Clear();
-            searchThread = new Thread(new ThreadStart(StartSearching));
+            searchThread = new Thread(StartSearching);
             searchThread.Start();
         }
 
@@ -184,6 +196,8 @@ namespace File_Searcher
                     }
                 }
             }
+
+            FillControlsToDisable();
 
             UseWaitCursor = true;
 
@@ -438,14 +452,7 @@ namespace File_Searcher
             {
                 new ExceptionForm(exceptionStringStore).ShowDialog(this);
                 exceptionStringStore.Clear();
-                //new Thread(StartExceptionForm).Start();
             }
-        }
-
-        private void StartExceptionForm()
-        {
-            Application.Run(new ExceptionForm(exceptionStringStore));
-            exceptionStringStore.Clear();
         }
 
         private void checkBoxShowDir_CheckedChanged(object sender, EventArgs e)
@@ -524,7 +531,7 @@ namespace File_Searcher
 
         private void checkBoxReverseExtensions_CheckedChanged(object sender, EventArgs e)
         {
-            //! Using string::replace doesn't have the same effect for some reason
+            //! Using String::Replace doesn't have the same effect for some reason
             if (checkBoxReverseExtensions.Checked)
                 lblIgnoreExtensions.Text = "Extensions to show (split by semicolon):";
             else
@@ -668,13 +675,7 @@ namespace File_Searcher
 
         private void buttonOpenFilter_Click(object sender, EventArgs e)
         {
-            //new Thread(StartFilteredResultsForm).Start();
             new FilteredResultsForm(listViewResults.Items).ShowDialog(this);
-        }
-
-        private void StartFilteredResultsForm()
-        {
-            //Application.Run(new FilteredResultsForm(listViewResults));
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
