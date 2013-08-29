@@ -679,7 +679,7 @@ namespace File_Searcher
                     {
                         var hadShiftDown = ((Control.ModifierKeys & Keys.Shift) != 0);
 
-                        if (MessageBox.Show(String.Format("Are you sure you want to open {0} files?", listViewResults.SelectedItems.Count), "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        if (MessageBox.Show(String.Format("Are you sure you want to open {0}?", listViewResults.SelectedItems.Count > 1 ? String.Format("the selected ({0}) files", listViewResults.SelectedItems.Count) : "this file"), "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                             foreach (ListViewItem item in listViewResults.SelectedItems)
                                 StartProcess(hadShiftDown ? Path.GetDirectoryName(item.SubItems[5].Text) + "\\" : item.SubItems[5].Text);
                     }
