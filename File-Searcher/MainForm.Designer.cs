@@ -269,7 +269,7 @@
             this.groupBoxSearchInfo.Controls.Add(this.lblSearchFile);
             this.groupBoxSearchInfo.Location = new System.Drawing.Point(14, 7);
             this.groupBoxSearchInfo.Name = "groupBoxSearchInfo";
-            this.groupBoxSearchInfo.Size = new System.Drawing.Size(740, 118);
+            this.groupBoxSearchInfo.Size = new System.Drawing.Size(740, 122);
             this.groupBoxSearchInfo.TabIndex = 10;
             this.groupBoxSearchInfo.TabStop = false;
             // 
