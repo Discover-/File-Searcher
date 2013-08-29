@@ -448,8 +448,16 @@ namespace File_Searcher
         {
             //! Update current results with path. SubItems[5] returns text of a column which is not visible (Width = 0)
             //! and which contains the full directory/path to the file.
-            foreach (ListViewItem item in listViewResults.Items)
-                item.SubItems[1].Text = checkBoxShowDir.Checked ? item.SubItems[5].Text : Path.GetFileName(item.SubItems[1].Text);
+            if (checkBoxShowDir.Checked)
+            {
+                foreach (ListViewItem item in listViewResults.Items)
+                    item.SubItems[1].Text = item.SubItems[5].Text;
+            }
+            else
+            {
+                foreach (ListViewItem item in listViewResults.Items)
+                    item.SubItems[1].Text = Path.GetFileName(item.SubItems[1].Text);
+            }
         }
 
         private string convertBytesFormat(int bytes, ref string fileType)
@@ -680,7 +688,6 @@ namespace File_Searcher
                 case Keys.Escape:
                     if (MessageBox.Show("Are you sure you want to quit?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         Close();
-
                     break;
             }
         }
