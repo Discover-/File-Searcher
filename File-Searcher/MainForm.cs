@@ -434,7 +434,7 @@ namespace File_Searcher
             foreach (var control in controlsToDisable)
                 SetEnabledOfControl(control, true);
 
-            if (checkBoxShowExceptions.Checked)
+            if (checkBoxShowExceptions.Checked && exceptionStringStore.Count > 0)
             {
                 new ExceptionForm(exceptionStringStore).ShowDialog(this);
                 exceptionStringStore.Clear();
