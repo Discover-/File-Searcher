@@ -99,12 +99,10 @@ namespace File_Searcher
             controlsToDisable.Add(txtBoxFileSearch);
             controlsToDisable.Add(txtBoxExtensions);
             controlsToDisable.Add(btnSearchDir);
+            controlsToDisable.Add(btnOpenFilter);
 
             if (btnClear.Enabled)
                 controlsToDisable.Add(btnClear);
-
-            if (btnOpenFilter.Enabled)
-                controlsToDisable.Add(btnOpenFilter);
 
             if (checkBoxIgnoreCaseSensitivity.Enabled)
                 controlsToDisable.Add(checkBoxIgnoreCaseSensitivity);
