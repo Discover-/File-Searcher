@@ -6,17 +6,19 @@ using System.Windows.Forms;
 using System.IO;
 using System.Threading;
 using System.Diagnostics;
+using Timer = System.Windows.Forms.Timer;
 
 namespace File_Searcher
 {
     public partial class MainForm : Form
     {
         private Thread searchThread = null;
-        private int oldWidth = 0;
+        private int oldWidth = 0, originalHeight = 0, originalWidth = 0;
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         private readonly List<ListViewItem> listViewResultsContainer = new List<ListViewItem>();
         private readonly List<Control> controlsToDisable = new List<Control>();
         private readonly List<string> exceptionStringStore = new List<string>();
+        private Timer timerCollapseOrContractProgressBar = null;
 
         public MainForm()
         {
@@ -29,6 +31,13 @@ namespace File_Searcher
             MinimizeBox = true;
             MinimumSize = new Size(Width, Height);
             MaximumSize = new Size(Width + 700, Height);
+            //MaximumSize = new Size(Width + 700, Height + 50);
+
+            originalHeight = Height;
+            originalWidth = Width;
+
+            timerCollapseOrContractProgressBar = new Timer { Enabled = false, Interval = 16 };
+            timerCollapseOrContractProgressBar.Tick += timerCollapseOrContractProgressBar_Tick;
 
             KeyPreview = true;
             KeyDown += Form1_KeyDown;
@@ -49,16 +58,7 @@ namespace File_Searcher
             listViewResults.ColumnClick += listViewResults_ColumnClick;
 
             //! Set all anchors; this makes the controls properly resize along with the form when it gets resized.
-            listViewResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
-            txtBoxDirectorySearch.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
-            groupBoxSearchInfo.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
-            progressBar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
-            txtBoxExtensions.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
-            btnSearchDir.Anchor = AnchorStyles.Right;
-            btnSearch.Anchor = AnchorStyles.Right;
-            btnClear.Anchor = AnchorStyles.Right;
-            btnStopSearching.Anchor = AnchorStyles.Right;
-            btnOpenFilter.Anchor = AnchorStyles.Right;
+            InitializeAnchors();
 
             oldWidth = Width; //! We store the initial width of the form so that we know how far the form was resized
                               //! which allows us to determine how many pixels the 'Name' column need to be increased.
@@ -77,11 +77,26 @@ namespace File_Searcher
             addTooltip(checkBoxShowHiddenFiles, "Determines whether or not you want to show hidden files or not.");
             addTooltip(checkBoxShowAllResultsAtOnce, "If this is checked, instead of live-updating the result box below, it will be filled all at once when the process finished.");
             addTooltip(checkBoxShowExceptions, "This is basically meant for error-tracking. This software is written in C# which means sometimes code return errors and only developers can see them (under certain circumstances). Checking this will show the errors in a new window when the process finished.");
-            addTooltip(checkBoxUseProgressBar, "This will enable the progressbar shown at the bottom of the application. The reason it's default unchecked is because it will make the process take quite a lot longer.");
+            addTooltip(checkBoxShowProgress, "This will enable the progressbar shown at the bottom of the application. The reason it's default unchecked is because it will make the process take quite a lot longer.");
             addTooltip(checkBoxIgnoreFilesWithoutExtension, "Checking this will make files without any extension be ignored (like most of the README files).");
             addTooltip(checkBoxIgnoreCaseSensitivity, "Checking this will allow you to ignore case sensitivity in the file name/content search field.");
         }
 
+        private void InitializeAnchors()
+        {
+            listViewResults.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
+            txtBoxDirectorySearch.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
+            groupBoxSearchInfo.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
+            groupBoxOptions.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
+            progressBar.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
+            txtBoxExtensions.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
+            btnSearchDir.Anchor = AnchorStyles.Right;
+            btnSearch.Anchor = AnchorStyles.Right;
+            btnClear.Anchor = AnchorStyles.Right;
+            btnStopSearching.Anchor = AnchorStyles.Right;
+            btnOpenFilter.Anchor = AnchorStyles.Right;
+        }
+        
         private void FillControlsToDisable()
         {
             controlsToDisable.Clear();
@@ -92,7 +107,7 @@ namespace File_Searcher
             controlsToDisable.Add(checkBoxShowAllResultsAtOnce);
             controlsToDisable.Add(checkBoxShowDir);
             controlsToDisable.Add(checkBoxShowHiddenFiles);
-            controlsToDisable.Add(checkBoxUseProgressBar);
+            controlsToDisable.Add(checkBoxShowProgress);
             controlsToDisable.Add(checkBoxShowExceptions);
             controlsToDisable.Add(checkBoxIgnoreFilesWithoutExtension);
             controlsToDisable.Add(txtBoxDirectorySearch);
@@ -212,7 +227,7 @@ namespace File_Searcher
 
             ClearListViewResults(listViewResults);
 
-            if (checkBoxUseProgressBar.Checked)
+            if (checkBoxShowProgress.Checked)
             {
                 var directoryCountTotal = 0;
                 GetDirectoryCount(searchDirectory, ref directoryCountTotal);
@@ -305,7 +320,7 @@ namespace File_Searcher
                 string[] directories = Directory.GetDirectories(directorySearch);
                 string[] files = Directory.GetFiles(directorySearch);
 
-                if (checkBoxUseProgressBar.Checked)
+                if (checkBoxShowProgress.Checked)
                     SetProgressBarValue(progressBar, progressBar.Value + 1);
 
                 foreach (string file in files)
@@ -619,13 +634,6 @@ namespace File_Searcher
             myListView.Sort();
         }
 
-        private void checkBoxUseProgressBar_CheckedChanged(object sender, EventArgs e)
-        {
-            if (checkBoxUseProgressBar.Checked)
-                if (MessageBox.Show("Are you sure you want to initialize a progress bar? The progress will take a lot longer than it would normally (if the directory we search in is big).", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
-                    checkBoxUseProgressBar.Checked = false;
-        }
-
         private void addTooltip(Control control, string tooltipMsg)
         {
             var toolTip = new ToolTip();
@@ -696,6 +704,58 @@ namespace File_Searcher
                     if (MessageBox.Show("Are you sure you want to quit?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                         Close();
                     break;
+            }
+        }
+
+        private void checkBoxUseProgressBar_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBoxShowProgress.Checked)
+            {
+                if (MessageBox.Show("Are you sure you want to initialize a progress bar? The progress will take a lot longer than it would normally (if the directory we search in is big).", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    MaximumSize = new Size(Width, Height + 30);
+                    timerCollapseOrContractProgressBar.Enabled = true;
+
+                    foreach (Control control in Controls)
+                        control.Anchor = AnchorStyles.Top;
+                }
+                else
+                    checkBoxShowProgress.Checked = false;
+            }
+            else
+            {
+                foreach (Control control in Controls)
+                    control.Anchor = AnchorStyles.Top;
+
+                timerCollapseOrContractProgressBar.Enabled = true;
+            }
+        }
+
+        private void timerCollapseOrContractProgressBar_Tick(object sender, EventArgs e)
+        {
+            if (checkBoxShowProgress.Checked)
+            {
+                if (Height >= originalHeight + 30)
+                {
+                    InitializeAnchors();
+                    Height = originalHeight + 30;
+                    timerCollapseOrContractProgressBar.Enabled = false;
+                    MaximumSize = new Size(originalWidth + 700, Height);
+                }
+                else
+                    Height += 5;
+            }
+            else
+            {
+                if (Height > originalHeight)
+                    Height -= 5;
+                else
+                {
+                    InitializeAnchors();
+                    Height = originalHeight;
+                    timerCollapseOrContractProgressBar.Enabled = false;
+                    MaximumSize = new Size(originalWidth + 700, Height);
+                }
             }
         }
     }

@@ -42,7 +42,7 @@
             this.checkBoxIgnoreFilesWithoutExtension = new System.Windows.Forms.CheckBox();
             this.checkBoxShowExceptions = new System.Windows.Forms.CheckBox();
             this.checkBoxShowAllResultsAtOnce = new System.Windows.Forms.CheckBox();
-            this.checkBoxUseProgressBar = new System.Windows.Forms.CheckBox();
+            this.checkBoxShowProgress = new System.Windows.Forms.CheckBox();
             this.checkBoxSearchForFileContent = new System.Windows.Forms.CheckBox();
             this.checkBoxReverseExtensions = new System.Windows.Forms.CheckBox();
             this.checkBoxShowHiddenFiles = new System.Windows.Forms.CheckBox();
@@ -146,7 +146,7 @@
             this.groupBoxOptions.Controls.Add(this.checkBoxIgnoreFilesWithoutExtension);
             this.groupBoxOptions.Controls.Add(this.checkBoxShowExceptions);
             this.groupBoxOptions.Controls.Add(this.checkBoxShowAllResultsAtOnce);
-            this.groupBoxOptions.Controls.Add(this.checkBoxUseProgressBar);
+            this.groupBoxOptions.Controls.Add(this.checkBoxShowProgress);
             this.groupBoxOptions.Controls.Add(this.checkBoxSearchForFileContent);
             this.groupBoxOptions.Controls.Add(this.checkBoxReverseExtensions);
             this.groupBoxOptions.Controls.Add(this.checkBoxShowHiddenFiles);
@@ -203,16 +203,16 @@
             this.checkBoxShowAllResultsAtOnce.Text = "Show all results at once";
             this.checkBoxShowAllResultsAtOnce.UseVisualStyleBackColor = true;
             // 
-            // checkBoxUseProgressBar
+            // checkBoxShowProgress
             // 
-            this.checkBoxUseProgressBar.AutoSize = true;
-            this.checkBoxUseProgressBar.Location = new System.Drawing.Point(519, 19);
-            this.checkBoxUseProgressBar.Name = "checkBoxUseProgressBar";
-            this.checkBoxUseProgressBar.Size = new System.Drawing.Size(106, 17);
-            this.checkBoxUseProgressBar.TabIndex = 7;
-            this.checkBoxUseProgressBar.Text = "Use progress bar";
-            this.checkBoxUseProgressBar.UseVisualStyleBackColor = true;
-            this.checkBoxUseProgressBar.CheckedChanged += new System.EventHandler(this.checkBoxUseProgressBar_CheckedChanged);
+            this.checkBoxShowProgress.AutoSize = true;
+            this.checkBoxShowProgress.Location = new System.Drawing.Point(519, 19);
+            this.checkBoxShowProgress.Name = "checkBoxShowProgress";
+            this.checkBoxShowProgress.Size = new System.Drawing.Size(114, 17);
+            this.checkBoxShowProgress.TabIndex = 7;
+            this.checkBoxShowProgress.Text = "Show progress bar";
+            this.checkBoxShowProgress.UseVisualStyleBackColor = true;
+            this.checkBoxShowProgress.CheckedChanged += new System.EventHandler(this.checkBoxUseProgressBar_CheckedChanged);
             // 
             // checkBoxSearchForFileContent
             // 
@@ -360,7 +360,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(765, 525);
+            this.ClientSize = new System.Drawing.Size(765, 495);
             this.Controls.Add(this.btnOpenFilter);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.progressBar);
@@ -406,7 +406,7 @@
         private System.Windows.Forms.CheckBox checkBoxReverseExtensions;
         private System.Windows.Forms.CheckBox checkBoxSearchForFileContent;
         private System.Windows.Forms.ProgressBar progressBar;
-        private System.Windows.Forms.CheckBox checkBoxUseProgressBar;
+        private System.Windows.Forms.CheckBox checkBoxShowProgress;
         private System.Windows.Forms.CheckBox checkBoxShowAllResultsAtOnce;
         private System.Windows.Forms.CheckBox checkBoxShowExceptions;
         private System.Windows.Forms.CheckBox checkBoxIgnoreFilesWithoutExtension;
