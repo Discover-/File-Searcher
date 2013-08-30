@@ -33,7 +33,7 @@ namespace File_Searcher
 
             foreach (ListViewItem item in initialItemCollection)
             {
-                if (item.SubItems[comboBoxFilterType.SelectedIndex].Text.Contains(textBoxFilter.Text))
+                if (item.SubItems[comboBoxFilterType.SelectedIndex].Text.ToLower().Contains(textBoxFilter.Text.ToLower()))
                 {
                     var listViewItem = new ListViewItem(new[] { item.SubItems[0].Text, item.SubItems[1].Text, item.SubItems[2].Text, item.SubItems[3].Text, item.SubItems[4].Text });
                     tempListViewCopy.Items.Add(listViewItem);
