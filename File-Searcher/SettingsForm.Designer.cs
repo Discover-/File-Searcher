@@ -36,11 +36,13 @@
             this.buttonExit = new System.Windows.Forms.Button();
             this.checkBoxPromptShowProgressbar = new System.Windows.Forms.CheckBox();
             this.checkBoxPromptToQuit = new System.Windows.Forms.CheckBox();
+            this.checkBoxAutoSaveSettings = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkBoxAutoSaveSettings);
             this.groupBox1.Controls.Add(this.checkBoxPromptToQuit);
             this.groupBox1.Controls.Add(this.checkBoxPromptShowProgressbar);
             this.groupBox1.Controls.Add(this.checkBoxPromptOpenFile);
@@ -108,12 +110,24 @@
             // checkBoxPromptToQuit
             // 
             this.checkBoxPromptToQuit.AutoSize = true;
+            this.checkBoxPromptToQuit.Checked = true;
+            this.checkBoxPromptToQuit.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxPromptToQuit.Location = new System.Drawing.Point(17, 65);
             this.checkBoxPromptToQuit.Name = "checkBoxPromptToQuit";
             this.checkBoxPromptToQuit.Size = new System.Drawing.Size(147, 17);
             this.checkBoxPromptToQuit.TabIndex = 5;
             this.checkBoxPromptToQuit.Text = "Prompt me if I want to exit";
             this.checkBoxPromptToQuit.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxAutoSaveSettings
+            // 
+            this.checkBoxAutoSaveSettings.AutoSize = true;
+            this.checkBoxAutoSaveSettings.Location = new System.Drawing.Point(17, 88);
+            this.checkBoxAutoSaveSettings.Name = "checkBoxAutoSaveSettings";
+            this.checkBoxAutoSaveSettings.Size = new System.Drawing.Size(113, 17);
+            this.checkBoxAutoSaveSettings.TabIndex = 6;
+            this.checkBoxAutoSaveSettings.Text = "Auto save settings";
+            this.checkBoxAutoSaveSettings.UseVisualStyleBackColor = true;
             // 
             // SettingsForm
             // 
@@ -143,5 +157,6 @@
         private System.Windows.Forms.Button buttonExit;
         private System.Windows.Forms.CheckBox checkBoxPromptShowProgressbar;
         private System.Windows.Forms.CheckBox checkBoxPromptToQuit;
+        private System.Windows.Forms.CheckBox checkBoxAutoSaveSettings;
     }
 }
