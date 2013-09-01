@@ -152,7 +152,7 @@ namespace File_Searcher
 
         private void StartSearching()
         {
-            string searchDirectory = txtBoxDirectorySearch.Text;
+            string searchDirectory = txtBoxDirectorySearch.Text + "\\";
             string searchFileText = txtBoxFileSearch.Text;
             string extensionField = txtBoxExtensions.Text;
 
@@ -425,10 +425,7 @@ namespace File_Searcher
 
         private void btnSearchDir_Click(object sender, EventArgs e)
         {
-            var fbd = new FolderBrowserDialog
-            {
-                Description = "Select a directory in which you want to search for files and directories."
-            };
+            var fbd = new FolderBrowserDialog { Description = "Select a directory in which you want to search for files and directories." };
 
             if (txtBoxDirectorySearch.Text != "" && Directory.Exists(txtBoxDirectorySearch.Text))
                 fbd.SelectedPath = txtBoxDirectorySearch.Text;
