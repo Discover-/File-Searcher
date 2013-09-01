@@ -35,11 +35,13 @@
             this.buttonClear = new System.Windows.Forms.Button();
             this.buttonExit = new System.Windows.Forms.Button();
             this.checkBoxPromptShowProgressbar = new System.Windows.Forms.CheckBox();
+            this.checkBoxPromptToQuit = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkBoxPromptToQuit);
             this.groupBox1.Controls.Add(this.checkBoxPromptShowProgressbar);
             this.groupBox1.Controls.Add(this.checkBoxPromptOpenFile);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
@@ -94,12 +96,24 @@
             // checkBoxPromptShowProgressbar
             // 
             this.checkBoxPromptShowProgressbar.AutoSize = true;
+            this.checkBoxPromptShowProgressbar.Checked = true;
+            this.checkBoxPromptShowProgressbar.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxPromptShowProgressbar.Location = new System.Drawing.Point(17, 42);
             this.checkBoxPromptShowProgressbar.Name = "checkBoxPromptShowProgressbar";
             this.checkBoxPromptShowProgressbar.Size = new System.Drawing.Size(214, 17);
             this.checkBoxPromptShowProgressbar.TabIndex = 4;
             this.checkBoxPromptShowProgressbar.Text = "Prompt me if I want to show progressbar";
             this.checkBoxPromptShowProgressbar.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxPromptToQuit
+            // 
+            this.checkBoxPromptToQuit.AutoSize = true;
+            this.checkBoxPromptToQuit.Location = new System.Drawing.Point(17, 65);
+            this.checkBoxPromptToQuit.Name = "checkBoxPromptToQuit";
+            this.checkBoxPromptToQuit.Size = new System.Drawing.Size(147, 17);
+            this.checkBoxPromptToQuit.TabIndex = 5;
+            this.checkBoxPromptToQuit.Text = "Prompt me if I want to exit";
+            this.checkBoxPromptToQuit.UseVisualStyleBackColor = true;
             // 
             // SettingsForm
             // 
@@ -128,5 +142,6 @@
         private System.Windows.Forms.Button buttonClear;
         private System.Windows.Forms.Button buttonExit;
         private System.Windows.Forms.CheckBox checkBoxPromptShowProgressbar;
+        private System.Windows.Forms.CheckBox checkBoxPromptToQuit;
     }
 }
