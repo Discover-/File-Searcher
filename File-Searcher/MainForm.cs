@@ -19,6 +19,7 @@ namespace File_Searcher
         private readonly List<Control> controlsToDisable = new List<Control>();
         private readonly List<string> exceptionStringStore = new List<string>();
         private Timer timerCollapseOrContractProgressBar = null;
+        public Settings settings = new Settings();
 
         public MainForm()
         {
@@ -84,6 +85,7 @@ namespace File_Searcher
             txtBoxDirectorySearch.AutoCompleteSource = AutoCompleteSource.FileSystemDirectories;
 
             menuItemExit.Click += TryCloseApplication;
+            menuItemSettings.Click += menuItemSettings_Click;
         }
 
         private void InitializeAnchors()
@@ -578,7 +580,7 @@ namespace File_Searcher
             if (IsInvalidString(listViewResults.SelectedItems[0].SubItems[5].Text))
                 return;
 
-            if (MessageBox.Show("Are you sure you want to open this file?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (settings.GetSetting("PromptOpenFile", "yes") == "no" || MessageBox.Show("Are you sure you want to open this file?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 StartProcess(hadShiftDown ? Path.GetDirectoryName(selectedItemName) : selectedItemName);
         }
 
@@ -685,6 +687,7 @@ namespace File_Searcher
             }
         }
 
+        //! Needs object and eventargs so we can attach a .Click event to it from menu item 'Exit'
         private void TryCloseApplication(object sender = null, EventArgs e = null)
         {
             if (MessageBox.Show("Are you sure you want to quit?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -741,6 +744,11 @@ namespace File_Searcher
                     MaximumSize = new Size(originalWidth + 700, Height);
                 }
             }
+        }
+
+        private void menuItemSettings_Click(object sender, EventArgs e)
+        {
+            new SettingsForm().ShowDialog(this);
         }
     }
 }
