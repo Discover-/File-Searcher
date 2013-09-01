@@ -34,11 +34,13 @@
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
             this.buttonExit = new System.Windows.Forms.Button();
+            this.checkBoxPromptShowProgressbar = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkBoxPromptShowProgressbar);
             this.groupBox1.Controls.Add(this.checkBoxPromptOpenFile);
             this.groupBox1.Location = new System.Drawing.Point(12, 12);
             this.groupBox1.Name = "groupBox1";
@@ -89,6 +91,16 @@
             this.buttonExit.UseVisualStyleBackColor = true;
             this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
             // 
+            // checkBoxPromptShowProgressbar
+            // 
+            this.checkBoxPromptShowProgressbar.AutoSize = true;
+            this.checkBoxPromptShowProgressbar.Location = new System.Drawing.Point(17, 42);
+            this.checkBoxPromptShowProgressbar.Name = "checkBoxPromptShowProgressbar";
+            this.checkBoxPromptShowProgressbar.Size = new System.Drawing.Size(214, 17);
+            this.checkBoxPromptShowProgressbar.TabIndex = 4;
+            this.checkBoxPromptShowProgressbar.Text = "Prompt me if I want to show progressbar";
+            this.checkBoxPromptShowProgressbar.UseVisualStyleBackColor = true;
+            // 
             // SettingsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -100,7 +112,7 @@
             this.Controls.Add(this.groupBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SettingsForm";
-            this.Text = "SettingsForm";
+            this.Text = "File-searcher settings";
             this.Load += new System.EventHandler(this.SettingsForm_Load);
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
@@ -115,5 +127,6 @@
         private System.Windows.Forms.Button buttonSave;
         private System.Windows.Forms.Button buttonClear;
         private System.Windows.Forms.Button buttonExit;
+        private System.Windows.Forms.CheckBox checkBoxPromptShowProgressbar;
     }
 }
