@@ -138,7 +138,7 @@
             this.checkBoxShowDir.AutoSize = true;
             this.checkBoxShowDir.Checked = true;
             this.checkBoxShowDir.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxShowDir.Location = new System.Drawing.Point(9, 39);
+            this.checkBoxShowDir.Location = new System.Drawing.Point(329, 19);
             this.checkBoxShowDir.Name = "checkBoxShowDir";
             this.checkBoxShowDir.Size = new System.Drawing.Size(124, 17);
             this.checkBoxShowDir.TabIndex = 8;
@@ -171,7 +171,7 @@
             this.checkBoxIgnoreCaseSensitivity.Checked = true;
             this.checkBoxIgnoreCaseSensitivity.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxIgnoreCaseSensitivity.Enabled = false;
-            this.checkBoxIgnoreCaseSensitivity.Location = new System.Drawing.Point(519, 39);
+            this.checkBoxIgnoreCaseSensitivity.Location = new System.Drawing.Point(516, 19);
             this.checkBoxIgnoreCaseSensitivity.Name = "checkBoxIgnoreCaseSensitivity";
             this.checkBoxIgnoreCaseSensitivity.Size = new System.Drawing.Size(130, 17);
             this.checkBoxIgnoreCaseSensitivity.TabIndex = 14;
@@ -183,9 +183,9 @@
             this.checkBoxIgnoreFilesWithoutExtension.AutoSize = true;
             this.checkBoxIgnoreFilesWithoutExtension.Location = new System.Drawing.Point(168, 59);
             this.checkBoxIgnoreFilesWithoutExtension.Name = "checkBoxIgnoreFilesWithoutExtension";
-            this.checkBoxIgnoreFilesWithoutExtension.Size = new System.Drawing.Size(162, 17);
+            this.checkBoxIgnoreFilesWithoutExtension.Size = new System.Drawing.Size(159, 17);
             this.checkBoxIgnoreFilesWithoutExtension.TabIndex = 13;
-            this.checkBoxIgnoreFilesWithoutExtension.Text = "Ignore files without extension";
+            this.checkBoxIgnoreFilesWithoutExtension.Text = "Show files without extension";
             this.checkBoxIgnoreFilesWithoutExtension.UseVisualStyleBackColor = true;
             // 
             // checkBoxShowExceptions
@@ -201,7 +201,7 @@
             // checkBoxShowProgress
             // 
             this.checkBoxShowProgress.AutoSize = true;
-            this.checkBoxShowProgress.Location = new System.Drawing.Point(519, 19);
+            this.checkBoxShowProgress.Location = new System.Drawing.Point(516, 39);
             this.checkBoxShowProgress.Name = "checkBoxShowProgress";
             this.checkBoxShowProgress.Size = new System.Drawing.Size(114, 17);
             this.checkBoxShowProgress.TabIndex = 7;
@@ -223,7 +223,7 @@
             // checkBoxReverseExtensions
             // 
             this.checkBoxReverseExtensions.AutoSize = true;
-            this.checkBoxReverseExtensions.Location = new System.Drawing.Point(329, 19);
+            this.checkBoxReverseExtensions.Location = new System.Drawing.Point(9, 39);
             this.checkBoxReverseExtensions.Name = "checkBoxReverseExtensions";
             this.checkBoxReverseExtensions.Size = new System.Drawing.Size(136, 17);
             this.checkBoxReverseExtensions.TabIndex = 6;
