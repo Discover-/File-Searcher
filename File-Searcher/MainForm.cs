@@ -80,6 +80,9 @@ namespace File_Searcher
             addTooltip(checkBoxShowProgress, "This will enable the progressbar shown at the bottom of the application. The reason it's default unchecked is because it will make the process take quite a lot longer.");
             addTooltip(checkBoxIgnoreFilesWithoutExtension, "Checking this will make files without any extension be ignored (like most of the README files).");
             addTooltip(checkBoxIgnoreCaseSensitivity, "Checking this will allow you to ignore case sensitivity in the file name/content search field.");
+
+            txtBoxDirectorySearch.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+            txtBoxDirectorySearch.AutoCompleteSource = AutoCompleteSource.FileSystemDirectories;
         }
 
         private void InitializeAnchors()
