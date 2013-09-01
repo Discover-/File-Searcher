@@ -75,7 +75,6 @@ namespace File_Searcher
             addTooltip(checkBoxReverseExtensions, "Checking this will mean the text box saying 'Extensions to ignore' will now be reversed, thus only show files containing extensions in that field");
             addTooltip(checkBoxSearchForFileContent, "This will make the 'Filename' field transfer into a field to determine which text must be included in the searched files in order to show uo");
             addTooltip(checkBoxShowHiddenFiles, "Determines whether or not you want to show hidden files or not.");
-            addTooltip(checkBoxShowAllResultsAtOnce, "If this is checked, instead of live-updating the result box below, it will be filled all at once when the process finished.");
             addTooltip(checkBoxShowExceptions, "This is basically meant for error-tracking. This software is written in C# which means sometimes code return errors and only developers can see them (under certain circumstances). Checking this will show the errors in a new window when the process finished.");
             addTooltip(checkBoxShowProgress, "This will enable the progressbar shown at the bottom of the application. The reason it's default unchecked is because it will make the process take quite a lot longer.");
             addTooltip(checkBoxIgnoreFilesWithoutExtension, "Checking this will make files without any extension be ignored (like most of the README files).");
@@ -107,7 +106,6 @@ namespace File_Searcher
             controlsToDisable.Add(checkBoxIncludeSubDirs);
             controlsToDisable.Add(checkBoxReverseExtensions);
             controlsToDisable.Add(checkBoxSearchForFileContent);
-            controlsToDisable.Add(checkBoxShowAllResultsAtOnce);
             controlsToDisable.Add(checkBoxShowDir);
             controlsToDisable.Add(checkBoxShowHiddenFiles);
             controlsToDisable.Add(checkBoxShowProgress);
@@ -239,14 +237,6 @@ namespace File_Searcher
 
             //! Function also fills up the listbox on the fly
             GetAllFilesFromDirectoryAndFillResults(searchDirectory, checkBoxIncludeSubDirs.Checked, ref allFiles);
-
-            if (listViewResultsContainer != null && checkBoxShowAllResultsAtOnce.Checked && listViewResultsContainer.Any())
-            {
-                foreach (var item in listViewResultsContainer)
-                    AddItemToListView(listViewResults, item);
-
-                listViewResultsContainer.Clear();
-            }
 
             if (IsInvalidString(allFiles))
             {
@@ -403,12 +393,7 @@ namespace File_Searcher
                     if (!checkBoxShowDir.Checked)
                         fileName = Path.GetFileName(fileName);
 
-                    var listViewItem = new ListViewItem(new[] { extension, fileName, fileSize, fileSizeType, new FileInfo(file).LastWriteTime.ToString(), fileName });
-
-                    if (checkBoxShowAllResultsAtOnce.Checked)
-                        listViewResultsContainer.Add(listViewItem);
-                    else
-                        AddItemToListView(listViewResults, listViewItem);
+                    AddItemToListView(listViewResults, new ListViewItem(new[] { extension, fileName, fileSize, fileSizeType, new FileInfo(file).LastWriteTime.ToString(), fileName }));
                 }
 
                 //! If we include sub directories, recursive call this function up to every single directory.
@@ -449,14 +434,6 @@ namespace File_Searcher
             SetProgressBarValue(progressBar, 0);
 
             UseWaitCursor = false;
-
-            if (listViewResultsContainer != null && checkBoxShowAllResultsAtOnce.Checked && listViewResultsContainer.Any())
-            {
-                foreach (var item in listViewResultsContainer)
-                    AddItemToListView(listViewResults, item);
-
-                listViewResultsContainer.Clear();
-            }
 
             foreach (var control in controlsToDisable)
                 SetEnabledOfControl(control, true);

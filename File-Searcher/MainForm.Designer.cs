@@ -41,7 +41,6 @@
             this.checkBoxIgnoreCaseSensitivity = new System.Windows.Forms.CheckBox();
             this.checkBoxIgnoreFilesWithoutExtension = new System.Windows.Forms.CheckBox();
             this.checkBoxShowExceptions = new System.Windows.Forms.CheckBox();
-            this.checkBoxShowAllResultsAtOnce = new System.Windows.Forms.CheckBox();
             this.checkBoxShowProgress = new System.Windows.Forms.CheckBox();
             this.checkBoxSearchForFileContent = new System.Windows.Forms.CheckBox();
             this.checkBoxReverseExtensions = new System.Windows.Forms.CheckBox();
@@ -145,7 +144,6 @@
             this.groupBoxOptions.Controls.Add(this.checkBoxIgnoreCaseSensitivity);
             this.groupBoxOptions.Controls.Add(this.checkBoxIgnoreFilesWithoutExtension);
             this.groupBoxOptions.Controls.Add(this.checkBoxShowExceptions);
-            this.groupBoxOptions.Controls.Add(this.checkBoxShowAllResultsAtOnce);
             this.groupBoxOptions.Controls.Add(this.checkBoxShowProgress);
             this.groupBoxOptions.Controls.Add(this.checkBoxSearchForFileContent);
             this.groupBoxOptions.Controls.Add(this.checkBoxReverseExtensions);
@@ -166,7 +164,7 @@
             this.checkBoxIgnoreCaseSensitivity.Checked = true;
             this.checkBoxIgnoreCaseSensitivity.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxIgnoreCaseSensitivity.Enabled = false;
-            this.checkBoxIgnoreCaseSensitivity.Location = new System.Drawing.Point(329, 59);
+            this.checkBoxIgnoreCaseSensitivity.Location = new System.Drawing.Point(519, 39);
             this.checkBoxIgnoreCaseSensitivity.Name = "checkBoxIgnoreCaseSensitivity";
             this.checkBoxIgnoreCaseSensitivity.Size = new System.Drawing.Size(130, 17);
             this.checkBoxIgnoreCaseSensitivity.TabIndex = 14;
@@ -192,16 +190,6 @@
             this.checkBoxShowExceptions.TabIndex = 12;
             this.checkBoxShowExceptions.Text = "Show exception errors";
             this.checkBoxShowExceptions.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxShowAllResultsAtOnce
-            // 
-            this.checkBoxShowAllResultsAtOnce.AutoSize = true;
-            this.checkBoxShowAllResultsAtOnce.Location = new System.Drawing.Point(519, 39);
-            this.checkBoxShowAllResultsAtOnce.Name = "checkBoxShowAllResultsAtOnce";
-            this.checkBoxShowAllResultsAtOnce.Size = new System.Drawing.Size(138, 17);
-            this.checkBoxShowAllResultsAtOnce.TabIndex = 11;
-            this.checkBoxShowAllResultsAtOnce.Text = "Show all results at once";
-            this.checkBoxShowAllResultsAtOnce.UseVisualStyleBackColor = true;
             // 
             // checkBoxShowProgress
             // 
@@ -407,7 +395,6 @@
         private System.Windows.Forms.CheckBox checkBoxSearchForFileContent;
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.CheckBox checkBoxShowProgress;
-        private System.Windows.Forms.CheckBox checkBoxShowAllResultsAtOnce;
         private System.Windows.Forms.CheckBox checkBoxShowExceptions;
         private System.Windows.Forms.CheckBox checkBoxIgnoreFilesWithoutExtension;
         private System.Windows.Forms.CheckBox checkBoxIgnoreCaseSensitivity;
