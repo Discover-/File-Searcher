@@ -15,6 +15,9 @@ namespace File_Searcher
         public AboutForm()
         {
             InitializeComponent();
+
+            KeyPreview = true;
+            KeyDown += AboutForm_KeyDown;
         }
 
         #region Assembly Attribute Accessors
@@ -105,6 +108,16 @@ namespace File_Searcher
         private void button2_Click(object sender, EventArgs e)
         {
             Process.Start("https://github.com/Discover-/");
+        }
+
+        private void AboutForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Escape:
+                    Close();
+                    break;
+            }
         }
     }
 }
