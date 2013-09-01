@@ -86,6 +86,7 @@ namespace File_Searcher
 
             menuItemExit.Click += TryCloseApplication;
             menuItemSettings.Click += menuItemSettings_Click;
+            menuItemAbout.Click += menuItemAbout_Click;
         }
 
         private void InitializeAnchors()
@@ -749,6 +750,11 @@ namespace File_Searcher
         private void menuItemSettings_Click(object sender, EventArgs e)
         {
             new SettingsForm().ShowDialog(this);
+        }
+
+        private void menuItemAbout_Click(object sender, EventArgs e)
+        {
+            new AboutForm().ShowDialog(this);
         }
     }
 }
