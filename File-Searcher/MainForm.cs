@@ -82,6 +82,8 @@ namespace File_Searcher
 
             txtBoxDirectorySearch.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             txtBoxDirectorySearch.AutoCompleteSource = AutoCompleteSource.FileSystemDirectories;
+
+            menuItemExit.Click += TryCloseApplication;
         }
 
         private void InitializeAnchors()
@@ -678,10 +680,15 @@ namespace File_Searcher
                         button2_Click(sender, e); // Start searching
                     break;
                 case Keys.Escape:
-                    if (MessageBox.Show("Are you sure you want to quit?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                        Close();
+                    TryCloseApplication();
                     break;
             }
+        }
+
+        private void TryCloseApplication(object sender = null, EventArgs e = null)
+        {
+            if (MessageBox.Show("Are you sure you want to quit?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                Close();
         }
 
         private void checkBoxUseProgressBar_CheckedChanged(object sender, EventArgs e)

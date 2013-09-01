@@ -56,13 +56,20 @@
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnOpenFilter = new System.Windows.Forms.Button();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.menuHeaderFiles = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemExit = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuHeaderAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxOptions.SuspendLayout();
             this.groupBoxSearchInfo.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtBoxDirectorySearch
             // 
-            this.txtBoxDirectorySearch.Location = new System.Drawing.Point(19, 49);
+            this.txtBoxDirectorySearch.Location = new System.Drawing.Point(19, 75);
             this.txtBoxDirectorySearch.Name = "txtBoxDirectorySearch";
             this.txtBoxDirectorySearch.Size = new System.Drawing.Size(704, 20);
             this.txtBoxDirectorySearch.TabIndex = 0;
@@ -91,7 +98,7 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(678, 143);
+            this.btnSearch.Location = new System.Drawing.Point(678, 169);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 15;
@@ -110,7 +117,7 @@
             // btnStopSearching
             // 
             this.btnStopSearching.Enabled = false;
-            this.btnStopSearching.Location = new System.Drawing.Point(678, 169);
+            this.btnStopSearching.Location = new System.Drawing.Point(678, 195);
             this.btnStopSearching.Name = "btnStopSearching";
             this.btnStopSearching.Size = new System.Drawing.Size(75, 23);
             this.btnStopSearching.TabIndex = 16;
@@ -120,9 +127,9 @@
             // 
             // listViewResults
             // 
-            this.listViewResults.Location = new System.Drawing.Point(14, 224);
+            this.listViewResults.Location = new System.Drawing.Point(14, 250);
             this.listViewResults.Name = "listViewResults";
-            this.listViewResults.Size = new System.Drawing.Size(739, 240);
+            this.listViewResults.Size = new System.Drawing.Size(740, 240);
             this.listViewResults.TabIndex = 8;
             this.listViewResults.UseCompatibleStateImageBehavior = false;
             // 
@@ -152,7 +159,7 @@
             this.groupBoxOptions.Controls.Add(this.checkBoxShowDir);
             this.groupBoxOptions.Controls.Add(this.labelOptions);
             this.groupBoxOptions.Controls.Add(this.checkBoxIncludeSubDirs);
-            this.groupBoxOptions.Location = new System.Drawing.Point(13, 137);
+            this.groupBoxOptions.Location = new System.Drawing.Point(13, 163);
             this.groupBoxOptions.Name = "groupBoxOptions";
             this.groupBoxOptions.Size = new System.Drawing.Size(659, 81);
             this.groupBoxOptions.TabIndex = 10;
@@ -255,7 +262,7 @@
             this.groupBoxSearchInfo.Controls.Add(this.txtBoxFileSearch);
             this.groupBoxSearchInfo.Controls.Add(this.label2);
             this.groupBoxSearchInfo.Controls.Add(this.lblSearchFile);
-            this.groupBoxSearchInfo.Location = new System.Drawing.Point(14, 7);
+            this.groupBoxSearchInfo.Location = new System.Drawing.Point(14, 33);
             this.groupBoxSearchInfo.Name = "groupBoxSearchInfo";
             this.groupBoxSearchInfo.Size = new System.Drawing.Size(740, 122);
             this.groupBoxSearchInfo.TabIndex = 10;
@@ -317,7 +324,7 @@
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(14, 495);
+            this.progressBar.Location = new System.Drawing.Point(14, 523);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(740, 23);
             this.progressBar.TabIndex = 11;
@@ -325,7 +332,7 @@
             // btnClear
             // 
             this.btnClear.Enabled = false;
-            this.btnClear.Location = new System.Drawing.Point(678, 195);
+            this.btnClear.Location = new System.Drawing.Point(678, 221);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 23);
             this.btnClear.TabIndex = 17;
@@ -336,7 +343,7 @@
             // btnOpenFilter
             // 
             this.btnOpenFilter.Enabled = false;
-            this.btnOpenFilter.Location = new System.Drawing.Point(677, 468);
+            this.btnOpenFilter.Location = new System.Drawing.Point(677, 494);
             this.btnOpenFilter.Name = "btnOpenFilter";
             this.btnOpenFilter.Size = new System.Drawing.Size(75, 23);
             this.btnOpenFilter.TabIndex = 18;
@@ -344,11 +351,57 @@
             this.btnOpenFilter.UseVisualStyleBackColor = true;
             this.btnOpenFilter.Click += new System.EventHandler(this.buttonOpenFilter_Click);
             // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuHeaderFiles,
+            this.menuHeaderAbout});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(765, 24);
+            this.menuStrip1.TabIndex = 19;
+            this.menuStrip1.Text = "menuStrip1";
+            // 
+            // menuHeaderFiles
+            // 
+            this.menuHeaderFiles.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemSettings,
+            this.menuItemExit});
+            this.menuHeaderFiles.Name = "menuHeaderFiles";
+            this.menuHeaderFiles.Size = new System.Drawing.Size(37, 20);
+            this.menuHeaderFiles.Text = "File";
+            // 
+            // menuItemSettings
+            // 
+            this.menuItemSettings.Name = "menuItemSettings";
+            this.menuItemSettings.Size = new System.Drawing.Size(152, 22);
+            this.menuItemSettings.Text = "Settings";
+            // 
+            // menuItemExit
+            // 
+            this.menuItemExit.Name = "menuItemExit";
+            this.menuItemExit.Size = new System.Drawing.Size(152, 22);
+            this.menuItemExit.Text = "Exit";
+            // 
+            // menuHeaderAbout
+            // 
+            this.menuHeaderAbout.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.menuItemAbout});
+            this.menuHeaderAbout.Name = "menuHeaderAbout";
+            this.menuHeaderAbout.Size = new System.Drawing.Size(52, 20);
+            this.menuHeaderAbout.Text = "About";
+            // 
+            // menuItemAbout
+            // 
+            this.menuItemAbout.Name = "menuItemAbout";
+            this.menuItemAbout.Size = new System.Drawing.Size(152, 22);
+            this.menuItemAbout.Text = "About";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(765, 495);
+            this.ClientSize = new System.Drawing.Size(765, 521);
             this.Controls.Add(this.btnOpenFilter);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.progressBar);
@@ -358,7 +411,9 @@
             this.Controls.Add(this.txtBoxDirectorySearch);
             this.Controls.Add(this.groupBoxSearchInfo);
             this.Controls.Add(this.groupBoxOptions);
+            this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
             this.Text = "File Searcher";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -366,6 +421,8 @@
             this.groupBoxOptions.PerformLayout();
             this.groupBoxSearchInfo.ResumeLayout(false);
             this.groupBoxSearchInfo.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -400,6 +457,12 @@
         private System.Windows.Forms.CheckBox checkBoxIgnoreCaseSensitivity;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnOpenFilter;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.ToolStripMenuItem menuHeaderFiles;
+        private System.Windows.Forms.ToolStripMenuItem menuItemSettings;
+        private System.Windows.Forms.ToolStripMenuItem menuItemExit;
+        private System.Windows.Forms.ToolStripMenuItem menuHeaderAbout;
+        private System.Windows.Forms.ToolStripMenuItem menuItemAbout;
     }
 }
 
