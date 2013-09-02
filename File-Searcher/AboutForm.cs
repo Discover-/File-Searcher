@@ -102,7 +102,7 @@ namespace File_Searcher
 
         private void button1_Click(object sender, EventArgs e)
         {
-            TryToOpenPage("https://github.com/Discover-/SAI-Editor/");
+            TryToOpenPage("https://github.com/Discover-/File-Searcher/");
         }
 
         private void button2_Click(object sender, EventArgs e)
