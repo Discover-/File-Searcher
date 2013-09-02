@@ -690,7 +690,7 @@ namespace File_Searcher
                             foreach (ListViewItem item in listViewResults.SelectedItems)
                                 StartProcess(hadShiftDown ? Path.GetDirectoryName(item.SubItems[5].Text) + "\\" : item.SubItems[5].Text);
                     }
-                    else
+                    else if (btnSearch.Enabled)
                         button2_Click(sender, e); // Start searching
                     break;
                 case Keys.Escape:
