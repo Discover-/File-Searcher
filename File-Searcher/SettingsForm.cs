@@ -68,11 +68,17 @@ namespace File_Searcher
 
         private void PromptSaveSettingsOnClose()
         {
+            if (settings.GetSetting("AutoSaveSettings", "no") == "yes")
+            {
+                SaveSettings();
+                return;
+            }
+
             if (checkBoxPromptOpenFile.Checked == (settings.GetSetting("PromptOpenFile", "yes") == "yes") && checkBoxPromptShowProgressbar.Checked == (settings.GetSetting("PromptShowProgressBar", "yes") == "yes") &&
                 checkBoxPromptToQuit.Checked == (settings.GetSetting("PromptToQuit", "yes") == "yes") && checkBoxAutoSaveSettings.Checked == (settings.GetSetting("AutoSaveSettings", "no") == "yes"))
                 return;
 
-            if (settings.GetSetting("AutoSaveSettings", "no") == "yes" || MessageBox.Show("Do you wish to save the edited settings?", "Save settings?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (MessageBox.Show("Do you wish to save the edited settings?", "Save settings?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 SaveSettings();
         }
 
