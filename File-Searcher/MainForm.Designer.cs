@@ -62,6 +62,7 @@
             this.menuItemExit = new System.Windows.Forms.ToolStripMenuItem();
             this.menuHeaderAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.checkBoxIncludeDirFilename = new System.Windows.Forms.CheckBox();
             this.groupBoxOptions.SuspendLayout();
             this.groupBoxSearchInfo.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -148,6 +149,7 @@
             // 
             // groupBoxOptions
             // 
+            this.groupBoxOptions.Controls.Add(this.checkBoxIncludeDirFilename);
             this.groupBoxOptions.Controls.Add(this.checkBoxIgnoreCaseSensitivity);
             this.groupBoxOptions.Controls.Add(this.checkBoxIgnoreFilesWithoutExtension);
             this.groupBoxOptions.Controls.Add(this.checkBoxShowExceptions);
@@ -374,13 +376,13 @@
             // menuItemSettings
             // 
             this.menuItemSettings.Name = "menuItemSettings";
-            this.menuItemSettings.Size = new System.Drawing.Size(152, 22);
+            this.menuItemSettings.Size = new System.Drawing.Size(116, 22);
             this.menuItemSettings.Text = "Settings";
             // 
             // menuItemExit
             // 
             this.menuItemExit.Name = "menuItemExit";
-            this.menuItemExit.Size = new System.Drawing.Size(152, 22);
+            this.menuItemExit.Size = new System.Drawing.Size(116, 22);
             this.menuItemExit.Text = "Exit";
             // 
             // menuHeaderAbout
@@ -394,8 +396,18 @@
             // menuItemAbout
             // 
             this.menuItemAbout.Name = "menuItemAbout";
-            this.menuItemAbout.Size = new System.Drawing.Size(152, 22);
+            this.menuItemAbout.Size = new System.Drawing.Size(107, 22);
             this.menuItemAbout.Text = "About";
+            // 
+            // checkBoxIncludeDirFilename
+            // 
+            this.checkBoxIncludeDirFilename.AutoSize = true;
+            this.checkBoxIncludeDirFilename.Location = new System.Drawing.Point(329, 58);
+            this.checkBoxIncludeDirFilename.Name = "checkBoxIncludeDirFilename";
+            this.checkBoxIncludeDirFilename.Size = new System.Drawing.Size(157, 17);
+            this.checkBoxIncludeDirFilename.TabIndex = 15;
+            this.checkBoxIncludeDirFilename.Text = "Include directory in filename";
+            this.checkBoxIncludeDirFilename.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -463,6 +475,7 @@
         private System.Windows.Forms.ToolStripMenuItem menuItemExit;
         private System.Windows.Forms.ToolStripMenuItem menuHeaderAbout;
         private System.Windows.Forms.ToolStripMenuItem menuItemAbout;
+        private System.Windows.Forms.CheckBox checkBoxIncludeDirFilename;
     }
 }
 

@@ -80,6 +80,7 @@ namespace File_Searcher
             addTooltip(checkBoxShowProgress, "This will enable the progressbar shown at the bottom of the application. The reason it's default unchecked is because it will make the process take quite a lot longer.");
             addTooltip(checkBoxIgnoreFilesWithoutExtension, "Checking this will make files without any extension be ignored (like most of the README files).");
             addTooltip(checkBoxIgnoreCaseSensitivity, "Checking this will allow you to ignore case sensitivity in the file name/content search field.");
+            addTooltip(checkBoxIncludeDirFilename, "Checking this will also include the directory of the file in the filename-search field.");
 
             txtBoxDirectorySearch.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             txtBoxDirectorySearch.AutoCompleteSource = AutoCompleteSource.FileSystemDirectories;
@@ -127,6 +128,9 @@ namespace File_Searcher
 
             if (checkBoxIgnoreCaseSensitivity.Enabled)
                 controlsToDisable.Add(checkBoxIgnoreCaseSensitivity);
+
+            if (checkBoxIncludeDirFilename.Enabled)
+                controlsToDisable.Add(checkBoxIncludeDirFilename);
         }
 
         protected override void OnResize(EventArgs e)
@@ -334,24 +338,29 @@ namespace File_Searcher
 
                     if (txtBoxFileSearch.Text != "")
                     {
+                        string fileToCheck = file;
+
+                        if (!checkBoxIncludeDirFilename.Checked && checkBoxIncludeDirFilename.Enabled)
+                            fileToCheck = Path.GetFileName(fileToCheck);
+
                         if (checkBoxSearchForFileContent.Checked)
                         {
                             if (checkBoxIgnoreCaseSensitivity.Checked)
                             {
-                                if (!File.ReadAllText(file).ToLower().Contains(txtBoxFileSearch.Text.ToLower()))
+                                if (!File.ReadAllText(fileToCheck).ToLower().Contains(txtBoxFileSearch.Text.ToLower()))
                                     continue;
                             }
-                            else if (!File.ReadAllText(file).Contains(txtBoxFileSearch.Text))
+                            else if (!File.ReadAllText(fileToCheck).Contains(txtBoxFileSearch.Text))
                                 continue;
                         }
                         else
                         {
                             if (checkBoxIgnoreCaseSensitivity.Checked)
                             {
-                                if (!file.ToLower().Contains(txtBoxFileSearch.Text.ToLower()))
+                                if (!fileToCheck.ToLower().Contains(txtBoxFileSearch.Text.ToLower()))
                                     continue;
                             }
-                            else if (!file.Contains(txtBoxFileSearch.Text))
+                            else if (!fileToCheck.Contains(txtBoxFileSearch.Text))
                                 continue;
                         }
                     }
@@ -535,6 +544,8 @@ namespace File_Searcher
 
         private void checkBoxSearchForFileContent_CheckedChanged(object sender, EventArgs e)
         {
+            checkBoxIncludeDirFilename.Enabled = !checkBoxSearchForFileContent.Checked;
+
             if (checkBoxSearchForFileContent.Checked)
                 lblSearchFile.Text = "File content to search for (if left empty all files in the directory will be shown):";
             else
