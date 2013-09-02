@@ -78,7 +78,7 @@ namespace File_Searcher
             addTooltip(checkBoxShowHiddenFiles, "Determines whether or not you want to show hidden files or not.");
             addTooltip(checkBoxShowExceptions, "This is basically meant for error-tracking. This software is written in C# which means sometimes code return errors and only developers can see them (under certain circumstances). Checking this will show the errors in a new window when the process finished.");
             addTooltip(checkBoxShowProgress, "This will enable the progressbar shown at the bottom of the application. The reason it's default unchecked is because it will make the process take quite a lot longer.");
-            addTooltip(checkBoxIgnoreFilesWithoutExtension, "Checking this will make files without any extension be ignored (like most of the README files).");
+            addTooltip(checkBoxShowFilesWithoutExtension, "Checking this will make files without any extension be shown as well (like most of the README files).");
             addTooltip(checkBoxIgnoreCaseSensitivity, "Checking this will allow you to ignore case sensitivity in the file name/content search field.");
             addTooltip(checkBoxIncludeDirFilename, "Checking this will also include the directory of the file in the filename-search field.");
 
@@ -116,7 +116,7 @@ namespace File_Searcher
             controlsToDisable.Add(checkBoxShowHiddenFiles);
             controlsToDisable.Add(checkBoxShowProgress);
             controlsToDisable.Add(checkBoxShowExceptions);
-            controlsToDisable.Add(checkBoxIgnoreFilesWithoutExtension);
+            controlsToDisable.Add(checkBoxShowFilesWithoutExtension);
             controlsToDisable.Add(txtBoxDirectorySearch);
             controlsToDisable.Add(txtBoxFileSearch);
             controlsToDisable.Add(txtBoxExtensions);
@@ -365,7 +365,7 @@ namespace File_Searcher
                         }
                     }
 
-                    if (checkBoxIgnoreFilesWithoutExtension.Checked && !Path.HasExtension(file))
+                    if (!checkBoxShowFilesWithoutExtension.Checked && !Path.HasExtension(file))
                         continue;
 
                     if (!IsInvalidString(txtBoxExtensions.Text))

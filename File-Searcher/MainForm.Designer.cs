@@ -39,7 +39,7 @@
             this.checkBoxShowDir = new System.Windows.Forms.CheckBox();
             this.groupBoxOptions = new System.Windows.Forms.GroupBox();
             this.checkBoxIgnoreCaseSensitivity = new System.Windows.Forms.CheckBox();
-            this.checkBoxIgnoreFilesWithoutExtension = new System.Windows.Forms.CheckBox();
+            this.checkBoxShowFilesWithoutExtension = new System.Windows.Forms.CheckBox();
             this.checkBoxShowExceptions = new System.Windows.Forms.CheckBox();
             this.checkBoxShowProgress = new System.Windows.Forms.CheckBox();
             this.checkBoxSearchForFileContent = new System.Windows.Forms.CheckBox();
@@ -151,7 +151,7 @@
             // 
             this.groupBoxOptions.Controls.Add(this.checkBoxIncludeDirFilename);
             this.groupBoxOptions.Controls.Add(this.checkBoxIgnoreCaseSensitivity);
-            this.groupBoxOptions.Controls.Add(this.checkBoxIgnoreFilesWithoutExtension);
+            this.groupBoxOptions.Controls.Add(this.checkBoxShowFilesWithoutExtension);
             this.groupBoxOptions.Controls.Add(this.checkBoxShowExceptions);
             this.groupBoxOptions.Controls.Add(this.checkBoxShowProgress);
             this.groupBoxOptions.Controls.Add(this.checkBoxSearchForFileContent);
@@ -180,20 +180,22 @@
             this.checkBoxIgnoreCaseSensitivity.Text = "Ignore case sensitivity";
             this.checkBoxIgnoreCaseSensitivity.UseVisualStyleBackColor = true;
             // 
-            // checkBoxIgnoreFilesWithoutExtension
+            // checkBoxShowFilesWithoutExtension
             // 
-            this.checkBoxIgnoreFilesWithoutExtension.AutoSize = true;
-            this.checkBoxIgnoreFilesWithoutExtension.Location = new System.Drawing.Point(168, 59);
-            this.checkBoxIgnoreFilesWithoutExtension.Name = "checkBoxIgnoreFilesWithoutExtension";
-            this.checkBoxIgnoreFilesWithoutExtension.Size = new System.Drawing.Size(159, 17);
-            this.checkBoxIgnoreFilesWithoutExtension.TabIndex = 13;
-            this.checkBoxIgnoreFilesWithoutExtension.Text = "Show files without extension";
-            this.checkBoxIgnoreFilesWithoutExtension.UseVisualStyleBackColor = true;
+            this.checkBoxShowFilesWithoutExtension.AutoSize = true;
+            this.checkBoxShowFilesWithoutExtension.Checked = true;
+            this.checkBoxShowFilesWithoutExtension.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxShowFilesWithoutExtension.Location = new System.Drawing.Point(9, 39);
+            this.checkBoxShowFilesWithoutExtension.Name = "checkBoxShowFilesWithoutExtension";
+            this.checkBoxShowFilesWithoutExtension.Size = new System.Drawing.Size(159, 17);
+            this.checkBoxShowFilesWithoutExtension.TabIndex = 13;
+            this.checkBoxShowFilesWithoutExtension.Text = "Show files without extension";
+            this.checkBoxShowFilesWithoutExtension.UseVisualStyleBackColor = true;
             // 
             // checkBoxShowExceptions
             // 
             this.checkBoxShowExceptions.AutoSize = true;
-            this.checkBoxShowExceptions.Location = new System.Drawing.Point(9, 59);
+            this.checkBoxShowExceptions.Location = new System.Drawing.Point(9, 58);
             this.checkBoxShowExceptions.Name = "checkBoxShowExceptions";
             this.checkBoxShowExceptions.Size = new System.Drawing.Size(131, 17);
             this.checkBoxShowExceptions.TabIndex = 12;
@@ -225,7 +227,7 @@
             // checkBoxReverseExtensions
             // 
             this.checkBoxReverseExtensions.AutoSize = true;
-            this.checkBoxReverseExtensions.Location = new System.Drawing.Point(9, 39);
+            this.checkBoxReverseExtensions.Location = new System.Drawing.Point(168, 58);
             this.checkBoxReverseExtensions.Name = "checkBoxReverseExtensions";
             this.checkBoxReverseExtensions.Size = new System.Drawing.Size(136, 17);
             this.checkBoxReverseExtensions.TabIndex = 6;
@@ -465,7 +467,7 @@
         private System.Windows.Forms.ProgressBar progressBar;
         private System.Windows.Forms.CheckBox checkBoxShowProgress;
         private System.Windows.Forms.CheckBox checkBoxShowExceptions;
-        private System.Windows.Forms.CheckBox checkBoxIgnoreFilesWithoutExtension;
+        private System.Windows.Forms.CheckBox checkBoxShowFilesWithoutExtension;
         private System.Windows.Forms.CheckBox checkBoxIgnoreCaseSensitivity;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnOpenFilter;
