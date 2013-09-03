@@ -674,6 +674,9 @@ namespace File_Searcher
         private void txtBoxFileSearch_TextChanged(object sender, EventArgs e)
         {
             checkBoxIgnoreCaseSensitivity.Enabled = (!IsInvalidString(txtBoxFileSearch.Text) || !IsInvalidString(txtBoxExtensions.Text));
+
+            if (!checkBoxSearchForFileContent.Checked)
+                checkBoxIncludeDirFilename.Enabled = checkBoxIgnoreCaseSensitivity.Enabled;
         }
 
         private void txtBoxExtensions_TextChanged(object sender, EventArgs e)
