@@ -173,9 +173,9 @@
             this.checkBoxIncludeDirFilename.Enabled = false;
             this.checkBoxIncludeDirFilename.Location = new System.Drawing.Point(329, 58);
             this.checkBoxIncludeDirFilename.Name = "checkBoxIncludeDirFilename";
-            this.checkBoxIncludeDirFilename.Size = new System.Drawing.Size(157, 17);
+            this.checkBoxIncludeDirFilename.Size = new System.Drawing.Size(188, 17);
             this.checkBoxIncludeDirFilename.TabIndex = 15;
-            this.checkBoxIncludeDirFilename.Text = "Include directory in filename";
+            this.checkBoxIncludeDirFilename.Text = "Search the directory for criteria too";
             this.checkBoxIncludeDirFilename.UseVisualStyleBackColor = true;
             // 
             // checkBoxIgnoreCaseSensitivity
