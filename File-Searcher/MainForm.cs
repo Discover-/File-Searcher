@@ -88,6 +88,15 @@ namespace File_Searcher
             menuItemExit.Click += TryCloseApplication;
             menuItemSettings.Click += menuItemSettings_Click;
             menuItemAbout.Click += menuItemAbout_Click;
+
+            menuItemExit.ShortcutKeys = (Keys.Shift | Keys.F5);
+            menuItemExit.ShortcutKeyDisplayString = "(Shift + F5)";
+
+            menuItemSettings.ShortcutKeys = Keys.F1;
+            menuItemSettings.ShortcutKeyDisplayString = "(F1)";
+
+            menuItemAbout.ShortcutKeys = (Keys.Alt | Keys.F1);
+            menuItemAbout.ShortcutKeyDisplayString = "(Alt + F1)";
         }
 
         private void InitializeAnchors()
