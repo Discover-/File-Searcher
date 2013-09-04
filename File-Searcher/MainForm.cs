@@ -424,7 +424,7 @@ namespace File_Searcher
                                 continue;
 
                         if (checkBoxFilesOlderThan.Checked)
-                            if (!(DateTime.Compare(File.GetCreationTime(Path.GetFileName((file))), datePickerFilesOlderThan.MinDate) < 0))
+                            if (!(DateTime.Compare(File.GetCreationTime(file), datePickerFilesOlderThan.Value.Date) < 0))
                                 continue;
                     }
 
