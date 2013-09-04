@@ -751,7 +751,8 @@ namespace File_Searcher
                     timerMoveForProgressBar.Enabled = true;
 
                     foreach (Control control in Controls)
-                        control.Anchor = AnchorStyles.Top;
+                        if (!(control is MenuStrip))
+                            control.Anchor = AnchorStyles.Top;
                 }
                 else
                     checkBoxShowProgress.Checked = false;
@@ -759,7 +760,8 @@ namespace File_Searcher
             else
             {
                 foreach (Control control in Controls)
-                    control.Anchor = AnchorStyles.Top;
+                    if (!(control is MenuStrip))
+                        control.Anchor = AnchorStyles.Top;
 
                 timerMoveForProgressBar.Enabled = true;
             }
