@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace File_Searcher
@@ -37,6 +30,9 @@ namespace File_Searcher
             checkBoxPromptToQuit.Checked = settings.GetSetting("PromptToQuit", "yes") == "yes";
             checkBoxAutoSaveSettings.Checked = settings.GetSetting("AutoSaveSettings", "no") == "yes";
             checkBoxAlwaysShowDetailedRestrictions.Checked = settings.GetSetting("AlwaysShowDetailedRestrictions", "no") == "yes";
+            textBoxShortcutAbout.Text = settings.GetSetting("KeyShortcutAbout", "Shift | F5");
+            textBoxShortcutSettings.Text = settings.GetSetting("KeyShortcutSettings", "F1");
+            textBoxShortcutExit.Text = settings.GetSetting("KeyShortcutExit", "Alt | F1");
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
@@ -106,6 +102,17 @@ namespace File_Searcher
                     Close();
                     break;
             }
+        }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            //if (keyData == (Keys.Control | Keys.F))
+            {
+                MessageBox.Show(keyData.ToString());
+                return true;
+            }
+
+            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }
