@@ -13,12 +13,12 @@ namespace File_Searcher
     public partial class MainForm : Form
     {
         private Thread searchThread = null;
-        private int oldWidth = 0, originalHeight = 0, originalWidth = 0;
+        private int oldWidth = 0, originalHeight = 0, originalWidth = 0, originalResultsHeight = 0;
         private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
         private readonly List<ListViewItem> listViewResultsContainer = new List<ListViewItem>();
         private readonly List<Control> controlsToDisable = new List<Control>();
         private readonly List<string> exceptionStringStore = new List<string>();
-        private Timer timerCollapseOrContractProgressBar = null;
+        private Timer timerMoveForProgressBar = null, timerMoveForDetailedRestrictions = null;
         public Settings settings = new Settings();
 
         public MainForm()
@@ -37,8 +37,11 @@ namespace File_Searcher
             originalHeight = Height;
             originalWidth = Width;
 
-            timerCollapseOrContractProgressBar = new Timer { Enabled = false, Interval = 16 };
-            timerCollapseOrContractProgressBar.Tick += timerCollapseOrContractProgressBar_Tick;
+            timerMoveForProgressBar = new Timer { Enabled = false, Interval = 16 };
+            timerMoveForProgressBar.Tick += timerMoveForProgressBar_Tick;
+
+            timerMoveForDetailedRestrictions = new Timer { Enabled = false, Interval = 16 };
+            timerMoveForDetailedRestrictions.Tick += timerMoveForDetailedRestrictions_Tick;
 
             KeyPreview = true;
             KeyDown += Form1_KeyDown;
@@ -97,6 +100,8 @@ namespace File_Searcher
 
             menuItemAbout.ShortcutKeys = (Keys.Alt | Keys.F1);
             menuItemAbout.ShortcutKeyDisplayString = "(Alt + F1)";
+
+            originalResultsHeight = listViewResults.Height;
         }
 
         private void InitializeAnchors()
@@ -403,6 +408,17 @@ namespace File_Searcher
                         }
                         else if (checkBoxReverseExtensions.Checked)
                             continue;
+                    }
+
+                    if (checkBoxShowDetailedRestrictions.Checked)
+                    {
+                        if (checkBoxFilesNewerThan.Checked)
+                            if (!(DateTime.Compare(File.GetCreationTime(file), datePickerFilesNewerThan.Value.Date) > 0))
+                                continue;
+
+                        if (checkBoxFilesOlderThan.Checked)
+                            if (!(DateTime.Compare(File.GetCreationTime(Path.GetFileName((file))), datePickerFilesOlderThan.MinDate) < 0))
+                                continue;
                     }
 
                     allFiles += file + "\n"; //! Need to fill up the reference...
@@ -725,7 +741,7 @@ namespace File_Searcher
                 if (settings.GetSetting("PromptShowProgressBar", "yes") == "no" || MessageBox.Show("Are you sure you want to initialize a progress bar? The progress will take a lot longer than it would normally (if the directory we search in is big).", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     MaximumSize = new Size(Width, Height + 30);
-                    timerCollapseOrContractProgressBar.Enabled = true;
+                    timerMoveForProgressBar.Enabled = true;
 
                     foreach (Control control in Controls)
                         control.Anchor = AnchorStyles.Top;
@@ -738,11 +754,11 @@ namespace File_Searcher
                 foreach (Control control in Controls)
                     control.Anchor = AnchorStyles.Top;
 
-                timerCollapseOrContractProgressBar.Enabled = true;
+                timerMoveForProgressBar.Enabled = true;
             }
         }
 
-        private void timerCollapseOrContractProgressBar_Tick(object sender, EventArgs e)
+        private void timerMoveForProgressBar_Tick(object sender, EventArgs e)
         {
             if (checkBoxShowProgress.Checked)
             {
@@ -750,7 +766,7 @@ namespace File_Searcher
                 {
                     InitializeAnchors();
                     Height = originalHeight + 30;
-                    timerCollapseOrContractProgressBar.Enabled = false;
+                    timerMoveForProgressBar.Enabled = false;
                     MaximumSize = new Size(originalWidth + 700, Height);
                 }
                 else
@@ -764,7 +780,7 @@ namespace File_Searcher
                 {
                     InitializeAnchors();
                     Height = originalHeight;
-                    timerCollapseOrContractProgressBar.Enabled = false;
+                    timerMoveForProgressBar.Enabled = false;
                     MaximumSize = new Size(originalWidth + 700, Height);
                 }
             }
@@ -778,6 +794,51 @@ namespace File_Searcher
         private void menuItemAbout_Click(object sender, EventArgs e)
         {
             new AboutForm().ShowDialog(this);
+        }
+
+        private void checkBoxShowDetailedRestrictions_CheckedChanged(object sender, EventArgs e)
+        {
+            timerMoveForDetailedRestrictions.Enabled = true;
+        }
+
+        private void timerMoveForDetailedRestrictions_Tick(object sender, EventArgs e)
+        {
+            if (checkBoxShowDetailedRestrictions.Checked)
+            {
+                if (listViewResults.Height > originalResultsHeight - 25)
+                {
+                    listViewResults.Height -= 5;
+                    listViewResults.Location = new Point(listViewResults.Location.X, listViewResults.Location.Y + 5);
+                }
+                else
+                {
+                    listViewResults.Height = originalResultsHeight - 25;
+                    timerMoveForDetailedRestrictions.Enabled = false;
+                }
+            }
+            else
+            {
+                if (listViewResults.Height < originalResultsHeight)
+                {
+                    listViewResults.Height += 5;
+                    listViewResults.Location = new Point(listViewResults.Location.X, listViewResults.Location.Y - 5);
+                }
+                else
+                {
+                    listViewResults.Height = originalResultsHeight;
+                    timerMoveForDetailedRestrictions.Enabled = false;
+                }
+            }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            datePickerFilesNewerThan.Enabled = checkBoxFilesNewerThan.Checked;
+        }
+
+        private void checkBoxFilesOlderThan_CheckedChanged(object sender, EventArgs e)
+        {
+            datePickerFilesOlderThan.Enabled = checkBoxFilesOlderThan.Checked;
         }
     }
 }

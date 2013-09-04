@@ -38,6 +38,7 @@
             this.listViewResults = new System.Windows.Forms.ListView();
             this.checkBoxShowDir = new System.Windows.Forms.CheckBox();
             this.groupBoxOptions = new System.Windows.Forms.GroupBox();
+            this.checkBoxShowDetailedRestrictions = new System.Windows.Forms.CheckBox();
             this.checkBoxIncludeDirFilename = new System.Windows.Forms.CheckBox();
             this.checkBoxIgnoreCaseSensitivity = new System.Windows.Forms.CheckBox();
             this.checkBoxShowFilesWithoutExtension = new System.Windows.Forms.CheckBox();
@@ -63,6 +64,10 @@
             this.menuItemExit = new System.Windows.Forms.ToolStripMenuItem();
             this.menuHeaderAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
+            this.datePickerFilesNewerThan = new System.Windows.Forms.DateTimePicker();
+            this.checkBoxFilesNewerThan = new System.Windows.Forms.CheckBox();
+            this.datePickerFilesOlderThan = new System.Windows.Forms.DateTimePicker();
+            this.checkBoxFilesOlderThan = new System.Windows.Forms.CheckBox();
             this.groupBoxOptions.SuspendLayout();
             this.groupBoxSearchInfo.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -139,7 +144,7 @@
             this.checkBoxShowDir.AutoSize = true;
             this.checkBoxShowDir.Checked = true;
             this.checkBoxShowDir.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxShowDir.Location = new System.Drawing.Point(329, 19);
+            this.checkBoxShowDir.Location = new System.Drawing.Point(324, 19);
             this.checkBoxShowDir.Name = "checkBoxShowDir";
             this.checkBoxShowDir.Size = new System.Drawing.Size(124, 17);
             this.checkBoxShowDir.TabIndex = 8;
@@ -149,6 +154,7 @@
             // 
             // groupBoxOptions
             // 
+            this.groupBoxOptions.Controls.Add(this.checkBoxShowDetailedRestrictions);
             this.groupBoxOptions.Controls.Add(this.checkBoxIncludeDirFilename);
             this.groupBoxOptions.Controls.Add(this.checkBoxIgnoreCaseSensitivity);
             this.groupBoxOptions.Controls.Add(this.checkBoxShowFilesWithoutExtension);
@@ -167,15 +173,26 @@
             this.groupBoxOptions.TabIndex = 10;
             this.groupBoxOptions.TabStop = false;
             // 
+            // checkBoxShowDetailedRestrictions
+            // 
+            this.checkBoxShowDetailedRestrictions.AutoSize = true;
+            this.checkBoxShowDetailedRestrictions.Location = new System.Drawing.Point(511, 58);
+            this.checkBoxShowDetailedRestrictions.Name = "checkBoxShowDetailedRestrictions";
+            this.checkBoxShowDetailedRestrictions.Size = new System.Drawing.Size(146, 17);
+            this.checkBoxShowDetailedRestrictions.TabIndex = 20;
+            this.checkBoxShowDetailedRestrictions.Text = "Show detailed restrictions";
+            this.checkBoxShowDetailedRestrictions.UseVisualStyleBackColor = true;
+            this.checkBoxShowDetailedRestrictions.CheckedChanged += new System.EventHandler(this.checkBoxShowDetailedRestrictions_CheckedChanged);
+            // 
             // checkBoxIncludeDirFilename
             // 
             this.checkBoxIncludeDirFilename.AutoSize = true;
             this.checkBoxIncludeDirFilename.Enabled = false;
-            this.checkBoxIncludeDirFilename.Location = new System.Drawing.Point(329, 58);
+            this.checkBoxIncludeDirFilename.Location = new System.Drawing.Point(324, 58);
             this.checkBoxIncludeDirFilename.Name = "checkBoxIncludeDirFilename";
-            this.checkBoxIncludeDirFilename.Size = new System.Drawing.Size(188, 17);
+            this.checkBoxIncludeDirFilename.Size = new System.Drawing.Size(170, 17);
             this.checkBoxIncludeDirFilename.TabIndex = 15;
-            this.checkBoxIncludeDirFilename.Text = "Search the directory for criteria too";
+            this.checkBoxIncludeDirFilename.Text = "Search directory for criteria too";
             this.checkBoxIncludeDirFilename.UseVisualStyleBackColor = true;
             // 
             // checkBoxIgnoreCaseSensitivity
@@ -184,7 +201,7 @@
             this.checkBoxIgnoreCaseSensitivity.Checked = true;
             this.checkBoxIgnoreCaseSensitivity.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxIgnoreCaseSensitivity.Enabled = false;
-            this.checkBoxIgnoreCaseSensitivity.Location = new System.Drawing.Point(516, 19);
+            this.checkBoxIgnoreCaseSensitivity.Location = new System.Drawing.Point(511, 19);
             this.checkBoxIgnoreCaseSensitivity.Name = "checkBoxIgnoreCaseSensitivity";
             this.checkBoxIgnoreCaseSensitivity.Size = new System.Drawing.Size(130, 17);
             this.checkBoxIgnoreCaseSensitivity.TabIndex = 14;
@@ -216,7 +233,7 @@
             // checkBoxShowProgress
             // 
             this.checkBoxShowProgress.AutoSize = true;
-            this.checkBoxShowProgress.Location = new System.Drawing.Point(516, 39);
+            this.checkBoxShowProgress.Location = new System.Drawing.Point(511, 39);
             this.checkBoxShowProgress.Name = "checkBoxShowProgress";
             this.checkBoxShowProgress.Size = new System.Drawing.Size(114, 17);
             this.checkBoxShowProgress.TabIndex = 7;
@@ -227,7 +244,7 @@
             // checkBoxSearchForFileContent
             // 
             this.checkBoxSearchForFileContent.AutoSize = true;
-            this.checkBoxSearchForFileContent.Location = new System.Drawing.Point(329, 39);
+            this.checkBoxSearchForFileContent.Location = new System.Drawing.Point(324, 39);
             this.checkBoxSearchForFileContent.Name = "checkBoxSearchForFileContent";
             this.checkBoxSearchForFileContent.Size = new System.Drawing.Size(167, 17);
             this.checkBoxSearchForFileContent.TabIndex = 10;
@@ -412,6 +429,46 @@
             this.menuItemAbout.Size = new System.Drawing.Size(107, 22);
             this.menuItemAbout.Text = "About";
             // 
+            // datePickerFilesNewerThan
+            // 
+            this.datePickerFilesNewerThan.Enabled = false;
+            this.datePickerFilesNewerThan.Location = new System.Drawing.Point(131, 251);
+            this.datePickerFilesNewerThan.Name = "datePickerFilesNewerThan";
+            this.datePickerFilesNewerThan.Size = new System.Drawing.Size(210, 20);
+            this.datePickerFilesNewerThan.TabIndex = 20;
+            this.datePickerFilesNewerThan.Value = new System.DateTime(2013, 9, 4, 10, 7, 46, 0);
+            // 
+            // checkBoxFilesNewerThan
+            // 
+            this.checkBoxFilesNewerThan.AutoSize = true;
+            this.checkBoxFilesNewerThan.Location = new System.Drawing.Point(22, 253);
+            this.checkBoxFilesNewerThan.Name = "checkBoxFilesNewerThan";
+            this.checkBoxFilesNewerThan.Size = new System.Drawing.Size(106, 17);
+            this.checkBoxFilesNewerThan.TabIndex = 21;
+            this.checkBoxFilesNewerThan.Text = "Files newer than:";
+            this.checkBoxFilesNewerThan.UseVisualStyleBackColor = true;
+            this.checkBoxFilesNewerThan.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
+            // 
+            // datePickerFilesOlderThan
+            // 
+            this.datePickerFilesOlderThan.Enabled = false;
+            this.datePickerFilesOlderThan.Location = new System.Drawing.Point(462, 251);
+            this.datePickerFilesOlderThan.Name = "datePickerFilesOlderThan";
+            this.datePickerFilesOlderThan.Size = new System.Drawing.Size(210, 20);
+            this.datePickerFilesOlderThan.TabIndex = 20;
+            this.datePickerFilesOlderThan.Value = new System.DateTime(2013, 9, 4, 10, 7, 46, 0);
+            // 
+            // checkBoxFilesOlderThan
+            // 
+            this.checkBoxFilesOlderThan.AutoSize = true;
+            this.checkBoxFilesOlderThan.Location = new System.Drawing.Point(359, 253);
+            this.checkBoxFilesOlderThan.Name = "checkBoxFilesOlderThan";
+            this.checkBoxFilesOlderThan.Size = new System.Drawing.Size(100, 17);
+            this.checkBoxFilesOlderThan.TabIndex = 22;
+            this.checkBoxFilesOlderThan.Text = "Files older than:";
+            this.checkBoxFilesOlderThan.UseVisualStyleBackColor = true;
+            this.checkBoxFilesOlderThan.CheckedChanged += new System.EventHandler(this.checkBoxFilesOlderThan_CheckedChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -427,6 +484,10 @@
             this.Controls.Add(this.groupBoxSearchInfo);
             this.Controls.Add(this.groupBoxOptions);
             this.Controls.Add(this.menuStrip1);
+            this.Controls.Add(this.datePickerFilesOlderThan);
+            this.Controls.Add(this.datePickerFilesNewerThan);
+            this.Controls.Add(this.checkBoxFilesOlderThan);
+            this.Controls.Add(this.checkBoxFilesNewerThan);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
             this.Name = "MainForm";
@@ -479,6 +540,11 @@
         private System.Windows.Forms.ToolStripMenuItem menuHeaderAbout;
         private System.Windows.Forms.ToolStripMenuItem menuItemAbout;
         private System.Windows.Forms.CheckBox checkBoxIncludeDirFilename;
+        private System.Windows.Forms.CheckBox checkBoxShowDetailedRestrictions;
+        private System.Windows.Forms.DateTimePicker datePickerFilesNewerThan;
+        private System.Windows.Forms.CheckBox checkBoxFilesNewerThan;
+        private System.Windows.Forms.DateTimePicker datePickerFilesOlderThan;
+        private System.Windows.Forms.CheckBox checkBoxFilesOlderThan;
     }
 }
 
