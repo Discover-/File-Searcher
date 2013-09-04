@@ -36,6 +36,7 @@ namespace File_Searcher
             checkBoxPromptShowProgressbar.Checked = settings.GetSetting("PromptShowProgressBar", "yes") == "yes";
             checkBoxPromptToQuit.Checked = settings.GetSetting("PromptToQuit", "yes") == "yes";
             checkBoxAutoSaveSettings.Checked = settings.GetSetting("AutoSaveSettings", "no") == "yes";
+            checkBoxAlwaysShowDetailedRestrictions.Checked = settings.GetSetting("AlwaysShowDetailedRestrictions", "no") == "yes";
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
@@ -51,6 +52,13 @@ namespace File_Searcher
             settings.PutSetting("PromptShowProgressBar", (checkBoxPromptShowProgressbar.Checked ? "yes" : "no"));
             settings.PutSetting("PromptToQuit", (checkBoxPromptToQuit.Checked ? "yes" : "no"));
             settings.PutSetting("AutoSaveSettings", (checkBoxAutoSaveSettings.Checked ? "yes" : "no"));
+            settings.PutSetting("AlwaysShowDetailedRestrictions", (checkBoxAlwaysShowDetailedRestrictions.Checked ? "yes" : "no"));
+
+            if (!((MainForm)Owner).checkBoxShowDetailedRestrictions.Checked && settings.GetSetting("AlwaysShowDetailedRestrictions", "no") == "yes")
+            {
+                ((MainForm)Owner).timerMoveForDetailedRestrictions.Enabled = true;
+                ((MainForm)Owner).checkBoxShowDetailedRestrictions.Checked = true;
+            }
         }
 
         private void buttonExit_Click(object sender, EventArgs e)
@@ -75,7 +83,8 @@ namespace File_Searcher
             }
 
             if (checkBoxPromptOpenFile.Checked == (settings.GetSetting("PromptOpenFile", "yes") == "yes") && checkBoxPromptShowProgressbar.Checked == (settings.GetSetting("PromptShowProgressBar", "yes") == "yes") &&
-                checkBoxPromptToQuit.Checked == (settings.GetSetting("PromptToQuit", "yes") == "yes") && checkBoxAutoSaveSettings.Checked == (settings.GetSetting("AutoSaveSettings", "no") == "yes"))
+                checkBoxPromptToQuit.Checked == (settings.GetSetting("PromptToQuit", "yes") == "yes") && checkBoxAutoSaveSettings.Checked == (settings.GetSetting("AutoSaveSettings", "no") == "yes") &&
+                checkBoxAlwaysShowDetailedRestrictions.Checked == (settings.GetSetting("AlwaysShowDetailedRestrictions", "no") == "yes"))
                 return;
 
             if (MessageBox.Show("Do you wish to save the edited settings?", "Save settings?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)

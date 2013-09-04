@@ -406,13 +406,13 @@
             // menuItemSettings
             // 
             this.menuItemSettings.Name = "menuItemSettings";
-            this.menuItemSettings.Size = new System.Drawing.Size(116, 22);
+            this.menuItemSettings.Size = new System.Drawing.Size(152, 22);
             this.menuItemSettings.Text = "Settings";
             // 
             // menuItemExit
             // 
             this.menuItemExit.Name = "menuItemExit";
-            this.menuItemExit.Size = new System.Drawing.Size(116, 22);
+            this.menuItemExit.Size = new System.Drawing.Size(152, 22);
             this.menuItemExit.Text = "Exit";
             // 
             // menuHeaderAbout
@@ -512,7 +512,6 @@
         private System.Windows.Forms.Button btnSearch;
         private System.Windows.Forms.TextBox txtBoxFileSearch;
         private System.Windows.Forms.Button btnStopSearching;
-        private System.Windows.Forms.ListView listViewResults;
         private System.Windows.Forms.CheckBox checkBoxShowDir;
         private System.Windows.Forms.GroupBox groupBoxOptions;
         private System.Windows.Forms.GroupBox groupBoxSearchInfo;
@@ -540,11 +539,12 @@
         private System.Windows.Forms.ToolStripMenuItem menuHeaderAbout;
         private System.Windows.Forms.ToolStripMenuItem menuItemAbout;
         private System.Windows.Forms.CheckBox checkBoxIncludeDirFilename;
-        private System.Windows.Forms.CheckBox checkBoxShowDetailedRestrictions;
         private System.Windows.Forms.DateTimePicker datePickerFilesNewerThan;
         private System.Windows.Forms.CheckBox checkBoxFilesNewerThan;
         private System.Windows.Forms.DateTimePicker datePickerFilesOlderThan;
         private System.Windows.Forms.CheckBox checkBoxFilesOlderThan;
+        public System.Windows.Forms.ListView listViewResults;
+        public System.Windows.Forms.CheckBox checkBoxShowDetailedRestrictions;
     }
 }
 

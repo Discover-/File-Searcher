@@ -30,18 +30,20 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingsForm));
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.checkBoxAutoSaveSettings = new System.Windows.Forms.CheckBox();
+            this.checkBoxPromptToQuit = new System.Windows.Forms.CheckBox();
+            this.checkBoxPromptShowProgressbar = new System.Windows.Forms.CheckBox();
             this.checkBoxPromptOpenFile = new System.Windows.Forms.CheckBox();
             this.buttonSave = new System.Windows.Forms.Button();
             this.buttonClear = new System.Windows.Forms.Button();
             this.buttonExit = new System.Windows.Forms.Button();
-            this.checkBoxPromptShowProgressbar = new System.Windows.Forms.CheckBox();
-            this.checkBoxPromptToQuit = new System.Windows.Forms.CheckBox();
-            this.checkBoxAutoSaveSettings = new System.Windows.Forms.CheckBox();
+            this.checkBoxAlwaysShowDetailedRestrictions = new System.Windows.Forms.CheckBox();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.checkBoxAlwaysShowDetailedRestrictions);
             this.groupBox1.Controls.Add(this.checkBoxAutoSaveSettings);
             this.groupBox1.Controls.Add(this.checkBoxPromptToQuit);
             this.groupBox1.Controls.Add(this.checkBoxPromptShowProgressbar);
@@ -52,6 +54,40 @@
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Settings";
+            // 
+            // checkBoxAutoSaveSettings
+            // 
+            this.checkBoxAutoSaveSettings.AutoSize = true;
+            this.checkBoxAutoSaveSettings.Location = new System.Drawing.Point(17, 157);
+            this.checkBoxAutoSaveSettings.Name = "checkBoxAutoSaveSettings";
+            this.checkBoxAutoSaveSettings.Size = new System.Drawing.Size(113, 17);
+            this.checkBoxAutoSaveSettings.TabIndex = 6;
+            this.checkBoxAutoSaveSettings.Text = "Auto save settings";
+            this.checkBoxAutoSaveSettings.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxPromptToQuit
+            // 
+            this.checkBoxPromptToQuit.AutoSize = true;
+            this.checkBoxPromptToQuit.Checked = true;
+            this.checkBoxPromptToQuit.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxPromptToQuit.Location = new System.Drawing.Point(17, 65);
+            this.checkBoxPromptToQuit.Name = "checkBoxPromptToQuit";
+            this.checkBoxPromptToQuit.Size = new System.Drawing.Size(147, 17);
+            this.checkBoxPromptToQuit.TabIndex = 5;
+            this.checkBoxPromptToQuit.Text = "Prompt me if I want to exit";
+            this.checkBoxPromptToQuit.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxPromptShowProgressbar
+            // 
+            this.checkBoxPromptShowProgressbar.AutoSize = true;
+            this.checkBoxPromptShowProgressbar.Checked = true;
+            this.checkBoxPromptShowProgressbar.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.checkBoxPromptShowProgressbar.Location = new System.Drawing.Point(17, 42);
+            this.checkBoxPromptShowProgressbar.Name = "checkBoxPromptShowProgressbar";
+            this.checkBoxPromptShowProgressbar.Size = new System.Drawing.Size(214, 17);
+            this.checkBoxPromptShowProgressbar.TabIndex = 4;
+            this.checkBoxPromptShowProgressbar.Text = "Prompt me if I want to show progressbar";
+            this.checkBoxPromptShowProgressbar.UseVisualStyleBackColor = true;
             // 
             // checkBoxPromptOpenFile
             // 
@@ -95,39 +131,15 @@
             this.buttonExit.UseVisualStyleBackColor = true;
             this.buttonExit.Click += new System.EventHandler(this.buttonExit_Click);
             // 
-            // checkBoxPromptShowProgressbar
+            // checkBoxAlwaysShowDetailedRestrictions
             // 
-            this.checkBoxPromptShowProgressbar.AutoSize = true;
-            this.checkBoxPromptShowProgressbar.Checked = true;
-            this.checkBoxPromptShowProgressbar.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxPromptShowProgressbar.Location = new System.Drawing.Point(17, 42);
-            this.checkBoxPromptShowProgressbar.Name = "checkBoxPromptShowProgressbar";
-            this.checkBoxPromptShowProgressbar.Size = new System.Drawing.Size(214, 17);
-            this.checkBoxPromptShowProgressbar.TabIndex = 4;
-            this.checkBoxPromptShowProgressbar.Text = "Prompt me if I want to show progressbar";
-            this.checkBoxPromptShowProgressbar.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxPromptToQuit
-            // 
-            this.checkBoxPromptToQuit.AutoSize = true;
-            this.checkBoxPromptToQuit.Checked = true;
-            this.checkBoxPromptToQuit.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxPromptToQuit.Location = new System.Drawing.Point(17, 65);
-            this.checkBoxPromptToQuit.Name = "checkBoxPromptToQuit";
-            this.checkBoxPromptToQuit.Size = new System.Drawing.Size(147, 17);
-            this.checkBoxPromptToQuit.TabIndex = 5;
-            this.checkBoxPromptToQuit.Text = "Prompt me if I want to exit";
-            this.checkBoxPromptToQuit.UseVisualStyleBackColor = true;
-            // 
-            // checkBoxAutoSaveSettings
-            // 
-            this.checkBoxAutoSaveSettings.AutoSize = true;
-            this.checkBoxAutoSaveSettings.Location = new System.Drawing.Point(17, 88);
-            this.checkBoxAutoSaveSettings.Name = "checkBoxAutoSaveSettings";
-            this.checkBoxAutoSaveSettings.Size = new System.Drawing.Size(113, 17);
-            this.checkBoxAutoSaveSettings.TabIndex = 6;
-            this.checkBoxAutoSaveSettings.Text = "Auto save settings";
-            this.checkBoxAutoSaveSettings.UseVisualStyleBackColor = true;
+            this.checkBoxAlwaysShowDetailedRestrictions.AutoSize = true;
+            this.checkBoxAlwaysShowDetailedRestrictions.Location = new System.Drawing.Point(17, 88);
+            this.checkBoxAlwaysShowDetailedRestrictions.Name = "checkBoxAlwaysShowDetailedRestrictions";
+            this.checkBoxAlwaysShowDetailedRestrictions.Size = new System.Drawing.Size(180, 17);
+            this.checkBoxAlwaysShowDetailedRestrictions.TabIndex = 7;
+            this.checkBoxAlwaysShowDetailedRestrictions.Text = "Always show detailed restrictions";
+            this.checkBoxAlwaysShowDetailedRestrictions.UseVisualStyleBackColor = true;
             // 
             // SettingsForm
             // 
@@ -158,5 +170,6 @@
         private System.Windows.Forms.CheckBox checkBoxPromptShowProgressbar;
         private System.Windows.Forms.CheckBox checkBoxPromptToQuit;
         private System.Windows.Forms.CheckBox checkBoxAutoSaveSettings;
+        private System.Windows.Forms.CheckBox checkBoxAlwaysShowDetailedRestrictions;
     }
 }

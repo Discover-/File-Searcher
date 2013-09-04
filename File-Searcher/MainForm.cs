@@ -18,7 +18,7 @@ namespace File_Searcher
         private readonly List<ListViewItem> listViewResultsContainer = new List<ListViewItem>();
         private readonly List<Control> controlsToDisable = new List<Control>();
         private readonly List<string> exceptionStringStore = new List<string>();
-        private Timer timerMoveForProgressBar = null, timerMoveForDetailedRestrictions = null;
+        public Timer timerMoveForProgressBar = null, timerMoveForDetailedRestrictions = null;
         public Settings settings = new Settings();
 
         public MainForm()
@@ -102,6 +102,13 @@ namespace File_Searcher
             menuItemAbout.ShortcutKeyDisplayString = "(Alt + F1)";
 
             originalResultsHeight = listViewResults.Height;
+
+            if (settings.GetSetting("AlwaysShowDetailedRestrictions", "no") == "yes")
+            {
+                checkBoxShowDetailedRestrictions.Checked = true;
+                listViewResults.Height -= 25;
+                listViewResults.Location = new Point(listViewResults.Location.X, listViewResults.Location.Y + 25);
+            }
         }
 
         private void InitializeAnchors()
