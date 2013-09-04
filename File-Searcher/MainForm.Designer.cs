@@ -68,6 +68,8 @@
             this.checkBoxFilesNewerThan = new System.Windows.Forms.CheckBox();
             this.datePickerFilesOlderThan = new System.Windows.Forms.DateTimePicker();
             this.checkBoxFilesOlderThan = new System.Windows.Forms.CheckBox();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.toolStrip1 = new System.Windows.Forms.ToolStrip();
             this.groupBoxOptions.SuspendLayout();
             this.groupBoxSearchInfo.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -287,6 +289,7 @@
             // 
             // groupBoxSearchInfo
             // 
+            this.groupBoxSearchInfo.Controls.Add(this.toolStrip1);
             this.groupBoxSearchInfo.Controls.Add(this.lblIgnoreExtensions);
             this.groupBoxSearchInfo.Controls.Add(this.txtBoxExtensions);
             this.groupBoxSearchInfo.Controls.Add(this.lblHeaderDirectories);
@@ -398,6 +401,7 @@
             // 
             this.menuHeaderFiles.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.menuItemSettings,
+            this.toolStripSeparator1,
             this.menuItemExit});
             this.menuHeaderFiles.Name = "menuHeaderFiles";
             this.menuHeaderFiles.Size = new System.Drawing.Size(37, 20);
@@ -406,13 +410,13 @@
             // menuItemSettings
             // 
             this.menuItemSettings.Name = "menuItemSettings";
-            this.menuItemSettings.Size = new System.Drawing.Size(116, 22);
+            this.menuItemSettings.Size = new System.Drawing.Size(152, 22);
             this.menuItemSettings.Text = "Settings";
             // 
             // menuItemExit
             // 
             this.menuItemExit.Name = "menuItemExit";
-            this.menuItemExit.Size = new System.Drawing.Size(116, 22);
+            this.menuItemExit.Size = new System.Drawing.Size(152, 22);
             this.menuItemExit.Text = "Exit";
             // 
             // menuHeaderAbout
@@ -468,6 +472,19 @@
             this.checkBoxFilesOlderThan.Text = "Files older than:";
             this.checkBoxFilesOlderThan.UseVisualStyleBackColor = true;
             this.checkBoxFilesOlderThan.CheckedChanged += new System.EventHandler(this.checkBoxFilesOlderThan_CheckedChanged);
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            // 
+            // toolStrip1
+            // 
+            this.toolStrip1.Location = new System.Drawing.Point(3, 16);
+            this.toolStrip1.Name = "toolStrip1";
+            this.toolStrip1.Size = new System.Drawing.Size(734, 25);
+            this.toolStrip1.TabIndex = 6;
+            this.toolStrip1.Text = "toolStrip1";
             // 
             // MainForm
             // 
@@ -545,6 +562,8 @@
         private System.Windows.Forms.CheckBox checkBoxFilesOlderThan;
         public System.Windows.Forms.ListView listViewResults;
         public System.Windows.Forms.CheckBox checkBoxShowDetailedRestrictions;
+        private System.Windows.Forms.ToolStrip toolStrip1;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
     }
 }
 
