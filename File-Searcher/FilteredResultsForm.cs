@@ -18,6 +18,9 @@ namespace File_Searcher
 
             initialItemCollection = items;
             InitializeListView(ref listViewResultsFilter, items);
+
+            KeyPreview = true;
+            KeyDown += FiltedResultsForm_KeyDown;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -59,6 +62,16 @@ namespace File_Searcher
             if (items != null)
                 foreach (ListViewItem item in items)
                     listView.Items.Add((ListViewItem)item.Clone());
+        }
+
+        private void FiltedResultsForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Escape:
+                    Close();
+                    break;
+            }
         }
     }
 }
