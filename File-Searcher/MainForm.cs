@@ -526,46 +526,6 @@ namespace File_Searcher
             return String.Format("{0:0.##}", bytes);
         }
 
-        //! Cross-thread functions:
-        private delegate void SetEnabledOfControlDelegate(Control control, bool enable);
-
-        private void SetEnabledOfControl(Control control, bool enable)
-        {
-            if (control.InvokeRequired)
-            {
-                Invoke(new SetEnabledOfControlDelegate(SetEnabledOfControl), new object[] { control, enable });
-                return;
-            }
-
-            control.Enabled = enable;
-        }
-
-        private delegate void AddItemToListViewDelegate(ListView listView, ListViewItem item);
-
-        private void AddItemToListView(ListView listView, ListViewItem item)
-        {
-            if (listView.InvokeRequired)
-            {
-                Invoke(new AddItemToListViewDelegate(AddItemToListView), new object[] { listView, item });
-                return;
-            }
-
-            listView.Items.Add(item);
-        }
-
-        private delegate void ClearListViewResultsDelegate(ListView listView);
-
-        private void ClearListViewResults(ListView listView)
-        {
-            if (listView.InvokeRequired)
-            {
-                Invoke(new ClearListViewResultsDelegate(ClearListViewResults), new object[] { listView });
-                return;
-            }
-
-            listView.Items.Clear();
-        }
-
         private void checkBoxReverseExtensions_CheckedChanged(object sender, EventArgs e)
         {
             //! Using String::Replace doesn't have the same effect for some reason
@@ -583,38 +543,6 @@ namespace File_Searcher
                 lblSearchFile.Text = "File content to search for (if left empty all files in the directory will be shown):";
             else
                 lblSearchFile.Text = "Filename to search for (if left empty all files in the directory will be shown):";
-        }
-
-        private delegate void SetProgressBarMaxValueDelegate(ProgressBar progressBar, int value);
-
-        private void SetProgressBarMaxValue(ProgressBar progressBar, int value)
-        {
-            if (progressBar.InvokeRequired)
-            {
-                Invoke(new SetProgressBarMaxValueDelegate(SetProgressBarMaxValue), new object[] { progressBar, value });
-                return;
-            }
-
-            progressBar.Maximum = value;
-        }
-
-        private delegate void SetProgressBarValueDelegate(ProgressBar progressBar, int value);
-
-        private void SetProgressBarValue(ProgressBar progressBar, int value)
-        {
-            if (progressBar.InvokeRequired)
-            {
-                Invoke(new SetProgressBarValueDelegate(SetProgressBarValue), new object[] { progressBar, value });
-                return;
-            }
-
-            if (value >= progressBar.Maximum)
-            {
-                progressBar.Value = progressBar.Maximum;
-                return;
-            }
-
-            progressBar.Value = value;
         }
 
         private void listViewResults_DoubleClick(object sender, EventArgs e)
@@ -849,6 +777,78 @@ namespace File_Searcher
         private void checkBoxFilesOlderThan_CheckedChanged(object sender, EventArgs e)
         {
             datePickerFilesOlderThan.Enabled = checkBoxFilesOlderThan.Checked;
+        }
+
+        //! Cross-thread functions:
+        private delegate void SetEnabledOfControlDelegate(Control control, bool enable);
+
+        private void SetEnabledOfControl(Control control, bool enable)
+        {
+            if (control.InvokeRequired)
+            {
+                Invoke(new SetEnabledOfControlDelegate(SetEnabledOfControl), new object[] { control, enable });
+                return;
+            }
+
+            control.Enabled = enable;
+        }
+
+        private delegate void AddItemToListViewDelegate(ListView listView, ListViewItem item);
+
+        private void AddItemToListView(ListView listView, ListViewItem item)
+        {
+            if (listView.InvokeRequired)
+            {
+                Invoke(new AddItemToListViewDelegate(AddItemToListView), new object[] { listView, item });
+                return;
+            }
+
+            listView.Items.Add(item);
+        }
+
+        private delegate void ClearListViewResultsDelegate(ListView listView);
+
+        private void ClearListViewResults(ListView listView)
+        {
+            if (listView.InvokeRequired)
+            {
+                Invoke(new ClearListViewResultsDelegate(ClearListViewResults), new object[] { listView });
+                return;
+            }
+
+            listView.Items.Clear();
+        }
+
+        private delegate void SetProgressBarMaxValueDelegate(ProgressBar progressBar, int value);
+
+        private void SetProgressBarMaxValue(ProgressBar progressBar, int value)
+        {
+            if (progressBar.InvokeRequired)
+            {
+                Invoke(new SetProgressBarMaxValueDelegate(SetProgressBarMaxValue), new object[] { progressBar, value });
+                return;
+            }
+
+            progressBar.Maximum = value;
+        }
+
+        private delegate void SetProgressBarValueDelegate(ProgressBar progressBar, int value);
+
+        private void SetProgressBarValue(ProgressBar progressBar, int value)
+        {
+            if (progressBar.InvokeRequired)
+            {
+                Invoke(new SetProgressBarValueDelegate(SetProgressBarValue), new object[] { progressBar, value });
+                return;
+            }
+
+            if (value >= progressBar.Maximum)
+            {
+                progressBar.Value = progressBar.Maximum;
+                return;
+            }
+
+            progressBar.Value = value;
         }
     }
 }
