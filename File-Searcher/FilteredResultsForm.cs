@@ -6,7 +6,7 @@ namespace File_Searcher
 {
     public partial class FilteredResultsForm : Form
     {
-        private readonly ListView.ListViewItemCollection initialItemCollection = null;
+        private readonly ListView.ListViewItemCollection initialItemCollection;
 
         public FilteredResultsForm(ListView.ListViewItemCollection items)
         {

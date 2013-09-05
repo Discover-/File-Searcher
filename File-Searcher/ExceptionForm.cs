@@ -8,9 +8,9 @@ namespace File_Searcher
 {
     public partial class ExceptionForm : Form
     {
-        private List<string> exceptionStringStore;
-        private int indexOfExceptions = 0;
-        private int totalExceptions = 0;
+        private readonly List<string> exceptionStringStore;
+        private readonly int totalExceptions;
+        private int indexOfExceptions;
 
         public ExceptionForm(List<string> exceptionStringStore)
         {
@@ -21,7 +21,7 @@ namespace File_Searcher
             MinimumSize = new Size(Width, Height);
 
             totalExceptions = exceptionStringStore.Count() - 1;
-            labelInfo.Text = "Exception 0 out of " + totalExceptions.ToString();
+            labelInfo.Text = "Exception 0 out of " + totalExceptions;
             textBoxExceptions.Anchor = AnchorStyles.Bottom | AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Left;
         }
 
@@ -35,7 +35,7 @@ namespace File_Searcher
             if (indexOfExceptions - 1 >= 0)
             {
                 textBoxExceptions.Text = exceptionStringStore[--indexOfExceptions];
-                labelInfo.Text = "Exception " + indexOfExceptions.ToString() + " out of " + totalExceptions.ToString();
+                labelInfo.Text = "Exception " + indexOfExceptions + " out of " + totalExceptions;
                 buttonPrevious.Enabled = indexOfExceptions - 1 >= 0;
                 buttonNext.Enabled = true;
             }
@@ -46,7 +46,7 @@ namespace File_Searcher
             if (totalExceptions > indexOfExceptions)
             {
                 textBoxExceptions.Text = exceptionStringStore[++indexOfExceptions];
-                labelInfo.Text = "Exception " + indexOfExceptions.ToString() + " out of " + totalExceptions.ToString();
+                labelInfo.Text = "Exception " + indexOfExceptions + " out of " + totalExceptions;
                 buttonNext.Enabled = !(indexOfExceptions + 1 > totalExceptions);
                 buttonPrevious.Enabled = true;
             }
