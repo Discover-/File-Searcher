@@ -181,9 +181,12 @@ namespace File_Searcher
 
         private void StartSearching()
         {
-            string searchDirectory = txtBoxDirectorySearch.Text + "\\";
+            string searchDirectory = txtBoxDirectorySearch.Text;
             string searchFileText = txtBoxFileSearch.Text;
             string extensionField = txtBoxExtensions.Text;
+
+            if (!txtBoxDirectorySearch.Text.EndsWith("\\"))
+                searchDirectory += "\\";
 
             if (IsInvalidString(searchDirectory))
             {
