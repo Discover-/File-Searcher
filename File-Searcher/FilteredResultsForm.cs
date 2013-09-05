@@ -71,6 +71,10 @@ namespace File_Searcher
                 case Keys.Escape:
                     Close();
                     break;
+                case Keys.Enter:
+                    if (textBoxFilter.Focused)
+                        button1_Click(sender, e);
+                    break;
             }
         }
     }
