@@ -40,12 +40,12 @@
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPageGeneral = new System.Windows.Forms.TabPage();
             this.tabPageShortcuts = new System.Windows.Forms.TabPage();
-            this.label1 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.textBoxShortcutAbout = new System.Windows.Forms.TextBox();
+            this.textBoxShortcutSettings = new System.Windows.Forms.TextBox();
             this.textBoxShortcutExit = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBoxShortcutSettings = new System.Windows.Forms.TextBox();
-            this.textBoxShortcutAbout = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPageGeneral.SuspendLayout();
             this.tabPageShortcuts.SuspendLayout();
@@ -178,14 +178,28 @@
             this.tabPageShortcuts.Text = "Shortcuts";
             this.tabPageShortcuts.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // label3
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(6, 9);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(27, 13);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Exit:";
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(6, 59);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(38, 13);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "About:";
+            // 
+            // textBoxShortcutAbout
+            // 
+            this.textBoxShortcutAbout.Location = new System.Drawing.Point(62, 59);
+            this.textBoxShortcutAbout.Name = "textBoxShortcutAbout";
+            this.textBoxShortcutAbout.Size = new System.Drawing.Size(162, 20);
+            this.textBoxShortcutAbout.TabIndex = 3;
+            // 
+            // textBoxShortcutSettings
+            // 
+            this.textBoxShortcutSettings.Location = new System.Drawing.Point(62, 33);
+            this.textBoxShortcutSettings.Name = "textBoxShortcutSettings";
+            this.textBoxShortcutSettings.Size = new System.Drawing.Size(162, 20);
+            this.textBoxShortcutSettings.TabIndex = 2;
             // 
             // textBoxShortcutExit
             // 
@@ -203,28 +217,14 @@
             this.label2.TabIndex = 0;
             this.label2.Text = "Settings:";
             // 
-            // textBoxShortcutSettings
+            // label1
             // 
-            this.textBoxShortcutSettings.Location = new System.Drawing.Point(62, 33);
-            this.textBoxShortcutSettings.Name = "textBoxShortcutSettings";
-            this.textBoxShortcutSettings.Size = new System.Drawing.Size(162, 20);
-            this.textBoxShortcutSettings.TabIndex = 2;
-            // 
-            // textBoxShortcutAbout
-            // 
-            this.textBoxShortcutAbout.Location = new System.Drawing.Point(62, 59);
-            this.textBoxShortcutAbout.Name = "textBoxShortcutAbout";
-            this.textBoxShortcutAbout.Size = new System.Drawing.Size(162, 20);
-            this.textBoxShortcutAbout.TabIndex = 3;
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 59);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(38, 13);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "About:";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(6, 9);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(27, 13);
+            this.label1.TabIndex = 0;
+            this.label1.Text = "Exit:";
             // 
             // SettingsForm
             // 
@@ -237,7 +237,7 @@
             this.Controls.Add(this.buttonSave);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "SettingsForm";
-            this.Text = "File-searcher settings";
+            this.Text = "File Searcher Settings";
             this.Load += new System.EventHandler(this.SettingsForm_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPageGeneral.ResumeLayout(false);

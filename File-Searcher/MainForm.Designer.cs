@@ -61,6 +61,7 @@
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.menuHeaderFiles = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemSettings = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.menuItemExit = new System.Windows.Forms.ToolStripMenuItem();
             this.menuHeaderAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.menuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
@@ -68,7 +69,6 @@
             this.checkBoxFilesNewerThan = new System.Windows.Forms.CheckBox();
             this.datePickerFilesOlderThan = new System.Windows.Forms.DateTimePicker();
             this.checkBoxFilesOlderThan = new System.Windows.Forms.CheckBox();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.groupBoxOptions.SuspendLayout();
             this.groupBoxSearchInfo.SuspendLayout();
             this.menuStrip1.SuspendLayout();
@@ -134,9 +134,9 @@
             // 
             // listViewResults
             // 
-            this.listViewResults.Location = new System.Drawing.Point(14, 277);
+            this.listViewResults.Location = new System.Drawing.Point(14, 250);
             this.listViewResults.Name = "listViewResults";
-            this.listViewResults.Size = new System.Drawing.Size(740, 213);
+            this.listViewResults.Size = new System.Drawing.Size(740, 240);
             this.listViewResults.TabIndex = 8;
             this.listViewResults.UseCompatibleStateImageBehavior = false;
             // 
@@ -408,13 +408,18 @@
             // menuItemSettings
             // 
             this.menuItemSettings.Name = "menuItemSettings";
-            this.menuItemSettings.Size = new System.Drawing.Size(152, 22);
+            this.menuItemSettings.Size = new System.Drawing.Size(116, 22);
             this.menuItemSettings.Text = "Settings";
+            // 
+            // toolStripSeparator1
+            // 
+            this.toolStripSeparator1.Name = "toolStripSeparator1";
+            this.toolStripSeparator1.Size = new System.Drawing.Size(113, 6);
             // 
             // menuItemExit
             // 
             this.menuItemExit.Name = "menuItemExit";
-            this.menuItemExit.Size = new System.Drawing.Size(152, 22);
+            this.menuItemExit.Size = new System.Drawing.Size(116, 22);
             this.menuItemExit.Text = "Exit";
             // 
             // menuHeaderAbout
@@ -470,11 +475,6 @@
             this.checkBoxFilesOlderThan.Text = "Files older than:";
             this.checkBoxFilesOlderThan.UseVisualStyleBackColor = true;
             this.checkBoxFilesOlderThan.CheckedChanged += new System.EventHandler(this.checkBoxFilesOlderThan_CheckedChanged);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
             // 
             // MainForm
             // 
