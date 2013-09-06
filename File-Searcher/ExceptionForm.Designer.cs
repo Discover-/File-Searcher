@@ -39,7 +39,7 @@
             // 
             this.textBoxExceptions.Location = new System.Drawing.Point(12, 39);
             this.textBoxExceptions.Name = "textBoxExceptions";
-            this.textBoxExceptions.Size = new System.Drawing.Size(959, 145);
+            this.textBoxExceptions.Size = new System.Drawing.Size(725, 145);
             this.textBoxExceptions.TabIndex = 2;
             this.textBoxExceptions.Text = "";
             // 
@@ -77,7 +77,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(983, 196);
+            this.ClientSize = new System.Drawing.Size(749, 196);
             this.Controls.Add(this.labelInfo);
             this.Controls.Add(this.buttonNext);
             this.Controls.Add(this.buttonPrevious);
