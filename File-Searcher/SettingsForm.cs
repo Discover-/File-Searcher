@@ -5,7 +5,6 @@ namespace File_Searcher
 {
     public partial class SettingsForm : Form
     {
-        private Settings settings = null;
         private bool closedFormByHand = false;
 
         public SettingsForm()
@@ -24,15 +23,14 @@ namespace File_Searcher
             KeyPreview = true;
             KeyDown += SettingsForm_KeyDown;
 
-            settings = ((MainForm)Owner).settings;
-            checkBoxPromptOpenFile.Checked = settings.GetSetting("PromptOpenFile", "yes") == "yes";
-            checkBoxPromptShowProgressbar.Checked = settings.GetSetting("PromptShowProgressBar", "yes") == "yes";
-            checkBoxPromptToQuit.Checked = settings.GetSetting("PromptToQuit", "yes") == "yes";
-            checkBoxAutoSaveSettings.Checked = settings.GetSetting("AutoSaveSettings", "no") == "yes";
-            checkBoxAlwaysShowDetailedRestrictions.Checked = settings.GetSetting("AlwaysShowDetailedRestrictions", "no") == "yes";
-            textBoxShortcutAbout.Text = settings.GetSetting("KeyShortcutAbout", "Shift | F5");
-            textBoxShortcutSettings.Text = settings.GetSetting("KeyShortcutSettings", "F1");
-            textBoxShortcutExit.Text = settings.GetSetting("KeyShortcutExit", "Alt | F1");
+            checkBoxPromptOpenFile.Checked = Properties.Settings.Default.PromptOpenFile;
+            checkBoxPromptShowProgressbar.Checked = Properties.Settings.Default.PromptShowProgressBar;
+            checkBoxPromptToQuit.Checked = Properties.Settings.Default.PromptToQuit;
+            checkBoxAutoSaveSettings.Checked = Properties.Settings.Default.AutoSaveSettings;
+            checkBoxAlwaysShowDetailedRestrictions.Checked = Properties.Settings.Default.AlwaysShowDetailedRestrictions;
+            textBoxShortcutAbout.Text = Properties.Settings.Default.KeyShortcutAbout;
+            textBoxShortcutSettings.Text = Properties.Settings.Default.KeyShortcutSettings;
+            textBoxShortcutExit.Text = Properties.Settings.Default.KeyShortcutExit;
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
@@ -44,13 +42,17 @@ namespace File_Searcher
 
         private void SaveSettings()
         {
-            settings.PutSetting("PromptOpenFile", (checkBoxPromptOpenFile.Checked ? "yes" : "no"));
-            settings.PutSetting("PromptShowProgressBar", (checkBoxPromptShowProgressbar.Checked ? "yes" : "no"));
-            settings.PutSetting("PromptToQuit", (checkBoxPromptToQuit.Checked ? "yes" : "no"));
-            settings.PutSetting("AutoSaveSettings", (checkBoxAutoSaveSettings.Checked ? "yes" : "no"));
-            settings.PutSetting("AlwaysShowDetailedRestrictions", (checkBoxAlwaysShowDetailedRestrictions.Checked ? "yes" : "no"));
+            Properties.Settings.Default.PromptOpenFile = checkBoxPromptOpenFile.Checked;
+            Properties.Settings.Default.PromptShowProgressBar = checkBoxPromptShowProgressbar.Checked;
+            Properties.Settings.Default.PromptToQuit = checkBoxPromptToQuit.Checked;
+            Properties.Settings.Default.AutoSaveSettings = checkBoxAutoSaveSettings.Checked;
+            Properties.Settings.Default.AlwaysShowDetailedRestrictions = checkBoxAlwaysShowDetailedRestrictions.Checked;
+            Properties.Settings.Default.KeyShortcutAbout = textBoxShortcutAbout.Text = Properties.Settings.Default.KeyShortcutAbout;
+            Properties.Settings.Default.KeyShortcutSettings = textBoxShortcutSettings.Text;
+            Properties.Settings.Default.KeyShortcutExit = textBoxShortcutExit.Text;
+            Properties.Settings.Default.Save();
 
-            if (!((MainForm)Owner).checkBoxShowDetailedRestrictions.Checked && settings.GetSetting("AlwaysShowDetailedRestrictions", "no") == "yes")
+            if (!((MainForm)Owner).checkBoxShowDetailedRestrictions.Checked && checkBoxAlwaysShowDetailedRestrictions.Checked)
             {
                 ((MainForm)Owner).timerMoveForDetailedRestrictions.Enabled = true;
                 ((MainForm)Owner).checkBoxShowDetailedRestrictions.Checked = true;
@@ -72,15 +74,15 @@ namespace File_Searcher
 
         private void PromptSaveSettingsOnClose()
         {
-            if (settings.GetSetting("AutoSaveSettings", "no") == "yes")
+            if (Properties.Settings.Default.AutoSaveSettings)
             {
                 SaveSettings();
                 return;
             }
 
-            if (checkBoxPromptOpenFile.Checked == (settings.GetSetting("PromptOpenFile", "yes") == "yes") && checkBoxPromptShowProgressbar.Checked == (settings.GetSetting("PromptShowProgressBar", "yes") == "yes") &&
-                checkBoxPromptToQuit.Checked == (settings.GetSetting("PromptToQuit", "yes") == "yes") && checkBoxAutoSaveSettings.Checked == (settings.GetSetting("AutoSaveSettings", "no") == "yes") &&
-                checkBoxAlwaysShowDetailedRestrictions.Checked == (settings.GetSetting("AlwaysShowDetailedRestrictions", "no") == "yes"))
+            if (checkBoxPromptOpenFile.Checked == Properties.Settings.Default.PromptOpenFile && checkBoxPromptShowProgressbar.Checked == Properties.Settings.Default.PromptShowProgressBar &&
+                checkBoxPromptToQuit.Checked == Properties.Settings.Default.PromptToQuit && checkBoxAutoSaveSettings.Checked == Properties.Settings.Default.AutoSaveSettings &&
+                checkBoxAlwaysShowDetailedRestrictions.Checked == Properties.Settings.Default.AlwaysShowDetailedRestrictions)
                 return;
 
             if (MessageBox.Show("Do you wish to save the edited settings?", "Save settings?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)

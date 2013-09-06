@@ -19,7 +19,6 @@ namespace File_Searcher
         private readonly List<Control> controlsToDisable = new List<Control>();
         private readonly List<string> exceptionStringStore = new List<string>();
         public Timer timerMoveForProgressBar = null, timerMoveForDetailedRestrictions = null;
-        public Settings settings = new Settings();
 
         public MainForm()
         {
@@ -103,7 +102,7 @@ namespace File_Searcher
 
             originalResultsHeight = listViewResults.Height;
 
-            if (settings.GetSetting("AlwaysShowDetailedRestrictions", "no") == "yes")
+            if (Properties.Settings.Default.AlwaysShowDetailedRestrictions)
             {
                 checkBoxShowDetailedRestrictions.Checked = true;
                 listViewResults.Height -= 25;
@@ -556,7 +555,7 @@ namespace File_Searcher
             if (IsInvalidString(listViewResults.SelectedItems[0].SubItems[5].Text))
                 return;
 
-            if (settings.GetSetting("PromptOpenFile", "yes") == "no" || MessageBox.Show("Are you sure you want to open this file?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (!Properties.Settings.Default.PromptOpenFile || MessageBox.Show("Are you sure you want to open this file?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 StartProcess(hadShiftDown ? Path.GetDirectoryName(selectedItemName) : selectedItemName);
         }
 
@@ -669,7 +668,7 @@ namespace File_Searcher
         //! Needs object and eventargs so we can attach a .Click event to it from menu item 'Exit'
         private void TryCloseApplication(object sender = null, EventArgs e = null)
         {
-            if (settings.GetSetting("PromptToQuit", "yes") == "no" || MessageBox.Show("Are you sure you want to quit?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (!Properties.Settings.Default.PromptToQuit || MessageBox.Show("Are you sure you want to quit?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 Close();
         }
 
@@ -677,7 +676,7 @@ namespace File_Searcher
         {
             if (checkBoxShowProgress.Checked)
             {
-                if (settings.GetSetting("PromptShowProgressBar", "yes") == "no" || MessageBox.Show("Are you sure you want to initialize a progress bar? The progress will take a lot longer than it would normally (if the directory we search in is big).", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (!Properties.Settings.Default.PromptToQuit || MessageBox.Show("Are you sure you want to initialize a progress bar? The progress will take a lot longer than it would normally (if the directory we search in is big).", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     MaximumSize = new Size(Width, Height + 30);
                     timerMoveForProgressBar.Enabled = true;
