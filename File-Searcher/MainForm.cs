@@ -144,7 +144,7 @@ namespace File_Searcher
             controlsToDisable.Add(btnOpenFilter);
             controlsToDisable.Add(checkBoxShowDetailedRestrictions);
 
-            if (btnClear.Enabled)
+            if (!btnClear.Enabled)
                 controlsToDisable.Add(btnClear);
 
             if (checkBoxIgnoreCaseSensitivity.Enabled)
