@@ -74,7 +74,7 @@ namespace File_Searcher
 
         private void PromptSaveSettingsOnClose()
         {
-            if (Properties.Settings.Default.AutoSaveSettings)
+            if (checkBoxAutoSaveSettings.Checked)
             {
                 SaveSettings();
                 return;
