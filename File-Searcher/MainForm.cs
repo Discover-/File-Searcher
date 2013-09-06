@@ -57,7 +57,6 @@ namespace File_Searcher
 
             listViewResults.DoubleClick += listViewResults_DoubleClick;
 
-            listViewResults.ListViewItemSorter = lvwColumnSorter;
             listViewResults.ColumnClick += listViewResults_ColumnClick;
 
             //! Set all anchors; this makes the controls properly resize along with the form when it gets resized.
@@ -574,6 +573,7 @@ namespace File_Searcher
         private void listViewResults_ColumnClick(object sender, ColumnClickEventArgs e)
         {
             var myListView = (ListView)sender;
+            myListView.ListViewItemSorter = lvwColumnSorter;
 
             //! Determine if clicked column is already the column that is being sorted
             if (e.Column != lvwColumnSorter.SortColumn)
