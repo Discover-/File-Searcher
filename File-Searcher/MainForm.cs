@@ -373,10 +373,10 @@ namespace File_Searcher
                                 //! Can't add an .Enabled call here because it is disabled during the process
                                 if (checkBoxIgnoreCaseSensitivity.Checked)// && checkBoxIgnoreCaseSensitivity.Enabled)
                                 {
-                                    if (String.Compare(fileToCheck, search, StringComparison.OrdinalIgnoreCase) != 0)
+                                    if (!fileToCheck.ToLower().Contains(search.ToLower()))
                                         continue;
                                 }
-                                else if (String.Compare(fileToCheck, search, StringComparison.Ordinal) != 0)
+                                else if (!fileToCheck.Contains(search))
                                     continue;
                             }
                         }
