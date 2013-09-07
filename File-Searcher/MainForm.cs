@@ -270,7 +270,7 @@ namespace File_Searcher
                     }
                 }
 
-                if ((((checkBoxSearchForFileContent.Checked && !String.IsNullOrWhiteSpace(txtBoxFileSearch.Text)) || Path.HasExtension(txtBoxFileSearch.Text)) || Path.HasExtension(extensionField)))
+                if ((checkBoxSearchForFileContent.Checked && !String.IsNullOrWhiteSpace(txtBoxFileSearch.Text)) || Path.HasExtension(txtBoxFileSearch.Text) || Path.HasExtension(extensionField))
                     MessageBox.Show("The searched directory contains no files matching the given criteria.", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
                     MessageBox.Show("The searched directory contains no files at all.", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -527,12 +527,12 @@ namespace File_Searcher
         {
             var selectedItemName = listViewResults.SelectedItems[0].SubItems[5].Text;
 
-            if (String.IsNullOrWhiteSpace(listViewResults.SelectedItems[0].SubItems[5].Text))
+            if (String.IsNullOrWhiteSpace(selectedItemName))
                 return;
 
             //! Need to use a variable to store whether or not the user had shift down before the 'Are you sure?'
             //! box was opened, otherwise it would only work if Shift was down when the confirmation box was closed.
-            var hadShiftDown = ((Control.ModifierKeys & Keys.Shift) != 0);
+            var hadShiftDown = (Control.ModifierKeys & Keys.Shift) != 0;
 
             if (!Properties.Settings.Default.PromptOpenFile || MessageBox.Show(String.Format("Are you sure you want to open this {0}?", hadShiftDown ? "directory" : "file"), "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 StartProcess(hadShiftDown ? Path.GetDirectoryName(selectedItemName) : selectedItemName);
