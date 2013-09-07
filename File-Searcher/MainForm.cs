@@ -623,7 +623,7 @@ namespace File_Searcher
             switch (e.KeyCode)
             {
                 case Keys.Enter:
-                    if (listViewResults.SelectedItems.Count > 0)
+                    if (listViewResults.SelectedItems.Count > 0 && !(txtBoxDirectorySearch.Focused || txtBoxFileSearch.Focused || txtBoxExtensions.Focused))
                     {
                         var hadShiftDown = ((Control.ModifierKeys & Keys.Shift) != 0);
 
