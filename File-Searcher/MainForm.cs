@@ -354,7 +354,7 @@ namespace File_Searcher
 
                     foreach (FileData file in FastDirectoryEnumerator.GetFiles(directory, "*"))
                     {
-                        string fileName = file.Name;
+                        string fileName = file.Path;
 
                         if (fileName.Length == 0)
                             continue;
@@ -543,10 +543,13 @@ namespace File_Searcher
         private void listViewResults_DoubleClick(object sender, EventArgs e)
         {
             var selectedItemName = listViewResults.SelectedItems[0].SubItems[5].Text;
-            var hadShiftDown = ((Control.ModifierKeys & Keys.Shift) != 0);
 
             if (String.IsNullOrWhiteSpace(listViewResults.SelectedItems[0].SubItems[5].Text))
                 return;
+
+            //! Need to use a variable to store whether or not the user had shift down before the 'Are you sure?'
+            //! box was opened, otherwise it would only work if Shift was down when the confirmation box was closed.
+            var hadShiftDown = ((Control.ModifierKeys & Keys.Shift) != 0);
 
             if (!Properties.Settings.Default.PromptOpenFile || MessageBox.Show("Are you sure you want to open this file?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 StartProcess(hadShiftDown ? Path.GetDirectoryName(selectedItemName) : selectedItemName);
