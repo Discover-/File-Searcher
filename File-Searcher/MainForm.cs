@@ -21,6 +21,7 @@ namespace File_Searcher
         private readonly List<Control> controlsToDisable = new List<Control>();
         private readonly List<string> exceptionStringStore = new List<string>();
         public Timer timerMoveForProgressBar = null, timerMoveForDetailedRestrictions = null;
+        private bool checkBoxIncludeDirFilenameWasEnabled = false;
 
         public MainForm()
         {
@@ -234,6 +235,8 @@ namespace File_Searcher
             SetEnabledOfControl(btnSearch, false);
             SetEnabledOfControl(btnStopSearching, true);
 
+            checkBoxIncludeDirFilenameWasEnabled = checkBoxIncludeDirFilename.Enabled;
+
             foreach (var control in controlsToDisable)
                 SetEnabledOfControl(control, false);
 
@@ -321,6 +324,7 @@ namespace File_Searcher
         private string GetAllFilesFromDirectoryAndFillResults(string directorySearch, bool includingSubDirs)
         {
             var stringBuilder = new StringBuilder(100);
+
             //! We need a try-catch block because accessing files without permissions does not work for some reason
             //! and breaks with an exception.
             try
@@ -351,7 +355,7 @@ namespace File_Searcher
                         {
                             var fileToCheck = fileName;
 
-                            if (!checkBoxIncludeDirFilename.Checked && checkBoxIncludeDirFilename.Enabled)
+                            if (!checkBoxIncludeDirFilename.Checked && checkBoxIncludeDirFilenameWasEnabled)
                                 fileToCheck = Path.GetFileName(fileName);
 
                             if (checkBoxSearchForFileContent.Checked)
@@ -366,12 +370,13 @@ namespace File_Searcher
                             }
                             else
                             {
-                                if (checkBoxIgnoreCaseSensitivity.Checked)
+                                //! Can't add an .Enabled call here because it is disabled during the process
+                                if (checkBoxIgnoreCaseSensitivity.Checked)// && checkBoxIgnoreCaseSensitivity.Enabled)
                                 {
-                                    if (string.Compare(fileToCheck, search, StringComparison.OrdinalIgnoreCase) != 0)
+                                    if (String.Compare(fileToCheck, search, StringComparison.OrdinalIgnoreCase) != 0)
                                         continue;
                                 }
-                                else if (string.Compare(fileToCheck, search, StringComparison.Ordinal) != 0)
+                                else if (String.Compare(fileToCheck, search, StringComparison.Ordinal) != 0)
                                     continue;
                             }
                         }
