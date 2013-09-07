@@ -7,6 +7,7 @@ namespace File_Searcher
     public partial class FilteredResultsForm : Form
     {
         private readonly ListView.ListViewItemCollection initialItemCollection;
+        private readonly ListViewColumnSorter lvwColumnSorter = new ListViewColumnSorter();
 
         public FilteredResultsForm(ListView.ListViewItemCollection items)
         {
@@ -76,6 +77,26 @@ namespace File_Searcher
                         button1_Click(sender, e);
                     break;
             }
+        }
+
+        private void listView_ColumnClick(object sender, ColumnClickEventArgs e)
+        {
+            var myListView = (ListView)sender;
+            myListView.ListViewItemSorter = lvwColumnSorter;
+
+            //! Determine if clicked column is already the column that is being sorted
+            if (e.Column != lvwColumnSorter.SortColumn)
+            {
+                //! Set the column number that is to be sorted; default to ascending
+                lvwColumnSorter.SortColumn = e.Column;
+                lvwColumnSorter.Order = SortOrder.Ascending;
+            }
+            else
+                //! Reverse the current sort direction for this column
+                lvwColumnSorter.Order = lvwColumnSorter.Order == SortOrder.Ascending ? SortOrder.Descending : SortOrder.Ascending;
+
+            //! Perform the sort with these new sort options
+            myListView.Sort();
         }
     }
 }

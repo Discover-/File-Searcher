@@ -42,6 +42,7 @@
             this.listViewResultsFilter.Size = new System.Drawing.Size(739, 240);
             this.listViewResultsFilter.TabIndex = 0;
             this.listViewResultsFilter.UseCompatibleStateImageBehavior = false;
+            this.listViewResultsFilter.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listView_ColumnClick);
             // 
             // textBoxFilter
             // 
