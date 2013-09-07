@@ -134,11 +134,15 @@
             // 
             // listViewResults
             // 
+            this.listViewResults.FullRowSelect = true;
             this.listViewResults.Location = new System.Drawing.Point(14, 250);
             this.listViewResults.Name = "listViewResults";
             this.listViewResults.Size = new System.Drawing.Size(740, 240);
             this.listViewResults.TabIndex = 8;
             this.listViewResults.UseCompatibleStateImageBehavior = false;
+            this.listViewResults.View = System.Windows.Forms.View.Details;
+            this.listViewResults.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewResults_ColumnClick);
+            this.listViewResults.DoubleClick += new System.EventHandler(this.listViewResults_DoubleClick);
             // 
             // checkBoxShowDir
             // 
@@ -410,6 +414,7 @@
             this.menuItemSettings.Name = "menuItemSettings";
             this.menuItemSettings.Size = new System.Drawing.Size(116, 22);
             this.menuItemSettings.Text = "Settings";
+            this.menuItemSettings.Click += new System.EventHandler(this.menuItemSettings_Click);
             // 
             // toolStripSeparator1
             // 
@@ -421,6 +426,7 @@
             this.menuItemExit.Name = "menuItemExit";
             this.menuItemExit.Size = new System.Drawing.Size(116, 22);
             this.menuItemExit.Text = "Exit";
+            this.menuItemExit.Click += new System.EventHandler(this.TryCloseApplication);
             // 
             // menuHeaderAbout
             // 
@@ -435,6 +441,7 @@
             this.menuItemAbout.Name = "menuItemAbout";
             this.menuItemAbout.Size = new System.Drawing.Size(107, 22);
             this.menuItemAbout.Text = "About";
+            this.menuItemAbout.Click += new System.EventHandler(this.menuItemAbout_Click);
             // 
             // datePickerFilesNewerThan
             // 
@@ -496,10 +503,13 @@
             this.Controls.Add(this.checkBoxFilesOlderThan);
             this.Controls.Add(this.checkBoxFilesNewerThan);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MainMenuStrip = this.menuStrip1;
+            this.MaximizeBox = false;
             this.Name = "MainForm";
             this.Text = "File Searcher";
             this.Load += new System.EventHandler(this.Form1_Load);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown);
             this.groupBoxOptions.ResumeLayout(false);
             this.groupBoxOptions.PerformLayout();
             this.groupBoxSearchInfo.ResumeLayout(false);

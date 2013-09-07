@@ -12,16 +12,8 @@ namespace File_Searcher
         public FilteredResultsForm(ListView.ListViewItemCollection items)
         {
             InitializeComponent();
-            MaximizeBox = false; //! This looks ugly if set to true when button is pressed while we have a hardcoded max size
-            MinimizeBox = true;
             MinimumSize = new Size(Width, Height);
             MaximumSize = new Size(Width, Height + 500);
-
-            initialItemCollection = items;
-            InitializeListView(ref listViewResultsFilter, items);
-
-            KeyPreview = true;
-            KeyDown += FiltedResultsForm_KeyDown;
         }
 
         private void button1_Click(object sender, EventArgs e)

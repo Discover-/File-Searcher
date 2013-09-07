@@ -85,9 +85,13 @@
             this.Controls.Add(this.comboBoxFilterType);
             this.Controls.Add(this.textBoxFilter);
             this.Controls.Add(this.listViewResultsFilter);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
+            this.MaximizeBox = false;
             this.Name = "FilteredResultsForm";
             this.Text = "Filtered results";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FiltedResultsForm_KeyDown);
             this.ResumeLayout(false);
             this.PerformLayout();
 

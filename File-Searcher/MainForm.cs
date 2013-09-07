@@ -29,8 +29,6 @@ namespace File_Searcher
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            MaximizeBox = false; //! This looks ugly if set to true when button is pressed while we have a hardcoded max size
-            MinimizeBox = true;
             MinimumSize = new Size(Width, Height);
             MaximumSize = new Size(Width + 700, Height);
             //MaximumSize = new Size(Width + 700, Height + 50);
@@ -44,22 +42,12 @@ namespace File_Searcher
             timerMoveForDetailedRestrictions = new Timer { Enabled = false, Interval = 16 };
             timerMoveForDetailedRestrictions.Tick += timerMoveForDetailedRestrictions_Tick;
 
-            KeyPreview = true;
-            KeyDown += Form1_KeyDown;
-
-            listViewResults.View = View.Details;
             listViewResults.Columns.Add("Extension", 60, HorizontalAlignment.Right);
             listViewResults.Columns.Add("Name", 430, HorizontalAlignment.Left);
             listViewResults.Columns.Add("Size", 35, HorizontalAlignment.Right);
             listViewResults.Columns.Add("Sizetype", 55, HorizontalAlignment.Right);
             listViewResults.Columns.Add("Last Modified", 138, HorizontalAlignment.Right);
             listViewResults.Columns.Add("", 0, HorizontalAlignment.Right);
-
-            listViewResults.FullRowSelect = true; //! This will make clicking on a row in the results select the full row.
-
-            listViewResults.DoubleClick += listViewResults_DoubleClick;
-
-            listViewResults.ColumnClick += listViewResults_ColumnClick;
 
             //! Set all anchors; this makes the controls properly resize along with the form when it gets resized.
             InitializeAnchors();
@@ -87,10 +75,6 @@ namespace File_Searcher
 
             txtBoxDirectorySearch.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             txtBoxDirectorySearch.AutoCompleteSource = AutoCompleteSource.FileSystemDirectories;
-
-            menuItemExit.Click += TryCloseApplication;
-            menuItemSettings.Click += menuItemSettings_Click;
-            menuItemAbout.Click += menuItemAbout_Click;
 
             menuItemExit.ShortcutKeys = (Keys.Shift | Keys.F5);
             menuItemExit.ShortcutKeyDisplayString = "(Shift + F5)";

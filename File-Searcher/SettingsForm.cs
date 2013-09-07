@@ -14,15 +14,6 @@ namespace File_Searcher
 
         private void SettingsForm_Load(object sender, EventArgs e)
         {
-            MaximizeBox = false;
-            MinimizeBox = true;
-            FormBorderStyle = FormBorderStyle.Fixed3D;
-
-            FormClosed += SettingsForm_FormClosed; //! To save settings
-
-            KeyPreview = true;
-            KeyDown += SettingsForm_KeyDown;
-
             checkBoxPromptOpenFile.Checked = Properties.Settings.Default.PromptOpenFile;
             checkBoxPromptShowProgressbar.Checked = Properties.Settings.Default.PromptShowProgressBar;
             checkBoxPromptToQuit.Checked = Properties.Settings.Default.PromptToQuit;
