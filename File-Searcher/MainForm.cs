@@ -430,7 +430,6 @@ namespace File_Searcher
                         stringBuilder.AppendLine(file.Name);
 
                         string extension = Path.GetExtension(fileName).ToLower();
-                        //string fileSize = (new FileInfo(files[i]).Length / 1024).ToString();
                         string fileSizeType = "";
                         string fileSize = convertBytesFormat(file.Size, ref fileSizeType);
 
@@ -551,7 +550,7 @@ namespace File_Searcher
             //! box was opened, otherwise it would only work if Shift was down when the confirmation box was closed.
             var hadShiftDown = ((Control.ModifierKeys & Keys.Shift) != 0);
 
-            if (!Properties.Settings.Default.PromptOpenFile || MessageBox.Show("Are you sure you want to open this file?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (!Properties.Settings.Default.PromptOpenFile || MessageBox.Show(String.Format("Are you sure you want to open this {0}?", hadShiftDown ? "directory" : "file"), "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 StartProcess(hadShiftDown ? Path.GetDirectoryName(selectedItemName) : selectedItemName);
         }
 
@@ -644,7 +643,7 @@ namespace File_Searcher
                     {
                         var hadShiftDown = ((Control.ModifierKeys & Keys.Shift) != 0);
 
-                        if (MessageBox.Show(String.Format("Are you sure you want to open {0}?", listViewResults.SelectedItems.Count > 1 ? String.Format("the selected ({0}) files", listViewResults.SelectedItems.Count) : "this file"), "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        if (MessageBox.Show(String.Format("Are you sure you want to open {0}?", listViewResults.SelectedItems.Count > 1 ? String.Format("the selected ({0}) {1}", listViewResults.SelectedItems.Count, hadShiftDown ? "directories" : "files") : String.Format("this {0}", hadShiftDown ? "directory" : "file")), "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                             foreach (ListViewItem item in listViewResults.SelectedItems)
                                 StartProcess(hadShiftDown ? Path.GetDirectoryName(item.SubItems[5].Text) + "\\" : item.SubItems[5].Text);
                     }
