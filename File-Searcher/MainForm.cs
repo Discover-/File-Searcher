@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
+using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using System.Threading;
@@ -10,7 +12,7 @@ using Timer = System.Windows.Forms.Timer;
 
 namespace File_Searcher
 {
-    public partial class MainForm : Form
+    public sealed partial class MainForm : Form
     {
         private Thread searchThread = null;
         private int oldWidth = 0, originalHeight = 0, originalWidth = 0, originalResultsHeight = 0;
@@ -186,7 +188,7 @@ namespace File_Searcher
             if (!txtBoxDirectorySearch.Text.EndsWith("\\"))
                 searchDirectory += "\\";
 
-            if (IsInvalidString(searchDirectory))
+            if (String.IsNullOrWhiteSpace(searchDirectory))
             {
                 MessageBox.Show("The search directory field was left empty!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
@@ -204,13 +206,13 @@ namespace File_Searcher
                 return;
             }
 
-            if (!IsInvalidString(searchFileText) && Directory.Exists(searchFileText))
+            if (!String.IsNullOrWhiteSpace(searchFileText) && Directory.Exists(searchFileText))
             {
                 MessageBox.Show("The field for filename contains a directory!", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
-            if (!IsInvalidString(extensionField))
+            if (!String.IsNullOrWhiteSpace(extensionField))
             {
                 if (Directory.Exists(extensionField))
                 {
@@ -256,8 +258,6 @@ namespace File_Searcher
             SetProgressBarMaxValue(progressBar, 100);
             SetProgressBarValue(progressBar, 0);
 
-            var allFiles = "";
-
             ClearListViewResults(listViewResults);
 
             if (checkBoxShowProgress.Checked)
@@ -268,13 +268,13 @@ namespace File_Searcher
             }
 
             //! Function also fills up the listbox on the fly
-            GetAllFilesFromDirectoryAndFillResults(searchDirectory, checkBoxIncludeSubDirs.Checked, ref allFiles);
+            var allFiles = GetAllFilesFromDirectoryAndFillResults(searchDirectory, checkBoxIncludeSubDirs.Checked);
 
-            if (IsInvalidString(allFiles))
+            if (String.IsNullOrWhiteSpace(allFiles))
             {
                 var illegalCharacters = new string(Path.GetInvalidFileNameChars()) + new string(Path.GetInvalidPathChars());
 
-                if (!IsInvalidString(txtBoxFileSearch.Text) && !IsInvalidString(extensionField))
+                if (!String.IsNullOrWhiteSpace(txtBoxFileSearch.Text) && !String.IsNullOrWhiteSpace(extensionField))
                 {
                     for (var i = 0; i < illegalCharacters.Count(); ++i)
                     {
@@ -286,7 +286,7 @@ namespace File_Searcher
                     }
                 }
 
-                if ((((checkBoxSearchForFileContent.Checked && !IsInvalidString(txtBoxFileSearch.Text)) || Path.HasExtension(txtBoxFileSearch.Text)) || Path.HasExtension(extensionField)))
+                if ((((checkBoxSearchForFileContent.Checked && !String.IsNullOrWhiteSpace(txtBoxFileSearch.Text)) || Path.HasExtension(txtBoxFileSearch.Text)) || Path.HasExtension(extensionField)))
                     MessageBox.Show("The searched directory contains no files matching the given criteria.", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 else
                     MessageBox.Show("The searched directory contains no files at all.", "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -336,134 +336,128 @@ namespace File_Searcher
             }
         }
 
-        private void GetAllFilesFromDirectoryAndFillResults(string directorySearch, bool includingSubDirs, ref string allFiles)
+        private string GetAllFilesFromDirectoryAndFillResults(string directorySearch, bool includingSubDirs)
         {
+            var stringBuilder = new StringBuilder(100);
             //! We need a try-catch block because accessing files without permissions does not work for some reason
             //! and breaks with an exception.
             try
             {
-                string[] directories = Directory.GetDirectories(directorySearch);
-                string[] files = Directory.GetFiles(directorySearch);
+                string search = txtBoxFileSearch.Text;
+                bool hasSearch = search.Length > 0;
+                IEnumerable<string> enumerator = includingSubDirs ? FastDirectoryEnumerator.GetAllDirectories(directorySearch) : FastDirectoryEnumerator.GetDirectories(directorySearch, "*");
 
-                if (checkBoxShowProgress.Checked)
-                    SetProgressBarValue(progressBar, progressBar.Value + 1);
-
-                foreach (string file in files)
+                foreach (var directory in enumerator)
                 {
-                    if (file == "")
-                        continue;
+                    if (checkBoxShowProgress.Checked)
+                        SetProgressBarValue(progressBar, progressBar.Value + 1);
 
-                    if (checkBoxIgnoreRecycledFiles.Checked && file.IndexOf("recycle", StringComparison.OrdinalIgnoreCase) >= 0)
-                        continue;
-
-                    if (!checkBoxShowHiddenFiles.Checked && (File.GetAttributes(file) & FileAttributes.Hidden) == FileAttributes.Hidden)
-                        continue;
-
-                    if (txtBoxFileSearch.Text != "")
+                    foreach (FileData file in FastDirectoryEnumerator.GetFiles(directory, "*"))
                     {
-                        string fileToCheck = file;
+                        string fileName = file.Name;
 
-                        if (!checkBoxIncludeDirFilename.Checked && checkBoxIncludeDirFilename.Enabled)
-                            fileToCheck = Path.GetFileName(fileToCheck);
-
-                        if (checkBoxSearchForFileContent.Checked)
-                        {
-                            if (checkBoxIgnoreCaseSensitivity.Checked)
-                            {
-                                if (!File.ReadAllText(fileToCheck).ToLower().Contains(txtBoxFileSearch.Text.ToLower()))
-                                    continue;
-                            }
-                            else if (!File.ReadAllText(fileToCheck).Contains(txtBoxFileSearch.Text))
-                                continue;
-                        }
-                        else
-                        {
-                            if (checkBoxIgnoreCaseSensitivity.Checked)
-                            {
-                                if (!fileToCheck.ToLower().Contains(txtBoxFileSearch.Text.ToLower()))
-                                    continue;
-                            }
-                            else if (!fileToCheck.Contains(txtBoxFileSearch.Text))
-                                continue;
-                        }
-                    }
-
-                    if (!checkBoxShowFilesWithoutExtension.Checked && !Path.HasExtension(file))
-                        continue;
-
-                    if (!IsInvalidString(txtBoxExtensions.Text))
-                    {
-                        //! If we only list specific extensions (field is not left empty) and the given file has no
-                        //! extension, we can safely ignore it.
-                        if (checkBoxReverseExtensions.Checked && !Path.HasExtension(file))
+                        if (fileName.Length == 0)
                             continue;
 
-                        string[] splitExtensionsField = txtBoxExtensions.Text.Split(';');
-                        bool foundExtensionMatch = false;
+                        if (checkBoxIgnoreRecycledFiles.Checked && fileName.IndexOf("recycle", StringComparison.OrdinalIgnoreCase) >= 0)
+                            continue;
 
-                        for (int x = 0; x < splitExtensionsField.Length; x++)
+                        if (!checkBoxShowHiddenFiles.Checked && (file.Attributes & FileAttributes.Hidden) == FileAttributes.Hidden)
+                            continue;
+
+                        if (hasSearch)
                         {
-                            if (Path.GetExtension(file).ToLower() == splitExtensionsField[x].ToLower())
+                            var fileToCheck = fileName;
+
+                            if (!checkBoxIncludeDirFilename.Checked && checkBoxIncludeDirFilename.Enabled)
+                                fileToCheck = Path.GetFileName(fileName);
+
+                            if (checkBoxSearchForFileContent.Checked)
                             {
-                                foundExtensionMatch = true;
-                                break;
+                                if (checkBoxIgnoreCaseSensitivity.Checked)
+                                {
+                                    if (!File.ReadAllText(fileName).ToLower().Contains(search.ToLower()))
+                                        continue;
+                                }
+                                else if (!File.ReadAllText(fileName).Contains(search))
+                                    continue;
+                            }
+                            else
+                            {
+                                if (checkBoxIgnoreCaseSensitivity.Checked)
+                                {
+                                    if (string.Compare(fileToCheck, search, StringComparison.OrdinalIgnoreCase) != 0)
+                                        continue;
+                                }
+                                else if (string.Compare(fileToCheck, search, StringComparison.Ordinal) != 0)
+                                    continue;
                             }
                         }
 
-                        if (foundExtensionMatch)
+                        if (!checkBoxShowFilesWithoutExtension.Checked && !Path.HasExtension(fileName))
+                            continue;
+
+                        if (!String.IsNullOrWhiteSpace(txtBoxExtensions.Text))
                         {
-                            if (!checkBoxReverseExtensions.Checked) //! Extensions to show instead of ignore in the field now
+                            //! If we only list specific extensions (field is not left empty) and the given file has no
+                            //! extension, we can safely ignore it.
+                            //if (checkBoxReverseExtensions.Checked && !Path.HasExtension(file))
+                            //    continue;
+
+                            string[] splitExtensionsField = txtBoxExtensions.Text.Split(';');
+                            bool foundExtensionMatch = splitExtensionsField.Any(t => fileName.EndsWith(t, StringComparison.OrdinalIgnoreCase));
+
+                            if (foundExtensionMatch)
+                            {
+                                if (!checkBoxReverseExtensions.Checked) //! Extensions to show instead of ignore in the field now
+                                    continue;
+                            }
+                            else if (checkBoxReverseExtensions.Checked)
                                 continue;
                         }
-                        else if (checkBoxReverseExtensions.Checked)
-                            continue;
+
+                        if (checkBoxShowDetailedRestrictions.Checked)
+                        {
+                            if (checkBoxFilesNewerThan.Checked)
+                                if (!(DateTime.Compare(file.CreationTime, datePickerFilesNewerThan.Value.Date) > 0))
+                                    continue;
+
+                            if (checkBoxFilesOlderThan.Checked)
+                                if (!(DateTime.Compare(file.CreationTime, datePickerFilesOlderThan.Value.Date) < 0))
+                                    continue;
+                        }
+
+                        stringBuilder.AppendLine(file.Name);
+
+                        string extension = Path.GetExtension(fileName).ToLower();
+                        //string fileSize = (new FileInfo(files[i]).Length / 1024).ToString();
+                        string fileSizeType = "";
+                        string fileSize = convertBytesFormat(file.Size, ref fileSizeType);
+
+                        if (!checkBoxShowDir.Checked)
+                            fileName = Path.GetFileName(file.Name);
+
+                        AddItemToListView(listViewResults, new ListViewItem(new[] { extension, fileName, fileSize, fileSizeType, file.LastWriteTime.ToString(CultureInfo.InvariantCulture), fileName }));
                     }
-
-                    if (checkBoxShowDetailedRestrictions.Checked)
-                    {
-                        if (checkBoxFilesNewerThan.Checked)
-                            if (!(DateTime.Compare(File.GetCreationTime(file), datePickerFilesNewerThan.Value.Date) > 0))
-                                continue;
-
-                        if (checkBoxFilesOlderThan.Checked)
-                            if (!(DateTime.Compare(File.GetCreationTime(file), datePickerFilesOlderThan.Value.Date) < 0))
-                                continue;
-                    }
-
-                    allFiles += file + "\n"; //! Need to fill up the reference...
-
-                    string fileName = file;
-                    string extension = Path.GetExtension(file).ToLower();
-                    //string fileSize = (new FileInfo(files[i]).Length / 1024).ToString();
-                    string fileSizeType = "";
-                    string fileSize = convertBytesFormat((int)new FileInfo(file).Length, ref fileSizeType);
-
-                    if (!checkBoxShowDir.Checked)
-                        fileName = Path.GetFileName(fileName);
-
-                    AddItemToListView(listViewResults, new ListViewItem(new[] { extension, fileName, fileSize, fileSizeType, new FileInfo(file).LastWriteTime.ToString(), fileName }));
                 }
-
-                //! If we include sub directories, recursive call this function up to every single directory.
-                if (includingSubDirs)
-                    foreach (string dir in directories)
-                        GetAllFilesFromDirectoryAndFillResults(dir, true, ref allFiles);
             }
             catch (Exception exception)
             {
                 if (checkBoxShowExceptions.Checked)
                     exceptionStringStore.Add(exception.ToString());
             }
+
+            return stringBuilder.ToString();
         }
 
         private void btnSearchDir_Click(object sender, EventArgs e)
         {
             var fbd = new FolderBrowserDialog { Description = "Select a directory in which you want to search for files and directories." };
 
-            if (txtBoxDirectorySearch.Text != "" && Directory.Exists(txtBoxDirectorySearch.Text))
+            if (txtBoxDirectorySearch.Text.Length > 0 && Directory.Exists(txtBoxDirectorySearch.Text))
                 fbd.SelectedPath = txtBoxDirectorySearch.Text;
 
-            if (fbd.ShowDialog() == System.Windows.Forms.DialogResult.OK)
+            if (fbd.ShowDialog() == DialogResult.OK)
                 txtBoxDirectorySearch.Text = fbd.SelectedPath;
         }
 
@@ -509,12 +503,12 @@ namespace File_Searcher
             }
         }
 
-        private string convertBytesFormat(int bytes, ref string fileType)
+        private string convertBytesFormat(long bytes, ref string fileType)
         {
             if (fileType == null)
                 throw new ArgumentNullException("fileType");
 
-            string[] sizes = { "B", "KB", "MB", "GB" };
+            string[] sizes = { "B", "KB", "MB", "GB", "TB", "PB" };
             var order = 0;
 
             while (bytes >= 1024 && order + 1 < sizes.Length)
@@ -551,7 +545,7 @@ namespace File_Searcher
             var selectedItemName = listViewResults.SelectedItems[0].SubItems[5].Text;
             var hadShiftDown = ((Control.ModifierKeys & Keys.Shift) != 0);
 
-            if (IsInvalidString(listViewResults.SelectedItems[0].SubItems[5].Text))
+            if (String.IsNullOrWhiteSpace(listViewResults.SelectedItems[0].SubItems[5].Text))
                 return;
 
             if (!Properties.Settings.Default.PromptOpenFile || MessageBox.Show("Are you sure you want to open this file?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
@@ -597,11 +591,6 @@ namespace File_Searcher
             toolTip.ShowAlways = true;
         }
 
-        private bool IsInvalidString(string str)
-        {
-            return (String.IsNullOrEmpty(str) || String.IsNullOrWhiteSpace(str));
-        }
-
         private bool ArrayHasDuplicates(string[] arrayString, ref string duplicateString)
         {
             var listValues = new List<string>();
@@ -627,7 +616,7 @@ namespace File_Searcher
 
         private void txtBoxFileSearch_TextChanged(object sender, EventArgs e)
         {
-            checkBoxIgnoreCaseSensitivity.Enabled = (!IsInvalidString(txtBoxFileSearch.Text) || !IsInvalidString(txtBoxExtensions.Text));
+            checkBoxIgnoreCaseSensitivity.Enabled = (!String.IsNullOrWhiteSpace(txtBoxFileSearch.Text) || !String.IsNullOrWhiteSpace(txtBoxExtensions.Text));
 
             if (!checkBoxSearchForFileContent.Checked)
                 checkBoxIncludeDirFilename.Enabled = checkBoxIgnoreCaseSensitivity.Enabled;
@@ -635,7 +624,7 @@ namespace File_Searcher
 
         private void txtBoxExtensions_TextChanged(object sender, EventArgs e)
         {
-            checkBoxIgnoreCaseSensitivity.Enabled = (!IsInvalidString(txtBoxFileSearch.Text) || !IsInvalidString(txtBoxExtensions.Text));
+            checkBoxIgnoreCaseSensitivity.Enabled = (!String.IsNullOrWhiteSpace(txtBoxFileSearch.Text) || !String.IsNullOrWhiteSpace(txtBoxExtensions.Text));
         }
 
         private void buttonOpenFilter_Click(object sender, EventArgs e)

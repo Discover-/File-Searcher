@@ -25,10 +25,9 @@ namespace File_Searcher
                 if (attributes.Length > 0)
                 {
                     AssemblyTitleAttribute titleAttribute = (AssemblyTitleAttribute)attributes[0];
-                    if (titleAttribute.Title != "")
-                    {
+
+                    if (titleAttribute.Title.Length > 0)
                         return titleAttribute.Title;
-                    }
                 }
                 return System.IO.Path.GetFileNameWithoutExtension(Assembly.GetExecutingAssembly().CodeBase);
             }

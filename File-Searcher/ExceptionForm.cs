@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace File_Searcher
 {
-    public partial class ExceptionForm : Form
+    public sealed partial class ExceptionForm : Form
     {
         private readonly List<string> exceptionStringStore;
         private readonly int totalExceptions;

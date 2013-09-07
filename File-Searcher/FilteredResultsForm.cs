@@ -50,10 +50,10 @@ namespace File_Searcher
         private void InitializeListView(ref ListView listView, ListView.ListViewItemCollection items = null)
         {
             listView.View = View.Details;
-            listView.Columns.Add("Extension", 60, HorizontalAlignment.Right);
-            listView.Columns.Add("Name", 430, HorizontalAlignment.Left);
-            listView.Columns.Add("Size", 35, HorizontalAlignment.Right);
-            listView.Columns.Add("Sizetype", 55, HorizontalAlignment.Right);
+            listView.Columns.Add("Extension",     60, HorizontalAlignment.Right);
+            listView.Columns.Add("Name",          430, HorizontalAlignment.Left);
+            listView.Columns.Add("Size",          35, HorizontalAlignment.Right);
+            listView.Columns.Add("Sizetype",      55, HorizontalAlignment.Right);
             listView.Columns.Add("Last Modified", 138, HorizontalAlignment.Right);
             listView.FullRowSelect = true;
             //! This will make clicking on a row in the results select the full row.

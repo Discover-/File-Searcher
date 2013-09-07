@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Runtime;
 using System.Windows.Forms;
 
 namespace File_Searcher
@@ -14,6 +12,9 @@ namespace File_Searcher
         [STAThread]
         static void Main()
         {
+            ProfileOptimization.SetProfileRoot(Environment.CurrentDirectory);
+            ProfileOptimization.StartProfile("filesearch.profile");
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new MainForm());

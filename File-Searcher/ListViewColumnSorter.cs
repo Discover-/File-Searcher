@@ -1,19 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Collections;
-using System.Collections.ObjectModel;
 using System.Windows.Forms;
-using System.Text.RegularExpressions;
 
 namespace File_Searcher
 {
     /// <summary>
     /// This class is an implementation of the 'IComparer' interface.
     /// </summary>
-    public class ListViewColumnSorter : IComparer
+    public sealed class ListViewColumnSorter : IComparer
     {
         /// <summary>
         /// Specifies the column to be sorted
@@ -53,12 +47,12 @@ namespace File_Searcher
             listviewY = y as ListViewItem;
 
             if (listviewX != listviewY)
-                compareResult = String.Compare(listviewX.SubItems[ColumnToSort].Text, listviewY.SubItems[ColumnToSort].Text);
+                compareResult = String.CompareOrdinal(listviewX.SubItems[ColumnToSort].Text, listviewY.SubItems[ColumnToSort].Text);
 
             if (OrderOfSort == SortOrder.Ascending)
                 return compareResult;
-            else
-                return -compareResult;
+
+            return -compareResult;
         }
 
         /// <summary>

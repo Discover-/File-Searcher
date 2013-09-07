@@ -62,6 +62,7 @@
     <Compile Include="ExceptionForm.Designer.cs">
       <DependentUpon>ExceptionForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="FastDirectoryEnumerator.cs" />
     <Compile Include="FilteredResultsForm.cs">
       <SubType>Form</SubType>
     </Compile>

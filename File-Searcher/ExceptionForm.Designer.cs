@@ -1,6 +1,6 @@
 ﻿namespace File_Searcher
 {
-    partial class ExceptionForm
+    sealed partial class ExceptionForm
     {
         /// <summary>
         /// Required designer variable.
