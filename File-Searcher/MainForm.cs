@@ -128,9 +128,7 @@ namespace File_Searcher
             controlsToDisable.Add(btnSearchDir);
             controlsToDisable.Add(btnOpenFilter);
             controlsToDisable.Add(checkBoxShowDetailedRestrictions);
-
-            if (!btnClear.Enabled)
-                controlsToDisable.Add(btnClear);
+            controlsToDisable.Add(btnClear); //! This one should be added no matter what
 
             if (checkBoxIgnoreCaseSensitivity.Enabled)
                 controlsToDisable.Add(checkBoxIgnoreCaseSensitivity);
