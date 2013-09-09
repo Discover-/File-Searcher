@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Windows.Forms;
+using File_Searcher.Properties;
 
 namespace File_Searcher
 {
@@ -14,11 +15,11 @@ namespace File_Searcher
 
         private void SettingsForm_Load(object sender, EventArgs e)
         {
-            checkBoxPromptOpenFile.Checked = Properties.Settings.Default.PromptOpenFile;
-            checkBoxPromptShowProgressbar.Checked = Properties.Settings.Default.PromptShowProgressBar;
-            checkBoxPromptToQuit.Checked = Properties.Settings.Default.PromptToQuit;
-            checkBoxAutoSaveSettings.Checked = Properties.Settings.Default.AutoSaveSettings;
-            checkBoxAlwaysShowDetailedRestrictions.Checked = Properties.Settings.Default.AlwaysShowDetailedRestrictions;
+            checkBoxPromptOpenFile.Checked = Settings.Default.PromptOpenFile;
+            checkBoxPromptShowProgressbar.Checked = Settings.Default.PromptShowProgressBar;
+            checkBoxPromptToQuit.Checked = Settings.Default.PromptToQuit;
+            checkBoxAutoSaveSettings.Checked = Settings.Default.AutoSaveSettings;
+            checkBoxAlwaysShowDetailedRestrictions.Checked = Settings.Default.AlwaysShowDetailedRestrictions;
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
@@ -30,12 +31,12 @@ namespace File_Searcher
 
         private void SaveSettings()
         {
-            Properties.Settings.Default.PromptOpenFile = checkBoxPromptOpenFile.Checked;
-            Properties.Settings.Default.PromptShowProgressBar = checkBoxPromptShowProgressbar.Checked;
-            Properties.Settings.Default.PromptToQuit = checkBoxPromptToQuit.Checked;
-            Properties.Settings.Default.AutoSaveSettings = checkBoxAutoSaveSettings.Checked;
-            Properties.Settings.Default.AlwaysShowDetailedRestrictions = checkBoxAlwaysShowDetailedRestrictions.Checked;
-            Properties.Settings.Default.Save();
+            Settings.Default.PromptOpenFile = checkBoxPromptOpenFile.Checked;
+            Settings.Default.PromptShowProgressBar = checkBoxPromptShowProgressbar.Checked;
+            Settings.Default.PromptToQuit = checkBoxPromptToQuit.Checked;
+            Settings.Default.AutoSaveSettings = checkBoxAutoSaveSettings.Checked;
+            Settings.Default.AlwaysShowDetailedRestrictions = checkBoxAlwaysShowDetailedRestrictions.Checked;
+            Settings.Default.Save();
 
             if (!((MainForm)Owner).checkBoxShowDetailedRestrictions.Checked && checkBoxAlwaysShowDetailedRestrictions.Checked)
             {
@@ -61,14 +62,14 @@ namespace File_Searcher
         {
             if (checkBoxAutoSaveSettings.Checked)
             {
-                Properties.Settings.Default.AutoSaveSettings = true;
+                Settings.Default.AutoSaveSettings = true;
                 SaveSettings();
                 return;
             }
 
-            if (checkBoxPromptOpenFile.Checked == Properties.Settings.Default.PromptOpenFile && checkBoxPromptShowProgressbar.Checked == Properties.Settings.Default.PromptShowProgressBar &&
-                checkBoxPromptToQuit.Checked == Properties.Settings.Default.PromptToQuit && checkBoxAutoSaveSettings.Checked == Properties.Settings.Default.AutoSaveSettings &&
-                checkBoxAlwaysShowDetailedRestrictions.Checked == Properties.Settings.Default.AlwaysShowDetailedRestrictions)
+            if (checkBoxPromptOpenFile.Checked == Settings.Default.PromptOpenFile && checkBoxPromptShowProgressbar.Checked == Settings.Default.PromptShowProgressBar &&
+                checkBoxPromptToQuit.Checked == Settings.Default.PromptToQuit && checkBoxAutoSaveSettings.Checked == Settings.Default.AutoSaveSettings &&
+                checkBoxAlwaysShowDetailedRestrictions.Checked == Settings.Default.AlwaysShowDetailedRestrictions)
                 return;
 
             if (MessageBox.Show("Do you wish to save the edited settings?", "Save settings?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)

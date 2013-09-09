@@ -9,6 +9,7 @@ using System.IO;
 using System.Threading;
 using System.Diagnostics;
 using Timer = System.Windows.Forms.Timer;
+using File_Searcher.Properties;
 
 namespace File_Searcher
 {
@@ -88,7 +89,7 @@ namespace File_Searcher
 
             originalResultsHeight = listViewResults.Height;
 
-            if (Properties.Settings.Default.AlwaysShowDetailedRestrictions)
+            if (Settings.Default.AlwaysShowDetailedRestrictions)
             {
                 checkBoxShowDetailedRestrictions.Checked = true;
                 listViewResults.Height -= 25;
@@ -537,7 +538,7 @@ namespace File_Searcher
             //! box was opened, otherwise it would only work if Shift was down when the confirmation box was closed.
             var hadShiftDown = (Control.ModifierKeys & Keys.Shift) != 0;
 
-            if (!Properties.Settings.Default.PromptOpenFile || MessageBox.Show(String.Format("Are you sure you want to open this {0}?", hadShiftDown ? "directory" : "file"), "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (!Settings.Default.PromptOpenFile || MessageBox.Show(String.Format("Are you sure you want to open this {0}?", hadShiftDown ? "directory" : "file"), "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 StartProcess(hadShiftDown ? Path.GetDirectoryName(selectedItemName) : selectedItemName);
         }
 
@@ -630,7 +631,7 @@ namespace File_Searcher
                     {
                         var hadShiftDown = ((Control.ModifierKeys & Keys.Shift) != 0);
 
-                        if (!Properties.Settings.Default.PromptOpenFile || MessageBox.Show(String.Format("Are you sure you want to open {0}?", listViewResults.SelectedItems.Count > 1 ? String.Format("the selected ({0}) {1}", listViewResults.SelectedItems.Count, hadShiftDown ? "directories" : "files") : String.Format("this {0}", hadShiftDown ? "directory" : "file")), "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        if (!Settings.Default.PromptOpenFile || MessageBox.Show(String.Format("Are you sure you want to open {0}?", listViewResults.SelectedItems.Count > 1 ? String.Format("the selected ({0}) {1}", listViewResults.SelectedItems.Count, hadShiftDown ? "directories" : "files") : String.Format("this {0}", hadShiftDown ? "directory" : "file")), "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                             foreach (ListViewItem item in listViewResults.SelectedItems)
                                 StartProcess(hadShiftDown ? Path.GetDirectoryName(item.SubItems[5].Text) + "\\" : item.SubItems[5].Text);
                     }
@@ -646,7 +647,7 @@ namespace File_Searcher
         //! Needs object and eventargs so we can attach a .Click event to it from menu item 'Exit'
         private void TryCloseApplication(object sender = null, EventArgs e = null)
         {
-            if (!Properties.Settings.Default.PromptToQuit || MessageBox.Show("Are you sure you want to quit?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            if (!Settings.Default.PromptToQuit || MessageBox.Show("Are you sure you want to quit?", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 Close();
         }
 
@@ -654,7 +655,7 @@ namespace File_Searcher
         {
             if (checkBoxShowProgress.Checked)
             {
-                if (!Properties.Settings.Default.PromptToQuit || MessageBox.Show("Are you sure you want to initialize a progress bar? The progress will take a lot longer than it would normally (if the directory we search in is big).", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (!Settings.Default.PromptToQuit || MessageBox.Show("Are you sure you want to initialize a progress bar? The progress will take a lot longer than it would normally (if the directory we search in is big).", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     MaximumSize = new Size(Width, Height + 30);
                     timerMoveForProgressBar.Enabled = true;
