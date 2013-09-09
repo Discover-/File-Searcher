@@ -61,6 +61,7 @@ namespace File_Searcher
         {
             if (checkBoxAutoSaveSettings.Checked)
             {
+                Properties.Settings.Default.AutoSaveSettings = true;
                 SaveSettings();
                 return;
             }
