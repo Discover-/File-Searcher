@@ -83,6 +83,10 @@ namespace File_Searcher
         private void buttonClear_Click(object sender, EventArgs e)
         {
             checkBoxPromptOpenFile.Checked = false;
+            checkBoxPromptShowProgressbar.Checked = false;
+            checkBoxPromptToQuit.Checked = false;
+            checkBoxAlwaysShowDetailedRestrictions.Checked = false;
+            checkBoxAutoSaveSettings.Checked = false;
         }
 
         private void SettingsForm_KeyDown(object sender, KeyEventArgs e)
