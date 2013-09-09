@@ -12,8 +12,12 @@ namespace File_Searcher
         public FilteredResultsForm(ListView.ListViewItemCollection items)
         {
             InitializeComponent();
+
             MinimumSize = new Size(Width, Height);
             MaximumSize = new Size(Width, Height + 500);
+
+            initialItemCollection = items;
+            InitializeListView(ref listViewResultsFilter, items);
         }
 
         private void button1_Click(object sender, EventArgs e)
