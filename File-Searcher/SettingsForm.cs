@@ -19,9 +19,6 @@ namespace File_Searcher
             checkBoxPromptToQuit.Checked = Properties.Settings.Default.PromptToQuit;
             checkBoxAutoSaveSettings.Checked = Properties.Settings.Default.AutoSaveSettings;
             checkBoxAlwaysShowDetailedRestrictions.Checked = Properties.Settings.Default.AlwaysShowDetailedRestrictions;
-            textBoxShortcutAbout.Text = Properties.Settings.Default.KeyShortcutAbout;
-            textBoxShortcutSettings.Text = Properties.Settings.Default.KeyShortcutSettings;
-            textBoxShortcutExit.Text = Properties.Settings.Default.KeyShortcutExit;
         }
 
         private void buttonSave_Click(object sender, EventArgs e)
@@ -38,9 +35,6 @@ namespace File_Searcher
             Properties.Settings.Default.PromptToQuit = checkBoxPromptToQuit.Checked;
             Properties.Settings.Default.AutoSaveSettings = checkBoxAutoSaveSettings.Checked;
             Properties.Settings.Default.AlwaysShowDetailedRestrictions = checkBoxAlwaysShowDetailedRestrictions.Checked;
-            Properties.Settings.Default.KeyShortcutAbout = textBoxShortcutAbout.Text = Properties.Settings.Default.KeyShortcutAbout;
-            Properties.Settings.Default.KeyShortcutSettings = textBoxShortcutSettings.Text;
-            Properties.Settings.Default.KeyShortcutExit = textBoxShortcutExit.Text;
             Properties.Settings.Default.Save();
 
             if (!((MainForm)Owner).checkBoxShowDetailedRestrictions.Checked && checkBoxAlwaysShowDetailedRestrictions.Checked)
@@ -99,17 +93,6 @@ namespace File_Searcher
                     Close();
                     break;
             }
-        }
-
-        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
-        {
-            //if (keyData == (Keys.Control | Keys.F))
-            {
-                MessageBox.Show(keyData.ToString());
-                return true;
-            }
-
-            return base.ProcessCmdKey(ref msg, keyData);
         }
     }
 }
