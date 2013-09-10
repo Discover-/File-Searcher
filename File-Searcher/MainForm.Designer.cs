@@ -80,6 +80,8 @@
             // 
             // txtBoxDirectorySearch
             // 
+            this.txtBoxDirectorySearch.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
+            this.txtBoxDirectorySearch.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.FileSystemDirectories;
             this.txtBoxDirectorySearch.Location = new System.Drawing.Point(18, 48);
             this.txtBoxDirectorySearch.Name = "txtBoxDirectorySearch";
             this.txtBoxDirectorySearch.Size = new System.Drawing.Size(704, 20);
@@ -473,6 +475,7 @@
             // menuItemSettings
             // 
             this.menuItemSettings.Index = 0;
+            this.menuItemSettings.Shortcut = System.Windows.Forms.Shortcut.F1;
             this.menuItemSettings.Text = "Settings";
             this.menuItemSettings.Click += new System.EventHandler(this.menuItemSettings_Click);
             // 
@@ -484,6 +487,7 @@
             // menuItemExit
             // 
             this.menuItemExit.Index = 2;
+            this.menuItemExit.Shortcut = System.Windows.Forms.Shortcut.ShiftF5;
             this.menuItemExit.Text = "Exit";
             this.menuItemExit.Click += new System.EventHandler(this.TryCloseApplication);
             // 
@@ -497,6 +501,7 @@
             // menuItemAbout
             // 
             this.menuItemAbout.Index = 0;
+            this.menuItemAbout.Shortcut = System.Windows.Forms.Shortcut.AltF1;
             this.menuItemAbout.Text = "About";
             this.menuItemAbout.Click += new System.EventHandler(this.menuItemAbout_Click);
             // 

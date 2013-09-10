@@ -57,11 +57,6 @@ namespace File_Searcher
             oldWidth = Width; //! We store the initial width of the form so that we know how far the form was resized
                               //! which allows us to determine how many pixels the 'Name' column need to be increased.
 
-            //! Initialize progress bar; default should be on 0%.
-            progressBar.Minimum = 0;
-            progressBar.Maximum = 100;
-            progressBar.Value = 0;
-
             //! Add all controls we disable once we start searching to the list controlling this
             FillControlsToDisable();
 
@@ -74,18 +69,6 @@ namespace File_Searcher
             addTooltip(checkBoxShowFilesWithoutExtension, "Checking this will make files without any extension be shown as well (like most of the README files).");
             addTooltip(checkBoxIgnoreCaseSensitivity, "Checking this will allow you to ignore case sensitivity in the file name/content search field.");
             addTooltip(checkBoxIncludeDirFilename, "Checking this will mean that the criteria filled in the 'Filename' criteria field is also searched for in the directory. So if the directory of a file is 'C:/ExampleFolder/VersionTwo/version.txt' and the criteria is 'two', it will only show this item if this checkbox is checked.");
-
-            txtBoxDirectorySearch.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-            txtBoxDirectorySearch.AutoCompleteSource = AutoCompleteSource.FileSystemDirectories;
-
-            menuItemExit.Shortcut = Shortcut.ShiftF5;
-            menuItemExit.ShowShortcut = true;
-
-            menuItemSettings.Shortcut = Shortcut.F1;
-            menuItemSettings.ShowShortcut = true;
-
-            menuItemAbout.Shortcut = Shortcut.AltF1;
-            menuItemAbout.ShowShortcut = true;
 
             originalResultsHeight = listViewResults.Height;
 
