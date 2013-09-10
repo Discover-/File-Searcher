@@ -538,14 +538,16 @@ namespace File_Searcher
                 StartProcess(selectedItemName);
         }
 
-        private void StartProcess(string filename)
+        private void StartProcess(string filename, string argument = "")
         {
             try
             {
-                new Process { StartInfo = new ProcessStartInfo(filename) }.Start();
+                //new Process { StartInfo = new ProcessStartInfo(filename) }.Start();
+                Process.Start(filename, argument);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                MessageBox.Show(ex.Message);
                 MessageBox.Show(String.Format("The process '{0}' could not be opened!", Path.GetFileName(filename)), "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
@@ -836,7 +838,7 @@ namespace File_Searcher
         private void openDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (listViewResults.SelectedItems.Count > 0)
-                StartProcess(Path.GetDirectoryName(listViewResults.SelectedItems[0].SubItems[5].Text));
+                StartProcess("explorer.exe", String.Format("/select,\"{0}\"", (listViewResults.SelectedItems[0].SubItems[5].Text)));
         }
 
         private void removeFromListToolStripMenuItem_Click(object sender, EventArgs e)
