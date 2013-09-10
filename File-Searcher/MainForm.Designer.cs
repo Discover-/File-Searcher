@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.txtBoxDirectorySearch = new System.Windows.Forms.TextBox();
             this.labelOptions = new System.Windows.Forms.Label();
@@ -69,9 +70,13 @@
             this.checkBoxFilesNewerThan = new System.Windows.Forms.CheckBox();
             this.datePickerFilesOlderThan = new System.Windows.Forms.DateTimePicker();
             this.checkBoxFilesOlderThan = new System.Windows.Forms.CheckBox();
+            this.contextMenuStripListView = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.openDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.removeFromListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxOptions.SuspendLayout();
             this.groupBoxSearchInfo.SuspendLayout();
             this.menuStrip1.SuspendLayout();
+            this.contextMenuStripListView.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtBoxDirectorySearch
@@ -143,6 +148,7 @@
             this.listViewResults.View = System.Windows.Forms.View.Details;
             this.listViewResults.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listViewResults_ColumnClick);
             this.listViewResults.DoubleClick += new System.EventHandler(this.listViewResults_DoubleClick);
+            this.listViewResults.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewResults_MouseClick);
             // 
             // checkBoxShowDir
             // 
@@ -483,6 +489,28 @@
             this.checkBoxFilesOlderThan.UseVisualStyleBackColor = true;
             this.checkBoxFilesOlderThan.CheckedChanged += new System.EventHandler(this.checkBoxFilesOlderThan_CheckedChanged);
             // 
+            // contextMenuStripListView
+            // 
+            this.contextMenuStripListView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openDirectoryToolStripMenuItem,
+            this.removeFromListToolStripMenuItem});
+            this.contextMenuStripListView.Name = "contextMenuStripListView";
+            this.contextMenuStripListView.Size = new System.Drawing.Size(165, 70);
+            // 
+            // openDirectoryToolStripMenuItem
+            // 
+            this.openDirectoryToolStripMenuItem.Name = "openDirectoryToolStripMenuItem";
+            this.openDirectoryToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.openDirectoryToolStripMenuItem.Text = "Open directory";
+            this.openDirectoryToolStripMenuItem.Click += new System.EventHandler(this.openDirectoryToolStripMenuItem_Click);
+            // 
+            // removeFromListToolStripMenuItem
+            // 
+            this.removeFromListToolStripMenuItem.Name = "removeFromListToolStripMenuItem";
+            this.removeFromListToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.removeFromListToolStripMenuItem.Text = "Remove from list";
+            this.removeFromListToolStripMenuItem.Click += new System.EventHandler(this.removeFromListToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -516,6 +544,7 @@
             this.groupBoxSearchInfo.PerformLayout();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
+            this.contextMenuStripListView.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -563,6 +592,9 @@
         public System.Windows.Forms.ListView listViewResults;
         public System.Windows.Forms.CheckBox checkBoxShowDetailedRestrictions;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStripListView;
+        private System.Windows.Forms.ToolStripMenuItem openDirectoryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem removeFromListToolStripMenuItem;
     }
 }
 

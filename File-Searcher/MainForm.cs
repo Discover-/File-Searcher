@@ -534,12 +534,8 @@ namespace File_Searcher
             if (String.IsNullOrWhiteSpace(selectedItemName))
                 return;
 
-            //! Need to use a variable to store whether or not the user had shift down before the 'Are you sure?'
-            //! box was opened, otherwise it would only work if Shift was down when the confirmation box was closed.
-            var hadShiftDown = (Control.ModifierKeys & Keys.Shift) != 0;
-
-            if (!Settings.Default.PromptOpenFile || MessageBox.Show(String.Format("Are you sure you want to open this {0}?", hadShiftDown ? "directory" : "file"), "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
-                StartProcess(hadShiftDown ? Path.GetDirectoryName(selectedItemName) : selectedItemName);
+            if (!Settings.Default.PromptOpenFile || MessageBox.Show("Are you sure you want to open this file", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                StartProcess(selectedItemName);
         }
 
         private void StartProcess(string filename)
@@ -629,11 +625,9 @@ namespace File_Searcher
                 case Keys.Enter:
                     if (listViewResults.SelectedItems.Count > 0 && !(txtBoxDirectorySearch.Focused || txtBoxFileSearch.Focused || txtBoxExtensions.Focused))
                     {
-                        var hadShiftDown = ((Control.ModifierKeys & Keys.Shift) != 0);
-
-                        if (!Settings.Default.PromptOpenFile || MessageBox.Show(String.Format("Are you sure you want to open {0}?", listViewResults.SelectedItems.Count > 1 ? String.Format("the selected ({0}) {1}", listViewResults.SelectedItems.Count, hadShiftDown ? "directories" : "files") : String.Format("this {0}", hadShiftDown ? "directory" : "file")), "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                        if (!Settings.Default.PromptOpenFile || MessageBox.Show(String.Format("Are you sure you want to open {0}?", listViewResults.SelectedItems.Count > 1 ? String.Format("the selected ({0}) files", listViewResults.SelectedItems.Count) : "this file"), "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                             foreach (ListViewItem item in listViewResults.SelectedItems)
-                                StartProcess(hadShiftDown ? Path.GetDirectoryName(item.SubItems[5].Text) + "\\" : item.SubItems[5].Text);
+                                StartProcess(item.SubItems[5].Text);
                     }
                     else if (btnSearch.Enabled)
                         button2_Click(sender, e); // Start searching
@@ -830,6 +824,25 @@ namespace File_Searcher
             }
 
             progressBar.Value = value;
+        }
+
+        private void listViewResults_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+                if (listViewResults.FocusedItem.Bounds.Contains(e.Location))
+                    contextMenuStripListView.Show(Cursor.Position);
+        }
+
+        private void openDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listViewResults.SelectedItems.Count > 0)
+                StartProcess(Path.GetDirectoryName(listViewResults.SelectedItems[0].SubItems[5].Text));
+        }
+
+        private void removeFromListToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listViewResults.SelectedItems.Count > 0)
+                listViewResults.Items.Remove(listViewResults.SelectedItems[0]);
         }
     }
 }
