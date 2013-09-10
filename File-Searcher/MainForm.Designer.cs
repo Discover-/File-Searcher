@@ -59,13 +59,6 @@
             this.progressBar = new System.Windows.Forms.ProgressBar();
             this.btnClear = new System.Windows.Forms.Button();
             this.btnOpenFilter = new System.Windows.Forms.Button();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
-            this.menuHeaderFiles = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemSettings = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.menuItemExit = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuHeaderAbout = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuItemAbout = new System.Windows.Forms.ToolStripMenuItem();
             this.datePickerFilesNewerThan = new System.Windows.Forms.DateTimePicker();
             this.checkBoxFilesNewerThan = new System.Windows.Forms.CheckBox();
             this.datePickerFilesOlderThan = new System.Windows.Forms.DateTimePicker();
@@ -73,15 +66,21 @@
             this.contextMenuStripListView = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.openDirectoryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.removeFromListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.mainMenu1 = new System.Windows.Forms.MainMenu(this.components);
+            this.menuItem1 = new System.Windows.Forms.MenuItem();
+            this.menuItemSettings = new System.Windows.Forms.MenuItem();
+            this.menuItem3 = new System.Windows.Forms.MenuItem();
+            this.menuItemExit = new System.Windows.Forms.MenuItem();
+            this.menuItem5 = new System.Windows.Forms.MenuItem();
+            this.menuItemAbout = new System.Windows.Forms.MenuItem();
             this.groupBoxOptions.SuspendLayout();
             this.groupBoxSearchInfo.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtBoxDirectorySearch
             // 
-            this.txtBoxDirectorySearch.Location = new System.Drawing.Point(19, 75);
+            this.txtBoxDirectorySearch.Location = new System.Drawing.Point(18, 48);
             this.txtBoxDirectorySearch.Name = "txtBoxDirectorySearch";
             this.txtBoxDirectorySearch.Size = new System.Drawing.Size(704, 20);
             this.txtBoxDirectorySearch.TabIndex = 0;
@@ -110,7 +109,7 @@
             // 
             // btnSearch
             // 
-            this.btnSearch.Location = new System.Drawing.Point(678, 169);
+            this.btnSearch.Location = new System.Drawing.Point(677, 142);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(75, 23);
             this.btnSearch.TabIndex = 16;
@@ -129,7 +128,7 @@
             // btnStopSearching
             // 
             this.btnStopSearching.Enabled = false;
-            this.btnStopSearching.Location = new System.Drawing.Point(678, 195);
+            this.btnStopSearching.Location = new System.Drawing.Point(677, 168);
             this.btnStopSearching.Name = "btnStopSearching";
             this.btnStopSearching.Size = new System.Drawing.Size(75, 23);
             this.btnStopSearching.TabIndex = 17;
@@ -140,7 +139,7 @@
             // listViewResults
             // 
             this.listViewResults.FullRowSelect = true;
-            this.listViewResults.Location = new System.Drawing.Point(14, 250);
+            this.listViewResults.Location = new System.Drawing.Point(13, 223);
             this.listViewResults.Name = "listViewResults";
             this.listViewResults.Size = new System.Drawing.Size(740, 240);
             this.listViewResults.TabIndex = 8;
@@ -178,7 +177,7 @@
             this.groupBoxOptions.Controls.Add(this.checkBoxShowDir);
             this.groupBoxOptions.Controls.Add(this.labelOptions);
             this.groupBoxOptions.Controls.Add(this.checkBoxIncludeSubDirs);
-            this.groupBoxOptions.Location = new System.Drawing.Point(13, 163);
+            this.groupBoxOptions.Location = new System.Drawing.Point(12, 136);
             this.groupBoxOptions.Name = "groupBoxOptions";
             this.groupBoxOptions.Size = new System.Drawing.Size(659, 81);
             this.groupBoxOptions.TabIndex = 10;
@@ -305,7 +304,7 @@
             this.groupBoxSearchInfo.Controls.Add(this.txtBoxFileSearch);
             this.groupBoxSearchInfo.Controls.Add(this.label2);
             this.groupBoxSearchInfo.Controls.Add(this.lblSearchFile);
-            this.groupBoxSearchInfo.Location = new System.Drawing.Point(14, 33);
+            this.groupBoxSearchInfo.Location = new System.Drawing.Point(13, 6);
             this.groupBoxSearchInfo.Name = "groupBoxSearchInfo";
             this.groupBoxSearchInfo.Size = new System.Drawing.Size(740, 122);
             this.groupBoxSearchInfo.TabIndex = 10;
@@ -367,7 +366,7 @@
             // 
             // progressBar
             // 
-            this.progressBar.Location = new System.Drawing.Point(14, 523);
+            this.progressBar.Location = new System.Drawing.Point(13, 496);
             this.progressBar.Name = "progressBar";
             this.progressBar.Size = new System.Drawing.Size(740, 23);
             this.progressBar.TabIndex = 11;
@@ -375,7 +374,7 @@
             // btnClear
             // 
             this.btnClear.Enabled = false;
-            this.btnClear.Location = new System.Drawing.Point(678, 221);
+            this.btnClear.Location = new System.Drawing.Point(677, 194);
             this.btnClear.Name = "btnClear";
             this.btnClear.Size = new System.Drawing.Size(75, 23);
             this.btnClear.TabIndex = 18;
@@ -386,7 +385,7 @@
             // btnOpenFilter
             // 
             this.btnOpenFilter.Enabled = false;
-            this.btnOpenFilter.Location = new System.Drawing.Point(677, 494);
+            this.btnOpenFilter.Location = new System.Drawing.Point(676, 467);
             this.btnOpenFilter.Name = "btnOpenFilter";
             this.btnOpenFilter.Size = new System.Drawing.Size(75, 23);
             this.btnOpenFilter.TabIndex = 19;
@@ -394,65 +393,10 @@
             this.btnOpenFilter.UseVisualStyleBackColor = true;
             this.btnOpenFilter.Click += new System.EventHandler(this.buttonOpenFilter_Click);
             // 
-            // menuStrip1
-            // 
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuHeaderFiles,
-            this.menuHeaderAbout});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(765, 24);
-            this.menuStrip1.TabIndex = 19;
-            this.menuStrip1.Text = "menuStrip1";
-            // 
-            // menuHeaderFiles
-            // 
-            this.menuHeaderFiles.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemSettings,
-            this.toolStripSeparator1,
-            this.menuItemExit});
-            this.menuHeaderFiles.Name = "menuHeaderFiles";
-            this.menuHeaderFiles.Size = new System.Drawing.Size(37, 20);
-            this.menuHeaderFiles.Text = "File";
-            // 
-            // menuItemSettings
-            // 
-            this.menuItemSettings.Name = "menuItemSettings";
-            this.menuItemSettings.Size = new System.Drawing.Size(116, 22);
-            this.menuItemSettings.Text = "Settings";
-            this.menuItemSettings.Click += new System.EventHandler(this.menuItemSettings_Click);
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(113, 6);
-            // 
-            // menuItemExit
-            // 
-            this.menuItemExit.Name = "menuItemExit";
-            this.menuItemExit.Size = new System.Drawing.Size(116, 22);
-            this.menuItemExit.Text = "Exit";
-            this.menuItemExit.Click += new System.EventHandler(this.TryCloseApplication);
-            // 
-            // menuHeaderAbout
-            // 
-            this.menuHeaderAbout.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuItemAbout});
-            this.menuHeaderAbout.Name = "menuHeaderAbout";
-            this.menuHeaderAbout.Size = new System.Drawing.Size(52, 20);
-            this.menuHeaderAbout.Text = "About";
-            // 
-            // menuItemAbout
-            // 
-            this.menuItemAbout.Name = "menuItemAbout";
-            this.menuItemAbout.Size = new System.Drawing.Size(107, 22);
-            this.menuItemAbout.Text = "About";
-            this.menuItemAbout.Click += new System.EventHandler(this.menuItemAbout_Click);
-            // 
             // datePickerFilesNewerThan
             // 
             this.datePickerFilesNewerThan.Enabled = false;
-            this.datePickerFilesNewerThan.Location = new System.Drawing.Point(131, 251);
+            this.datePickerFilesNewerThan.Location = new System.Drawing.Point(130, 224);
             this.datePickerFilesNewerThan.Name = "datePickerFilesNewerThan";
             this.datePickerFilesNewerThan.Size = new System.Drawing.Size(210, 20);
             this.datePickerFilesNewerThan.TabIndex = 21;
@@ -461,7 +405,7 @@
             // checkBoxFilesNewerThan
             // 
             this.checkBoxFilesNewerThan.AutoSize = true;
-            this.checkBoxFilesNewerThan.Location = new System.Drawing.Point(22, 253);
+            this.checkBoxFilesNewerThan.Location = new System.Drawing.Point(21, 226);
             this.checkBoxFilesNewerThan.Name = "checkBoxFilesNewerThan";
             this.checkBoxFilesNewerThan.Size = new System.Drawing.Size(106, 17);
             this.checkBoxFilesNewerThan.TabIndex = 20;
@@ -472,7 +416,7 @@
             // datePickerFilesOlderThan
             // 
             this.datePickerFilesOlderThan.Enabled = false;
-            this.datePickerFilesOlderThan.Location = new System.Drawing.Point(462, 251);
+            this.datePickerFilesOlderThan.Location = new System.Drawing.Point(461, 224);
             this.datePickerFilesOlderThan.Name = "datePickerFilesOlderThan";
             this.datePickerFilesOlderThan.Size = new System.Drawing.Size(210, 20);
             this.datePickerFilesOlderThan.TabIndex = 23;
@@ -481,7 +425,7 @@
             // checkBoxFilesOlderThan
             // 
             this.checkBoxFilesOlderThan.AutoSize = true;
-            this.checkBoxFilesOlderThan.Location = new System.Drawing.Point(359, 253);
+            this.checkBoxFilesOlderThan.Location = new System.Drawing.Point(358, 226);
             this.checkBoxFilesOlderThan.Name = "checkBoxFilesOlderThan";
             this.checkBoxFilesOlderThan.Size = new System.Drawing.Size(100, 17);
             this.checkBoxFilesOlderThan.TabIndex = 22;
@@ -495,7 +439,7 @@
             this.openDirectoryToolStripMenuItem,
             this.removeFromListToolStripMenuItem});
             this.contextMenuStripListView.Name = "contextMenuStripListView";
-            this.contextMenuStripListView.Size = new System.Drawing.Size(165, 70);
+            this.contextMenuStripListView.Size = new System.Drawing.Size(165, 48);
             // 
             // openDirectoryToolStripMenuItem
             // 
@@ -511,11 +455,56 @@
             this.removeFromListToolStripMenuItem.Text = "Remove from list";
             this.removeFromListToolStripMenuItem.Click += new System.EventHandler(this.removeFromListToolStripMenuItem_Click);
             // 
+            // mainMenu1
+            // 
+            this.mainMenu1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItem1,
+            this.menuItem5});
+            // 
+            // menuItem1
+            // 
+            this.menuItem1.Index = 0;
+            this.menuItem1.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItemSettings,
+            this.menuItem3,
+            this.menuItemExit});
+            this.menuItem1.Text = "File";
+            // 
+            // menuItemSettings
+            // 
+            this.menuItemSettings.Index = 0;
+            this.menuItemSettings.Text = "Settings";
+            this.menuItemSettings.Click += new System.EventHandler(this.menuItemSettings_Click);
+            // 
+            // menuItem3
+            // 
+            this.menuItem3.Index = 1;
+            this.menuItem3.Text = "-";
+            // 
+            // menuItemExit
+            // 
+            this.menuItemExit.Index = 2;
+            this.menuItemExit.Text = "Exit";
+            this.menuItemExit.Click += new System.EventHandler(this.TryCloseApplication);
+            // 
+            // menuItem5
+            // 
+            this.menuItem5.Index = 1;
+            this.menuItem5.MenuItems.AddRange(new System.Windows.Forms.MenuItem[] {
+            this.menuItemAbout});
+            this.menuItem5.Text = "About";
+            // 
+            // menuItemAbout
+            // 
+            this.menuItemAbout.Index = 0;
+            this.menuItemAbout.Text = "About";
+            this.menuItemAbout.Click += new System.EventHandler(this.menuItemAbout_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(765, 521);
+            this.ClientSize = new System.Drawing.Size(765, 494);
             this.Controls.Add(this.btnOpenFilter);
             this.Controls.Add(this.btnClear);
             this.Controls.Add(this.progressBar);
@@ -525,15 +514,14 @@
             this.Controls.Add(this.txtBoxDirectorySearch);
             this.Controls.Add(this.groupBoxSearchInfo);
             this.Controls.Add(this.groupBoxOptions);
-            this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.datePickerFilesOlderThan);
             this.Controls.Add(this.datePickerFilesNewerThan);
             this.Controls.Add(this.checkBoxFilesOlderThan);
             this.Controls.Add(this.checkBoxFilesNewerThan);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
-            this.MainMenuStrip = this.menuStrip1;
             this.MaximizeBox = false;
+            this.Menu = this.mainMenu1;
             this.Name = "MainForm";
             this.Text = "File Searcher";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -542,8 +530,6 @@
             this.groupBoxOptions.PerformLayout();
             this.groupBoxSearchInfo.ResumeLayout(false);
             this.groupBoxSearchInfo.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.contextMenuStripListView.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -578,12 +564,6 @@
         private System.Windows.Forms.CheckBox checkBoxIgnoreCaseSensitivity;
         private System.Windows.Forms.Button btnClear;
         private System.Windows.Forms.Button btnOpenFilter;
-        private System.Windows.Forms.MenuStrip menuStrip1;
-        private System.Windows.Forms.ToolStripMenuItem menuHeaderFiles;
-        private System.Windows.Forms.ToolStripMenuItem menuItemSettings;
-        private System.Windows.Forms.ToolStripMenuItem menuItemExit;
-        private System.Windows.Forms.ToolStripMenuItem menuHeaderAbout;
-        private System.Windows.Forms.ToolStripMenuItem menuItemAbout;
         private System.Windows.Forms.CheckBox checkBoxIncludeDirFilename;
         private System.Windows.Forms.DateTimePicker datePickerFilesNewerThan;
         private System.Windows.Forms.CheckBox checkBoxFilesNewerThan;
@@ -591,10 +571,16 @@
         private System.Windows.Forms.CheckBox checkBoxFilesOlderThan;
         public System.Windows.Forms.ListView listViewResults;
         public System.Windows.Forms.CheckBox checkBoxShowDetailedRestrictions;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
         private System.Windows.Forms.ContextMenuStrip contextMenuStripListView;
         private System.Windows.Forms.ToolStripMenuItem openDirectoryToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem removeFromListToolStripMenuItem;
+        private System.Windows.Forms.MainMenu mainMenu1;
+        private System.Windows.Forms.MenuItem menuItem1;
+        private System.Windows.Forms.MenuItem menuItemSettings;
+        private System.Windows.Forms.MenuItem menuItem3;
+        private System.Windows.Forms.MenuItem menuItemExit;
+        private System.Windows.Forms.MenuItem menuItem5;
+        private System.Windows.Forms.MenuItem menuItemAbout;
     }
 }
 

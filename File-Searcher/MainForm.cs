@@ -78,14 +78,14 @@ namespace File_Searcher
             txtBoxDirectorySearch.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
             txtBoxDirectorySearch.AutoCompleteSource = AutoCompleteSource.FileSystemDirectories;
 
-            menuItemExit.ShortcutKeys = (Keys.Shift | Keys.F5);
-            menuItemExit.ShortcutKeyDisplayString = "(Shift + F5)";
+            menuItemExit.Shortcut = Shortcut.ShiftF5;
+            menuItemExit.ShowShortcut = true;
 
-            menuItemSettings.ShortcutKeys = Keys.F1;
-            menuItemSettings.ShortcutKeyDisplayString = "(F1)";
+            menuItemSettings.Shortcut = Shortcut.F1;
+            menuItemSettings.ShowShortcut = true;
 
-            menuItemAbout.ShortcutKeys = (Keys.Alt | Keys.F1);
-            menuItemAbout.ShortcutKeyDisplayString = "(Alt + F1)";
+            menuItemAbout.Shortcut = Shortcut.AltF1;
+            menuItemAbout.ShowShortcut = true;
 
             originalResultsHeight = listViewResults.Height;
 
@@ -845,6 +845,16 @@ namespace File_Searcher
         {
             if (listViewResults.SelectedItems.Count > 0)
                 listViewResults.Items.Remove(listViewResults.SelectedItems[0]);
+        }
+
+        private void menuItemExit_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
         }
     }
 }
