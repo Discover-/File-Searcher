@@ -655,7 +655,7 @@ namespace File_Searcher
         {
             if (checkBoxShowProgress.Checked)
             {
-                if (!Settings.Default.PromptToQuit || MessageBox.Show("Are you sure you want to initialize a progress bar? The progress will take a lot longer than it would normally (if the directory we search in is big).", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (!Settings.Default.PromptShowProgressBar || MessageBox.Show("Are you sure you want to initialize a progress bar? The progress will take a lot longer than it would normally (if the directory we search in is big).", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     MaximumSize = new Size(Width, Height + 30);
                     timerMoveForProgressBar.Enabled = true;
