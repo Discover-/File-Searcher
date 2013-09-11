@@ -825,13 +825,15 @@ namespace File_Searcher
         private void openDirectoryToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (listViewResults.SelectedItems.Count > 0)
-                StartProcess("explorer.exe", String.Format("/select,\"{0}\"", (listViewResults.SelectedItems[0].SubItems[5].Text)));
+                foreach (ListViewItem item in listViewResults.SelectedItems)
+                    StartProcess("explorer.exe", String.Format("/select,\"{0}\"", (item.SubItems[5].Text)));
         }
 
         private void removeFromListToolStripMenuItem_Click(object sender, EventArgs e)
         {
             if (listViewResults.SelectedItems.Count > 0)
-                listViewResults.Items.Remove(listViewResults.SelectedItems[0]);
+                foreach (ListViewItem item in listViewResults.SelectedItems)
+                    listViewResults.Items.Remove(item);
         }
     }
 }
