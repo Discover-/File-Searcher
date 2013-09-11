@@ -400,7 +400,7 @@
             this.datePickerFilesNewerThan.Enabled = false;
             this.datePickerFilesNewerThan.Location = new System.Drawing.Point(130, 224);
             this.datePickerFilesNewerThan.Name = "datePickerFilesNewerThan";
-            this.datePickerFilesNewerThan.Size = new System.Drawing.Size(210, 20);
+            this.datePickerFilesNewerThan.Size = new System.Drawing.Size(186, 20);
             this.datePickerFilesNewerThan.TabIndex = 21;
             this.datePickerFilesNewerThan.Value = new System.DateTime(2013, 9, 4, 10, 7, 46, 0);
             // 
@@ -418,16 +418,16 @@
             // datePickerFilesOlderThan
             // 
             this.datePickerFilesOlderThan.Enabled = false;
-            this.datePickerFilesOlderThan.Location = new System.Drawing.Point(461, 224);
+            this.datePickerFilesOlderThan.Location = new System.Drawing.Point(427, 224);
             this.datePickerFilesOlderThan.Name = "datePickerFilesOlderThan";
-            this.datePickerFilesOlderThan.Size = new System.Drawing.Size(210, 20);
+            this.datePickerFilesOlderThan.Size = new System.Drawing.Size(186, 20);
             this.datePickerFilesOlderThan.TabIndex = 23;
             this.datePickerFilesOlderThan.Value = new System.DateTime(2013, 9, 4, 10, 7, 46, 0);
             // 
             // checkBoxFilesOlderThan
             // 
             this.checkBoxFilesOlderThan.AutoSize = true;
-            this.checkBoxFilesOlderThan.Location = new System.Drawing.Point(358, 226);
+            this.checkBoxFilesOlderThan.Location = new System.Drawing.Point(322, 226);
             this.checkBoxFilesOlderThan.Name = "checkBoxFilesOlderThan";
             this.checkBoxFilesOlderThan.Size = new System.Drawing.Size(100, 17);
             this.checkBoxFilesOlderThan.TabIndex = 22;

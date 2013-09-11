@@ -79,6 +79,9 @@ namespace File_Searcher
                 listViewResults.Height -= 25;
                 listViewResults.Location = new Point(listViewResults.Location.X, listViewResults.Location.Y + 25);
             }
+
+            datePickerFilesNewerThan.Value = DateTime.Now;
+            datePickerFilesOlderThan.Value = DateTime.Now;
         }
 
         private void InitializeAnchors()
