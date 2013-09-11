@@ -581,7 +581,7 @@ namespace File_Searcher
 
         private void btnClear_Click(object sender, EventArgs e)
         {
-            listViewResults.Clear();
+            listViewResults.Items.Clear();
             btnClear.Enabled = false;
         }
 
@@ -828,16 +828,6 @@ namespace File_Searcher
         {
             if (listViewResults.SelectedItems.Count > 0)
                 listViewResults.Items.Remove(listViewResults.SelectedItems[0]);
-        }
-
-        private void menuItemExit_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
         }
     }
 }
