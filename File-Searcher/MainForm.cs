@@ -69,6 +69,7 @@ namespace File_Searcher
             addTooltip(checkBoxShowFilesWithoutExtension, "Checking this will make files without any extension be shown as well (like most of the README files).");
             addTooltip(checkBoxIgnoreCaseSensitivity, "Checking this will allow you to ignore case sensitivity in the file name/content search field.");
             addTooltip(checkBoxIncludeDirFilename, "Checking this will mean that the criteria filled in the 'Filename' criteria field is also searched for in the directory. So if the directory of a file is 'C:/ExampleFolder/VersionTwo/version.txt' and the criteria is 'two', it will only show this item if this checkbox is checked.");
+            addTooltip(checkBoxShowDetailedRestrictions, "Checking this will expand a few new restriction options, such as filtering results to only show if the file is older and/or newer than.");
 
             originalResultsHeight = listViewResults.Height;
 
