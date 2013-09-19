@@ -350,10 +350,10 @@ namespace File_Searcher
                             {
                                 if (checkBoxIgnoreCaseSensitivity.Checked)
                                 {
-                                    if (!File.ReadAllText(fileName).ToLower().Contains(search.ToLower()))
+                                    if (File.ReadAllText(fileName).IndexOf(search, StringComparison.OrdinalIgnoreCase) <= 0)
                                         continue;
                                 }
-                                else if (!File.ReadAllText(fileName).Contains(search))
+                                else if (File.ReadAllText(fileName).IndexOf(search) <= 0)
                                     continue;
                             }
                             else
