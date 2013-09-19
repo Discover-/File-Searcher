@@ -70,7 +70,7 @@ namespace File_Searcher
                     break;
                 case Keys.Enter:
                     if (textBoxFilter.Focused)
-                        button1_Click(sender, e);
+                        buttonFilter.PerformClick();
                     break;
             }
         }
