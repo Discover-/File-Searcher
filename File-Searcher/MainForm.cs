@@ -618,7 +618,7 @@ namespace File_Searcher
                                 StartProcess(item.SubItems[5].Text);
                     }
                     else if (btnSearch.Enabled)
-                        button2_Click(sender, e); // Start searching
+                        btnSearch.PerformClick(); // Start searching
                     break;
                 case Keys.Escape:
                     TryCloseApplication();
