@@ -73,6 +73,7 @@
             this.menuItemExit = new System.Windows.Forms.MenuItem();
             this.menuItem5 = new System.Windows.Forms.MenuItem();
             this.menuItemAbout = new System.Windows.Forms.MenuItem();
+            this.openWithToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.groupBoxOptions.SuspendLayout();
             this.groupBoxSearchInfo.SuspendLayout();
             this.contextMenuStripListView.SuspendLayout();
@@ -438,10 +439,11 @@
             // contextMenuStripListView
             // 
             this.contextMenuStripListView.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.openWithToolStripMenuItem,
             this.openDirectoryToolStripMenuItem,
             this.removeFromListToolStripMenuItem});
             this.contextMenuStripListView.Name = "contextMenuStripListView";
-            this.contextMenuStripListView.Size = new System.Drawing.Size(165, 48);
+            this.contextMenuStripListView.Size = new System.Drawing.Size(165, 92);
             // 
             // openDirectoryToolStripMenuItem
             // 
@@ -505,6 +507,13 @@
             this.menuItemAbout.Text = "About";
             this.menuItemAbout.Click += new System.EventHandler(this.menuItemAbout_Click);
             // 
+            // openWithToolStripMenuItem
+            // 
+            this.openWithToolStripMenuItem.Name = "openWithToolStripMenuItem";
+            this.openWithToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
+            this.openWithToolStripMenuItem.Text = "Open with...";
+            this.openWithToolStripMenuItem.Click += new System.EventHandler(this.openWithToolStripMenuItem_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -526,7 +535,6 @@
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MaximizeBox = false;
-            this.Menu = this.mainMenu1;
             this.Name = "MainForm";
             this.Text = "File Searcher";
             this.Load += new System.EventHandler(this.Form1_Load);
@@ -586,6 +594,7 @@
         private System.Windows.Forms.MenuItem menuItemExit;
         private System.Windows.Forms.MenuItem menuItem5;
         private System.Windows.Forms.MenuItem menuItemAbout;
+        private System.Windows.Forms.ToolStripMenuItem openWithToolStripMenuItem;
     }
 }
 

@@ -529,7 +529,6 @@ namespace File_Searcher
         {
             try
             {
-                //new Process { StartInfo = new ProcessStartInfo(filename) }.Start();
                 Process.Start(filename, argument);
             }
             catch (Exception ex)
@@ -834,6 +833,27 @@ namespace File_Searcher
             if (listViewResults.SelectedItems.Count > 0)
                 foreach (ListViewItem item in listViewResults.SelectedItems)
                     listViewResults.Items.Remove(item);
+        }
+
+        private void openWithToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (listViewResults.SelectedItems.Count == 0)
+                return;
+
+            var selectedItemName = listViewResults.SelectedItems[0].SubItems[5].Text;
+
+            if (String.IsNullOrWhiteSpace(selectedItemName))
+                return;
+
+            try
+            {
+                Process.Start("rundll32.exe", "shell32.dll, OpenAs_RunDLL " + selectedItemName);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                MessageBox.Show(String.Format("The process '{0}' could not be opened!", Path.GetFileName(selectedItemName)), "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }
