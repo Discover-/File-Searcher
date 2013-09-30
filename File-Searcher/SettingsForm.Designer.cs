@@ -44,7 +44,7 @@
             // checkBoxAlwaysShowDetailedRestrictions
             // 
             this.checkBoxAlwaysShowDetailedRestrictions.AutoSize = true;
-            this.checkBoxAlwaysShowDetailedRestrictions.Location = new System.Drawing.Point(6, 88);
+            this.checkBoxAlwaysShowDetailedRestrictions.Location = new System.Drawing.Point(12, 91);
             this.checkBoxAlwaysShowDetailedRestrictions.Name = "checkBoxAlwaysShowDetailedRestrictions";
             this.checkBoxAlwaysShowDetailedRestrictions.Size = new System.Drawing.Size(180, 17);
             this.checkBoxAlwaysShowDetailedRestrictions.TabIndex = 7;
@@ -54,7 +54,7 @@
             // checkBoxAutoSaveSettings
             // 
             this.checkBoxAutoSaveSettings.AutoSize = true;
-            this.checkBoxAutoSaveSettings.Location = new System.Drawing.Point(6, 157);
+            this.checkBoxAutoSaveSettings.Location = new System.Drawing.Point(12, 114);
             this.checkBoxAutoSaveSettings.Name = "checkBoxAutoSaveSettings";
             this.checkBoxAutoSaveSettings.Size = new System.Drawing.Size(113, 17);
             this.checkBoxAutoSaveSettings.TabIndex = 6;
@@ -66,7 +66,7 @@
             this.checkBoxPromptToQuit.AutoSize = true;
             this.checkBoxPromptToQuit.Checked = true;
             this.checkBoxPromptToQuit.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxPromptToQuit.Location = new System.Drawing.Point(6, 65);
+            this.checkBoxPromptToQuit.Location = new System.Drawing.Point(12, 68);
             this.checkBoxPromptToQuit.Name = "checkBoxPromptToQuit";
             this.checkBoxPromptToQuit.Size = new System.Drawing.Size(147, 17);
             this.checkBoxPromptToQuit.TabIndex = 5;
@@ -78,7 +78,7 @@
             this.checkBoxPromptShowProgressbar.AutoSize = true;
             this.checkBoxPromptShowProgressbar.Checked = true;
             this.checkBoxPromptShowProgressbar.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxPromptShowProgressbar.Location = new System.Drawing.Point(6, 42);
+            this.checkBoxPromptShowProgressbar.Location = new System.Drawing.Point(12, 45);
             this.checkBoxPromptShowProgressbar.Name = "checkBoxPromptShowProgressbar";
             this.checkBoxPromptShowProgressbar.Size = new System.Drawing.Size(214, 17);
             this.checkBoxPromptShowProgressbar.TabIndex = 4;
@@ -90,7 +90,7 @@
             this.checkBoxPromptOpenFile.AutoSize = true;
             this.checkBoxPromptOpenFile.Checked = true;
             this.checkBoxPromptOpenFile.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.checkBoxPromptOpenFile.Location = new System.Drawing.Point(6, 19);
+            this.checkBoxPromptOpenFile.Location = new System.Drawing.Point(12, 22);
             this.checkBoxPromptOpenFile.Name = "checkBoxPromptOpenFile";
             this.checkBoxPromptOpenFile.Size = new System.Drawing.Size(180, 17);
             this.checkBoxPromptOpenFile.TabIndex = 1;
@@ -113,7 +113,7 @@
             this.buttonClear.Name = "buttonClear";
             this.buttonClear.Size = new System.Drawing.Size(75, 23);
             this.buttonClear.TabIndex = 2;
-            this.buttonClear.Text = "Clear";
+            this.buttonClear.Text = "Default";
             this.buttonClear.UseVisualStyleBackColor = true;
             this.buttonClear.Click += new System.EventHandler(this.buttonClear_Click);
             // 
