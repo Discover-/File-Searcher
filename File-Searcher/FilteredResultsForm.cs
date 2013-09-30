@@ -94,5 +94,12 @@ namespace File_Searcher
             //! Perform the sort with these new sort options
             myListView.Sort();
         }
+
+        private void listViewResultsFilter_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+                if (listViewResultsFilter.FocusedItem.Bounds.Contains(e.Location))
+                    contextMenuStripListView.Show(Cursor.Position);
+        }
     }
 }
