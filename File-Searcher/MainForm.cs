@@ -146,7 +146,6 @@ namespace File_Searcher
         private void button2_Click(object sender, EventArgs e)
         {
             listViewResultsContainer.Clear();
-            listViewResults.ListViewItemSorter = null;
             searchThread = new Thread(StartSearching);
             searchThread.Start();
         }
@@ -289,8 +288,6 @@ namespace File_Searcher
 
             foreach (var control in controlsToDisable)
                 SetEnabledOfControl(control, true);
-
-            listViewResults.ListViewItemSorter = lvwColumnSorter;
         }
 
         private void GetDirectoryCount(string searchDirectory, ref int directoryCountTotal)
