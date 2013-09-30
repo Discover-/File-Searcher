@@ -1,5 +1,8 @@
-﻿using System;
+﻿using File_Searcher.Properties;
+using System;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace File_Searcher
@@ -47,10 +50,10 @@ namespace File_Searcher
         private void InitializeListView(ref ListView listView, ListView.ListViewItemCollection items = null)
         {
             listView.View = View.Details;
-            listView.Columns.Add("Extension",     60, HorizontalAlignment.Right);
-            listView.Columns.Add("Name",          430, HorizontalAlignment.Left);
-            listView.Columns.Add("Size",          35, HorizontalAlignment.Right);
-            listView.Columns.Add("Sizetype",      55, HorizontalAlignment.Right);
+            listView.Columns.Add("Extension", 60, HorizontalAlignment.Right);
+            listView.Columns.Add("Name", 430, HorizontalAlignment.Left);
+            listView.Columns.Add("Size", 35, HorizontalAlignment.Right);
+            listView.Columns.Add("Sizetype", 55, HorizontalAlignment.Right);
             listView.Columns.Add("Last Modified", 138, HorizontalAlignment.Right);
             listView.FullRowSelect = true;
             //! This will make clicking on a row in the results select the full row.
@@ -100,6 +103,30 @@ namespace File_Searcher
             if (e.Button == MouseButtons.Right)
                 if (listViewResultsFilter.FocusedItem.Bounds.Contains(e.Location))
                     contextMenuStripListView.Show(Cursor.Position);
+        }
+
+        private void listViewResultsFilter_DoubleClick(object sender, EventArgs e)
+        {
+            var selectedItemName = listViewResultsFilter.SelectedItems[0].SubItems[5].Text;
+
+            if (String.IsNullOrWhiteSpace(selectedItemName))
+                return;
+
+            if (!Settings.Default.PromptOpenFile || MessageBox.Show("Are you sure you want to open this file", "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                StartProcess(selectedItemName);
+        }
+
+        private void StartProcess(string filename, string argument = "")
+        {
+            try
+            {
+                Process.Start(filename, argument);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                MessageBox.Show(String.Format("The process '{0}' could not be opened!", Path.GetFileName(filename)), "An error has occurred!", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
     }
 }

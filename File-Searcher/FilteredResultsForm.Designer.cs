@@ -49,6 +49,7 @@
             this.listViewResultsFilter.TabIndex = 0;
             this.listViewResultsFilter.UseCompatibleStateImageBehavior = false;
             this.listViewResultsFilter.ColumnClick += new System.Windows.Forms.ColumnClickEventHandler(this.listView_ColumnClick);
+            this.listViewResultsFilter.DoubleClick += new System.EventHandler(this.listViewResultsFilter_DoubleClick);
             this.listViewResultsFilter.MouseClick += new System.Windows.Forms.MouseEventHandler(this.listViewResultsFilter_MouseClick);
             // 
             // textBoxFilter
