@@ -90,6 +90,7 @@
             this.KeyPreview = true;
             this.MaximizeBox = false;
             this.Name = "FilteredResultsForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Filtered results";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FiltedResultsForm_KeyDown);
             this.ResumeLayout(false);

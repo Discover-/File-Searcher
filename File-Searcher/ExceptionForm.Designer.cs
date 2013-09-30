@@ -84,6 +84,7 @@
             this.Controls.Add(this.textBoxExceptions);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "ExceptionForm";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Exceptions";
             this.Load += new System.EventHandler(this.ExceptionForm_Load);
             this.ResumeLayout(false);
