@@ -47,7 +47,16 @@ namespace File_Searcher
             listviewY = y as ListViewItem;
 
             if (listviewX != listviewY)
-                compareResult = String.CompareOrdinal(listviewX.SubItems[ColumnToSort].Text, listviewY.SubItems[ColumnToSort].Text);
+            {
+                int intListViewX, intListViewY;
+                Int32.TryParse(listviewX.SubItems[ColumnToSort].Text, out intListViewX);
+                Int32.TryParse(listviewY.SubItems[ColumnToSort].Text, out intListViewY);
+
+                if (intListViewX > 0 && intListViewY > 0)
+                    compareResult = Decimal.Compare(intListViewX, intListViewY);
+                else
+                    compareResult = String.CompareOrdinal(listviewX.SubItems[ColumnToSort].Text, listviewY.SubItems[ColumnToSort].Text);
+            }
 
             if (OrderOfSort == SortOrder.Ascending)
                 return compareResult;
