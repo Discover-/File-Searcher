@@ -299,8 +299,9 @@ namespace File_Searcher
                 var directories = Directory.GetDirectories(searchDirectory);
                 directoryCountTotal += directories.Count();
 
-                foreach (string dir in directories)
-                    GetDirectoryCount(dir, ref directoryCountTotal);
+                if (checkBoxIncludeSubDirs.Checked)
+                    foreach (string dir in directories)
+                        GetDirectoryCount(dir, ref directoryCountTotal);
             }
             catch (Exception exception)
             {
