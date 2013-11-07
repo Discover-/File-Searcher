@@ -612,12 +612,18 @@ namespace File_Searcher
             switch (e.KeyCode)
             {
                 case Keys.Enter:
+                    if (GetKeyState(Keys.Enter) >= 0)
+                        break;
+
                     if (listViewResults.SelectedItems.Count > 0 && !(txtBoxDirectorySearch.Focused || txtBoxFileSearch.Focused || txtBoxExtensions.Focused))
                     {
                         if (!Settings.Default.PromptOpenFile || MessageBox.Show(String.Format("Are you sure you want to open {0}?", listViewResults.SelectedItems.Count > 1 ? String.Format("the selected ({0}) files", listViewResults.SelectedItems.Count) : "this file"), "Are you sure?", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                             foreach (ListViewItem item in listViewResults.SelectedItems)
                                 StartProcess(item.SubItems[5].Text);
                     }
+                    //! Only perform the click event if the Enter key is actually down. This is needed because
+                    //! there's an issue with the AutoComplete code behind the directory textboxes that cause
+                    //! them to call the KeyDown event with the Enter key when an item is selected.
                     else if (btnSearch.Enabled)
                         btnSearch.PerformClick(); // Start searching
                     break;
@@ -626,6 +632,9 @@ namespace File_Searcher
                     break;
             }
         }
+
+        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        private static extern short GetKeyState(Keys key);
 
         //! Needs object and eventargs so we can attach a .Click event to it from menu item 'Exit'
         private void TryCloseApplication(object sender = null, EventArgs e = null)
