@@ -612,6 +612,9 @@ namespace File_Searcher
             switch (e.KeyCode)
             {
                 case Keys.Enter:
+                    //! Only perform the click event if the Enter key is actually down. This is needed because
+                    //! there's an issue with the AutoComplete code behind the directory textboxes that cause
+                    //! them to call the KeyDown event with the Enter key when an item is selected.
                     if (GetKeyState(Keys.Enter) >= 0)
                         break;
 
@@ -621,9 +624,6 @@ namespace File_Searcher
                             foreach (ListViewItem item in listViewResults.SelectedItems)
                                 StartProcess(item.SubItems[5].Text);
                     }
-                    //! Only perform the click event if the Enter key is actually down. This is needed because
-                    //! there's an issue with the AutoComplete code behind the directory textboxes that cause
-                    //! them to call the KeyDown event with the Enter key when an item is selected.
                     else if (btnSearch.Enabled)
                         btnSearch.PerformClick(); // Start searching
                     break;
