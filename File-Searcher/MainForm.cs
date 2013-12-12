@@ -10,6 +10,7 @@ using System.Threading;
 using System.Diagnostics;
 using Timer = System.Windows.Forms.Timer;
 using File_Searcher.Properties;
+using System.Runtime.InteropServices;
 
 namespace File_Searcher
 {
@@ -626,6 +627,7 @@ namespace File_Searcher
                     }
                     else if (btnSearch.Enabled)
                         btnSearch.PerformClick(); // Start searching
+
                     break;
                 case Keys.Escape:
                     TryCloseApplication();
@@ -633,7 +635,7 @@ namespace File_Searcher
             }
         }
 
-        [System.Runtime.InteropServices.DllImport("user32.dll")]
+        [DllImport("user32.dll")]
         private static extern short GetKeyState(Keys key);
 
         //! Needs object and eventargs so we can attach a .Click event to it from menu item 'Exit'
