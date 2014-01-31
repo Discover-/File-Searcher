@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
+using System.Security;
 using System.Security.Permissions;
 
 namespace File_Searcher
@@ -45,7 +46,7 @@ namespace File_Searcher
 
         private static long CombineHighLowInts(uint high, uint low)
         {
-            return (((long) high) << 0x20) | low;
+            return (((long)high) << 0x20) | low;
         }
 
         private static DateTime ConvertDateTime(uint high, uint low)
@@ -55,7 +56,7 @@ namespace File_Searcher
         }
     }
 
-    [Serializable, StructLayout(LayoutKind.Sequential, CharSet = CharSet.Auto), BestFitMapping(false)]
+    [Serializable, StructLayout(LayoutKind.Sequential, CharSet = CharSet.Unicode), BestFitMapping(false)]
     internal struct Win32FindData
     {
         public FileAttributes dwFileAttributes;
@@ -85,7 +86,7 @@ namespace File_Searcher
         public static IEnumerable<string> GetDirectories(string path, string searchPattern)
         {
             Win32FindData winFindData;
-            var findHandle = FindFirstFile(Path.Combine(path, searchPattern), out winFindData);
+            var findHandle = FindFirstFileExW(Path.Combine(path, searchPattern), IndexInfoLevels.FindExInfoBasic, out winFindData, IndexSearchOps.FindExSearchLimitToDirectories, IntPtr.Zero, FIND_FIRST_EX_LARGE_FETCH);
 
             if (findHandle == InvalidHandleValue)
                 yield break;
@@ -95,11 +96,12 @@ namespace File_Searcher
                 {
                     if (winFindData.cFileName == "." || winFindData.cFileName == "..")
                         continue;
+                    // FindExSearchLimitToDirectories is advisory only. If the file system does not support directory filtering, this flag is silently ignored.
                     if ((winFindData.dwFileAttributes & FileAttributes.Directory) != 0)
                     {
                         yield return Path.Combine(path, winFindData.cFileName);
                     }
-                } while (FindNextFile(findHandle, out winFindData));
+                } while (FindNextFileW(findHandle, out winFindData));
             }
             finally
             {
@@ -122,7 +124,7 @@ namespace File_Searcher
         public static IEnumerable<FileData> GetFiles(string path, string searchPattern)
         {
             Win32FindData winFindData;
-            var findHandle = FindFirstFile(Path.Combine(path, searchPattern), out winFindData);
+            var findHandle = FindFirstFileExW(Path.Combine(path, searchPattern), IndexInfoLevels.FindExInfoBasic, out winFindData, IndexSearchOps.FindExSearchNameMatch, IntPtr.Zero, FIND_FIRST_EX_LARGE_FETCH);
 
             if (findHandle == InvalidHandleValue)
                 yield break;
@@ -136,7 +138,7 @@ namespace File_Searcher
                     {
                         yield return new FileData(path, winFindData);
                     }
-                } while (FindNextFile(findHandle, out winFindData));
+                } while (FindNextFileW(findHandle, out winFindData));
             }
             finally
             {
@@ -144,10 +146,28 @@ namespace File_Searcher
             }
         }
 
-        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern IntPtr FindFirstFile(string fileName, out Win32FindData data);
-        [DllImport("kernel32.dll", CharSet = CharSet.Auto, SetLastError = true)]
-        private static extern bool FindNextFile(IntPtr hndFindFile, out Win32FindData lpFindFileData);
+        private enum IndexInfoLevels
+        {
+            FindExInfoStandard,
+            FindExInfoBasic,
+            FindExInfoMaxInfoLevel
+        };
+
+        private enum IndexSearchOps
+        {
+            FindExSearchNameMatch,
+            FindExSearchLimitToDirectories,
+            FindExSearchLimitToDevices
+        };
+
+        private const int FIND_FIRST_EX_LARGE_FETCH = 0x02;
+
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true, ExactSpelling = true), SuppressUnmanagedCodeSecurity]
+        private static extern IntPtr FindFirstFileExW(string lpFileName, IndexInfoLevels infoLevels, out Win32FindData lpFindFileData, IndexSearchOps fSearchOp, IntPtr lpSearchFilter, int dwAdditionalFlag);
+
+        [DllImport("kernel32.dll", CharSet = CharSet.Unicode, SetLastError = true, ExactSpelling = true), SuppressUnmanagedCodeSecurity]
+        private static extern bool FindNextFileW(IntPtr hndFindFile, out Win32FindData lpFindFileData);
+
         [DllImport("kernel32.dll", SetLastError = true)]
         private static extern bool FindClose(IntPtr hFindFile);
         private static readonly IntPtr InvalidHandleValue = new IntPtr(-1);
