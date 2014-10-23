@@ -1,4 +1,10 @@
-﻿using System;
+﻿/*
+  This class was originally written by wilsone8 and taken from a codeproject article. Slightly edited to fit the proper needs.
+  By wilsone8, 27 Aug 2009 
+  http://www.codeproject.com/Articles/38959/A-Faster-Directory-Enumerator
+*/
+
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Runtime.InteropServices;
